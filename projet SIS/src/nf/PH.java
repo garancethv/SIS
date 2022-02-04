@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package fc;
+package nf;
 
 /**
  *
@@ -38,7 +38,7 @@ public class PH extends Personnel{
         return mdp;
     }
     
-    public boolean isChef(){
+    public boolean getIsChef(){
         return isChef;
     }
     
