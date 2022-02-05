@@ -18,6 +18,11 @@ public class Personnel {
         this.mdp = mdp;
     }
 
+    @Override
+    public String toString() {
+        return "Personnel{" + "nom=" + nom + ", prenom=" + prenom + ", id=" + id + '}';
+    }
+
     /*public String getMetier() {
         if (this instanceof Medecin) {
             return "MEDECIN";
