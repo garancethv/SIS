@@ -9,12 +9,12 @@ package ui;
  *
  * @author Garance
  */
-public class jFrame1 extends javax.swing.JFrame {
+public class DMRPatient extends javax.swing.JPanel {
 
     /**
-     * Creates new form jFrame1
+     * Creates new form DMRPatient
      */
-    public jFrame1() {
+    public DMRPatient() {
         initComponents();
     }
 
@@ -48,8 +48,6 @@ public class jFrame1 extends javax.swing.JFrame {
         table_exams = new javax.swing.JTable();
         new_exam = new javax.swing.JButton();
         selection_button = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         id_patient_panel.setBackground(new java.awt.Color(255, 255, 255));
         id_patient_panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Patient"));
@@ -117,7 +115,7 @@ public class jFrame1 extends javax.swing.JFrame {
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tel)))
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         id_patient_panelLayout.setVerticalGroup(
             id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,21 +179,22 @@ public class jFrame1 extends javax.swing.JFrame {
             examsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(examsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
                 .addContainerGap())
         );
         examsLayout.setVerticalGroup(
             examsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(examsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
 
         new_exam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add (2).png"))); // NOI18N
         new_exam.setText("  Créer un nouvel examen");
 
-        selection_button.setText("Sélectionner");
+        selection_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-view-32.png"))); // NOI18N
+        selection_button.setText("  Voir l'examen sélectionné");
         selection_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selection_buttonActionPerformed(evt);
@@ -209,36 +208,38 @@ public class jFrame1 extends javax.swing.JFrame {
             .addGroup(dmr_panelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dmr_panelLayout.createSequentialGroup()
-                        .addComponent(new_exam)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(dmr_panelLayout.createSequentialGroup()
-                        .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(selection_button)
-                            .addComponent(exams, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(53, 53, 53))))
+                .addGap(71, 71, 71)
+                .addComponent(exams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(new_exam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(selection_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         dmr_panelLayout.setVerticalGroup(
             dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dmr_panelLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(new_exam)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(exams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selection_button, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                    .addGroup(dmr_panelLayout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(exams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(dmr_panelLayout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addComponent(new_exam)
+                        .addGap(26, 26, 26)
+                        .addComponent(selection_button, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(68, 68, 68))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dmr_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(dmr_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,48 +247,12 @@ public class jFrame1 extends javax.swing.JFrame {
                 .addComponent(dmr_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void selection_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selection_buttonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_selection_buttonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jFrame1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jFrame1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jFrame1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jFrame1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new jFrame1().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adresse;
