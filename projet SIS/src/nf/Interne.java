@@ -11,11 +11,7 @@ package nf;
  * @author Mathilde
  */
 public class Interne extends Personnel {
-    
-
     public Interne(String nom, String prenom,int id, String mdp) {
         super(nom,prenom,id,mdp);
-    }
-
-    
+    }   
 }
