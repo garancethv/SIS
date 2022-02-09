@@ -62,7 +62,6 @@ public class Accueil extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(1650, 1080));
-        setPreferredSize(new java.awt.Dimension(1650, 1080));
 
         top_Pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -92,6 +91,12 @@ public class Accueil extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        search_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_fieldActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Rechercher un DMR par n° id :");
@@ -207,6 +212,10 @@ public class Accueil extends javax.swing.JFrame {
         // récupère infos du champs recherche & ouvre un nouvel onglet
         open_dmr();
     }//GEN-LAST:event_search_buttonActionPerformed
+
+    private void search_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_search_fieldActionPerformed
 
     private javax.swing.JPanel create_dmr_panel() {
                 
