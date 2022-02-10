@@ -11,9 +11,12 @@ package nf;
  * @author Mathilde
  */
 public enum Genre {
-    H, F;
+    H("masculin"),
+    F("feminin"),
+    Autre("autre");
 
-    public Genre getGenre() {
-        return this;
+    Genre(String s) {
+        this.s=s;
     }
+    String s;
 }

@@ -5,6 +5,9 @@ package BD;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.DateFormatSymbols;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 import nf.DMR;
 import nf.Personnel;
@@ -38,14 +41,19 @@ class Connexionsgbd {
             System.out.println(p + " type" + p.getClass());
             p = requetesbd.utilisateur(conn, 1234567894);
             System.out.println(p + " type" + p.getClass());
-            int id=requetesbd.nouveauIdDMR(conn);
+            int id = requetesbd.nouveauIdDMR(conn);
             System.out.println(id);
-            int i = 0 ;
-            String s="";
-            java.sql.Date d= new java.sql.Date(06,11,1978);
-            
-            int de=requetesbd.creationDMR(conn, "Doe", "John", id, d, i, "autre", s, s, s);
-            
+            int i = 2;
+            String s = "";
+
+            //DateFormatSymbols dfsEN = new DateFormatSymbols(Locale.ENGLISH);
+            //java.util.Date myDate = new java.util.Date("10-OCT-2009");
+            //java.sql.Date d = new java.sql.Date(myDate.getTime());
+            String d = "06-06-2006";
+            System.out.println(d);
+
+            int de = requetesbd.creationDMR(conn, "Doe", "John", d, i, "masculin", s, s, s);
+
             // requetesbd.employes(conn);
 // Print information about connection warnings
             SQLWarningsExceptions.printWarnings(conn);
