@@ -71,4 +71,10 @@ public class DMR {
         Examen examen = new Examen(this.getId(), date, phResp);   
         examens.add(examen);
     }
+
+    @Override
+    public String toString() {
+        return "DMR{" + "nomPatient=" + nomPatient + ", prenomPatient=" + prenomPatient + ", dateNaissance=" + dateNaissance + ", genre=" + genre + ", id=" + id + ", tel=" + tel + ", adresse=" + adresse + ", codePostal=" + codePostal + ", ville=" + ville + ", examens=" + examens + '}';
+    }
+    
 }

@@ -36,32 +36,35 @@ public class requetesbd {
      * @throws SQLException en cas d'erreur d'acc�s � la base de donn�es
      */
     public static Connection connexionBD() throws SQLException, ClassNotFoundException {
-try{
-        String jdbcDriver, dbUrl, username, password;
-        DatabaseAccessProperties dap = new DatabaseAccessProperties(configurationFile);
-        jdbcDriver = dap.getJdbcDriver();
-        dbUrl = dap.getDatabaseUrl();
-        username = dap.getUsername();
-        password = dap.getPassword();
+        /* connexion à la BD*/
+        try {
+            String jdbcDriver, dbUrl, username, password;
+            DatabaseAccessProperties dap = new DatabaseAccessProperties(configurationFile);
+            jdbcDriver = dap.getJdbcDriver();
+            dbUrl = dap.getDatabaseUrl();
+            username = dap.getUsername();
+            password = dap.getPassword();
 // Load the database driver
-        Class.forName(jdbcDriver);
+            Class.forName(jdbcDriver);
 // Get a connection to the database
-        Connection conn = DriverManager.getConnection(dbUrl, username, password);
-        // Print information about connection warnings
-        SQLWarningsExceptions.printWarnings(conn);
-        return conn;}
-finally{
-    
-}
+            Connection conn = DriverManager.getConnection(dbUrl, username, password);
+            // Print information about connection warnings
+            SQLWarningsExceptions.printWarnings(conn);
+            return conn;
+        } finally {
+
+        }
     }
 
-    public static void deconnexionBD() {
-
+    public static void deconnexionBD(Connection conn) throws SQLException {
+        /*déconnexion de la BD*/
+        conn.close();
     }
 
     public static boolean connexion(Connection conn, int idPerso, String mdp) throws SQLException {
+        /*vérifie que le personnel existe dans la base de données*/
         try {
-            /*vérifie que le personnel existe dans la base de données*/
+
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
@@ -121,11 +124,22 @@ finally{
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
-            ResultSet rs = stmt.executeQuery("select TRIM(nom) nom, TRIM(prenom) prenom, idDMR, dateNaissance, tel, TRIM(genre) genre, TRIM(adresse) adresse,TRIM(codePostal) codePostal,TRIM(ville) ville from DMR where idPerso =" + idDMR);
+            ResultSet rs = stmt.executeQuery("select TRIM(nom) nom, TRIM(prenom) prenom, idDMR, dateNaissance, tel, TRIM(genre) genre, TRIM(adresse) adresse,TRIM(codePostal) codePostal,TRIM(ville) ville from DMR where idDMR =" + idDMR);
             rs.next();
             DMR dmr;
             System.out.println(rs.getDate("dateNaissance").toString());
-            Genre genre = Genre.valueOf(rs.getString("genre"));
+            String g =rs.getString("genre");
+            Genre genre ;
+            if (g.equals("masculin")){
+                genre = Genre.H;
+            }
+            else if (g.equals("feminin")){
+                genre = Genre.F;
+            }
+            else {
+                genre= Genre.Autre;
+            }
+            
             dmr = new DMR(rs.getString("nom"), rs.getString("prenom"), ((Date) rs.getDate("dateNaissance")), rs.getInt("tel"), genre, rs.getInt("idDMR"), rs.getString("adresse"), rs.getString("codePostal"), rs.getString("ville"));
 
 // Close the result set, statement and the connection 
