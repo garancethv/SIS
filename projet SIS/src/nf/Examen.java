@@ -31,7 +31,6 @@ public class Examen {
         this.numPACS = numPACS;
         this.texteCR = texteCR;
     }
-
     
     public int getIdDMR() {
         return idDMR;
