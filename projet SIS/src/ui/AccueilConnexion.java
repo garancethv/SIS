@@ -26,16 +26,8 @@ import javax.swing.JOptionPane;
  */
 public class AccueilConnexion extends javax.swing.JFrame {
     
-    Accueil accueil = new Accueil();
-    /*ArrayList<Acte> actes = new ArrayList<>();//liste des actes d'une nouvelle fiche
-    PortailMedical pm = new PortailMedical();
-    PortailAdministratif pa = new PortailAdministratif();*/
-    
-    
     public AccueilConnexion() {
         initComponents();
-        //pm.setVisible(false);
-        //pa.setVisible(false);
         jLabel7.setVisible(false);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
@@ -221,7 +213,8 @@ public class AccueilConnexion extends javax.swing.JFrame {
             jPasswordField1.setText("");
         }    
         else{
-            this.setVisible(false);
+            dispose();
+            Accueil accueil = new Accueil();
             accueil.setVisible(true);
             
         }
