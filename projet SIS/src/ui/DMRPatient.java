@@ -5,6 +5,13 @@
  */
 package ui;
 
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+import nf.DMR;
+import nf.Examen;
+import nf.Genre;
+
 /**
  *
  * @author Garance
@@ -16,6 +23,36 @@ public class DMRPatient extends javax.swing.JPanel {
      */
     public DMRPatient() {
         initComponents();
+    }
+    
+    public DMRPatient(DMR dmr) {
+        initComponents();
+        
+        nom_patient.setText(dmr.getNomPatient());
+        prenom_patient.setText(dmr.getPrenomPatient());
+        Date date = dmr.getDateNaissance();
+        date_naissance.setText(String.valueOf(date.getDay())+"/"+String.valueOf(date.getMonth()+1)+"/"+String.valueOf(date.getYear()));
+        id.setText(String.valueOf(dmr.getId()));
+        String genre="";
+        if (dmr.getGenre()==Genre.H) {
+            genre="Homme";
+        }
+        else if (dmr.getGenre()==Genre.F) {
+            genre="Femme";
+        }
+        genre_patient.setText(genre);
+        
+        DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
+        ArrayList<Examen> examens = dmr.getExamens();
+        // rajouter une fction tri par date de la plus récente à la plus ancienne dans classe DMR
+        for (int i=0; i<examens.size(); i++) {
+            String date_exam=String.valueOf(examens.get(i).getDate().getDay())
+                    +"/"+String.valueOf(examens.get(i).getDate().getMonth()+1)
+                    +"/"+String.valueOf(examens.get(i).getDate().getYear())
+                    +" "+String.valueOf(examens.get(i).getDate().getHours())
+                    +":"+String.valueOf(examens.get(i).getDate().getMinutes());
+            model.insertRow(model.getRowCount(), new Object[]{date_exam,"Radio",examens.get(i).getPhRespo().toString()});
+        }
     }
 
     /**
@@ -32,17 +69,13 @@ public class DMRPatient extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         nom_patient = new javax.swing.JLabel();
         prenom_patient = new javax.swing.JLabel();
         date_naissance = new javax.swing.JLabel();
-        email = new javax.swing.JLabel();
-        tel = new javax.swing.JLabel();
-        adresse = new javax.swing.JLabel();
-        num_secu = new javax.swing.JLabel();
+        id = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        genre_patient = new javax.swing.JLabel();
         exams = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_exams = new javax.swing.JTable();
@@ -58,13 +91,7 @@ public class DMRPatient extends javax.swing.JPanel {
 
         jLabel10.setText("Date de naissance :");
 
-        jLabel11.setText("Adresse :");
-
-        jLabel12.setText("Email :");
-
-        jLabel13.setText("Tel :");
-
-        jLabel14.setText("N° de sécurité sociale :");
+        jLabel14.setText("N° Identifiant :");
 
         nom_patient.setText("John");
 
@@ -72,13 +99,11 @@ public class DMRPatient extends javax.swing.JPanel {
 
         date_naissance.setText("01/01/1900");
 
-        email.setText("john.doe@gmail.com");
+        id.setText("JLabel");
 
-        tel.setText("06 99 99 99 99");
+        jLabel1.setText("Genre :");
 
-        adresse.setText("12 rue de Paris, Grenoble");
-
-        num_secu.setText("JLabel");
+        genre_patient.setText("Inconnu");
 
         javax.swing.GroupLayout id_patient_panelLayout = new javax.swing.GroupLayout(id_patient_panel);
         id_patient_panel.setLayout(id_patient_panelLayout);
@@ -89,38 +114,34 @@ public class DMRPatient extends javax.swing.JPanel {
                 .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(id_patient_panelLayout.createSequentialGroup()
                         .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(date_naissance))
                     .addGroup(id_patient_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
+                        .addComponent(jLabel9)
                         .addGap(18, 18, 18)
-                        .addComponent(adresse))
+                        .addComponent(prenom_patient))
                     .addGroup(id_patient_panelLayout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(nom_patient))
                     .addGroup(id_patient_panelLayout.createSequentialGroup()
                         .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(id))
+                    .addGroup(id_patient_panelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(num_secu))
-                    .addGroup(id_patient_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(prenom_patient))
-                    .addGroup(id_patient_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(email))
-                    .addGroup(id_patient_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tel)))
-                .addContainerGap(171, Short.MAX_VALUE))
+                        .addComponent(genre_patient)))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
         id_patient_panelLayout.setVerticalGroup(
             id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(id_patient_panelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(id))
+                .addGap(18, 18, 18)
                 .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(nom_patient))
@@ -134,21 +155,9 @@ public class DMRPatient extends javax.swing.JPanel {
                     .addComponent(date_naissance))
                 .addGap(18, 18, 18)
                 .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(email))
-                .addGap(18, 18, 18)
-                .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(tel))
-                .addGap(16, 16, 16)
-                .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(adresse))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(num_secu))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(genre_patient))
+                .addGap(26, 26, 26))
         );
 
         exams.setBackground(new java.awt.Color(255, 255, 255));
@@ -195,6 +204,9 @@ public class DMRPatient extends javax.swing.JPanel {
 
         selection_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-view-32.png"))); // NOI18N
         selection_button.setText("  Voir l'examen sélectionné");
+        selection_button.setMaximumSize(new java.awt.Dimension(251, 41));
+        selection_button.setMinimumSize(new java.awt.Dimension(251, 41));
+        selection_button.setPreferredSize(new java.awt.Dimension(251, 41));
         selection_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selection_buttonActionPerformed(evt);
@@ -223,13 +235,13 @@ public class DMRPatient extends javax.swing.JPanel {
                     .addGroup(dmr_panelLayout.createSequentialGroup()
                         .addGap(113, 113, 113)
                         .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(exams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(exams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(dmr_panelLayout.createSequentialGroup()
                         .addGap(143, 143, 143)
                         .addComponent(new_exam)
                         .addGap(26, 26, 26)
-                        .addComponent(selection_button, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(selection_button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(68, 68, 68))
         );
 
@@ -255,26 +267,22 @@ public class DMRPatient extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel adresse;
     private javax.swing.JLabel date_naissance;
     private javax.swing.JPanel dmr_panel;
-    private javax.swing.JLabel email;
     private javax.swing.JPanel exams;
+    private javax.swing.JLabel genre_patient;
+    private javax.swing.JLabel id;
     private javax.swing.JPanel id_patient_panel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton new_exam;
     private javax.swing.JLabel nom_patient;
-    private javax.swing.JLabel num_secu;
     private javax.swing.JLabel prenom_patient;
     private javax.swing.JButton selection_button;
     private javax.swing.JTable table_exams;
-    private javax.swing.JLabel tel;
     // End of variables declaration//GEN-END:variables
 }
