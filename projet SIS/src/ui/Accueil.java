@@ -348,11 +348,8 @@ public class Accueil extends javax.swing.JFrame {
             DMR dmr_test= new DMR("Thoviste", "Garance", new Date(2001,4,4), Genre.F, 11804526);
             PH ph_test= new PH("Deblouze", "Agathe", 222, "mdp", 1);
             
-            Examen ex1 = new Examen(11804526, new Date(2022,1,9), ph_test);
-            Examen ex2 = new Examen(11804526, new Date(2022,0,3), ph_test);
-            
-            dmr_test.ajouterExamen(ex1);
-            dmr_test.ajouterExamen(ex2);
+            dmr_test.ajouterExamen(new Date(2022,1,9), ph_test);
+            dmr_test.ajouterExamen(new Date(2022,0,3), ph_test);
             
             open_dmr(dmr_test);
         }
