@@ -29,8 +29,10 @@ public class NewDMR extends javax.swing.JPanel {
     public NewDMR(JTabbedPane pane) {
         this.pane=pane;
         initComponents();
-        nom_field.requestFocusInWindow();
-        erreur_nom.setVisible(false);
+        
+        nom_field2.requestFocusInWindow();
+        
+        erreur_nom2.setVisible(false);
         erreur_prenom.setVisible(false);
         erreur_date.setVisible(false);
     }
@@ -46,11 +48,11 @@ public class NewDMR extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        nom_field = new javax.swing.JTextField();
-        erreur_nom = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        nom_field2 = new javax.swing.JTextField();
+        erreur_nom2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         prenom_field = new javax.swing.JTextField();
@@ -64,7 +66,6 @@ public class NewDMR extends javax.swing.JPanel {
         genre_field = new javax.swing.JComboBox<>();
         valider_button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         jLabel2.setFont(new java.awt.Font("Source Serif Pro Black", 0, 58)); // NOI18N
         jLabel2.setText("Création d'un DMR");
@@ -86,39 +87,39 @@ public class NewDMR extends javax.swing.JPanel {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(170, 0, 0));
-        jLabel5.setText("Nom");
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(170, 0, 0));
+        jLabel10.setText("Nom");
 
-        erreur_nom.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
-        erreur_nom.setForeground(new java.awt.Color(149, 46, 46));
-        erreur_nom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
-        erreur_nom.setText("Ce champ est obligatoire");
+        erreur_nom2.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        erreur_nom2.setForeground(new java.awt.Color(149, 46, 46));
+        erreur_nom2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
+        erreur_nom2.setText("Ce champ est obligatoire");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
-                        .addComponent(nom_field, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(erreur_nom)
+                        .addComponent(nom_field2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(erreur_nom2)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(nom_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(nom_field2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(erreur_nom)
+                .addComponent(erreur_nom2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -229,41 +230,41 @@ public class NewDMR extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(86, 86, 86)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(234, 234, 234))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(177, 177, 177)
                 .addComponent(valider_button, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(jLabel1)))
                 .addGap(18, 18, 18)
@@ -272,8 +273,6 @@ public class NewDMR extends javax.swing.JPanel {
                 .addComponent(valider_button, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LogoHopital.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -284,84 +283,79 @@ public class NewDMR extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(339, 339, 339)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(336, 336, 336)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(444, 444, 444))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(92, 92, 92))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void genre_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genre_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_genre_fieldActionPerformed
-
     private void valider_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valider_buttonActionPerformed
-       // Conditions avant de valider :
-       // Tous les champs sont remplis
-       // Date sous le bon format
-       
-        String nom= nom_field.getText();
+        // Conditions avant de valider :
+        // Tous les champs sont remplis
+        // Date sous le bon format
+
+        String nom= nom_field2.getText();
         String prenom= prenom_field.getText();
         String date= date_naissance_field.getText();
-        
+
         if (!bonFormatDate(date)) {
             erreur_date.setVisible(true);
         }
         else {
             erreur_date.setVisible(false);
         }
-        
+
         if (nom.equals("")) {
-            erreur_nom.setVisible(true);
+            erreur_nom2.setVisible(true);
         }
         else {
-            erreur_nom.setVisible(false);
+            erreur_nom2.setVisible(false);
         }
-        
+
         if (prenom.equals("")) {
             erreur_prenom.setVisible(true);
         }
         else {
             erreur_prenom.setVisible(false);
         }
-        
-        if (!erreur_date.isVisible() && !erreur_prenom.isVisible() && !erreur_nom.isVisible()) {
+
+        if (!erreur_date.isVisible() && !erreur_prenom.isVisible() && !erreur_nom2.isVisible()) {
             String genre= genre_field.getSelectedItem().toString();
             //Genre genre=Genre.valueOf(genre);
-        
+
             int jour=Integer.valueOf(date.split("/")[0]);
             // attention dans java.util.date les mois vont de 0 (Janvier) à 11 (Décembre)
             int mois=Integer.valueOf(date.split("/")[1])-1;
             int annee=Integer.valueOf(date.split("/")[2]);
             Date date_naissance= new Date(annee,mois,jour);
-            
+
             //DMR nv_DMR= new DMR;
-            
+
             // ferme l'onglet (rajouter un délai ?)
             int i = pane.getSelectedIndex();
             if (i != -1) {
                 pane.remove(i);
             }
         }
-        
+
     }//GEN-LAST:event_valider_buttonActionPerformed
+
+    private void genre_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genre_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_genre_fieldActionPerformed
 
     private boolean bonFormatDate(String date) {
         String[] liste_date=date.split("/");
-        if(liste_date.length==3 && Integer.valueOf(liste_date[2])>1900) {
+        if(liste_date.length==3 && liste_date[0].matches("-?\\d+") && liste_date[1].matches("-?\\d+")
+                && liste_date[2].matches("-?\\d+") && Integer.valueOf(liste_date[2])>1900) {
             return true;
         }
         return false;
@@ -370,23 +364,22 @@ public class NewDMR extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField date_naissance_field;
     private javax.swing.JLabel erreur_date;
-    private javax.swing.JLabel erreur_nom;
+    private javax.swing.JLabel erreur_nom2;
     private javax.swing.JLabel erreur_prenom;
     private javax.swing.JComboBox<String> genre_field;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JTextField nom_field;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JTextField nom_field2;
     private javax.swing.JTextField prenom_field;
     private javax.swing.JButton valider_button;
     // End of variables declaration//GEN-END:variables
