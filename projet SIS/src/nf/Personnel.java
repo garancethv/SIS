@@ -20,7 +20,7 @@ public class Personnel {
 
     @Override
     public String toString() {
-        return "Personnel{" + "nom=" + nom + ", prenom=" + prenom + ", id=" + id + '}';
+        return "Personnel {" + "nom = " + nom + ", prénom = " + prenom + ", id = " + id + '}';
     }
 
     /*public String getMetier() {

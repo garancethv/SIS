@@ -5,10 +5,16 @@
  */
 
 package ui;
+import BD.requetesbd;
 import java.awt.Frame;
+import static java.lang.Integer.parseInt;
+import static java.lang.Integer.parseInt;
+import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
 import static java.lang.String.valueOf;
 import static java.lang.String.valueOf;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -19,16 +25,9 @@ import javax.swing.JOptionPane;
  * @author Mathilde
  */
 public class AccueilConnexion extends javax.swing.JFrame {
-
-    /*ArrayList<Acte> actes = new ArrayList<>();//liste des actes d'une nouvelle fiche
-    PortailMedical pm = new PortailMedical();
-    PortailAdministratif pa = new PortailAdministratif();*/
-    
     
     public AccueilConnexion() {
         initComponents();
-        //pm.setVisible(false);
-        //pa.setVisible(false);
         jLabel7.setVisible(false);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
@@ -202,32 +201,23 @@ public class AccueilConnexion extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /*String id = jTextField2.getText();
-        String mdp = jPasswordField1.getText(); 
-        boolean rep = false;
-        int i = 0;
-        Personnel p = null;
-        ArrayList<Personnel> personnels = getPersonnels();
-        while (!rep && i < personnels.size()){
-            if (personnels.get(i).getId().equals(id) && personnels.get(i).getMdp().equals(mdp)){
-                rep = true;
-                p = personnels.get(i);   
-            }
-            i++;
-        }
-        if (p == null){
+        int id = parseInt(jTextField2.getText());
+        String mdp = jPasswordField1.getPassword().toString(); 
+        boolean rep = true;
+        /*requetesbd req = new requetesbd();
+        Connection conn = DriverManager.getConnection();
+        rep = req.connexion(conn, id, mdp);*/ //je ne sais pas comment appeler connexion
+        if (!rep){ //cad si pas de couple (id, mdp) correspondant
             jLabel7.setVisible(true);
+            jTextField2.setText("");
+            jPasswordField1.setText("");
         }    
         else{
-            this.setVisible(false);
-            if (p.getMetier().equals("SECRETAIRE ADMINISTRATIVE")){
-                pa.setVisible(true);
-            }
-            else{
-                pm.setVisible(true);
-            }
+            dispose();
+            Accueil accueil = new Accueil();
+            accueil.setVisible(true);
             
-        }*/
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed

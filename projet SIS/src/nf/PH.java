@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package nf;
 
@@ -13,13 +9,11 @@ package nf;
 public class PH extends Personnel{
     
     private int isChef;
-
+    
     public PH(String nom, String prenom,int id, String mdp, int isChef) {
         super(nom,prenom,id,mdp);
         this.isChef = isChef;
     }
-
-    
     
     public int getIsChef(){
         return isChef;
