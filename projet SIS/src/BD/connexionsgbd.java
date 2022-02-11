@@ -69,6 +69,13 @@ class Connexionsgbd {
                 DMR dmr = requetesbd.recupDMR(conn, 3);
                 System.out.println(dmr.toString());
             }
+            conn = requetesbd.connexionBD();
+            if (requetesbd.dmrExisteBis(conn, "Doe" ,"John",d)) {
+                conn = requetesbd.connexionBD();
+                DMR dmr = requetesbd.recupDMRBis(conn, "Doe","John",d);
+                System.out.println(dmr.toString());
+            }
+            
 
             // requetesbd.employes(conn);
 // Print information about connection warnings
