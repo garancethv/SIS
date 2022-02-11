@@ -23,7 +23,6 @@ public class Examen {
         this.numPACS = null;
         this.texteCR = null;
     }
-
     
     public int getIdDMR() {
         return idDMR;
