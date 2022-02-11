@@ -19,7 +19,7 @@ class Connexionsgbd {
 
     public static void main(String args[]) {
         try {
-            String jdbcDriver, dbUrl, username, password;
+            /*String jdbcDriver, dbUrl, username, password;
             DatabaseAccessProperties dap = new DatabaseAccessProperties(configurationFile);
             jdbcDriver = dap.getJdbcDriver();
             dbUrl = dap.getDatabaseUrl();
@@ -28,19 +28,28 @@ class Connexionsgbd {
 // Load the database driver
             Class.forName(jdbcDriver);
 // Get a connection to the database
-            Connection conn = DriverManager.getConnection(dbUrl, username, password);
+            Connection conn = DriverManager.getConnection(dbUrl, username, password);*/
+            Connection conn = requetesbd.connexionBD();
             System.out.println(requetesbd.connexion(conn, 1234567891, "'bow12'"));
+            conn = requetesbd.connexionBD();
             System.out.println(requetesbd.connexion(conn, 1234567891, "'bow1'"));
+            conn = requetesbd.connexionBD();
             Personnel p = requetesbd.utilisateur(conn, 1234567890);
+            
             System.out.println(p + " type" + p.getClass());
+            conn = requetesbd.connexionBD();
             p = requetesbd.utilisateur(conn, 1234567891);
             System.out.println(p + " type" + p.getClass());
+            conn = requetesbd.connexionBD();
             p = requetesbd.utilisateur(conn, 1234567892);
             System.out.println(p + " type" + p.getClass());
+            conn = requetesbd.connexionBD();
             p = requetesbd.utilisateur(conn, 1234567893);
             System.out.println(p + " type" + p.getClass());
+            conn = requetesbd.connexionBD();
             p = requetesbd.utilisateur(conn, 1234567894);
             System.out.println(p + " type" + p.getClass());
+            conn = requetesbd.connexionBD();
             int id = requetesbd.nouveauIdDMR(conn);
             System.out.println(id);
             int i = 2;
@@ -51,13 +60,13 @@ class Connexionsgbd {
             //java.sql.Date d = new java.sql.Date(myDate.getTime());
             String d = "06-06-2006";
             System.out.println(d);
-
+conn = requetesbd.connexionBD();
             int de = requetesbd.creationDMR(conn, "Doe", "John", d, i, "masculin", s, s, s);
 
             // requetesbd.employes(conn);
 // Print information about connection warnings
-            SQLWarningsExceptions.printWarnings(conn);
-            conn.close();
+            //SQLWarningsExceptions.printWarnings(conn);
+            //conn.close();
         } catch (SQLException se) {
 // Print information about SQL exceptions
             SQLWarningsExceptions.printExceptions(se);
