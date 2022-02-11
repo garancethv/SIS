@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 import nf.DMR;
+import nf.Genre;
 import nf.Personnel;
 
 class Connexionsgbd {
@@ -35,7 +36,7 @@ class Connexionsgbd {
             System.out.println(requetesbd.connexion(conn, 1234567891, "'bow1'"));
             conn = requetesbd.connexionBD();
             Personnel p = requetesbd.utilisateur(conn, 1234567890);
-            
+
             System.out.println(p + " type" + p.getClass());
             conn = requetesbd.connexionBD();
             p = requetesbd.utilisateur(conn, 1234567891);
@@ -60,8 +61,21 @@ class Connexionsgbd {
             //java.sql.Date d = new java.sql.Date(myDate.getTime());
             String d = "06-06-2006";
             System.out.println(d);
-conn = requetesbd.connexionBD();
+            conn = requetesbd.connexionBD();
             int de = requetesbd.creationDMR(conn, "Doe", "John", d, i, "masculin", s, s, s);
+            conn = requetesbd.connexionBD();
+            if (requetesbd.dmrExiste(conn, 3)) {
+                conn = requetesbd.connexionBD();
+                DMR dmr = requetesbd.recupDMR(conn, 3);
+                System.out.println(dmr.toString());
+            }
+            conn = requetesbd.connexionBD();
+            if (requetesbd.dmrExisteBis(conn, "Doe" ,"John",d)) {
+                conn = requetesbd.connexionBD();
+                DMR dmr = requetesbd.recupDMRBis(conn, "Doe","John",d);
+                System.out.println(dmr.toString());
+            }
+            
 
             // requetesbd.employes(conn);
 // Print information about connection warnings

@@ -16,12 +16,20 @@ public class Examen {
     private String numPACS; //numPACS est null quand les images sont format papier, c'est pourquoi j'ai du mettre un type String et pas int!!!!!!!
     private String texteCR; //texteCR est null quand le CR est format papier
 
-    public Examen(int idDMR, Date date, PH phRespo) {
+    public Examen(int idDMR, Date date, PH phRespo, TypeExamen type) {
         this.idDMR = idDMR;
         this.date = date;
         this.phRespo = phRespo;
-        this.numPACS = null;
-        this.texteCR = null;
+        this.typeExamen=type;
+    }
+   
+    public Examen(int idDMR, Date date, PH phRespo, TypeExamen typeExamen, String numPACS, String texteCR) {
+        this.idDMR = idDMR;
+        this.date = date;
+        this.phRespo = phRespo;
+        this.typeExamen = typeExamen;
+        this.numPACS = numPACS;
+        this.texteCR = texteCR;
     }
     
     public int getIdDMR() {
