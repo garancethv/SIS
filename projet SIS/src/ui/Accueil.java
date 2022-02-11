@@ -14,6 +14,7 @@ import nf.DMR;
 import nf.Examen;
 import nf.Genre;
 import nf.PH;
+import nf.TypeExamen;
 
 /**
  *
@@ -56,6 +57,7 @@ public class Accueil extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         search_panel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -172,6 +174,7 @@ public class Accueil extends javax.swing.JFrame {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logo (encore).png"))); // NOI18N
         top_Pane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, 580, 170));
+        top_Pane.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, -1, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -348,8 +351,8 @@ public class Accueil extends javax.swing.JFrame {
             DMR dmr_test= new DMR("Thoviste", "Garance", new Date(2001,4,4), Genre.F, 11804526);
             PH ph_test= new PH("Deblouze", "Agathe", 222, "mdp", 1);
             
-            Examen ex1 = new Examen(11804526, new Date(2022,1,9), ph_test);
-            Examen ex2 = new Examen(11804526, new Date(2022,0,3), ph_test);
+            Examen ex1 = new Examen(11804526, new Date(2022,1,9), ph_test, TypeExamen.IRM);
+            Examen ex2 = new Examen(11804526, new Date(2022,0,3), ph_test, TypeExamen.SCANNER);
             
             dmr_test.ajouterExamen(ex1);
             dmr_test.ajouterExamen(ex2);
@@ -455,6 +458,7 @@ public class Accueil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton logout_button;
     private javax.swing.JPanel logout_panel;

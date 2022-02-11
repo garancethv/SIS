@@ -19,4 +19,8 @@ public enum Genre {
         this.s=s;
     }
     String s;
+    
+    String getS() {
+        return s;
+    }
 }

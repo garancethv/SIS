@@ -21,7 +21,7 @@ public class DMR {
 
     private ArrayList<Examen> examens;
 
-    public DMR(String nomPatient, String prenomPatient, Date dateNaissance, Genre genre, int idDMR) {
+    public DMR(String nomPatient, String prenomPatient, Date dateNaissance, Genre genre, int id) {
         this.nomPatient = nomPatient;
         this.prenomPatient = prenomPatient;
         this.dateNaissance = dateNaissance; //il existe plusieurs constructeurs dans la classe Date de Java. Pour une date de naissance, on rentre Date("année", "mois", "jour")
@@ -30,7 +30,7 @@ public class DMR {
         examens = new ArrayList<Examen>();
     }
 
-    public DMR(String nomPatient, String prenomPatient, Date dateNaissance, int tel, Genre genre, int idDMR, String adresse, String codePostal, String ville) {
+    public DMR(String nomPatient, String prenomPatient, Date dateNaissance, int tel, Genre genre, int id, String adresse, String codePostal, String ville) {
         this.nomPatient = nomPatient;
         this.prenomPatient = prenomPatient;
         this.dateNaissance = dateNaissance; //il existe plusieurs constructeurs dans la classe Date de Java. Pour une date de naissance, on rentre Date("année", "mois", "jour")
