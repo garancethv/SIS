@@ -14,6 +14,7 @@ import nf.Manip;
 import nf.PH;
 import nf.Personnel;
 import nf.Secretaire;
+import nf.TypeExamen;
 
 /*
 * To change this license header, choose License Headers in
@@ -144,7 +145,7 @@ public class requetesbd {
             rs.close();
             ResultSet rs1 = stmt.executeQuery("select TRIM(nom) nom, TRIM(prenom) prenom, idDMR, dateNaissance, tel, TRIM(genre) genre, TRIM(adresse) adresse,TRIM(codePostal) codePostal,TRIM(ville) ville from DMR where idDMR =" + idDMR);
             rs1.next();
-
+            recupExamen(conn, dmr);
             rs1.close();
             stmt.close();
             SQLWarningsExceptions.printWarnings(conn);
@@ -158,18 +159,28 @@ public class requetesbd {
         }
     }
 
-    public static boolean recupExamen(Connection conn, DMR dmr) throws SQLException {
-        /*renvoie le DMR recherché*/
+    public static DMR recupExamen(Connection conn, DMR dmr) throws SQLException {
+        /*renvoie le DMR recherché
+        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
             ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH,idPACS, typeExamen,archivagePapier from Examen where idDMR =" + dmr.getId());
-            rs.next();
-            Examen exam;
-            
 
-            dmr = new DMR(rs.getString("nom"), rs.getString("prenom"), ((Date) rs.getDate("dateNaissance")), rs.getInt("tel"), genre, rs.getInt("idDMR"), rs.getString("adresse"), rs.getString("codePostal"), rs.getString("ville"));
+            while (rs.next()) {
+                String s = rs.getString("typeExamen");
+                TypeExamen typeExam;
+                if (s.equals("irm")) {
+                    typeExam = TypeExamen.IRM;
+                } else if (s.equals("scanner")) {
+                    typeExam = TypeExamen.SCANNER;
+                } else {
+                    typeExam = TypeExamen.RADIO;
+                }
+                dmr.ajouterExamen((Date) rs.getDate("dateExamen"), rs.getInt("idPH"), typeExam, rs.getInt("idPACS"), rs.getString("texteCR"));
+
+            }
 
 // Close the result set, statement and the connection 
             rs.close();
@@ -178,7 +189,7 @@ public class requetesbd {
 
             return dmr;
         } finally {
-            
+
         }
     }
 
@@ -261,7 +272,8 @@ public class requetesbd {
     }
 
     public static int nouveauIdDMR(Connection conn) throws SQLException {
-        /*renvoie un nouveau  idDMR = max(idDMR)+1*/
+        /*renvoie un nouveau  idDMR = max(idDMR)+1
+        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
@@ -276,7 +288,7 @@ public class requetesbd {
             SQLWarningsExceptions.printWarnings(conn);
             return idDMR;
         } finally {
-            
+
         }
     }
 
@@ -287,9 +299,8 @@ public class requetesbd {
             Statement stmt = conn.createStatement();
 
 // Execute the query
-            
             int idDMR = nouveauIdDMR(conn);
-            DMR dmr = new DMR();
+
             int rowCount = stmt.executeUpdate("INSERT INTO DMR(nom,prenom,idDMR,dateNaissance,tel,genre,Adresse,CodePostal,Ville) VALUES ('"
                     + nom + "','"
                     + prenom
@@ -302,7 +313,7 @@ public class requetesbd {
                     + ville + "')");
 
 // Close the statement and the connection
-           
+            DMR dmr = recupDMR(conn, idDMR);
             stmt.close();
             SQLWarningsExceptions.printWarnings(conn);
             return dmr;

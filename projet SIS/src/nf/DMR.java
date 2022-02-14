@@ -67,8 +67,8 @@ public class DMR {
         return examens;
     }
 
-    public void ajouterExamen(Date date, PH phResp){//ajoute un nouvel examen dans le DMR courant
-        Examen examen = new Examen(this.getId(), date, phResp);   
+    public void ajouterExamen( Date date, int idPhRespo, TypeExamen typeExamen, int numPACS, String texteCR){//ajoute un nouvel examen dans le DMR courant
+        Examen examen = new Examen(id,date, idPhRespo,typeExamen,numPACS, texteCR);   
         examens.add(examen);
     }
 

@@ -11,22 +11,22 @@ import java.util.Date;
 public class Examen {
     private int idDMR;
     private Date date; //il existe plusieurs constructeurs dans la classe Date de Java. Pour une date d'examen, on rentre Date("année", "mois", "jour", "heure", "minute")
-    private PH phRespo;
+    private int idPhRespo;
     private TypeExamen typeExamen;
-    private String numPACS; //numPACS est null quand les images sont format papier, c'est pourquoi j'ai du mettre un type String et pas int!!!!!!!
+    private int numPACS; //numPACS est null quand les images sont format papier, c'est pourquoi j'ai du mettre un type String et pas int!!!!!!!
     private String texteCR; //texteCR est null quand le CR est format papier
 
-    public Examen(int idDMR, Date date, PH phRespo, TypeExamen type) {
+    public Examen(int idDMR, Date date, int idPhRespo, TypeExamen type) {
         this.idDMR = idDMR;
         this.date = date;
-        this.phRespo = phRespo;
+        this.idPhRespo = idPhRespo;
         this.typeExamen=type;
     }
    
-    public Examen(int idDMR, Date date, PH phRespo, TypeExamen typeExamen, String numPACS, String texteCR) {
+    public Examen(int idDMR, Date date, int idPhRespo, TypeExamen typeExamen, int numPACS, String texteCR) {
         this.idDMR = idDMR;
         this.date = date;
-        this.phRespo = phRespo;
+        this.idPhRespo = idPhRespo;
         this.typeExamen = typeExamen;
         this.numPACS = numPACS;
         this.texteCR = texteCR;
@@ -40,15 +40,15 @@ public class Examen {
         return date;
     }
 
-    public PH getPhRespo() {
-        return phRespo;
+    public int getIdPhRespo() {
+        return idPhRespo;
     }
 
     public TypeExamen getTypeExamen() {
         return typeExamen;
     }
 
-    public String getNumPACS() {
+    public int getNumPACS() {
         return numPACS;
     }
 
@@ -63,9 +63,13 @@ public class Examen {
         }
     }
 
-    public void setNumPACS(String numPACS) {
-        if (this.numPACS == null){
+    public void setNumPACS(int numPACS) {
+        if (this.numPACS == 0){
             this.numPACS = numPACS;
         }
+    }
+
+    public Object getPhRespo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
