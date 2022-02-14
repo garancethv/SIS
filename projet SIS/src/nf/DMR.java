@@ -71,6 +71,7 @@ public class DMR {
         Examen examen = new Examen(this.getId(), date, phResp);   
         examens.add(examen);
     }
+
     
     public void trierExamensParDate(){
         int nb_examens = this.examens.size();
@@ -86,4 +87,10 @@ public class DMR {
             }
         }
     }
+  
+    @Override
+    public String toString() {
+        return "DMR{" + "nomPatient=" + nomPatient + ", prenomPatient=" + prenomPatient + ", dateNaissance=" + dateNaissance + ", genre=" + genre + ", id=" + id + ", tel=" + tel + ", adresse=" + adresse + ", codePostal=" + codePostal + ", ville=" + ville + ", examens=" + examens + '}';
+    }
+    
 }

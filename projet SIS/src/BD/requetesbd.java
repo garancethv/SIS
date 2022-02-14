@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import nf.DMR;
+import nf.Examen;
 import nf.Genre;
 import nf.Interne;
 import nf.Manip;
@@ -36,32 +37,41 @@ public class requetesbd {
      * @throws SQLException en cas d'erreur d'acc�s � la base de donn�es
      */
     public static Connection connexionBD() throws SQLException, ClassNotFoundException {
-try{
-        String jdbcDriver, dbUrl, username, password;
-        DatabaseAccessProperties dap = new DatabaseAccessProperties(configurationFile);
-        jdbcDriver = dap.getJdbcDriver();
-        dbUrl = dap.getDatabaseUrl();
-        username = dap.getUsername();
-        password = dap.getPassword();
+        /* connexion à la BD*/
+        try {
+            String jdbcDriver, dbUrl, username, password;
+            DatabaseAccessProperties dap = new DatabaseAccessProperties(configurationFile);
+            jdbcDriver = dap.getJdbcDriver();
+            dbUrl = dap.getDatabaseUrl();
+            username = dap.getUsername();
+            password = dap.getPassword();
 // Load the database driver
-        Class.forName(jdbcDriver);
+            Class.forName(jdbcDriver);
 // Get a connection to the database
-        Connection conn = DriverManager.getConnection(dbUrl, username, password);
-        // Print information about connection warnings
-        SQLWarningsExceptions.printWarnings(conn);
-        return conn;}
-finally{
-    
-}
+            Connection conn = DriverManager.getConnection(dbUrl, username, password);
+            // Print information about connection warnings
+            SQLWarningsExceptions.printWarnings(conn);
+            return conn;
+        } finally {
+
+        }
     }
+<<<<<<< HEAD
     
     public static void deconnexionBD() {
 
+=======
+
+    public static void deconnexionBD(Connection conn) throws SQLException {
+        /*déconnexion de la BD*/
+        conn.close();
+>>>>>>> 0ed26a6e32eb7669b75bcfb26b7fa81f5b6359d6
     }
 
     public static boolean connexion(Connection conn, int idPerso, String mdp) throws SQLException {
+        /*vérifie que le personnel existe dans la base de données*/
         try {
-            /*vérifie que le personnel existe dans la base de données*/
+
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
@@ -121,17 +131,30 @@ finally{
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
-            ResultSet rs = stmt.executeQuery("select TRIM(nom) nom, TRIM(prenom) prenom, idDMR, dateNaissance, tel, TRIM(genre) genre, TRIM(adresse) adresse,TRIM(codePostal) codePostal,TRIM(ville) ville from DMR where idPerso =" + idDMR);
+            ResultSet rs = stmt.executeQuery("select TRIM(nom) nom, TRIM(prenom) prenom, idDMR, dateNaissance, tel, TRIM(genre) genre, TRIM(adresse) adresse,TRIM(codePostal) codePostal,TRIM(ville) ville from DMR where idDMR =" + idDMR);
             rs.next();
             DMR dmr;
-            System.out.println(rs.getDate("dateNaissance").toString());
-            Genre genre = Genre.valueOf(rs.getString("genre"));
+            String g = rs.getString("genre");
+            Genre genre;
+            if (g.equals("masculin")) {
+                genre = Genre.H;
+            } else if (g.equals("feminin")) {
+                genre = Genre.F;
+            } else {
+                genre = Genre.Autre;
+            }
+
             dmr = new DMR(rs.getString("nom"), rs.getString("prenom"), ((Date) rs.getDate("dateNaissance")), rs.getInt("tel"), genre, rs.getInt("idDMR"), rs.getString("adresse"), rs.getString("codePostal"), rs.getString("ville"));
 
 // Close the result set, statement and the connection 
             rs.close();
+            ResultSet rs1 = stmt.executeQuery("select TRIM(nom) nom, TRIM(prenom) prenom, idDMR, dateNaissance, tel, TRIM(genre) genre, TRIM(adresse) adresse,TRIM(codePostal) codePostal,TRIM(ville) ville from DMR where idDMR =" + idDMR);
+            rs1.next();
+
+            rs1.close();
             stmt.close();
             SQLWarningsExceptions.printWarnings(conn);
+
             return dmr;
         } finally {
             //close connection
@@ -141,17 +164,49 @@ finally{
         }
     }
 
+    public static boolean recupExamen(Connection conn, DMR dmr) throws SQLException {
+        /*renvoie le DMR recherché*/
+        try {
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+// Execute the query
+            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH,idPACS, typeExamen,archivagePapier from Examen where idDMR =" + dmr.getId());
+            rs.next();
+            Examen exam;
+            
+
+            dmr = new DMR(rs.getString("nom"), rs.getString("prenom"), ((Date) rs.getDate("dateNaissance")), rs.getInt("tel"), genre, rs.getInt("idDMR"), rs.getString("adresse"), rs.getString("codePostal"), rs.getString("ville"));
+
+// Close the result set, statement and the connection 
+            rs.close();
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+
+            return dmr;
+        } finally {
+            
+        }
+    }
+
     public static DMR recupDMRBis(Connection conn, String nom, String prenom, String dateNaissance) throws SQLException {
         /*renvoie le DMR recherché*/
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
-            ResultSet rs = stmt.executeQuery("select TRIM(nom) nom, TRIM(prenom) prenom, idDMR, dateNaissance, tel, TRIM(genre) genre, TRIM(adresse) adresse,TRIM(codePostal) codePostal,TRIM(ville) ville from DMR where nom='" + nom + "',prenom='" + prenom + "',dateNaissance='" + dateNaissance + "')");
+            ResultSet rs = stmt.executeQuery("select TRIM(nom) nom, TRIM(prenom) prenom, idDMR, dateNaissance, tel, TRIM(genre) genre, TRIM(adresse) adresse,TRIM(codePostal) codePostal,TRIM(ville) ville from DMR where nom='" + nom + "' and prenom='" + prenom + "'and dateNaissance='" + dateNaissance + "'");
             rs.next();
             DMR dmr;
-            System.out.println(rs.getDate("dateNaissance").toString());
-            Genre genre = Genre.valueOf(rs.getString("genre"));
+            String g = rs.getString("genre");
+            Genre genre;
+            if (g.equals("masculin")) {
+                genre = Genre.H;
+            } else if (g.equals("feminin")) {
+                genre = Genre.F;
+            } else {
+                genre = Genre.Autre;
+            }
+
             dmr = new DMR(rs.getString("nom"), rs.getString("prenom"), ((Date) rs.getDate("dateNaissance")), rs.getInt("tel"), genre, rs.getInt("idDMR"), rs.getString("adresse"), rs.getString("codePostal"), rs.getString("ville"));
 
 // Close the result set, statement and the connection 
@@ -189,6 +244,28 @@ finally{
         }
     }
 
+    public static boolean dmrExisteBis(Connection conn, String nom, String prenom, String dateNaissance) throws SQLException {
+        /*renvoie un nouveau  idDMR = max(idDMR)+1*/
+        try {
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+// Execute the query
+            ResultSet rs = stmt.executeQuery("select idDMR from DMR where nom='" + nom + "'and prenom='" + prenom + "' and dateNaissance ='" + dateNaissance + "'");
+            boolean a = rs.next();
+
+// Close the result set, statement and the connection 
+            rs.close();
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+            return a;
+        } finally {
+            //close connection
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
     public static int nouveauIdDMR(Connection conn) throws SQLException {
         /*renvoie un nouveau  idDMR = max(idDMR)+1*/
         try {
@@ -205,24 +282,20 @@ finally{
             SQLWarningsExceptions.printWarnings(conn);
             return idDMR;
         } finally {
-            //close connection
-            if (conn != null) {
-                conn.close();
-            }
+            
         }
     }
 
-    public static int creationDMR(Connection conn, String nom, String prenom, String dateNaissance, int tel, String genre, String adresse, String codePostal, String ville) throws SQLException {
-        /*création dans la base de données d’un nouveau DMR => renvoie 1 si la création a bien été réalisée*/
+    public static DMR creationDMR(Connection conn, String nom, String prenom, String dateNaissance, int tel, String genre, String adresse, String codePostal, String ville) throws SQLException {
+        /*création dans la base de données d’un nouveau DMR => renvoie idDMR*/
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 
 // Execute the query
-            ResultSet rs = stmt.executeQuery("select max(idDMR) id from DMR ");
-            boolean a = rs.next();
-            int idDMR = rs.getInt("id") + 1;
-
+            
+            int idDMR = nouveauIdDMR(conn);
+            DMR dmr = new DMR();
             int rowCount = stmt.executeUpdate("INSERT INTO DMR(nom,prenom,idDMR,dateNaissance,tel,genre,Adresse,CodePostal,Ville) VALUES ('"
                     + nom + "','"
                     + prenom
@@ -235,10 +308,10 @@ finally{
                     + ville + "')");
 
 // Close the statement and the connection
-            rs.close();
+           
             stmt.close();
             SQLWarningsExceptions.printWarnings(conn);
-            return rowCount;
+            return dmr;
         } finally {
             //close connection
             if (conn != null) {
