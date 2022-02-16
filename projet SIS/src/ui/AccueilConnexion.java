@@ -34,7 +34,8 @@ public class AccueilConnexion extends javax.swing.JFrame {
     public AccueilConnexion() {
         initComponents();
         jLabel7.setVisible(false);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setLocationRelativeTo(null);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -58,7 +59,7 @@ public class AccueilConnexion extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Accueil connexion");
+        setTitle("Connexion");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -203,7 +204,6 @@ public class AccueilConnexion extends javax.swing.JFrame {
             dispose();
             Accueil accueil = new Accueil();
             accueil.setVisible(true);
-            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
