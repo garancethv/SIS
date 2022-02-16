@@ -14,16 +14,20 @@ import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
+import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
 import static java.lang.String.valueOf;
 import static java.lang.String.valueOf;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.sql.SQLException;
 
 /**
  *
@@ -33,9 +37,11 @@ public class AccueilConnexion extends javax.swing.JFrame {
     
     public AccueilConnexion() {
         initComponents();
-        jLabel7.setVisible(false);
+
         this.setLocationRelativeTo(null);
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        erreur_connexion.setVisible(false);
     }
 
     /**
@@ -50,13 +56,13 @@ public class AccueilConnexion extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        bouton_valider = new javax.swing.JButton();
+        field_mdp = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        field_identifiant = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        erreur_connexion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Connexion");
@@ -68,23 +74,23 @@ public class AccueilConnexion extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(236, 236, 236));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(149, 46, 46), 2));
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(149, 46, 46));
-        jButton1.setText("Valider");
-        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(149, 46, 46), null));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bouton_valider.setBackground(new java.awt.Color(204, 204, 204));
+        bouton_valider.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
+        bouton_valider.setForeground(new java.awt.Color(149, 46, 46));
+        bouton_valider.setText("Valider");
+        bouton_valider.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(149, 46, 46), null));
+        bouton_valider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bouton_validerActionPerformed(evt);
             }
         });
 
-        jPasswordField1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jPasswordField1.setForeground(new java.awt.Color(100, 0, 0));
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(149, 46, 46)));
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        field_mdp.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        field_mdp.setForeground(new java.awt.Color(100, 0, 0));
+        field_mdp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(149, 46, 46)));
+        field_mdp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                field_mdpActionPerformed(evt);
             }
         });
 
@@ -96,10 +102,9 @@ public class AccueilConnexion extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(170, 0, 0));
         jLabel6.setText("Mot de passe");
 
-        jFormattedTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(149, 46, 46)));
-        jFormattedTextField1.setForeground(new java.awt.Color(100, 0, 0));
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-        jFormattedTextField1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        field_identifiant.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        field_identifiant.setForeground(new java.awt.Color(100, 0, 0));
+        field_identifiant.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(149, 46, 46)));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -108,16 +113,16 @@ public class AccueilConnexion extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(49, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jFormattedTextField1)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(56, 56, 56)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bouton_valider, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(field_mdp, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(field_identifiant))
                 .addGap(47, 47, 47))
         );
         jPanel2Layout.setVerticalGroup(
@@ -126,13 +131,13 @@ public class AccueilConnexion extends javax.swing.JFrame {
                 .addGap(77, 77, 77)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addComponent(field_identifiant, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(field_mdp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addComponent(bouton_valider, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
         );
 
@@ -140,10 +145,10 @@ public class AccueilConnexion extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(170, 0, 0));
         jLabel3.setText("Page de connexion");
 
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 150, 0));
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoAttention.png"))); // NOI18N
-        jLabel7.setText("Identifiant ou mot de passe incorrect");
+        erreur_connexion.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
+        erreur_connexion.setForeground(new java.awt.Color(255, 150, 0));
+        erreur_connexion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoAttention.png"))); // NOI18N
+        erreur_connexion.setText("Identifiant ou mot de passe incorrect");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -156,7 +161,7 @@ public class AccueilConnexion extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(97, 97, 97)
-                        .addComponent(jLabel7))
+                        .addComponent(erreur_connexion))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(132, 132, 132)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -172,7 +177,7 @@ public class AccueilConnexion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(erreur_connexion, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62))
         );
 
@@ -190,26 +195,60 @@ public class AccueilConnexion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int id = parseInt(jFormattedTextField1.getText());
-        String mdp = jPasswordField1.getPassword().toString();
-        boolean rep = true;
-        //boolean rep = requetesbd.connexion(requetesbd.connexionBD(), id, mdp); //appel à connexion correct?
-        if (!rep){ //cad si pas de couple (id, mdp) correspondant
-            jLabel7.setVisible(true);
-            jFormattedTextField1.setText("");
-            jPasswordField1.setText("");
+    private void bouton_validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_validerActionPerformed
+        
+        String mdp = field_mdp.getPassword().toString();
+        String id_brut = field_identifiant.getText();
+        
+        //liste des chiffres
+        ArrayList numbers = new ArrayList<>();
+        for (int i = 0; i < 10; i++){
+            numbers.add(i);
+        }
+        
+        //vérifie char par char si le texte entré est bien un nombre !!!!!!!!!!!MARCHE UNIQUEMENT JUSQUA 9 CHIFFRES
+        int j = 0;
+        boolean boo = true;
+        while (boo && j < id_brut.length()){
+            if (!Character.isDigit(id_brut.charAt(j))){
+                boo = false;
+            }
+            j++;
+        }
+        if (boo){
+            int id = Integer.valueOf(field_identifiant.getText());
+            boolean rep = true; 
+            try {
+                rep = requetesbd.connexion(requetesbd.connexionBD(), id, mdp); //appel à connexion correct?
+            } catch (SQLException ex) {
+                Logger.getLogger(AccueilConnexion.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AccueilConnexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if (rep){ //cad si il y a un couple (id, mdp) correspondant
+                dispose();
+                Accueil accueil = new Accueil();
+                accueil.setVisible(true);
+            }
+            
+            else{
+                erreur_connexion.setVisible(true);
+                field_identifiant.setText("");
+                field_mdp.setText("");
+            }
+            
         }    
         else{
-            dispose();
-            Accueil accueil = new Accueil();
-            accueil.setVisible(true);
+            erreur_connexion.setVisible(true);
+            field_identifiant.setText("");
+            field_mdp.setText("");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bouton_validerActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void field_mdpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_mdpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_field_mdpActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -220,15 +259,15 @@ public class AccueilConnexion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JButton bouton_valider;
+    private javax.swing.JLabel erreur_connexion;
+    private javax.swing.JTextField field_identifiant;
+    private javax.swing.JPasswordField field_mdp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
     // End of variables declaration//GEN-END:variables
 }

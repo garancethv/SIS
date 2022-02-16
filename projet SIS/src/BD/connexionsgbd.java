@@ -62,13 +62,21 @@ class Connexionsgbd {
             String d = "06-06-2006";
             System.out.println(d);
             conn = requetesbd.connexionBD();
-            int de = requetesbd.creationDMR(conn, "Doe", "John", d, i, "masculin", s, s, s);
+            DMR dmr0 = requetesbd.creationDMR(conn, "Doe", "John", d, i, "masculin", s, s, s);
+            System.out.println(dmr0);
             conn = requetesbd.connexionBD();
-            if (requetesbd.dmrExiste(conn, 3)) {
+            if (requetesbd.dmrExiste(conn, 1)) {
                 conn = requetesbd.connexionBD();
-                DMR dmr = requetesbd.recupDMR(conn, 3);
+                DMR dmr = requetesbd.recupDMR(conn, 1);
                 System.out.println(dmr.toString());
             }
+            conn = requetesbd.connexionBD();
+            if (requetesbd.dmrExisteBis(conn, "Doe" ,"John",d)) {
+                conn = requetesbd.connexionBD();
+                DMR dmr = requetesbd.recupDMRBis(conn, "Doe","John",d);
+                System.out.println(dmr.toString());
+            }
+            
 
             // requetesbd.employes(conn);
 // Print information about connection warnings
