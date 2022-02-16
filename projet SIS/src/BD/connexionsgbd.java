@@ -62,12 +62,12 @@ class Connexionsgbd {
             String d = "06-06-2006";
             System.out.println(d);
             conn = requetesbd.connexionBD();
-            DMR dmr0 = requetesbd.creationDMR(conn, "Doe", "John", d, i, "masculin", s, s, s);
+            DMR dmr0 = requetesbd.creationDMR(conn, "Doe", "John", d, "tel", "masculin", s, s, s);
             System.out.println(dmr0);
             conn = requetesbd.connexionBD();
             if (requetesbd.dmrExiste(conn, 1)) {
                 conn = requetesbd.connexionBD();
-                DMR dmr = requetesbd.recupDMR(conn, 1);
+                DMR dmr = requetesbd.recupDMR(conn, "1");
                 System.out.println(dmr.toString());
             }
             conn = requetesbd.connexionBD();

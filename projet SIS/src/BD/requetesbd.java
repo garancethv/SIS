@@ -120,7 +120,7 @@ public class requetesbd {
         }
     }
 
-    public static DMR recupDMR(Connection conn, int idDMR) throws SQLException {
+    public static DMR recupDMR(Connection conn, String idDMR) throws SQLException {
         /*renvoie le DMR recherché*/
         try {
 // Get a statement from the connection
@@ -292,7 +292,7 @@ public class requetesbd {
         }
     }
 
-    public static DMR creationDMR(Connection conn, String nom, String prenom, String dateNaissance, int tel, String genre, String adresse, String codePostal, String ville) throws SQLException {
+    public static DMR creationDMR(Connection conn, String nom, String prenom, String dateNaissance, String tel, String genre, String adresse, String codePostal, String ville) throws SQLException {
         /*création dans la base de données d’un nouveau DMR => renvoie idDMR*/
         try {
 // Get a statement from the connection
@@ -313,7 +313,7 @@ public class requetesbd {
                     + ville + "')");
 
 // Close the statement and the connection
-            DMR dmr = recupDMR(conn, idDMR);
+            DMR dmr = recupDMR(conn, String.valueOf(idDMR));
             stmt.close();
             SQLWarningsExceptions.printWarnings(conn);
             return dmr;
