@@ -328,7 +328,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/LogoInformation.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Le format doit &#xea;tre sous la forme JJ/MM/AAAA"/>
+                <Property name="text" type="java.lang.String" value="Le format doit &#xea;tre sous la forme JJ-MM-AAAA"/>
               </Properties>
             </Component>
           </SubComponents>

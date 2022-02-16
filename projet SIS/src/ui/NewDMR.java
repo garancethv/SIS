@@ -5,6 +5,7 @@
  */
 package ui;
 
+import BD.requetesbd;
 import java.sql.Array;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -26,13 +27,13 @@ public class NewDMR extends javax.swing.JPanel {
      * Creates new form NewDMR
      */
     JTabbedPane pane;
-    
+
     public NewDMR(JTabbedPane pane) {
-        this.pane=pane;
+        this.pane = pane;
         initComponents();
-        
+
         nom_field.requestFocusInWindow();
-        
+
         erreur_nom.setVisible(false);
         erreur_prenom.setVisible(false);
         erreur_date.setVisible(false);
@@ -168,20 +169,22 @@ public class NewDMR extends javax.swing.JPanel {
         erreur_date.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         erreur_date.setForeground(new java.awt.Color(149, 46, 46));
         erreur_date.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
-        erreur_date.setText("Le format doit être sous la forme JJ/MM/AAAA");
+        erreur_date.setText("Le format doit être sous la forme JJ-MM-AAAA");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(date_naissance_field, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(date_naissance_field, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(erreur_date)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(erreur_date)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,61 +313,66 @@ public class NewDMR extends javax.swing.JPanel {
         // Tous les champs sont remplis
         // Date sous le bon format
 
-        String nom= nom_field.getText();
-        String prenom= prenom_field.getText();
-        String date= date_naissance_field.getText();
+        String nom = nom_field.getText();
+        String prenom = prenom_field.getText();
+        String date = date_naissance_field.getText();
+        String genre = genre_field.getSelectedItem().toString();
 
         if (!bonFormatDate(date)) {
             erreur_date.setVisible(true);
-        }
-        else {
+        } else {
             erreur_date.setVisible(false);
+            date=date.split("/")[0]+"-"+date.split("/")[1]+"-"+date.split("/")[2];
         }
 
         if (nom.equals("")) {
             erreur_nom.setVisible(true);
-        }
-        else {
+        } else {
             erreur_nom.setVisible(false);
         }
 
         if (prenom.equals("")) {
             erreur_prenom.setVisible(true);
-        }
-        else {
+        } else {
             erreur_prenom.setVisible(false);
         }
 
         if (!erreur_date.isVisible() && !erreur_prenom.isVisible() && !erreur_nom.isVisible()) {
-            String genre1= genre_field.getSelectedItem().toString();
-            Genre genre=Genre.valueOf(genre1);
+            try {
+                if (requetesbd.dmrExisteBis(requetesbd.connexionBD(), nom, prenom, date)) {
+                    // JDialog avec Message d'erreur : DMR Existe déjà et donne l'id correspondant
+                    // ou alors message "attention voulez-vous remplacer DMR existant" et si oui forcer création
+                }
+                else {
+                    try {
+                        DMR nv_dmr = requetesbd.creationDMR(requetesbd.connexionBD(), nom, prenom, date, "0781808779", genre, "adresse", "38000", "Grenoble");
 
-            int jour=Integer.valueOf(date.split("/")[0]);
-            // attention dans java.util.date les mois vont de 0 (Janvier) à 11 (Décembre)
-            int mois=Integer.valueOf(date.split("/")[1])-1;
-            int annee=Integer.valueOf(date.split("/")[2]);
-            Date date_naissance= new Date(annee,mois,jour);
+                        // ferme l'onglet
+                        int i = pane.getSelectedIndex();
+                        if (i != -1) {
+                            pane.remove(i);
+                        }
 
-            DMR nv_dmr= new DMR(nom, prenom, date_naissance, genre, 1);
+                        // ouvre le DMR crée
+                        javax.swing.JPanel dmrpanel = new DMRPatient(pane, nv_dmr);
 
-            // ferme l'onglet
-            int i = pane.getSelectedIndex();
-            if (i != -1) {
-                pane.remove(i);
+                        // ajoute un nouvel onglet
+                        pane.addTab("             DMR         ", dmrpanel);
+                        pane.setSelectedComponent(dmrpanel);
+
+                        // création d'un bouton pour fermer l'onglet
+                        CloseButton close_button = new CloseButton(pane);
+
+                        // ajout du bouton
+                        pane.setTabComponentAt(pane.getSelectedIndex(), close_button);
+                    }
+                    catch (Exception e) {
+                        // Message d'erreur BD
+                    }
+                }
+            } catch (Exception e) {
+                // Message d'erreur BD
             }
-
-            // ouvre le DMR crée
-            javax.swing.JPanel dmrpanel=new DMRPatient(pane,nv_dmr);
-
-            // ajoute un nouvel onglet
-            pane.addTab("             DMR         ",dmrpanel);
-            pane.setSelectedComponent(dmrpanel);
-
-            // création d'un bouton pour fermer l'onglet
-            CloseButton close_button = new CloseButton(pane);
-
-            // ajout du bouton
-            pane.setTabComponentAt(pane.getSelectedIndex(), close_button);
         }
     }//GEN-LAST:event_valider_buttonActionPerformed
 
@@ -373,9 +381,9 @@ public class NewDMR extends javax.swing.JPanel {
     }//GEN-LAST:event_genre_fieldActionPerformed
 
     private boolean bonFormatDate(String date) {
-        String[] liste_date=date.split("/");
-        if(liste_date.length==3 && liste_date[0].matches("-?\\d+") && liste_date[1].matches("-?\\d+")
-                && liste_date[2].matches("-?\\d+") && Integer.valueOf(liste_date[2])>1900) {
+        String[] liste_date = date.split("/");
+        if (liste_date.length == 3 && liste_date[0].matches("-?\\d+") && liste_date[1].matches("-?\\d+")
+                && liste_date[2].matches("-?\\d+") && Integer.valueOf(liste_date[2]) > 1900) {
             return true;
         }
         return false;

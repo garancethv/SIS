@@ -6,6 +6,7 @@
 
 package ui;
 
+import BD.requetesbd;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.util.Date;
@@ -335,21 +336,16 @@ public class Accueil extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String id=jTextField1.getText();
-        if (id.equals("")) {
+        
+        try {
+            DMR dmr=requetesbd.recupDMR(requetesbd.connexionBD(),id);
+            search_jdialog.setVisible(false);
+            open_dmr(dmr);
+        }
+        catch(Exception e) {
             jTextField1.setText("");
             jTextField1.requestFocusInWindow();
             jLabel10.setVisible(true);
-        }
-        else {
-            search_jdialog.setVisible(false);
-            
-            // il faudra chercher DMR avec le bon n° id
-            DMR dmr_test= new DMR("Thoviste", "Garance", new Date(2001,4,4), Genre.F, 1);
-            PH ph_test= new PH("Deblouze", "Agathe", 222, "mdp", 1);
-            
-            dmr_test.ajouterExamen(new Date(2022,1,16,14,05), ph_test, TypeExamen.RADIO);
-            
-            open_dmr(dmr_test);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -71,6 +71,10 @@ public class DMR {
         Examen examen = new Examen(id,date, idPhRespo,typeExamen,numPACS, texteCR);   
         examens.add(examen);
     }
+    
+    public void ajouterExamen(Examen examen) {
+        examens.add(examen);
+    }
 
     
     public void trierExamensParDate(){
