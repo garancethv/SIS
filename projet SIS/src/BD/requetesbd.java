@@ -63,7 +63,7 @@ public class requetesbd {
         conn.close();
     }
 
-    public static boolean connexion(Connection conn, int idPerso, String mdp) throws SQLException {
+    public static boolean connexion(Connection conn, String idPerso, String mdp) throws SQLException {
         /*vérifie que le personnel existe dans la base de données*/
         try {
 
@@ -190,6 +190,88 @@ public class requetesbd {
             return dmr;
         } finally {
 
+        }
+    }
+    
+    public static DMR creationExamen(Connection conn, DMR dmr, int idPH, TypeExamen typeExam, int archivagePapier) throws SQLException {
+        /*renvoie le DMR recherché
+        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
+        try {
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+// Execute the query
+            int rowCount = stmt.executeUpdate("INSERT INTO Examen(idDMR,dateExamen,idPH,typeExamen,archivagePapier) VALUES ('"
+                    + dmr.getId() + "',sysdate"
+                    + "','" + idPH + "','"
+                    + typeExam.toString() + "','"
+                    + archivagePapier+"')");
+            
+            
+            recupExamen(conn, dmr);
+        
+// Close the result set, statement and the connection 
+            
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+
+            return dmr;
+        } finally {
+            //close connection
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    public static void creationCR(Connection conn, Examen examen, String texteCR) throws SQLException {
+        /*renvoie le DMR recherché
+        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
+        try {
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+// Execute the query
+            int rowCount = stmt.executeUpdate("INSERT INTO Examen SET texteCR ='"
+                    + texteCR + "' where idDMR ='"+examen.getIdDMR() +"' and idExamen ='"+examen.getDate().toString()+"'");
+            
+            
+            examen.setTexteCR(texteCR);
+        
+// Close the result set, statement and the connection 
+            
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+
+            
+        } finally {
+            //close connection
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    public static void numerisationImage(Connection conn, Examen examen) throws SQLException {
+        /*renvoie le DMR recherché
+        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
+        try {
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+// Execute the query
+            int rowCount = stmt.executeUpdate("INSERT INTO Examen SET texteCR ='"
+                    + "' where idDMR ='"+examen.getIdDMR() +"' and idExamen ='"+examen.getDate().toString()+"'");
+            
+            
+           
+        
+// Close the result set, statement and the connection 
+            
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+
+            
+        } finally {
+            //close connection
+            if (conn != null) {
+                conn.close();
+            }
         }
     }
 
