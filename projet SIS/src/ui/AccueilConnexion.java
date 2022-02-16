@@ -37,8 +37,11 @@ public class AccueilConnexion extends javax.swing.JFrame {
     
     public AccueilConnexion() {
         initComponents();
+
+        this.setLocationRelativeTo(null);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
         erreur_connexion.setVisible(false);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -62,7 +65,7 @@ public class AccueilConnexion extends javax.swing.JFrame {
         erreur_connexion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Accueil connexion");
+        setTitle("Connexion");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -240,7 +243,6 @@ public class AccueilConnexion extends javax.swing.JFrame {
             erreur_connexion.setVisible(true);
             field_identifiant.setText("");
             field_mdp.setText("");
-            
         }
     }//GEN-LAST:event_bouton_validerActionPerformed
 
