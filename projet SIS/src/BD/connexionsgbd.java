@@ -31,9 +31,9 @@ class Connexionsgbd {
 // Get a connection to the database
             Connection conn = DriverManager.getConnection(dbUrl, username, password);*/
             Connection conn = requetesbd.connexionBD();
-            System.out.println(requetesbd.connexion(conn, 1234567891, "'bow12'"));
+            System.out.println(requetesbd.connexion(conn, "1234567891", "'bow12'"));
             conn = requetesbd.connexionBD();
-            System.out.println(requetesbd.connexion(conn, 1234567891, "'bow1'"));
+            System.out.println(requetesbd.connexion(conn, "1234567891", "'bow1'"));
             conn = requetesbd.connexionBD();
             Personnel p = requetesbd.utilisateur(conn, 1234567890);
 
