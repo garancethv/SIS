@@ -39,8 +39,20 @@ public class DMRPatient extends javax.swing.JPanel {
         
         nom_patient.setText(dmr.getNomPatient());
         prenom_patient.setText(dmr.getPrenomPatient());
+        
         Date date = dmr.getDateNaissance();
-        date_naissance.setText(String.valueOf(date.getDate())+"/"+String.valueOf(date.getMonth()+1)+"/"+String.valueOf(date.getYear()));
+        String année="1800";
+        if (Integer.valueOf(date.getYear())-100 > 10) {
+            année="20"+String.valueOf(date.getYear()-100);
+        }
+        else if (Integer.valueOf(date.getYear())>100) {
+            année="200"+String.valueOf(date.getYear()-100);
+        }
+        else {
+            année="19"+String.valueOf(date.getYear());
+        }
+        date_naissance.setText(String.valueOf(date.getDate())+"/"+String.valueOf(date.getMonth()+1)+"/"+année);
+        
         id.setText(String.valueOf(dmr.getId()));
         String genre="";
         if (dmr.getGenre()==Genre.H) {

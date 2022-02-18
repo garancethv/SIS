@@ -63,6 +63,22 @@ public class DMR {
         return id;
     }
 
+    public int getTel() {
+        return tel;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public String getCodePostal() {
+        return codePostal;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
     public ArrayList<Examen> getExamens() {
         return examens;
     }

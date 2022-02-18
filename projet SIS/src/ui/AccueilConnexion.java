@@ -197,55 +197,36 @@ public class AccueilConnexion extends javax.swing.JFrame {
 
     private void bouton_validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_validerActionPerformed
         
-        String mdp = field_mdp.getPassword().toString();
-        String id_brut = field_identifiant.getText();
+        String mdp = field_mdp.getText();
+        String id = field_identifiant.getText();
+        System.out.println(id);
+        System.out.println(mdp);
         
-        //liste des chiffres
-        ArrayList numbers = new ArrayList<>();
-        for (int i = 0; i < 10; i++){
-            numbers.add(i);
+        boolean rep=false;
+        try {
+            System.out.println("2eme étape");
+            rep = requetesbd.connexion(requetesbd.connexionBD(), id, mdp); //appel à connexion
         }
-        
-        //vérifie char par char si le texte entré est bien un nombre !!!!!!!!!!!MARCHE UNIQUEMENT JUSQUA 9 CHIFFRES
-        int j = 0;
-        boolean boo = true;
-        while (boo && j < id_brut.length()){
-            if (!Character.isDigit(id_brut.charAt(j))){
-                boo = false;
-            }
-            j++;
+        catch (Exception e) {
+            System.out.println("2eme étape ratée");
         }
-        if (boo){
-            int id = Integer.valueOf(field_identifiant.getText());
-            boolean rep = true; 
-            try {
-                rep = requetesbd.connexion(requetesbd.connexionBD(), id, mdp); //appel à connexion correct?
-            } catch (SQLException ex) {
-                Logger.getLogger(AccueilConnexion.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AccueilConnexion.class.getName()).log(Level.SEVERE, null, ex);
-            }
 
-            if (rep){ //cad si il y a un couple (id, mdp) correspondant
-                dispose();
-                Accueil accueil = new Accueil();
-                accueil.setVisible(true);
-            }
-            
-            else{
-                erreur_connexion.setVisible(true);
-                field_identifiant.setText("");
-                field_mdp.setText("");
-            }
-            
-        }    
+        if (rep){ //cad si il y a un couple (id, mdp) correspondant
+            dispose();
+            Accueil accueil = new Accueil();
+            accueil.setVisible(true);
+        }
         else{
-            erreur_connexion.setVisible(true);
-            field_identifiant.setText("");
-            field_mdp.setText("");
+            erreur_connexion();
         }
     }//GEN-LAST:event_bouton_validerActionPerformed
 
+    private void erreur_connexion() {
+        erreur_connexion.setVisible(true);
+        field_identifiant.setText("");
+        field_mdp.setText("");
+    }
+    
     private void field_mdpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_mdpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_field_mdpActionPerformed
