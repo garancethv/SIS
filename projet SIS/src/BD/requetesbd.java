@@ -86,6 +86,28 @@ public class requetesbd {
             }
         }
     }
+    public static boolean PhExiste(Connection conn, String idPerso) throws SQLException {
+        /*vérifie que le personnel existe dans la base de données*/
+        try {
+
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+// Execute the query
+            ResultSet rs = stmt.executeQuery("select nom from Personnel where idPerso ='" + idPerso +"'");
+            boolean a = rs.next();
+
+// Close the result set, statement and the connection 
+            rs.close();
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+            return a;
+        } finally {
+            //close connection
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
 
     public static Personnel utilisateur(Connection conn, int idPerso) throws SQLException {
         /*renvoie le personnel qui est censé être connecté*/

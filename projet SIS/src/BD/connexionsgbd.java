@@ -21,7 +21,7 @@ class Connexionsgbd {
             = "BD.properties.txt";
 
     public static void main(String args[]) {
-        try {
+        try {   
             /*String jdbcDriver, dbUrl, username, password;
             DatabaseAccessProperties dap = new DatabaseAccessProperties(configurationFile);
             jdbcDriver = dap.getJdbcDriver();
