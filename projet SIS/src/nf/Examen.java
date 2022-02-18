@@ -39,6 +39,7 @@ public class Examen {
     public Date getDate() {
         return date;
     }
+   
 
     public int getIdPhRespo() {
         return idPhRespo;

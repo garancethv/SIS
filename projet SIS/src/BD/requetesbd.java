@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import nf.DMR;
 import nf.Examen;
@@ -166,7 +167,7 @@ public class requetesbd {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
-System.out.println("b");
+            System.out.println("b");
             ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR =" + dmr.getId());
 
             while (rs.next()) {
@@ -201,9 +202,9 @@ System.out.println("b");
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
-System.out.println("a");
+            System.out.println("a");
             int rowCount = stmt.executeUpdate("INSERT INTO Examen(idDMR, dateExamen, idPH, typeExamen, archivagePapier) VALUES ('"
-                    + dmr.getId() 
+                    + dmr.getId()
                     + "', sysdate ,'"
                     + idPH + "',lower('"
                     + typeExam.toString() + "'),'"
@@ -224,15 +225,16 @@ System.out.println("a");
         }
     }
 
-    public static void creationCR(Connection conn, Examen examen, String texteCR) throws SQLException {
+    public static void creationCR(Connection conn, Examen examen, String date, String texteCR) throws SQLException {
         /*renvoie le DMR recherché
         NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
-            int rowCount = stmt.executeUpdate("INSERT INTO Examen SET texteCR ='"
-                    + texteCR + "' where idDMR ='" + examen.getIdDMR() + "' and idExamen ='" + examen.getDate().toString() + "'");
+
+            int rowCount = stmt.executeUpdate("UPDATE Examen SET texteCR ='"
+                    + texteCR + "' where idDMR ='" + examen.getIdDMR() + "' and dateExamen ='" + date + "'");
 
             examen.setTexteCR(texteCR);
 
@@ -270,32 +272,34 @@ System.out.println("a");
         }
     }
 
-    public static DMR recupDMRBis(Connection conn, String nom, String prenom, String dateNaissance) throws SQLException {
+    public static ArrayList<DMR> recupDMRBis(Connection conn, String nom, String prenom, String dateNaissance) throws SQLException {
         /*renvoie le DMR recherché*/
+        ArrayList<DMR> listeDMR = new ArrayList<>();
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
             ResultSet rs = stmt.executeQuery("select TRIM(nom) nom, TRIM(prenom) prenom, idDMR, dateNaissance, tel, TRIM(genre) genre, TRIM(adresse) adresse,TRIM(codePostal) codePostal,TRIM(ville) ville from DMR where nom='" + nom + "' and prenom='" + prenom + "'and dateNaissance='" + dateNaissance + "'");
-            rs.next();
-            DMR dmr;
-            String g = rs.getString("genre");
-            Genre genre;
-            if (g.equals("masculin")) {
-                genre = Genre.H;
-            } else if (g.equals("feminin")) {
-                genre = Genre.F;
-            } else {
-                genre = Genre.Autre;
+            while (rs.next()) {
+                DMR dmr;
+                String g = rs.getString("genre");
+                Genre genre;
+                if (g.equals("masculin")) {
+                    genre = Genre.H;
+                } else if (g.equals("feminin")) {
+                    genre = Genre.F;
+                } else {
+                    genre = Genre.Autre;
+                }
+
+                dmr = new DMR(rs.getString("nom"), rs.getString("prenom"), ((Date) rs.getDate("dateNaissance")), rs.getInt("tel"), genre, rs.getInt("idDMR"), rs.getString("adresse"), rs.getString("codePostal"), rs.getString("ville"));
+                listeDMR.add(dmr);
             }
-
-            dmr = new DMR(rs.getString("nom"), rs.getString("prenom"), ((Date) rs.getDate("dateNaissance")), rs.getInt("tel"), genre, rs.getInt("idDMR"), rs.getString("adresse"), rs.getString("codePostal"), rs.getString("ville"));
-
 // Close the result set, statement and the connection 
             rs.close();
             stmt.close();
             SQLWarningsExceptions.printWarnings(conn);
-            return dmr;
+            return listeDMR;
         } finally {
             //close connection
             if (conn != null) {
