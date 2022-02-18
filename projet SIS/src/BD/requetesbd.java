@@ -70,7 +70,7 @@ public class requetesbd {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
-            ResultSet rs = stmt.executeQuery("select nom from Personnel where idPerso =" + idPerso + " and mdp =" + mdp);
+            ResultSet rs = stmt.executeQuery("select nom from Personnel where idPerso ='" + idPerso + "' and mdp ='" + mdp+"'");
             boolean a = rs.next();
 
 // Close the result set, statement and the connection 
