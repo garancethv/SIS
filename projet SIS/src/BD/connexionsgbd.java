@@ -27,7 +27,7 @@ class Connexionsgbd {
             dbUrl = dap.getDatabaseUrl();
             username = dap.getUsername();
             password = dap.getPassword();
-// Load the database driver
+// Load the database driver 
             Class.forName(jdbcDriver);
 // Get a connection to the database
             Connection conn = DriverManager.getConnection(dbUrl, username, password);*/
@@ -61,29 +61,25 @@ class Connexionsgbd {
             //java.util.Date myDate = new java.util.Date("10-OCT-2009");
             //java.sql.Date d = new java.sql.Date(myDate.getTime());
             String d = "06-06-2006";
-          
-            conn = requetesbd.connexionBD();
 
-            DMR dmr= requetesbd.creationDMR(conn, "Doe", "John", d, i, "masculin", s, s, s);
-            System.out.println(dmr);
+            conn = requetesbd.connexionBD();  
+
+            DMR dmr0 = requetesbd.creationDMR(conn, "Doe", "John", d, "2", "masculin", s, s, s);
+            System.out.println(dmr0);
             conn = requetesbd.connexionBD();
-            if (requetesbd.dmrExiste(conn, 1)) {
+            DMR dmr1 = requetesbd.recupDMR(conn, "5");
+            System.out.println(dmr1.toString());
+
+            conn = requetesbd.connexionBD();
+            if (requetesbd.dmrExisteBis(conn, "Doe", "John", d)) {
                 conn = requetesbd.connexionBD();
-                dmr = requetesbd.recupDMR(conn, 1);
-
+                DMR dmr = requetesbd.recupDMRBis(conn, "Doe", "John", d);
                 System.out.println(dmr.toString());
             }
             conn = requetesbd.connexionBD();
-            if (requetesbd.dmrExisteBis(conn, "Doe" ,"John",d)) {
-                conn = requetesbd.connexionBD();
-                dmr = requetesbd.recupDMRBis(conn, "Doe","John",d);
-                System.out.println(dmr.toString());
-            }
-            conn = requetesbd.connexionBD();
-            dmr = requetesbd.creationExamen(conn, dmr, id, TypeExamen.IRM, 1);
-            System.out.println(dmr);
             
-
+            requetesbd.creationExamen(conn, dmr1, 1234567890 , TypeExamen.IRM, 1);
+            System.out.println(dmr1.getExamens());
 
             // requetesbd.employes(conn);
 // Print information about connection warnings
