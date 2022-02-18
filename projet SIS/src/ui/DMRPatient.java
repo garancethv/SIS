@@ -7,6 +7,7 @@ package ui;
 
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 import nf.DMR;
 import nf.Examen;
@@ -21,17 +22,25 @@ public class DMRPatient extends javax.swing.JPanel {
     /**
      * Creates new form DMRPatient
      */
+    JTabbedPane Onglets;
+    private ArrayList<Examen> examens;
+    int ligne=-1;
+    DMR dmr;
+    
     public DMRPatient() {
         initComponents();
     }
     
-    public DMRPatient(DMR dmr) {
+    public DMRPatient(JTabbedPane pane, DMR dmr) {
         initComponents();
+        this.dmr=dmr;
+        Onglets=pane;
+        examens=dmr.getExamens();
         
         nom_patient.setText(dmr.getNomPatient());
         prenom_patient.setText(dmr.getPrenomPatient());
         Date date = dmr.getDateNaissance();
-        date_naissance.setText(String.valueOf(date.getDay())+"/"+String.valueOf(date.getMonth()+1)+"/"+String.valueOf(date.getYear()));
+        date_naissance.setText(String.valueOf(date.getDate())+"/"+String.valueOf(date.getMonth()+1)+"/"+String.valueOf(date.getYear()));
         id.setText(String.valueOf(dmr.getId()));
         String genre="";
         if (dmr.getGenre()==Genre.H) {
@@ -42,16 +51,18 @@ public class DMRPatient extends javax.swing.JPanel {
         }
         genre_patient.setText(genre);
         
+        erreur_exam.setVisible(false);
+           
         DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
-        ArrayList<Examen> examens = dmr.getExamens();
-        // rajouter une fction tri par date de la plus récente à la plus ancienne dans classe DMR
-        for (int i=0; i<examens.size(); i++) {
-            String date_exam=String.valueOf(examens.get(i).getDate().getDay())
+        examens = dmr.getExamens();
+        // examens triés du plus ancien ou plus récent dans la BD donc il suffit de parcourir la liste en sens inverse
+        for (int i=examens.size()-1; i>=0; i--) {
+            String date_exam=String.valueOf(examens.get(i).getDate().getDate())
                     +"/"+String.valueOf(examens.get(i).getDate().getMonth()+1)
                     +"/"+String.valueOf(examens.get(i).getDate().getYear())
                     +" "+String.valueOf(examens.get(i).getDate().getHours())
                     +":"+String.valueOf(examens.get(i).getDate().getMinutes());
-            model.insertRow(model.getRowCount(), new Object[]{date_exam,"Radio",examens.get(i).getPhRespo().toString()});
+            model.insertRow(model.getRowCount(), new Object[]{date_exam,examens.get(i).getTypeExamen(),examens.get(i).getPhRespo().toString()});
         }
     }
 
@@ -81,6 +92,13 @@ public class DMRPatient extends javax.swing.JPanel {
         table_exams = new javax.swing.JTable();
         new_exam = new javax.swing.JButton();
         selection_button = new javax.swing.JButton();
+        erreur_exam = new javax.swing.JLabel();
+
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         id_patient_panel.setBackground(new java.awt.Color(255, 255, 255));
         id_patient_panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Patient"));
@@ -180,6 +198,11 @@ public class DMRPatient extends javax.swing.JPanel {
             }
         });
         table_exams.setToolTipText("");
+        table_exams.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_examsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table_exams);
 
         javax.swing.GroupLayout examsLayout = new javax.swing.GroupLayout(exams);
@@ -201,6 +224,11 @@ public class DMRPatient extends javax.swing.JPanel {
 
         new_exam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add (2).png"))); // NOI18N
         new_exam.setText("  Créer un nouvel examen");
+        new_exam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                new_examActionPerformed(evt);
+            }
+        });
 
         selection_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-view-32.png"))); // NOI18N
         selection_button.setText("  Voir l'examen sélectionné");
@@ -213,6 +241,11 @@ public class DMRPatient extends javax.swing.JPanel {
             }
         });
 
+        erreur_exam.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        erreur_exam.setForeground(new java.awt.Color(149, 46, 46));
+        erreur_exam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
+        erreur_exam.setText("Aucun examen n'est sélectionné.");
+
         javax.swing.GroupLayout dmr_panelLayout = new javax.swing.GroupLayout(dmr_panel);
         dmr_panel.setLayout(dmr_panelLayout);
         dmr_panelLayout.setHorizontalGroup(
@@ -223,9 +256,13 @@ public class DMRPatient extends javax.swing.JPanel {
                 .addGap(71, 71, 71)
                 .addComponent(exams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
-                .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(new_exam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(selection_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(new_exam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(selection_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(dmr_panelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(erreur_exam)))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         dmr_panelLayout.setVerticalGroup(
@@ -241,7 +278,9 @@ public class DMRPatient extends javax.swing.JPanel {
                         .addGap(143, 143, 143)
                         .addComponent(new_exam)
                         .addGap(26, 26, 26)
-                        .addComponent(selection_button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(selection_button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(erreur_exam)))
                 .addGap(68, 68, 68))
         );
 
@@ -262,13 +301,79 @@ public class DMRPatient extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void selection_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selection_buttonActionPerformed
-        // TODO add your handling code here:
+        
+       if (ligne>-1) {
+            ouvreExam();
+       }
+       else {
+           erreur_exam.setVisible(true);
+       }
     }//GEN-LAST:event_selection_buttonActionPerformed
 
+    private void ouvreExam() {
+            // Besoin d'une fction recherche d'un exam avec id patient & date exam
+            Examen ex = examens.get(examens.size()-1-ligne);
+            // Ouvre un nouvel onglet avec l'examen sélectionné
+
+            javax.swing.JPanel exam_panel=new VoirExam(ex);
+
+            // ajoute un nouvel onglet
+            Onglets.addTab("           "+ex.getTypeExamen().toString()+"        ",exam_panel);
+            Onglets.setSelectedComponent(exam_panel);
+
+            // création d'un bouton pour fermer l'onglet
+            CloseButton close_button = new CloseButton(Onglets);
+
+            // ajout du bouton
+            Onglets.setTabComponentAt(Onglets.getSelectedIndex(), close_button);
+    }
+    
+    private void table_examsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_examsMouseClicked
+        erreur_exam.setVisible(false);
+        ligne = table_exams.getSelectedRow();
+        //System.out.println(ligne);
+                
+        if(evt.getClickCount()==2 && ligne>-1){
+            ouvreExam();
+        }
+    }//GEN-LAST:event_table_examsMouseClicked
+
+    private void new_examActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_examActionPerformed
+            erreur_exam.setVisible(false);
+            
+            // Ouvre un nouvel onglet ajout d'exam
+            javax.swing.JPanel exam_panel=new NewExam(this);
+
+            // ajoute un nouvel onglet
+            Onglets.addTab("        Ajouter un Examen      ",exam_panel);
+            Onglets.setSelectedComponent(exam_panel);
+
+            // création d'un bouton pour fermer l'onglet
+            CloseButton close_button = new CloseButton(Onglets);
+
+            // ajout du bouton
+            Onglets.setTabComponentAt(Onglets.getSelectedIndex(), close_button);
+    }//GEN-LAST:event_new_examActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        erreur_exam.setVisible(false);
+    }//GEN-LAST:event_formMouseClicked
+
+    public void maj_exam(Examen exam) {
+        examens=dmr.getExamens();
+        String date_exam=String.valueOf(exam.getDate().getDate())
+                    +"/"+String.valueOf(exam.getDate().getMonth()+1)
+                    +"/"+String.valueOf(exam.getDate().getYear())
+                    +" "+String.valueOf(exam.getDate().getHours())
+                    +":"+String.valueOf(exam.getDate().getMinutes());
+        DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
+        model.insertRow(0, new Object[]{date_exam,exam.getTypeExamen(),exam.getPhRespo().toString()});
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel date_naissance;
     private javax.swing.JPanel dmr_panel;
+    private javax.swing.JLabel erreur_exam;
     private javax.swing.JPanel exams;
     private javax.swing.JLabel genre_patient;
     private javax.swing.JLabel id;

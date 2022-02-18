@@ -6,6 +6,7 @@
 
 package ui;
 
+import BD.requetesbd;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.util.Date;
@@ -14,6 +15,7 @@ import nf.DMR;
 import nf.Examen;
 import nf.Genre;
 import nf.PH;
+import nf.TypeExamen;
 
 /**
  *
@@ -158,7 +160,7 @@ public class Accueil extends javax.swing.JFrame {
         top_Pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Source Serif Pro Black", 0, 58)); // NOI18N
-        jLabel2.setText("Bienvenue X");
+        jLabel2.setText("Bienvenue Agathe");
         top_Pane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 531, 66));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logo (encore).png"))); // NOI18N
@@ -325,8 +327,6 @@ public class Accueil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void search_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_buttonActionPerformed
-        // récupère infos du champs recherche & ouvre un nouvel onglet
-        //open_dmr();
         search_jdialog.setLocationRelativeTo(null);
         jLabel10.setVisible(false);
         jTextField1.setText("");
@@ -336,22 +336,16 @@ public class Accueil extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String id=jTextField1.getText();
-        if (id.equals("")) {
+        
+        try {
+            DMR dmr=requetesbd.recupDMR(requetesbd.connexionBD(),id);
+            search_jdialog.setVisible(false);
+            open_dmr(dmr);
+        }
+        catch(Exception e) {
             jTextField1.setText("");
             jTextField1.requestFocusInWindow();
             jLabel10.setVisible(true);
-        }
-        else {
-            search_jdialog.setVisible(false);
-            
-            // il faudra chercher DMR avec le bon n° id
-            DMR dmr_test= new DMR("Thoviste", "Garance", new Date(2001,4,4), Genre.F, 11804526);
-            PH ph_test= new PH("Deblouze", "Agathe", 222, "mdp", 1);
-            
-            dmr_test.ajouterExamen(new Date(2022,1,9), ph_test);
-            dmr_test.ajouterExamen(new Date(2022,0,3), ph_test);
-            
-            open_dmr(dmr_test);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -385,7 +379,7 @@ public class Accueil extends javax.swing.JFrame {
         // vérifier si n° id est correct
         // si oui, initialiser les composants pour qu'ils correspondent au patient
         
-        javax.swing.JPanel dmrpanel=new DMRPatient(dmr);
+        javax.swing.JPanel dmrpanel=new DMRPatient(Onglets,dmr);
         
         // ajoute un nouvel onglet
         Onglets.addTab("             DMR         ",dmrpanel);
