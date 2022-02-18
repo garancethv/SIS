@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.DateFormatSymbols;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
@@ -20,7 +21,7 @@ class Connexionsgbd {
             = "BD.properties.txt";
 
     public static void main(String args[]) {
-        try {
+        try {   
             /*String jdbcDriver, dbUrl, username, password;
             DatabaseAccessProperties dap = new DatabaseAccessProperties(configurationFile);
             jdbcDriver = dap.getJdbcDriver();
@@ -60,9 +61,9 @@ class Connexionsgbd {
             //DateFormatSymbols dfsEN = new DateFormatSymbols(Locale.ENGLISH);
             //java.util.Date myDate = new java.util.Date("10-OCT-2009");
             //java.sql.Date d = new java.sql.Date(myDate.getTime());
-            String d = "06-06-2006";
+            String d = "06-06-2006"; 
 
-            conn = requetesbd.connexionBD();  
+            conn = requetesbd.connexionBD();
 
             DMR dmr0 = requetesbd.creationDMR(conn, "Doe", "John", d, "2", "masculin", s, s, s);
             System.out.println(dmr0);
@@ -73,14 +74,17 @@ class Connexionsgbd {
             conn = requetesbd.connexionBD();
             if (requetesbd.dmrExisteBis(conn, "Doe", "John", d)) {
                 conn = requetesbd.connexionBD();
-                DMR dmr = requetesbd.recupDMRBis(conn, "Doe", "John", d);
-                System.out.println(dmr.toString());
-            }
+                ArrayList<DMR> listedmr = requetesbd.recupDMRBis(conn, "Doe", "John", d);
+                System.out.println(listedmr.toString()); 
+            } 
             conn = requetesbd.connexionBD();
-            
-            requetesbd.creationExamen(conn, dmr1, 1234567890 , TypeExamen.IRM, 1);
-            System.out.println(dmr1.getExamens());
 
+            requetesbd.creationExamen(conn, dmr1, 1234567890, TypeExamen.IRM, 1);
+            
+            conn = requetesbd.connexionBD();
+            requetesbd.creationCR(conn, dmr1.getExamens().get(1), "18-02-2022", "test2");
+            System.out.println(dmr1.getExamens());
+ 
             // requetesbd.employes(conn);
 // Print information about connection warnings
             //SQLWarningsExceptions.printWarnings(conn);

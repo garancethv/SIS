@@ -86,7 +86,31 @@ public class requetesbd {
             }
         }
     }
-    
+
+    public static boolean PhExiste(Connection conn, String idPerso) throws SQLException {
+        /*vérifie que le personnel existe dans la base de données*/
+        try {
+
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+// Execute the query
+            ResultSet rs = stmt.executeQuery("select nom from Personnel where idPerso ='" + idPerso +"'");
+            boolean a = rs.next();
+
+// Close the result set, statement and the connection 
+            rs.close();
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+            return a;
+        } finally {
+            //close connection
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+
     public static Personnel utilisateur(Connection conn, int idPerso) throws SQLException {
         /*renvoie le personnel qui est censé être connecté*/
         try {
@@ -225,16 +249,20 @@ public class requetesbd {
             }
         }
     }
-    
-    public static void creationCR(Connection conn, Examen examen, String texteCR) throws SQLException {
+
+    public static void creationCR(Connection conn, Examen examen, String date, String texteCR) throws SQLException {
+     
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
             System.out.println("1");
 // Execute the query
-            int rowCount = stmt.executeUpdate("INSERT INTO Examen SET texteCR ='"
-                    + texteCR + "' where idDMR ='" + examen.getIdDMR() + "' and dateExamen ='" + examen.getDate().toString() + "'");
-            System.out.println("2");
+
+
+            int rowCount = stmt.executeUpdate("UPDATE Examen SET texteCR ='"
+                    + texteCR + "' where idDMR ='" + examen.getIdDMR() + "' and dateExamen ='" + date + "'");
+
+
             examen.setTexteCR(texteCR);
             System.out.println("3");
 // Close the result set, statement and the connection 
@@ -271,33 +299,39 @@ public class requetesbd {
             }
         }
     }
-    
-    public static DMR recupDMRBis(Connection conn, String nom, String prenom, String dateNaissance) throws SQLException {
+
+
+    public static ArrayList<DMR> recupDMRBis(Connection conn, String nom, String prenom, String dateNaissance) throws SQLException {
+
         /*renvoie le DMR recherché*/
+        ArrayList<DMR> listeDMR = new ArrayList<>();
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
             ResultSet rs = stmt.executeQuery("select TRIM(nom) nom, TRIM(prenom) prenom, idDMR, dateNaissance, tel, TRIM(genre) genre, TRIM(adresse) adresse,TRIM(codePostal) codePostal,TRIM(ville) ville from DMR where nom='" + nom + "' and prenom='" + prenom + "'and dateNaissance='" + dateNaissance + "'");
-            rs.next();
-            DMR dmr;
-            String g = rs.getString("genre");
-            Genre genre;
-            if (g.equals("masculin")) {
-                genre = Genre.H;
-            } else if (g.equals("feminin")) {
-                genre = Genre.F;
-            } else {
-                genre = Genre.Autre;
-            }
-            
-            dmr = new DMR(rs.getString("nom"), rs.getString("prenom"), ((Date) rs.getDate("dateNaissance")), rs.getInt("tel"), genre, rs.getInt("idDMR"), rs.getString("adresse"), rs.getString("codePostal"), rs.getString("ville"));
 
+            while (rs.next()) {
+                DMR dmr;
+                String g = rs.getString("genre");
+                Genre genre;
+                if (g.equals("masculin")) {
+                    genre = Genre.H;
+                } else if (g.equals("feminin")) {
+                    genre = Genre.F;
+                } else {
+                    genre = Genre.Autre;
+                }
+
+
+                dmr = new DMR(rs.getString("nom"), rs.getString("prenom"), ((Date) rs.getDate("dateNaissance")), rs.getInt("tel"), genre, rs.getInt("idDMR"), rs.getString("adresse"), rs.getString("codePostal"), rs.getString("ville"));
+                listeDMR.add(dmr);
+            }
 // Close the result set, statement and the connection 
             rs.close();
             stmt.close();
             SQLWarningsExceptions.printWarnings(conn);
-            return dmr;
+            return listeDMR;
         } finally {
             //close connection
             if (conn != null) {
