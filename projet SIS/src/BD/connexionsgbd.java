@@ -12,6 +12,7 @@ import java.util.Scanner;
 import nf.DMR;
 import nf.Genre;
 import nf.Personnel;
+import nf.TypeExamen;
 
 class Connexionsgbd {
 
@@ -60,23 +61,29 @@ class Connexionsgbd {
             //java.util.Date myDate = new java.util.Date("10-OCT-2009");
             //java.sql.Date d = new java.sql.Date(myDate.getTime());
             String d = "06-06-2006";
-            System.out.println(d);
+          
             conn = requetesbd.connexionBD();
-            DMR dmr0 = requetesbd.creationDMR(conn, "Doe", "John", d, "tel", "masculin", s, s, s);
-            System.out.println(dmr0);
+
+            DMR dmr= requetesbd.creationDMR(conn, "Doe", "John", d, i, "masculin", s, s, s);
+            System.out.println(dmr);
             conn = requetesbd.connexionBD();
             if (requetesbd.dmrExiste(conn, 1)) {
                 conn = requetesbd.connexionBD();
-                DMR dmr = requetesbd.recupDMR(conn, "1");
+                dmr = requetesbd.recupDMR(conn, 1);
+
                 System.out.println(dmr.toString());
             }
             conn = requetesbd.connexionBD();
             if (requetesbd.dmrExisteBis(conn, "Doe" ,"John",d)) {
                 conn = requetesbd.connexionBD();
-                DMR dmr = requetesbd.recupDMRBis(conn, "Doe","John",d);
+                dmr = requetesbd.recupDMRBis(conn, "Doe","John",d);
                 System.out.println(dmr.toString());
             }
+            conn = requetesbd.connexionBD();
+            dmr = requetesbd.creationExamen(conn, dmr, id, TypeExamen.IRM, 1);
+            System.out.println(dmr);
             
+
 
             // requetesbd.employes(conn);
 // Print information about connection warnings
