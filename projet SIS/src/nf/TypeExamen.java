@@ -6,7 +6,7 @@ package nf;
  */
 public enum TypeExamen {
     IRM("irm"),
-    RADIO("radiographie"),
+    RADIOGRAPHIE("radiographie"),
     SCANNER("scanner");
 
     TypeExamen(String s) {

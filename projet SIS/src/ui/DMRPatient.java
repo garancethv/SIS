@@ -5,6 +5,7 @@
  */
 package ui;
 
+import BD.requetesbd;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JTabbedPane;
@@ -12,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import nf.DMR;
 import nf.Examen;
 import nf.Genre;
+import nf.Personnel;
 
 /**
  *
@@ -41,17 +43,7 @@ public class DMRPatient extends javax.swing.JPanel {
         prenom_patient.setText(dmr.getPrenomPatient());
         
         Date date = dmr.getDateNaissance();
-        String année="1800";
-        if (Integer.valueOf(date.getYear())-100 > 10) {
-            année="20"+String.valueOf(date.getYear()-100);
-        }
-        else if (Integer.valueOf(date.getYear())>100) {
-            année="200"+String.valueOf(date.getYear()-100);
-        }
-        else {
-            année="19"+String.valueOf(date.getYear());
-        }
-        date_naissance.setText(String.valueOf(date.getDate())+"/"+String.valueOf(date.getMonth()+1)+"/"+année);
+        date_naissance.setText(DMR.format_date(date));
         
         id.setText(String.valueOf(dmr.getId()));
         String genre="";
@@ -66,15 +58,15 @@ public class DMRPatient extends javax.swing.JPanel {
         erreur_exam.setVisible(false);
            
         DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
-        examens = dmr.getExamens();
         // examens triés du plus ancien ou plus récent dans la BD donc il suffit de parcourir la liste en sens inverse
         for (int i=examens.size()-1; i>=0; i--) {
-            String date_exam=String.valueOf(examens.get(i).getDate().getDate())
-                    +"/"+String.valueOf(examens.get(i).getDate().getMonth()+1)
-                    +"/"+String.valueOf(examens.get(i).getDate().getYear())
-                    +" "+String.valueOf(examens.get(i).getDate().getHours())
-                    +":"+String.valueOf(examens.get(i).getDate().getMinutes());
-            model.insertRow(model.getRowCount(), new Object[]{date_exam,examens.get(i).getTypeExamen(),examens.get(i).getPhRespo().toString()});
+            try {
+                Personnel p = requetesbd.utilisateur(requetesbd.connexionBD(), examens.get(i).getIdPhRespo());
+                String ph="Dr "+p.getPrenom()+" "+p.getNom();
+                model.insertRow(model.getRowCount(), new Object[]{DMR.format_date(examens.get(i).getDate()),examens.get(i).getTypeExamen(),ph});
+            }
+            catch(Exception e) {
+            }
         }
     }
 
@@ -311,7 +303,7 @@ public class DMRPatient extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void selection_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selection_buttonActionPerformed
         
        if (ligne>-1) {
@@ -327,7 +319,7 @@ public class DMRPatient extends javax.swing.JPanel {
             Examen ex = examens.get(examens.size()-1-ligne);
             // Ouvre un nouvel onglet avec l'examen sélectionné
 
-            javax.swing.JPanel exam_panel=new VoirExam(ex);
+            javax.swing.JPanel exam_panel=new VoirExam(dmr,ex);
 
             // ajoute un nouvel onglet
             Onglets.addTab("           "+ex.getTypeExamen().toString()+"        ",exam_panel);
@@ -371,15 +363,16 @@ public class DMRPatient extends javax.swing.JPanel {
         erreur_exam.setVisible(false);
     }//GEN-LAST:event_formMouseClicked
 
-    public void maj_exam(Examen exam) {
-        examens=dmr.getExamens();
-        String date_exam=String.valueOf(exam.getDate().getDate())
-                    +"/"+String.valueOf(exam.getDate().getMonth()+1)
-                    +"/"+String.valueOf(exam.getDate().getYear())
-                    +" "+String.valueOf(exam.getDate().getHours())
-                    +":"+String.valueOf(exam.getDate().getMinutes());
-        DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
-        model.insertRow(0, new Object[]{date_exam,exam.getTypeExamen(),exam.getPhRespo().toString()});
+    public void maj_exam(DMR maj) {
+        examens=maj.getExamens();
+        DefaultTableModel model = (DefaultTableModel)table_exams.getModel(); 
+        int rows = model.getRowCount(); 
+        for(int i = rows - 1; i >=0; i--){
+            model.removeRow(i); 
+        }
+        for (int i=examens.size()-1; i>=0; i--) {
+            model.insertRow(model.getRowCount(), new Object[]{DMR.format_date(examens.get(i).getDate()),examens.get(i).getTypeExamen(),String.valueOf(examens.get(i).getIdPhRespo())});
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
