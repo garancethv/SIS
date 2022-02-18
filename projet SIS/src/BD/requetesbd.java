@@ -70,7 +70,7 @@ public class requetesbd {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
-            ResultSet rs = stmt.executeQuery("select nom from Personnel where idPerso ='" + idPerso + "' and mdp ='" + mdp+"'");
+            ResultSet rs = stmt.executeQuery("select nom from Personnel where idPerso =" + idPerso + " and mdp =" + mdp);
             boolean a = rs.next();
 
 // Close the result set, statement and the connection 
@@ -166,7 +166,8 @@ public class requetesbd {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
-            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH,idPACS, typeExamen,archivagePapier from Examen where idDMR =" + dmr.getId());
+System.out.println("b");
+            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR =" + dmr.getId());
 
             while (rs.next()) {
                 String s = rs.getString("typeExamen");
@@ -192,7 +193,7 @@ public class requetesbd {
 
         }
     }
-    
+
     public static DMR creationExamen(Connection conn, DMR dmr, int idPH, TypeExamen typeExam, int archivagePapier) throws SQLException {
         /*renvoie le DMR recherché
         NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
@@ -200,17 +201,17 @@ public class requetesbd {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
-            int rowCount = stmt.executeUpdate("INSERT INTO Examen(idDMR,dateExamen,idPH,typeExamen,archivagePapier) VALUES ('"
-                    + dmr.getId() + "',sysdate"
-                    + "','" + idPH + "','"
-                    + typeExam.toString() + "','"
-                    + archivagePapier+"')");
-            
-            
+System.out.println("a");
+            int rowCount = stmt.executeUpdate("INSERT INTO Examen(idDMR, dateExamen, idPH, typeExamen, archivagePapier) VALUES ('"
+                    + dmr.getId() 
+                    + "', sysdate ,'"
+                    + idPH + "',lower('"
+                    + typeExam.toString() + "'),'"
+                    + archivagePapier + "')");
+
             recupExamen(conn, dmr);
-        
+
 // Close the result set, statement and the connection 
-            
             stmt.close();
             SQLWarningsExceptions.printWarnings(conn);
 
@@ -222,6 +223,7 @@ public class requetesbd {
             }
         }
     }
+
     public static void creationCR(Connection conn, Examen examen, String texteCR) throws SQLException {
         /*renvoie le DMR recherché
         NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
@@ -230,17 +232,14 @@ public class requetesbd {
             Statement stmt = conn.createStatement();
 // Execute the query
             int rowCount = stmt.executeUpdate("INSERT INTO Examen SET texteCR ='"
-                    + texteCR + "' where idDMR ='"+examen.getIdDMR() +"' and idExamen ='"+examen.getDate().toString()+"'");
-            
-            
+                    + texteCR + "' where idDMR ='" + examen.getIdDMR() + "' and idExamen ='" + examen.getDate().toString() + "'");
+
             examen.setTexteCR(texteCR);
-        
+
 // Close the result set, statement and the connection 
-            
             stmt.close();
             SQLWarningsExceptions.printWarnings(conn);
 
-            
         } finally {
             //close connection
             if (conn != null) {
@@ -248,6 +247,7 @@ public class requetesbd {
             }
         }
     }
+
     public static void numerisationImage(Connection conn, Examen examen) throws SQLException {
         /*renvoie le DMR recherché
         NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
@@ -256,17 +256,12 @@ public class requetesbd {
             Statement stmt = conn.createStatement();
 // Execute the query
             int rowCount = stmt.executeUpdate("INSERT INTO Examen SET texteCR ='"
-                    + "' where idDMR ='"+examen.getIdDMR() +"' and idExamen ='"+examen.getDate().toString()+"'");
-            
-            
-           
-        
+                    + "' where idDMR ='" + examen.getIdDMR() + "' and idExamen ='" + examen.getDate().toString() + "'");
+
 // Close the result set, statement and the connection 
-            
             stmt.close();
             SQLWarningsExceptions.printWarnings(conn);
 
-            
         } finally {
             //close connection
             if (conn != null) {
