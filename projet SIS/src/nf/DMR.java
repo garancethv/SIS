@@ -42,7 +42,19 @@ public class DMR {
         this.ville = ville;
         examens = new ArrayList<Examen>();
     }
-
+public static String format_date(Date date) {
+        String année="1800";
+        if (Integer.valueOf(date.getYear())-100 > 9) {
+            année="20"+String.valueOf(date.getYear()-100);
+        }
+        else if (Integer.valueOf(date.getYear())>100) {
+            année="200"+String.valueOf(date.getYear()-100);
+        }
+        else {
+            année="19"+String.valueOf(date.getYear());
+        }
+        return String.valueOf(date.getDate())+"/"+String.valueOf(date.getMonth()+1)+"/"+année;
+}
     public String getNomPatient() {
         return nomPatient;
     }
@@ -90,6 +102,10 @@ public class DMR {
     
     public void ajouterExamen(Examen examen) {
         examens.add(examen);
+    }
+    
+    public void setExamens(ArrayList<Examen> examens) {
+        this.examens=examens;
     }
 
     

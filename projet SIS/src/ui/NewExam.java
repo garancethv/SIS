@@ -5,6 +5,7 @@
  */
 package ui;
 
+import BD.requetesbd;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
@@ -36,7 +37,6 @@ public class NewExam extends javax.swing.JPanel {
         this.dmr=dmr_pane.dmr;
         
         erreur_ph.setVisible(false);
-        pacs_error.setVisible(false);
         save_button.setVisible(false);
     }
 
@@ -65,12 +65,6 @@ public class NewExam extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         type_field = new javax.swing.JComboBox<>();
         valider_button = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        dmr_papier_check = new javax.swing.JCheckBox();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        pacs_field = new javax.swing.JTextField();
-        pacs_error = new javax.swing.JLabel();
         add_cr_button = new javax.swing.JButton();
 
         cr_jdialog.setResizable(false);
@@ -185,7 +179,7 @@ public class NewExam extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(170, 0, 0));
         jLabel7.setText("Type d'examen :");
 
-        type_field.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IRM", "RADIO", "SCANNER" }));
+        type_field.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IRM", "RADIOGRAPHIE", "SCANNER" }));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -214,49 +208,6 @@ public class NewExam extends javax.swing.JPanel {
             }
         });
 
-        dmr_papier_check.setText("DMR Papier");
-        dmr_papier_check.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dmr_papier_checkActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(170, 0, 0));
-        jLabel9.setText("N° PACS :");
-
-        pacs_error.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
-        pacs_error.setForeground(new java.awt.Color(149, 46, 46));
-        pacs_error.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
-        pacs_error.setText("Ce champ est obligatoire");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pacs_field, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(pacs_error)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(pacs_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(pacs_error)
-                .addContainerGap())
-        );
-
         add_cr_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add (2).png"))); // NOI18N
         add_cr_button.setText("Ajouter un compte-rendu");
         add_cr_button.addActionListener(new java.awt.event.ActionListener() {
@@ -276,34 +227,20 @@ public class NewExam extends javax.swing.JPanel {
                         .addComponent(add_cr_button)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(valider_button, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(dmr_papier_check))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(234, 234, 234))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(valider_button, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(281, 281, 281)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(dmr_papier_check)))
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addComponent(add_cr_button)
                 .addGap(18, 18, 18)
                 .addComponent(valider_button, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -317,7 +254,7 @@ public class NewExam extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(338, 338, 338)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -335,12 +272,12 @@ public class NewExam extends javax.swing.JPanel {
         // Tous les champs sont remplis
         // idPH est bien un entier et correspond bien à un PH (à faire)
         // numPacs est bien un entier et correspond bien à un num pacs (à faire)
-
+        
         String idPH= ph_field.getText();
         String type_ex= type_field.getSelectedItem().toString();
         TypeExamen type= TypeExamen.valueOf(type_ex);
-        String numPacs= pacs_field.getText();
 
+        // vérifier que id correspond à un PH
         if (idPH.equals("")) {
             erreur_ph.setVisible(true);
         }
@@ -348,50 +285,31 @@ public class NewExam extends javax.swing.JPanel {
             erreur_ph.setVisible(false);
         }
 
-        if (!dmr_papier_check.isSelected() && numPacs.equals("")) {
-            pacs_error.setVisible(true);
-        }
-        else {
-            pacs_error.setVisible(false);
-        }
-
-        if (!erreur_ph.isVisible() && !pacs_error.isVisible()) {
+        if (!erreur_ph.isVisible()) {
             // à faire : récupérer Date et Heure avec la base de données
             // fonction recherche ph à partir de son id
-            PH ph_test= new PH("Deblouze", "Agathe", 222, "mdp", 1);
-            
-            if(dmr_papier_check.isSelected()) {
-                Examen exam= new Examen(dmr.getId(),new Date(2022,1,16,14,5), ph_test, type, cr);
+            try {
+                System.out.println("Il est dans le try");
+                int id=Integer.valueOf(idPH);
+                System.out.println("Il réussit à caster l'id en integer");
+                DMR ajout_exam=requetesbd.creationExamen(requetesbd.connexionBD(), dmr, Integer.valueOf(idPH), type, 0);
                 
-                // ajte exam au DMR (à faire : maj BD)
-                dmr.ajouterExamen(exam);
-                // met à jour DMR Patient
-                dmr_pane.maj_exam(exam);
-            }
-            else {
-                Examen exam= new Examen(dmr.getId(),new Date(2022,1,16,14,5), ph_test, type, numPacs, cr);
-                dmr.ajouterExamen(exam);
-                dmr_pane.maj_exam(exam);
-            }
+                System.out.println("Il réussit la fonction création exam");
+                
+                //met à jour DMR Patient
+                dmr_pane.maj_exam(ajout_exam);
+                System.out.println("Il réussit maj exam");
 
-            // ferme l'onglet
-            Onglets.remove(this);
+                // ferme l'onglet
+                Onglets.remove(this);
+            }
+            catch (Exception e) {
+                System.out.println("Exception 1");
+            }
         }
     }//GEN-LAST:event_valider_buttonActionPerformed
 
     
-    private void dmr_papier_checkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dmr_papier_checkActionPerformed
-        if (dmr_papier_check.isSelected()) {
-            jLabel9.setVisible(false);
-            pacs_field.setVisible(false);
-            pacs_error.setVisible(false);
-        }
-        else {
-            jLabel9.setVisible(true);
-            pacs_field.setVisible(true);
-        }
-    }//GEN-LAST:event_dmr_papier_checkActionPerformed
-
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         if(!cr_field.getText().equals("")) {
             add_cr_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-pencil-32.png")));
@@ -420,22 +338,16 @@ public class NewExam extends javax.swing.JPanel {
     private javax.swing.JButton add_cr_button;
     private javax.swing.JTextArea cr_field;
     private javax.swing.JDialog cr_jdialog;
-    private javax.swing.JCheckBox dmr_papier_check;
     private javax.swing.JLabel erreur_ph;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel pacs_error;
-    private javax.swing.JTextField pacs_field;
     private javax.swing.JTextField ph_field;
     private javax.swing.JButton save_button;
     private javax.swing.JComboBox<String> type_field;

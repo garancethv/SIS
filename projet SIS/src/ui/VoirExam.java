@@ -5,7 +5,10 @@
  */
 package ui;
 
+import BD.requetesbd;
+import nf.DMR;
 import nf.Examen;
+import nf.Personnel;
 
 /**
  *
@@ -22,33 +25,32 @@ public class VoirExam extends javax.swing.JPanel {
         initComponents();
     }
     
-    public VoirExam(Examen ex) {
+    public VoirExam(DMR dmr,Examen ex) {
         initComponents();
         this.ex=ex;
         
         save_button.setVisible(false);
         
-        String date=String.valueOf(ex.getDate().getDate())
-                    +"/"+String.valueOf(ex.getDate().getMonth()+1)
-                    +"/"+String.valueOf(ex.getDate().getYear())
-                    +" "+String.valueOf(ex.getDate().getHours())
-                    +":"+String.valueOf(ex.getDate().getMinutes());
+        String date=DMR.format_date(ex.getDate());
         
         title_label.setText(ex.getTypeExamen().toString()+" du "+date);
-        
-        id_label.setText(String.valueOf(ex.getIdDMR())+" (Garance Thoviste)"); //rajter nom/prénom correspondant
+        id_label.setText(String.valueOf(ex.getIdDMR())+" ("+dmr.getPrenomPatient()+" "+dmr.getNomPatient()+")"); //rajter nom/prénom correspondant
         type_label.setText(ex.getTypeExamen().toString());
         date_label.setText(date);
-        ph_label.setText("Dr "+ex.getPhRespo().getNom()+" "+ex.getPhRespo().getPrenom());
+        try {
+            Personnel p = requetesbd.utilisateur(requetesbd.connexionBD(), ex.getIdPhRespo());
+            ph_label.setText("Dr "+p.getPrenom()+" "+p.getNom());
+        }
+        catch(Exception e) {}
         
-        if(ex.getNumPACS()==null) {
+        if(ex.getNumPACS()==0) {
             pacs_label_1.setText("DMR Papier");
             pacs_label.setText("");
         }
         
         else {
             pacs_label_1.setText("N° PACS :");
-            pacs_label.setText(ex.getNumPACS());
+            pacs_label.setText(String.valueOf(ex.getNumPACS()));
         }
         
         //compte-rendu éditable seulement si vide
@@ -266,7 +268,13 @@ public class VoirExam extends javax.swing.JPanel {
     }//GEN-LAST:event_compte_renduMouseEntered
 
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
-        ex.setTexteCR(compte_rendu.getText());
+        //ex.setTexteCR(compte_rendu.getText());
+        try {
+            requetesbd.creationCR(requetesbd.connexionBD(), ex, compte_rendu.getText());
+        }
+        catch (Exception e) {
+            System.out.println("Echec du compte-rendu");
+        }
     }//GEN-LAST:event_save_buttonActionPerformed
 
     private void compte_renduKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_compte_renduKeyTyped

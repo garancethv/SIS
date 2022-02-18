@@ -73,6 +73,7 @@ public class Examen {
     public Object getPhRespo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
     @Override
     public String toString() {
         return "Examen{" + "idDMR=" + idDMR + ", date=" + date + ", idPhRespo=" + idPhRespo + ", typeExamen=" + typeExamen + ", numPACS=" + numPACS + ", texteCR=" + texteCR + '}';
