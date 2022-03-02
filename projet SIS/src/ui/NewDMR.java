@@ -7,6 +7,7 @@ package ui;
 
 import BD.requetesbd;
 import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -421,7 +422,7 @@ public class NewDMR extends javax.swing.JPanel {
 
         jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(170, 0, 0));
-        jLabel14.setText("Code Postal");
+        jLabel14.setText("Ville");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -556,8 +557,9 @@ public class NewDMR extends javax.swing.JPanel {
 
     private void valider_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valider_buttonActionPerformed
         // Conditions avant de valider :
-        // Tous les champs sont remplis
+        // Tous les champs obligatoires sont remplis
         // Date sous le bon format
+        // Rajouter nveaux champs
 
         String nom = nom_field.getText();
         String prenom = prenom_field.getText();
@@ -587,9 +589,19 @@ public class NewDMR extends javax.swing.JPanel {
             try {
                 if (requetesbd.dmrExisteBis(requetesbd.connexionBD(), nom, prenom, date)) {
                     warning_jdialog.setLocationRelativeTo(null);
-                    DMR dmr_bis = requetesbd.recupDMRBis(requetesbd.connexionBD(), nom, prenom, date);
-                    nom_prenom_date.setText("Il existe déjà un "+nom+" "+prenom+" né(e) le "+date+" (id "+dmr_bis.getId()+")");
-                    tel_label.setText("0"+String.valueOf(dmr_bis.getTel()));
+                    ArrayList<DMR> liste_dmr=requetesbd.recupDMRBis(requetesbd.connexionBD(), nom, prenom, date);
+                    if (liste_dmr.size()==1) {
+                        nom_prenom_date.setText("Il existe déjà un(e) "+nom+" "+prenom+" né(e) le "+date+" (id "+liste_dmr.get(0).getId()+")");
+                        tel_label.setText("0"+String.valueOf(liste_dmr.get(0).getTel()));
+                    }
+                    else {
+                        String id_tel="";
+                        for (DMR dmr_bis : liste_dmr) {
+                            id_tel="\n"+String.valueOf(dmr_bis.getId())+" (tel : 0"+String.valueOf(dmr_bis.getTel())+")";
+                        }
+                        nom_prenom_date.setText("Il existe déjà "+liste_dmr.size()+" patients avec le même nom, prénom et la même date de naissance :"+ id_tel);
+                    }
+                    tel_label.setVisible(false);
                     warning_jdialog.setVisible(true);
                 }
                 else {
@@ -630,7 +642,8 @@ public class NewDMR extends javax.swing.JPanel {
     }//GEN-LAST:event_genre_fieldActionPerformed
 
     private void continue_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continue_buttonActionPerformed
-        // TODO add your handling code here:
+        // force la création de DMR
+        // A ECRIRE
     }//GEN-LAST:event_continue_buttonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

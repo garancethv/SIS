@@ -340,6 +340,45 @@ public class requetesbd {
         }
     }
     
+    public static ArrayList<DMR> recupDMRBis(Connection conn, String nom, String prenom) throws SQLException {
+
+        /*renvoie le DMR recherché*/
+        ArrayList<DMR> listeDMR = new ArrayList<>();
+        try {
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+// Execute the query
+            ResultSet rs = stmt.executeQuery("select TRIM(nom) nom, TRIM(prenom) prenom, idDMR, dateNaissance, tel, TRIM(genre) genre, TRIM(adresse) adresse,TRIM(codePostal) codePostal,TRIM(ville) ville from DMR where nom='" + nom + "' and prenom='" + prenom+ "'");
+
+            while (rs.next()) {
+                DMR dmr;
+                String g = rs.getString("genre");
+                Genre genre;
+                if (g.equals("masculin")) {
+                    genre = Genre.H;
+                } else if (g.equals("feminin")) {
+                    genre = Genre.F;
+                } else {
+                    genre = Genre.Autre;
+                }
+
+
+                dmr = new DMR(rs.getString("nom"), rs.getString("prenom"), ((Date) rs.getDate("dateNaissance")), rs.getInt("tel"), genre, rs.getInt("idDMR"), rs.getString("adresse"), rs.getString("codePostal"), rs.getString("ville"));
+                listeDMR.add(dmr);
+            }
+// Close the result set, statement and the connection 
+            rs.close();
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+            return listeDMR;
+        } finally {
+            //close connection
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    
     public static boolean dmrExiste(Connection conn, int idDMR) throws SQLException {
         /*renvoie un nouveau  idDMR = max(idDMR)+1*/
         try {
