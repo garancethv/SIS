@@ -55,6 +55,12 @@ public static String format_date(Date date) {
         }
         return String.valueOf(date.getDate())+"/"+String.valueOf(date.getMonth()+1)+"/"+année;
 }
+
+public static String format_date_sql(Date date) {
+    return String.valueOf(date.getDate())+"-"+String.valueOf(date.getMonth()+1)+"-"+String.valueOf(date.getYear())
+            +" "+String.valueOf(date.getHours())+"."+String.valueOf(date.getMinutes())+"."+String.valueOf(date.getSeconds());
+}
+
     public String getNomPatient() {
         return nomPatient;
     }

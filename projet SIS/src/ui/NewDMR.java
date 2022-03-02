@@ -38,6 +38,10 @@ public class NewDMR extends javax.swing.JPanel {
         erreur_nom.setVisible(false);
         erreur_prenom.setVisible(false);
         erreur_date.setVisible(false);
+        erreur_tel.setVisible(false);
+        erreur_codepostal.setVisible(false);
+        erreur_adresse.setVisible(false);
+        erreur_ville.setVisible(false);
     }
 
     /**
@@ -78,19 +82,20 @@ public class NewDMR extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        tel_field = new javax.swing.JTextField();
+        erreur_tel = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        adresse_field = new javax.swing.JTextField();
+        erreur_adresse = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        codePostal_field = new javax.swing.JTextField();
+        erreur_codepostal = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        ville_field = new javax.swing.JTextField();
+        erreur_ville = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -322,20 +327,30 @@ public class NewDMR extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(170, 0, 0));
         jLabel9.setText("Téléphone ");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tel_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tel_fieldActionPerformed(evt);
             }
         });
+
+        erreur_tel.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        erreur_tel.setForeground(new java.awt.Color(149, 46, 46));
+        erreur_tel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
+        erreur_tel.setText("Ce numéro n'est pas valide");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tel_field, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(erreur_tel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -344,46 +359,34 @@ public class NewDMR extends javax.swing.JPanel {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-
-        jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(170, 0, 0));
-        jLabel10.setText("E-mail");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41))
+                    .addComponent(tel_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(erreur_tel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(170, 0, 0));
         jLabel12.setText("Adresse");
 
+        erreur_adresse.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        erreur_adresse.setForeground(new java.awt.Color(149, 46, 46));
+        erreur_adresse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
+        erreur_adresse.setText("Ce champ est obligatoire");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(adresse_field, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(erreur_adresse)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -392,22 +395,34 @@ public class NewDMR extends javax.swing.JPanel {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                    .addComponent(adresse_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(erreur_adresse)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(170, 0, 0));
         jLabel13.setText("Code Postal");
 
+        erreur_codepostal.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        erreur_codepostal.setForeground(new java.awt.Color(149, 46, 46));
+        erreur_codepostal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
+        erreur_codepostal.setText("Ce code postal n'est pas valide");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(codePostal_field, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(erreur_codepostal)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -416,22 +431,34 @@ public class NewDMR extends javax.swing.JPanel {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                    .addComponent(codePostal_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(erreur_codepostal)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(170, 0, 0));
         jLabel14.setText("Ville");
 
+        erreur_ville.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        erreur_ville.setForeground(new java.awt.Color(149, 46, 46));
+        erreur_ville.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
+        erreur_ville.setText("Ce champ est obligatoire");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ville_field, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(erreur_ville)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -439,9 +466,11 @@ public class NewDMR extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ville_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
-                .addGap(43, 43, 43))
+                .addGap(18, 18, 18)
+                .addComponent(erreur_ville)
+                .addGap(8, 8, 8))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -458,7 +487,6 @@ public class NewDMR extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(genre_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(prenom_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(date_panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -489,15 +517,13 @@ public class NewDMR extends javax.swing.JPanel {
                 .addComponent(genre_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(valider_button, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -529,7 +555,7 @@ public class NewDMR extends javax.swing.JPanel {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(525, 525, 525)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(557, Short.MAX_VALUE))
+                .addContainerGap(527, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
@@ -555,6 +581,65 @@ public class NewDMR extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean check_valider(String nom, String prenom, String date, String tel, String adresse, String codePostal, String ville ) {
+        erreur_nom.setVisible(false);
+        erreur_prenom.setVisible(false);
+        erreur_date.setVisible(false);
+        erreur_tel.setVisible(false);
+        erreur_codepostal.setVisible(false);
+        erreur_adresse.setVisible(false);
+        erreur_ville.setVisible(false);
+        
+        if (!bonFormatDate(date)) {
+            erreur_date.setVisible(true);
+        }
+        if (nom.equals("")) {
+            erreur_nom.setVisible(true);
+        }
+        if (prenom.equals("")) {
+            erreur_prenom.setVisible(true);
+        }
+        if (tel.equals("")) {
+            erreur_tel.setVisible(true);
+        }
+        if (codePostal.equals("")) {
+            erreur_codepostal.setVisible(true);
+        }
+        if (adresse.equals("")) {
+            erreur_adresse.setVisible(true);
+        }
+        if (ville.equals("")) {
+            erreur_ville.setVisible(true);
+        }
+        
+        try {
+            int num_tel=Integer.valueOf(tel);
+            if (num_tel>999999999 || num_tel<100000000) {
+                erreur_tel.setVisible(true);
+            }
+        }
+        catch (Exception e) {
+            erreur_tel.setVisible(true);
+        }
+        
+        try {
+            int code=Integer.valueOf(codePostal);
+            if (code<1000 || code>100000) {
+                erreur_codepostal.setVisible(true);
+            }
+        }
+        catch (Exception e) {
+            erreur_codepostal.setVisible(true);
+        }
+       
+        if (erreur_date.isVisible() || erreur_nom.isVisible() || erreur_prenom.isVisible() || erreur_tel.isVisible()
+                || erreur_adresse.isVisible() || erreur_codepostal.isVisible() || erreur_ville.isVisible()) {
+            return false;
+        }
+        
+        return true;
+    }
+    
     private void valider_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valider_buttonActionPerformed
         // Conditions avant de valider :
         // Tous les champs obligatoires sont remplis
@@ -565,27 +650,15 @@ public class NewDMR extends javax.swing.JPanel {
         String prenom = prenom_field.getText();
         String date = date_naissance_field.getText();
         String genre = genre_field.getSelectedItem().toString();
-
-        if (!bonFormatDate(date)) {
-            erreur_date.setVisible(true);
-        } else {
-            erreur_date.setVisible(false);
-            date=date.split("/")[0]+"-"+date.split("/")[1]+"-"+date.split("/")[2];
-        }
-
-        if (nom.equals("")) {
-            erreur_nom.setVisible(true);
-        } else {
-            erreur_nom.setVisible(false);
-        }
-
-        if (prenom.equals("")) {
-            erreur_prenom.setVisible(true);
-        } else {
-            erreur_prenom.setVisible(false);
-        }
-
-        if (!erreur_date.isVisible() && !erreur_prenom.isVisible() && !erreur_nom.isVisible()) {
+        String tel = tel_field.getText();
+        String adresse = adresse_field.getText();
+        String codePostal = codePostal_field.getText();
+        String ville = ville_field.getText();
+        
+        boolean valide = check_valider(nom,prenom,date,tel,adresse,codePostal,ville);
+        date=date.split("/")[0]+"-"+date.split("/")[1]+"-"+date.split("/")[2];
+        
+        if (valide) {
             try {
                 if (requetesbd.dmrExisteBis(requetesbd.connexionBD(), nom, prenom, date)) {
                     warning_jdialog.setLocationRelativeTo(null);
@@ -606,7 +679,7 @@ public class NewDMR extends javax.swing.JPanel {
                 }
                 else {
                     try {
-                        DMR nv_dmr = requetesbd.creationDMR(requetesbd.connexionBD(), nom, prenom, date, "0781808779", genre, "adresse", "38000", "Grenoble");
+                        DMR nv_dmr = requetesbd.creationDMR(requetesbd.connexionBD(), nom, prenom, date, tel, genre, adresse, codePostal, ville);
 
                         // ferme l'onglet
                         int i = pane.getSelectedIndex();
@@ -646,9 +719,9 @@ public class NewDMR extends javax.swing.JPanel {
         // A ECRIRE
     }//GEN-LAST:event_continue_buttonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tel_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tel_fieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tel_fieldActionPerformed
 
     private boolean bonFormatDate(String date) {
         String[] liste_date = date.split("/");
@@ -660,17 +733,22 @@ public class NewDMR extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField adresse_field;
     private javax.swing.JButton annuler_button;
+    private javax.swing.JTextField codePostal_field;
     private javax.swing.JButton continue_button;
     private javax.swing.JTextField date_naissance_field;
     private javax.swing.JPanel date_panel;
+    private javax.swing.JLabel erreur_adresse;
+    private javax.swing.JLabel erreur_codepostal;
     private javax.swing.JLabel erreur_date;
     private javax.swing.JLabel erreur_nom;
     private javax.swing.JLabel erreur_prenom;
+    private javax.swing.JLabel erreur_tel;
+    private javax.swing.JLabel erreur_ville;
     private javax.swing.JComboBox<String> genre_field;
     private javax.swing.JPanel genre_panel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -685,24 +763,20 @@ public class NewDMR extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField nom_field;
     private javax.swing.JPanel nom_panel;
     private javax.swing.JLabel nom_prenom_date;
     private javax.swing.JTextField prenom_field;
     private javax.swing.JPanel prenom_panel;
+    private javax.swing.JTextField tel_field;
     private javax.swing.JLabel tel_label;
     private javax.swing.JButton valider_button;
+    private javax.swing.JTextField ville_field;
     private javax.swing.JDialog warning_jdialog;
     // End of variables declaration//GEN-END:variables
 }

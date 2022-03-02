@@ -46,6 +46,7 @@ public class DMRPatient extends javax.swing.JPanel {
         date_naissance.setText(DMR.format_date(date));
         
         id.setText(String.valueOf(dmr.getId()));
+        
         String genre="";
         if (dmr.getGenre()==Genre.H) {
             genre="Homme";
@@ -53,7 +54,14 @@ public class DMRPatient extends javax.swing.JPanel {
         else if (dmr.getGenre()==Genre.F) {
             genre="Femme";
         }
+        else {
+            genre="Autre";
+        }
         genre_patient.setText(genre);
+        
+        tel_label.setText("0"+String.valueOf(dmr.getTel()));
+        adresse.setText(dmr.getAdresse());
+        ville.setText(dmr.getCodePostal()+" "+dmr.getVille());
         
         erreur_exam.setVisible(false);
            
@@ -93,11 +101,9 @@ public class DMRPatient extends javax.swing.JPanel {
         genre_patient = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tel_label = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        adresse = new javax.swing.JLabel();
+        ville = new javax.swing.JLabel();
         exams = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_exams = new javax.swing.JTable();
@@ -138,15 +144,11 @@ public class DMRPatient extends javax.swing.JPanel {
 
         tel_label.setText("0781808779");
 
-        jLabel3.setText("Email :");
-
         jLabel4.setText("Adresse :");
 
-        jLabel5.setText("14, place du Conseil National de la Résistance");
+        adresse.setText("14, place du Conseil National de la Résistance");
 
-        jLabel6.setText("38400 Saint-Martin-d'Hères");
-
-        jLabel7.setText("john.doe@gmail.com");
+        ville.setText("38400 Saint-Martin-d'Hères");
 
         javax.swing.GroupLayout id_patient_panelLayout = new javax.swing.GroupLayout(id_patient_panel);
         id_patient_panel.setLayout(id_patient_panelLayout);
@@ -180,15 +182,11 @@ public class DMRPatient extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(tel_label))
                     .addGroup(id_patient_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7))
-                    .addGroup(id_patient_panelLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5))))
+                            .addComponent(ville)
+                            .addComponent(adresse))))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
         id_patient_panelLayout.setVerticalGroup(
@@ -218,16 +216,12 @@ public class DMRPatient extends javax.swing.JPanel {
                 .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tel_label))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(adresse))
                 .addGap(6, 6, 6)
-                .addComponent(jLabel6)
+                .addComponent(ville)
                 .addGap(31, 31, 31))
         );
 
@@ -306,7 +300,7 @@ public class DMRPatient extends javax.swing.JPanel {
             .addGroup(dmr_panelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(199, 199, 199)
+                .addGap(140, 140, 140)
                 .addComponent(exams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
                 .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,6 +419,7 @@ public class DMRPatient extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel adresse;
     private javax.swing.JLabel date_naissance;
     private javax.swing.JPanel dmr_panel;
     private javax.swing.JLabel erreur_exam;
@@ -436,11 +431,7 @@ public class DMRPatient extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -450,5 +441,6 @@ public class DMRPatient extends javax.swing.JPanel {
     private javax.swing.JButton selection_button;
     private javax.swing.JTable table_exams;
     private javax.swing.JLabel tel_label;
+    private javax.swing.JLabel ville;
     // End of variables declaration//GEN-END:variables
 }
