@@ -309,7 +309,7 @@ public class requetesbd {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
-            ResultSet rs = stmt.executeQuery("select TRIM(nom) nom, TRIM(prenom) prenom, idDMR, dateNaissance, tel, TRIM(genre) genre, TRIM(adresse) adresse,TRIM(codePostal) codePostal,TRIM(ville) ville from DMR where nom='" + nom + "' and prenom='" + prenom + "'and dateNaissance='" + dateNaissance + "'");
+            ResultSet rs = stmt.executeQuery("select TRIM(nom) nom, TRIM(prenom) prenom, idDMR, dateNaissance, tel, TRIM(genre) genre, TRIM(adresse) adresse,TRIM(codePostal) codePostal,TRIM(ville) ville from DMR where lower(nom)='" + nom.toLowerCase() + "' and lower(prenom)='" + prenom.toLowerCase() + "'and dateNaissance='" + dateNaissance + "'");
 
             while (rs.next()) {
                 DMR dmr;
@@ -368,7 +368,7 @@ public class requetesbd {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
 // Execute the query
-            ResultSet rs = stmt.executeQuery("select idDMR from DMR where nom='" + nom + "'and prenom='" + prenom + "' and dateNaissance ='" + dateNaissance + "'");
+            ResultSet rs = stmt.executeQuery("select idDMR from DMR where lower(nom)='" + nom.toLowerCase() + "'and lower(prenom)='" + prenom.toLowerCase() + "' and dateNaissance ='" + dateNaissance + "'");
             boolean a = rs.next();
 
 // Close the result set, statement and the connection 
