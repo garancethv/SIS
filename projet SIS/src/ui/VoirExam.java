@@ -27,8 +27,12 @@ public class VoirExam extends javax.swing.JPanel {
     
     public VoirExam(DMR dmr,Examen ex) {
         initComponents();
+        
+        fen_confirmer_imp.setLocationRelativeTo(null);
+        
         this.ex=ex;
         
+        //print_button.setVisible(false);
         save_button.setVisible(false);
         
         String date=DMR.format_date(ex.getDate());
@@ -72,6 +76,10 @@ public class VoirExam extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fen_confirmer_imp = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        area_apercu = new javax.swing.JTextArea();
+        button_imp_ok = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         title_label = new javax.swing.JLabel();
@@ -90,6 +98,44 @@ public class VoirExam extends javax.swing.JPanel {
         ph_label = new javax.swing.JLabel();
         pacs_label = new javax.swing.JLabel();
         save_button = new javax.swing.JButton();
+        print_button = new javax.swing.JButton();
+
+        fen_confirmer_imp.setSize(new java.awt.Dimension(800, 750));
+
+        area_apercu.setEditable(false);
+        area_apercu.setLineWrap(true);
+        area_apercu.setAutoscrolls(false);
+        area_apercu.setMaximumSize(new java.awt.Dimension(2, 2));
+        area_apercu.setMinimumSize(new java.awt.Dimension(2, 2));
+        jScrollPane3.setViewportView(area_apercu);
+
+        button_imp_ok.setText("Confimer l'impression");
+        button_imp_ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_imp_okActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout fen_confirmer_impLayout = new javax.swing.GroupLayout(fen_confirmer_imp.getContentPane());
+        fen_confirmer_imp.getContentPane().setLayout(fen_confirmer_impLayout);
+        fen_confirmer_impLayout.setHorizontalGroup(
+            fen_confirmer_impLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fen_confirmer_impLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(button_imp_ok)
+                .addContainerGap(129, Short.MAX_VALUE))
+        );
+        fen_confirmer_impLayout.setVerticalGroup(
+            fen_confirmer_impLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fen_confirmer_impLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(fen_confirmer_impLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(button_imp_ok, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         title_label.setFont(new java.awt.Font("Source Serif Pro Black", 0, 58)); // NOI18N
         title_label.setText("Examen du JJ/MM/AAAA");
@@ -164,13 +210,20 @@ public class VoirExam extends javax.swing.JPanel {
             }
         });
 
+        print_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-printer-32.png"))); // NOI18N
+        print_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                print_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(205, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel10)
                         .addGroup(jPanel3Layout.createSequentialGroup()
@@ -194,7 +247,10 @@ public class VoirExam extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addComponent(id_label))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(save_button, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(print_button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(save_button))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +280,9 @@ public class VoirExam extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(save_button, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(save_button, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(print_button, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -283,23 +341,60 @@ public class VoirExam extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_compte_renduKeyTyped
 
+    private void print_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_buttonActionPerformed
+        if (compte_rendu.isEditable()){
+            //ouvre la fenêtre de confirmation
+            area_apercu.setText(title_label.getText() + " (compte-rendu)\n"
+            + "DMR : " + id_label.getText() + "\n"
+            + "Type d'examen : " + type_label.getText() + "\n"
+            + "Date : " + date_label.getText() + "\n"
+            + "PH responsable : " + ph_label.getText() + "\n"
+            + compte_rendu.getText());
+
+            fen_confirmer_imp.setVisible(true);
+        }
+    }//GEN-LAST:event_print_buttonActionPerformed
+
+    private void button_imp_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_imp_okActionPerformed
+        //imprimer
+        boolean reussi = false;
+        
+        try{
+            area_apercu.print();
+            reussi = true;
+        }
+        
+        catch (Exception e){ 
+        }
+        
+        if (reussi){
+            fen_confirmer_imp.setVisible(false);
+            //area_apercu.setText("");
+        }
+    }//GEN-LAST:event_button_imp_okActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Label1;
     private javax.swing.JLabel Label2;
     private javax.swing.JLabel Label3;
     private javax.swing.JLabel Label4;
+    private javax.swing.JTextArea area_apercu;
+    private javax.swing.JButton button_imp_ok;
     private javax.swing.JTextPane compte_rendu;
     private javax.swing.JLabel date_label;
+    private javax.swing.JDialog fen_confirmer_imp;
     private javax.swing.JLabel id_label;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel pacs_label;
     private javax.swing.JLabel pacs_label_1;
     private javax.swing.JLabel ph_label;
+    private javax.swing.JButton print_button;
     private javax.swing.JButton save_button;
     private javax.swing.JLabel title_label;
     private javax.swing.JLabel type_label;
