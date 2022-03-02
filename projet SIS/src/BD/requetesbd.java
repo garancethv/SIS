@@ -204,7 +204,7 @@ public class requetesbd {
                 } else {
                     typeExam = TypeExamen.RADIOGRAPHIE;
                 }
-                liste.add(new Examen(dmr.getId(), (Date) rs.getDate("dateExamen"), rs.getInt("idPH"), typeExam, rs.getInt("idPACS"), rs.getString("texteCR")));
+                liste.add(new Examen(dmr.getId(), (Date) rs.getTimestamp("dateExamen"), rs.getInt("idPH"), typeExam, rs.getInt("idPACS"), rs.getString("texteCR")));
                 
             }
             dmr.setExamens(liste);

@@ -106,7 +106,6 @@ public class AccueilConnexion extends javax.swing.JFrame {
 
         field_identifiant.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(149, 46, 46)));
         field_identifiant.setForeground(new java.awt.Color(100, 0, 0));
-        field_identifiant.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         field_identifiant.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

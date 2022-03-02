@@ -33,10 +33,10 @@ class Connexionsgbd {
 // Get a connection to the database
             Connection conn = DriverManager.getConnection(dbUrl, username, password);*/
             Connection conn = requetesbd.connexionBD();
-            System.out.println(requetesbd.connexion(conn, "1234567891", "'bow12'"));
-            conn = requetesbd.connexionBD();
-            System.out.println(requetesbd.connexion(conn, "1234567891", "'bow1'"));
-            conn = requetesbd.connexionBD();
+//            System.out.println(requetesbd.connexion(conn, "'1234567891'", "'bow12'"));
+//            conn = requetesbd.connexionBD();
+//            System.out.println(requetesbd.connexion(conn, "'1234567891'", "'bow1'"));
+//            conn = requetesbd.connexionBD();
             Personnel p = requetesbd.utilisateur(conn, 1234567890);
 
             System.out.println(p + " type" + p.getClass());
@@ -68,7 +68,7 @@ class Connexionsgbd {
             DMR dmr0 = requetesbd.creationDMR(conn, "Doe", "John", d, "2", "masculin", s, s, s);
             System.out.println(dmr0);
             conn = requetesbd.connexionBD();
-            DMR dmr1 = requetesbd.recupDMR(conn, "5");
+            DMR dmr1 = requetesbd.recupDMR(conn, "7");
             System.out.println(dmr1.toString());
 
             conn = requetesbd.connexionBD();
@@ -82,10 +82,11 @@ class Connexionsgbd {
             requetesbd.creationExamen(conn, dmr1, 1234567890, TypeExamen.IRM, 1);
             
             conn = requetesbd.connexionBD();
-            requetesbd.creationCR(conn, dmr1.getExamens().get(1), "18-02-2022", "test2");
-            System.out.println(dmr1.getExamens());
+            requetesbd.creationCR(conn, dmr1.getExamens().get(1), dmr1.getExamens().get(1).getDate().toLocaleString(), "test2");
+            conn = requetesbd.connexionBD();
+            System.out.println(requetesbd.recupExamen(conn, dmr1).getExamens());
  
-            // requetesbd.employes(conn);
+            // requetesbd.employes(conn); 
 // Print information about connection warnings
             //SQLWarningsExceptions.printWarnings(conn);
             //conn.close();
