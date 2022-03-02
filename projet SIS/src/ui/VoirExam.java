@@ -270,7 +270,7 @@ public class VoirExam extends javax.swing.JPanel {
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         //ex.setTexteCR(compte_rendu.getText());
         try {
-            requetesbd.creationCR(requetesbd.connexionBD(), ex, compte_rendu.getText());
+            //requetesbd.creationCR(requetesbd.connexionBD(), ex, compte_rendu.getText());
         }
         catch (Exception e) {
             System.out.println("Echec du compte-rendu");

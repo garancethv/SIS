@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import nf.Personnel;
 
 /**
  *
@@ -60,12 +61,13 @@ public class AccueilConnexion extends javax.swing.JFrame {
         field_mdp = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        field_identifiant = new javax.swing.JTextField();
+        field_identifiant = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         erreur_connexion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Connexion");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -102,9 +104,10 @@ public class AccueilConnexion extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(170, 0, 0));
         jLabel6.setText("Mot de passe");
 
-        field_identifiant.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        field_identifiant.setForeground(new java.awt.Color(100, 0, 0));
         field_identifiant.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(149, 46, 46)));
+        field_identifiant.setForeground(new java.awt.Color(100, 0, 0));
+        field_identifiant.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        field_identifiant.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -113,6 +116,7 @@ public class AccueilConnexion extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(49, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(field_identifiant)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -121,8 +125,7 @@ public class AccueilConnexion extends javax.swing.JFrame {
                                 .addComponent(bouton_valider, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(field_mdp, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(field_identifiant))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(47, 47, 47))
         );
         jPanel2Layout.setVerticalGroup(
@@ -131,18 +134,19 @@ public class AccueilConnexion extends javax.swing.JFrame {
                 .addGap(77, 77, 77)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(field_identifiant, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addComponent(field_identifiant, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(field_mdp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addComponent(field_mdp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(bouton_valider, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
         );
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 30)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(170, 0, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Page de connexion");
 
         erreur_connexion.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
@@ -204,17 +208,18 @@ public class AccueilConnexion extends javax.swing.JFrame {
         
         boolean rep=false;
         try {
-            System.out.println("2eme étape");
             rep = requetesbd.connexion(requetesbd.connexionBD(), id, mdp); //appel à connexion
         }
-        catch (Exception e) {
-            System.out.println("2eme étape ratée");
-        }
+        catch (Exception e) {}
 
         if (rep){ //cad si il y a un couple (id, mdp) correspondant
+            try {
+            Personnel p = requetesbd.utilisateur(requetesbd.connexionBD(), Integer.valueOf(id));
             dispose();
-            Accueil accueil = new Accueil();
+            Accueil accueil = new Accueil(p);
             accueil.setVisible(true);
+            }
+            catch (Exception e) {}
         }
         else{
             erreur_connexion();
@@ -242,7 +247,7 @@ public class AccueilConnexion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bouton_valider;
     private javax.swing.JLabel erreur_connexion;
-    private javax.swing.JTextField field_identifiant;
+    private javax.swing.JFormattedTextField field_identifiant;
     private javax.swing.JPasswordField field_mdp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
