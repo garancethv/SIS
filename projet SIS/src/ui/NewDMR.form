@@ -161,7 +161,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="525" max="-2" attributes="0"/>
                       <Component id="jPanel2" min="-2" pref="520" max="-2" attributes="0"/>
-                      <EmptySpace pref="557" max="32767" attributes="0"/>
+                      <EmptySpace pref="527" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
               </Group>
@@ -203,7 +203,6 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jPanel6" alignment="1" max="32767" attributes="0"/>
                                       <Component id="jPanel5" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="jPanel4" alignment="1" max="32767" attributes="0"/>
                                       <Component id="genre_panel" alignment="1" max="32767" attributes="0"/>
                                       <Component id="prenom_panel" alignment="0" max="32767" attributes="0"/>
                                       <Component id="date_panel" alignment="1" max="32767" attributes="0"/>
@@ -243,15 +242,13 @@
                           <Component id="genre_panel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="valider_button" min="-2" pref="49" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -529,10 +526,18 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jTextField1" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="tel_field" min="-2" pref="180" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="erreur_tel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -543,9 +548,11 @@
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tel_field" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="43" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="erreur_tel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -562,52 +569,24 @@
                         <Property name="text" type="java.lang.String" value="T&#xe9;l&#xe9;phone "/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField1">
+                    <Component class="javax.swing.JTextField" name="tel_field">
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tel_fieldActionPerformed"/>
                       </Events>
                     </Component>
-                  </SubComponents>
-                </Container>
-                <Container class="javax.swing.JPanel" name="jPanel4">
-
-                  <Layout>
-                    <DimensionLayout dim="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jTextField2" min="-2" pref="180" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                    </DimensionLayout>
-                    <DimensionLayout dim="1">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="35" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                    </DimensionLayout>
-                  </Layout>
-                  <SubComponents>
-                    <Component class="javax.swing.JLabel" name="jLabel10">
+                    <Component class="javax.swing.JLabel" name="erreur_tel">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Century Gothic" size="18" style="0"/>
+                          <Font name="Century Gothic" size="14" style="2"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="0" green="0" red="aa" type="rgb"/>
+                          <Color blue="2e" green="2e" red="95" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="E-mail"/>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/images/LogoInformation.png"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Ce num&#xe9;ro n&apos;est pas valide"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField2">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -616,10 +595,18 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jTextField3" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="adresse_field" min="-2" pref="180" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="erreur_adresse" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -630,9 +617,11 @@
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="adresse_field" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="43" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="erreur_adresse" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -649,7 +638,21 @@
                         <Property name="text" type="java.lang.String" value="Adresse"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField3">
+                    <Component class="javax.swing.JTextField" name="adresse_field">
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="erreur_adresse">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Century Gothic" size="14" style="2"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="2e" green="2e" red="95" type="rgb"/>
+                        </Property>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/images/LogoInformation.png"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Ce champ est obligatoire"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -658,10 +661,18 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jTextField4" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="codePostal_field" min="-2" pref="180" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="erreur_codepostal" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -672,9 +683,11 @@
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="codePostal_field" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="43" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="erreur_codepostal" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -691,7 +704,21 @@
                         <Property name="text" type="java.lang.String" value="Code Postal"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField4">
+                    <Component class="javax.swing.JTextField" name="codePostal_field">
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="erreur_codepostal">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Century Gothic" size="14" style="2"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="2e" green="2e" red="95" type="rgb"/>
+                        </Property>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/images/LogoInformation.png"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Ce code postal n&apos;est pas valide"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -700,10 +727,18 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jTextField5" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="ville_field" min="-2" pref="180" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="erreur_ville" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -713,10 +748,12 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace pref="33" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jTextField5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ville_field" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="erreur_ville" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -733,7 +770,21 @@
                         <Property name="text" type="java.lang.String" value="Ville"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField5">
+                    <Component class="javax.swing.JTextField" name="ville_field">
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="erreur_ville">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Century Gothic" size="14" style="2"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="2e" green="2e" red="95" type="rgb"/>
+                        </Property>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/images/LogoInformation.png"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Ce champ est obligatoire"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>

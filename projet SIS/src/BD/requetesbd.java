@@ -258,7 +258,6 @@ public class requetesbd {
             System.out.println("1");
 // Execute the query
 
-
             int rowCount = stmt.executeUpdate("UPDATE Examen SET texteCR ='"
                     + texteCR + "' where idDMR ='" + examen.getIdDMR() + "' and dateExamen ='" + date + "'");
 
