@@ -32,7 +32,7 @@ public class VoirExam extends javax.swing.JPanel {
         
         this.ex=ex;
         
-        //print_button.setVisible(false);
+        print_button.setVisible(false);
         save_button.setVisible(false);
         
         String date=DMR.format_date(ex.getDate());
@@ -61,6 +61,7 @@ public class VoirExam extends javax.swing.JPanel {
         if(ex.getTexteCR()!=null && !ex.getTexteCR().equals("")) {
             compte_rendu.setText(ex.getTexteCR());
             compte_rendu.setRequestFocusEnabled(false);
+            print_button.setVisible(true);
         }
         else {
             compte_rendu.setEditable(true);
@@ -122,8 +123,8 @@ public class VoirExam extends javax.swing.JPanel {
             fen_confirmer_impLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fen_confirmer_impLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(button_imp_ok)
                 .addContainerGap(129, Short.MAX_VALUE))
         );
@@ -326,13 +327,18 @@ public class VoirExam extends javax.swing.JPanel {
     }//GEN-LAST:event_compte_renduMouseEntered
 
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
-        ex.setTexteCR(compte_rendu.getText());
-        try {
-            requetesbd.creationCR(requetesbd.connexionBD(), ex, ex.getDate().toLocaleString(),compte_rendu.getText());
-        }
-        catch (Exception e) {
-            System.out.println("Echec du compte-rendu");
-        }
+        //if (!compte_rendu.getText().equals("")){
+            ex.setTexteCR(compte_rendu.getText());
+            try {
+                requetesbd.creationCR(requetesbd.connexionBD(), ex, ex.getDate().toLocaleString(),compte_rendu.getText());
+            }
+            catch (Exception e) {
+                System.out.println("Echec du compte-rendu");
+            }
+            compte_rendu.setEditable(false);
+            save_button.setVisible(false);
+            print_button.setVisible(true);
+        //}
     }//GEN-LAST:event_save_buttonActionPerformed
 
     private void compte_renduKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_compte_renduKeyTyped
@@ -342,13 +348,14 @@ public class VoirExam extends javax.swing.JPanel {
     }//GEN-LAST:event_compte_renduKeyTyped
 
     private void print_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_buttonActionPerformed
-        if (compte_rendu.isEditable()){
+        if (!compte_rendu.isEditable()){
             //ouvre la fenêtre de confirmation
-            area_apercu.setText(title_label.getText() + " (compte-rendu)\n"
+            area_apercu.setText("                                                                                                                                                                                              Compte-rendu d'examen\n"
             + "DMR : " + id_label.getText() + "\n"
             + "Type d'examen : " + type_label.getText() + "\n"
             + "Date : " + date_label.getText() + "\n"
             + "PH responsable : " + ph_label.getText() + "\n"
+            + "      ------------------------------------------------------------------------------------------------\n"
             + compte_rendu.getText());
 
             fen_confirmer_imp.setVisible(true);
@@ -369,7 +376,6 @@ public class VoirExam extends javax.swing.JPanel {
         
         if (reussi){
             fen_confirmer_imp.setVisible(false);
-            //area_apercu.setText("");
         }
     }//GEN-LAST:event_button_imp_okActionPerformed
 
