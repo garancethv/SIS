@@ -60,6 +60,14 @@ public class NewDMR extends javax.swing.JPanel {
         continue_button = new javax.swing.JButton();
         annuler_button = new javax.swing.JButton();
         tel_label = new javax.swing.JLabel();
+        confirmation_jdialog = new javax.swing.JDialog();
+        yes_newdmr = new javax.swing.JButton();
+        cancel_newdmr = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        dmrcree_jdialog = new javax.swing.JDialog();
+        jLabel17 = new javax.swing.JLabel();
+        yes_dmrcree = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel8 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -77,7 +85,7 @@ public class NewDMR extends javax.swing.JPanel {
         erreur_date = new javax.swing.JLabel();
         genre_panel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        genre_field = new javax.swing.JComboBox<>();
+        genre_field = new javax.swing.JComboBox<String>();
         valider_button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -166,6 +174,95 @@ public class NewDMR extends javax.swing.JPanel {
                     .addComponent(annuler_button)
                     .addComponent(continue_button))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        confirmation_jdialog.setSize(new java.awt.Dimension(520, 300));
+
+        yes_newdmr.setText("OUI");
+        yes_newdmr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yes_newdmrActionPerformed(evt);
+            }
+        });
+
+        cancel_newdmr.setText("ANNULER");
+        cancel_newdmr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancel_newdmrActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("créer ce DMR ?");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("Êtes-vous sûr de vouloir");
+
+        javax.swing.GroupLayout confirmation_jdialogLayout = new javax.swing.GroupLayout(confirmation_jdialog.getContentPane());
+        confirmation_jdialog.getContentPane().setLayout(confirmation_jdialogLayout);
+        confirmation_jdialogLayout.setHorizontalGroup(
+            confirmation_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, confirmation_jdialogLayout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(cancel_newdmr)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(yes_newdmr, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59))
+            .addGroup(confirmation_jdialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(confirmation_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        confirmation_jdialogLayout.setVerticalGroup(
+            confirmation_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(confirmation_jdialogLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(confirmation_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(yes_newdmr, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancel_newdmr, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48))
+        );
+
+        dmrcree_jdialog.setSize(new java.awt.Dimension(520, 300));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("DMR créé");
+
+        yes_dmrcree.setText("OK");
+        yes_dmrcree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yes_dmrcreeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dmrcree_jdialogLayout = new javax.swing.GroupLayout(dmrcree_jdialog.getContentPane());
+        dmrcree_jdialog.getContentPane().setLayout(dmrcree_jdialogLayout);
+        dmrcree_jdialogLayout.setHorizontalGroup(
+            dmrcree_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dmrcree_jdialogLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(dmrcree_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(yes_dmrcree, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        dmrcree_jdialogLayout.setVerticalGroup(
+            dmrcree_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dmrcree_jdialogLayout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addComponent(yes_dmrcree, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -289,7 +386,7 @@ public class NewDMR extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(170, 0, 0));
         jLabel8.setText("Genre");
 
-        genre_field.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "masculin", "feminin", "autre" }));
+        genre_field.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "masculin", "feminin", "autre" }));
         genre_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 genre_fieldActionPerformed(evt);
@@ -645,7 +742,11 @@ public class NewDMR extends javax.swing.JPanel {
         // Tous les champs obligatoires sont remplis
         // Date sous le bon format
         // Rajouter nveaux champs
-
+        
+        
+        //affichage fenêtre de confirmation
+        
+        
         String nom = nom_field.getText();
         String prenom = prenom_field.getText();
         String date = date_naissance_field.getText();
@@ -659,54 +760,7 @@ public class NewDMR extends javax.swing.JPanel {
         date=date.split("/")[0]+"-"+date.split("/")[1]+"-"+date.split("/")[2];
         
         if (valide) {
-            try {
-                if (requetesbd.dmrExisteBis(requetesbd.connexionBD(), nom, prenom, date)) {
-                    warning_jdialog.setLocationRelativeTo(null);
-                    ArrayList<DMR> liste_dmr=requetesbd.recupDMRBis(requetesbd.connexionBD(), nom, prenom, date);
-                    if (liste_dmr.size()==1) {
-                        nom_prenom_date.setText("Il existe déjà un(e) "+nom+" "+prenom+" né(e) le "+date+" (id "+liste_dmr.get(0).getId()+")");
-                        tel_label.setText("0"+String.valueOf(liste_dmr.get(0).getTel()));
-                    }
-                    else {
-                        String id_tel="";
-                        for (DMR dmr_bis : liste_dmr) {
-                            id_tel="\n"+String.valueOf(dmr_bis.getId())+" (tel : 0"+String.valueOf(dmr_bis.getTel())+")";
-                        }
-                        nom_prenom_date.setText("Il existe déjà "+liste_dmr.size()+" patients avec le même nom, prénom et la même date de naissance :"+ id_tel);
-                    }
-                    tel_label.setVisible(false);
-                    warning_jdialog.setVisible(true);
-                }
-                else {
-                    try {
-                        DMR nv_dmr = requetesbd.creationDMR(requetesbd.connexionBD(), nom, prenom, date, tel, genre, adresse, codePostal, ville);
-
-                        // ferme l'onglet
-                        int i = pane.getSelectedIndex();
-                        if (i != -1) {
-                            pane.remove(i);
-                        }
-
-                        // ouvre le DMR crée
-                        javax.swing.JPanel dmrpanel = new DMRPatient(pane, nv_dmr);
-
-                        // ajoute un nouvel onglet
-                        pane.addTab("             DMR         ", dmrpanel);
-                        pane.setSelectedComponent(dmrpanel);
-
-                        // création d'un bouton pour fermer l'onglet
-                        CloseButton close_button = new CloseButton(pane);
-
-                        // ajout du bouton
-                        pane.setTabComponentAt(pane.getSelectedIndex(), close_button);
-                    }
-                    catch (Exception e) {
-                        System.out.println("Exception 2");
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println("Exception 1");
-            }
+            confirmation_jdialog.setVisible(true);
         }
     }//GEN-LAST:event_valider_buttonActionPerformed
 
@@ -723,6 +777,75 @@ public class NewDMR extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tel_fieldActionPerformed
 
+    private void yes_newdmrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yes_newdmrActionPerformed
+        String nom = nom_field.getText();
+        String prenom = prenom_field.getText();
+        String date = date_naissance_field.getText();
+        String genre = genre_field.getSelectedItem().toString();
+        String tel = tel_field.getText();
+        String adresse = adresse_field.getText();
+        String codePostal = codePostal_field.getText();
+        String ville = ville_field.getText();
+        
+        try {
+            if (requetesbd.dmrExisteBis(requetesbd.connexionBD(), nom, prenom, date)) {
+                warning_jdialog.setLocationRelativeTo(null);
+                ArrayList<DMR> liste_dmr = requetesbd.recupDMRBis(requetesbd.connexionBD(), nom, prenom, date);
+                if (liste_dmr.size() == 1) {
+                    nom_prenom_date.setText("Il existe déjà un(e) " + nom + " " + prenom + " né(e) le " + date + " (id " + liste_dmr.get(0).getId() + ")");
+                    tel_label.setText("0" + String.valueOf(liste_dmr.get(0).getTel()));
+                } else {
+                    String id_tel = "";
+                    for (DMR dmr_bis : liste_dmr) {
+                        id_tel = "\n" + String.valueOf(dmr_bis.getId()) + " (tel : 0" + String.valueOf(dmr_bis.getTel()) + ")";
+                    }
+                    nom_prenom_date.setText("Il existe déjà " + liste_dmr.size() + " patients avec le même nom, prénom et la même date de naissance :" + id_tel);
+                }
+                tel_label.setVisible(false);
+                warning_jdialog.setVisible(true);
+            } else {
+                try {
+                    DMR nv_dmr = requetesbd.creationDMR(requetesbd.connexionBD(), nom, prenom, date, tel, genre, adresse, codePostal, ville);
+
+                    // ferme l'onglet
+                    int i = pane.getSelectedIndex();
+                    if (i != -1) {
+                        pane.remove(i);
+                    }
+
+                    // ouvre le DMR crée
+                    javax.swing.JPanel dmrpanel = new DMRPatient(pane, nv_dmr);
+
+                    // ajoute un nouvel onglet
+                    pane.addTab("             DMR         ", dmrpanel);
+                    pane.setSelectedComponent(dmrpanel);
+
+                    // création d'un bouton pour fermer l'onglet
+                    CloseButton close_button = new CloseButton(pane);
+
+                    // ajout du bouton
+                    pane.setTabComponentAt(pane.getSelectedIndex(), close_button);
+                } catch (Exception e) {
+                    System.out.println("Exception 2");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Exception 1");
+        }
+        
+        confirmation_jdialog.setVisible(false);
+        this.setVisible(false);
+        dmrcree_jdialog.setVisible(true);
+    }//GEN-LAST:event_yes_newdmrActionPerformed
+
+    private void cancel_newdmrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_newdmrActionPerformed
+        confirmation_jdialog.setVisible(false);
+    }//GEN-LAST:event_cancel_newdmrActionPerformed
+
+    private void yes_dmrcreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yes_dmrcreeActionPerformed
+        dmrcree_jdialog.setVisible(false);
+    }//GEN-LAST:event_yes_dmrcreeActionPerformed
+
     private boolean bonFormatDate(String date) {
         String[] liste_date = date.split("/");
         if (liste_date.length == 3 && liste_date[0].matches("-?\\d+") && liste_date[1].matches("-?\\d+")
@@ -735,10 +858,13 @@ public class NewDMR extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField adresse_field;
     private javax.swing.JButton annuler_button;
+    private javax.swing.JButton cancel_newdmr;
     private javax.swing.JTextField codePostal_field;
+    private javax.swing.JDialog confirmation_jdialog;
     private javax.swing.JButton continue_button;
     private javax.swing.JTextField date_naissance_field;
     private javax.swing.JPanel date_panel;
+    private javax.swing.JDialog dmrcree_jdialog;
     private javax.swing.JLabel erreur_adresse;
     private javax.swing.JLabel erreur_codepostal;
     private javax.swing.JLabel erreur_date;
@@ -753,6 +879,9 @@ public class NewDMR extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -778,5 +907,7 @@ public class NewDMR extends javax.swing.JPanel {
     private javax.swing.JButton valider_button;
     private javax.swing.JTextField ville_field;
     private javax.swing.JDialog warning_jdialog;
+    private javax.swing.JButton yes_dmrcree;
+    private javax.swing.JButton yes_newdmr;
     // End of variables declaration//GEN-END:variables
 }
