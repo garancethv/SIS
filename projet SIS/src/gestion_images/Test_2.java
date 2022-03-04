@@ -17,12 +17,12 @@ import javax.swing.JFileChooser;
  *
  * @author Chloe
  */
-public class Test extends javax.swing.JFrame {
+public class Test_2 extends javax.swing.JFrame {
 
     /**
      * Creates new form Test
      */
-    public Test() {
+    public Test_2() {
         initComponents();
     }
 
@@ -68,12 +68,12 @@ public class Test extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        String chemin = System.getProperty("user.home") + "/Dropbox/projet_SIS/PACS/" + "dateExamen_nom_prenom";
-        new File(chemin).mkdirs();
+         String chemin = System.getProperty("user.home") + "/Dropbox/projet_SIS/PACS/" + "dateExamen_nom_prenom";
 
         //Set up the file chooser.
-        JFileChooser fc = new JFileChooser(System.getProperty("user.home") + "/Documents/IMAGES_SCANNEES");
+        JFileChooser fc = new JFileChooser(System.getProperty("user.home") + "/Dropbox/projet_SIS/PACS/" + "dateExamen_nom_prenom");
         fc.setMultiSelectionEnabled(true);
+
         //Add a custom file filter and disable the default
         //(Accept All) file filter.
         fc.addChoosableFileFilter(new ImageFilter());
@@ -93,22 +93,9 @@ public class Test extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File[] liste_files = fc.getSelectedFiles();
             int i = 19;
-            for (File file : liste_files) {
-//            
-                try {
-                    Path source = file.toPath();
-                    Path dest = Paths.get(chemin + "/" + i+".jpg");
-
-                    Files.move(source, dest);
-                    i++;
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-
-                System.out.println("Attaching file: " + file.getPath()
-                        + ".");
-                
-            }
+            IconDemoApp vision = new IconDemoApp(liste_files);
+            vision.setVisible(true);
+            
         } else {
             System.out.println("Attachment cancelled by user.");
         }
