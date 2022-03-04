@@ -168,10 +168,9 @@ public class requetesbd {
 
 // Close the result set, statement and the connection 
             rs.close();
-            ResultSet rs1 = stmt.executeQuery("select TRIM(nom) nom, TRIM(prenom) prenom, idDMR, dateNaissance, tel, TRIM(genre) genre, TRIM(adresse) adresse,TRIM(codePostal) codePostal,TRIM(ville) ville from DMR where idDMR =" + idDMR);
-            rs1.next();
+            
             recupExamen(conn, dmr);
-            rs1.close();
+            
             stmt.close();
             SQLWarningsExceptions.printWarnings(conn);
             
@@ -220,7 +219,7 @@ public class requetesbd {
         }
     }
     
-    public static DMR creationExamen(Connection conn, DMR dmr, int idPH, TypeExamen typeExam, int archivagePapier) throws SQLException {
+    public static DMR creationExamen(Connection conn, DMR dmr, int idPH, TypeExamen typeExam, int archivagePapier, String texteCR) throws SQLException {
         /*renvoie le DMR recherché
         NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
         try {
@@ -228,12 +227,12 @@ public class requetesbd {
             Statement stmt = conn.createStatement();
 // Execute the query
             System.out.println("a");
-            int rowCount = stmt.executeUpdate("INSERT INTO Examen(idDMR, dateExamen, idPH, typeExamen, archivagePapier) VALUES ('"
+            int rowCount = stmt.executeUpdate("INSERT INTO Examen(idDMR, dateExamen, idPH, typeExamen, archivagePapier, texteCR) VALUES ('"
                     + dmr.getId()
                     + "', sysdate ,'"
                     + idPH + "',lower('"
                     + typeExam.toString() + "'),'"
-                    + archivagePapier + "')");
+                    + archivagePapier + "', '" + texteCR + "')");
             
             recupExamen(conn, dmr);
 
@@ -365,7 +364,9 @@ public class requetesbd {
                 dmr = new DMR(rs.getString("nom"), rs.getString("prenom"), ((Date) rs.getDate("dateNaissance")), rs.getInt("tel"), genre, rs.getInt("idDMR"), rs.getString("adresse"), rs.getString("codePostal"), rs.getString("ville"));
                 listeDMR.add(dmr);
             }
+            
 // Close the result set, statement and the connection 
+
             rs.close();
             stmt.close();
             SQLWarningsExceptions.printWarnings(conn);

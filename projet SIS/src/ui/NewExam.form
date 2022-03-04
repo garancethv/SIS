@@ -258,7 +258,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/LogoInformation.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ce champ est obligatoire"/>
+                <Property name="text" type="java.lang.String" value="Cet id ne correspond &#xe0; aucun PH"/>
               </Properties>
             </Component>
           </SubComponents>

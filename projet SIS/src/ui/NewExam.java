@@ -146,7 +146,7 @@ public class NewExam extends javax.swing.JPanel {
         erreur_ph.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         erreur_ph.setForeground(new java.awt.Color(149, 46, 46));
         erreur_ph.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
-        erreur_ph.setText("Ce champ est obligatoire");
+        erreur_ph.setText("Cet id ne correspond à aucun PH");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -278,33 +278,31 @@ public class NewExam extends javax.swing.JPanel {
         TypeExamen type= TypeExamen.valueOf(type_ex);
 
         // vérifier que id correspond à un PH
-        if (idPH.equals("")) {
-            erreur_ph.setVisible(true);
-        }
-        else {
+        try {
+            int id=Integer.valueOf(idPH);
             erreur_ph.setVisible(false);
+        }
+        catch(Exception e) {
+            erreur_ph.setVisible(true);
         }
 
         if (!erreur_ph.isVisible()) {
             // à faire : récupérer Date et Heure avec la base de données
             // fonction recherche ph à partir de son id
+            
             try {
-                System.out.println("Il est dans le try");
                 int id=Integer.valueOf(idPH);
-                System.out.println("Il réussit à caster l'id en integer");
-                DMR ajout_exam=requetesbd.creationExamen(requetesbd.connexionBD(), dmr, Integer.valueOf(idPH), type, 0);
+                DMR ajout_exam=requetesbd.creationExamen(requetesbd.connexionBD(), dmr, Integer.valueOf(idPH), type, 0, cr);
                 
-                System.out.println("Il réussit la fonction création exam");
                 
                 //met à jour DMR Patient
                 dmr_pane.maj_exam(ajout_exam);
-                System.out.println("Il réussit maj exam");
 
                 // ferme l'onglet
                 Onglets.remove(this);
             }
             catch (Exception e) {
-                System.out.println("Exception 1");
+                erreur_ph.setVisible(true);
             }
         }
     }//GEN-LAST:event_valider_buttonActionPerformed

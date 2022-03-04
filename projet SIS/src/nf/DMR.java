@@ -42,7 +42,8 @@ public class DMR {
         this.ville = ville;
         examens = new ArrayList<Examen>();
     }
-public static String format_date(Date date) {
+    
+    public static String format_date(Date date) {
         String année="1800";
         if (Integer.valueOf(date.getYear())-100 > 9) {
             année="20"+String.valueOf(date.getYear()-100);
@@ -54,12 +55,7 @@ public static String format_date(Date date) {
             année="19"+String.valueOf(date.getYear());
         }
         return String.valueOf(date.getDate())+"/"+String.valueOf(date.getMonth()+1)+"/"+année;
-}
-
-public static String format_date_sql(Date date) {
-    return String.valueOf(date.getDate())+"-"+String.valueOf(date.getMonth()+1)+"-"+String.valueOf(date.getYear())
-            +" "+String.valueOf(date.getHours())+"."+String.valueOf(date.getMinutes())+"."+String.valueOf(date.getSeconds());
-}
+    }
 
     public String getNomPatient() {
         return nomPatient;
@@ -132,7 +128,7 @@ public static String format_date_sql(Date date) {
   
     @Override
     public String toString() {
-        return "DMR{" + "nomPatient=" + nomPatient + ", prenomPatient=" + prenomPatient + ", dateNaissance=" + dateNaissance + ", genre=" + genre + ", id=" + id + ", tel=" + tel + ", adresse=" + adresse + ", codePostal=" + codePostal + ", ville=" + ville + ", examens=" + examens + '}';
+        return prenomPatient+" "+ nomPatient +" ("+DMR.format_date(dateNaissance)+")";
     }
     
 }

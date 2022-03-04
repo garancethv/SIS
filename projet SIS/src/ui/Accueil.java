@@ -12,11 +12,15 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
+import javax.swing.ListModel;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 import nf.DMR;
 import nf.Examen;
 import nf.Genre;
@@ -39,16 +43,6 @@ public class Accueil extends javax.swing.JFrame {
         
         //mettre la fenêtre en plein écran
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
-//        //tests de menu [le rajouter à tous les onglets ? Mais super chiant
-//        Fond.addMouseListener(new MouseAdapter() {
-//            public void mouseClicked(MouseEvent e) {
-//                //événement click droit de la souris
-//                if (SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1){
-//                    Menu.show(e.getComponent(), e.getX(), e.getY());
-//                }        
-//             }               
-//        });
     }
     
     public Accueil(Personnel p) {
@@ -66,13 +60,26 @@ public class Accueil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        search_jdialog = new javax.swing.JDialog();
-        jPanel1 = new javax.swing.JPanel();
+        search_jdialog_nom = new javax.swing.JDialog();
         jLabel9 = new javax.swing.JLabel();
+        search_field = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        error_panel = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        loading = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        liste_patients = new javax.swing.JList<>();
+        search_field2 = new javax.swing.JTextField();
+        logout_jdialog = new javax.swing.JDialog();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        yes_logout = new javax.swing.JButton();
+        cancel_logout = new javax.swing.JButton();
+        search_jdialog_id = new javax.swing.JDialog();
+        jLabel13 = new javax.swing.JLabel();
+        search_field1 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        loading1 = new javax.swing.JLabel();
         Onglets = new javax.swing.JTabbedPane();
         Fond = new javax.swing.JPanel();
         top_Pane = new javax.swing.JPanel();
@@ -83,7 +90,8 @@ public class Accueil extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         search_panel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        search_button = new javax.swing.JButton();
+        search_button_id = new javax.swing.JButton();
+        search_button_name = new javax.swing.JButton();
         logout_panel = new javax.swing.JPanel();
         logout_button = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -91,92 +99,252 @@ public class Accueil extends javax.swing.JFrame {
         newdmr_button = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
 
-        search_jdialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        search_jdialog.setTitle("Rechercher un DMR");
-        search_jdialog.setAlwaysOnTop(true);
-        search_jdialog.setResizable(false);
-        search_jdialog.setSize(new java.awt.Dimension(508, 190));
+        search_jdialog_nom.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        search_jdialog_nom.setTitle("Rechercher un DMR");
+        search_jdialog_nom.setAlwaysOnTop(true);
+        search_jdialog_nom.setPreferredSize(new java.awt.Dimension(508, 240));
+        search_jdialog_nom.setResizable(false);
+        search_jdialog_nom.setSize(new java.awt.Dimension(544, 260));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Rentrer un n° d'id :");
+        jLabel9.setText("Rentrer un prénom et/ou un nom :");
+
+        search_field.setText("Prénom");
+        search_field.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                search_fieldKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_fieldKeyReleased(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-search-24.png"))); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton1MouseReleased(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField1KeyPressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel9)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-
         jLabel10.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 150, 0));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoAttention.png"))); // NOI18N
-        jLabel10.setText("Identifiant incorrect");
+        jLabel10.setText("Aucune correspondance trouvée");
 
-        javax.swing.GroupLayout error_panelLayout = new javax.swing.GroupLayout(error_panel);
-        error_panel.setLayout(error_panelLayout);
-        error_panelLayout.setHorizontalGroup(
-            error_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        loading.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
+        loading.setForeground(new java.awt.Color(153, 204, 0));
+        loading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loading.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-chargement-en-cours-48.png"))); // NOI18N
+        loading.setText("Chargement en cours");
+
+        liste_patients.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        liste_patients.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                liste_patientsMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(liste_patients);
+
+        search_field2.setText("Nom");
+        search_field2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                search_field2KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_field2KeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout search_jdialog_nomLayout = new javax.swing.GroupLayout(search_jdialog_nom.getContentPane());
+        search_jdialog_nom.getContentPane().setLayout(search_jdialog_nomLayout);
+        search_jdialog_nomLayout.setHorizontalGroup(
+            search_jdialog_nomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(loading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(search_jdialog_nomLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(search_jdialog_nomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addGroup(search_jdialog_nomLayout.createSequentialGroup()
+                        .addComponent(search_field, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(search_field2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32)
+                .addComponent(jButton1)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
-        error_panelLayout.setVerticalGroup(
-            error_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(error_panelLayout.createSequentialGroup()
+        search_jdialog_nomLayout.setVerticalGroup(
+            search_jdialog_nomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(search_jdialog_nomLayout.createSequentialGroup()
+                .addGroup(search_jdialog_nomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(search_jdialog_nomLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel9)
+                        .addGap(41, 41, 41)
+                        .addGroup(search_jdialog_nomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(search_field, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(search_field2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 24, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, search_jdialog_nomLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(loading, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout search_jdialogLayout = new javax.swing.GroupLayout(search_jdialog.getContentPane());
-        search_jdialog.getContentPane().setLayout(search_jdialogLayout);
-        search_jdialogLayout.setHorizontalGroup(
-            search_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(search_jdialogLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(error_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(search_jdialogLayout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+        logout_jdialog.setResizable(false);
+        logout_jdialog.setSize(new java.awt.Dimension(485, 250));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("vous déconnecter ?");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Êtes-vous sûr de vouloir");
+
+        yes_logout.setText("OUI");
+        yes_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yes_logoutActionPerformed(evt);
+            }
+        });
+
+        cancel_logout.setText("ANNULER");
+        cancel_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancel_logoutActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout logout_jdialogLayout = new javax.swing.GroupLayout(logout_jdialog.getContentPane());
+        logout_jdialog.getContentPane().setLayout(logout_jdialogLayout);
+        logout_jdialogLayout.setHorizontalGroup(
+            logout_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, logout_jdialogLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(cancel_logout)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                .addComponent(yes_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
+            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(logout_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE))
         );
-        search_jdialogLayout.setVerticalGroup(
-            search_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, search_jdialogLayout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        logout_jdialogLayout.setVerticalGroup(
+            logout_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logout_jdialogLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel11)
+                .addGap(39, 39, 39)
+                .addGroup(logout_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(yes_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancel_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(logout_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(logout_jdialogLayout.createSequentialGroup()
+                    .addGap(26, 26, 26)
+                    .addComponent(jLabel12)
+                    .addContainerGap(151, Short.MAX_VALUE)))
+        );
+
+        search_jdialog_id.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        search_jdialog_id.setTitle("Rechercher un DMR");
+        search_jdialog_id.setAlwaysOnTop(true);
+        search_jdialog_id.setPreferredSize(new java.awt.Dimension(508, 240));
+        search_jdialog_id.setResizable(false);
+        search_jdialog_id.setSize(new java.awt.Dimension(508, 255));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Rentrer un n° d'id :");
+
+        search_field1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                search_field1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_field1KeyReleased(evt);
+            }
+        });
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-search-24.png"))); // NOI18N
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton2MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton2MouseReleased(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 150, 0));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoAttention.png"))); // NOI18N
+        jLabel14.setText("N° d'id invalide");
+
+        loading1.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
+        loading1.setForeground(new java.awt.Color(153, 204, 0));
+        loading1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loading1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-chargement-en-cours-48.png"))); // NOI18N
+        loading1.setText("Chargement en cours");
+
+        javax.swing.GroupLayout search_jdialog_idLayout = new javax.swing.GroupLayout(search_jdialog_id.getContentPane());
+        search_jdialog_id.getContentPane().setLayout(search_jdialog_idLayout);
+        search_jdialog_idLayout.setHorizontalGroup(
+            search_jdialog_idLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(search_jdialog_idLayout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addComponent(search_field1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jButton2)
+                .addContainerGap(91, Short.MAX_VALUE))
+            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(loading1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        search_jdialog_idLayout.setVerticalGroup(
+            search_jdialog_idLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(search_jdialog_idLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel13)
+                .addGap(25, 25, 25)
+                .addGroup(search_jdialog_idLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(search_jdialog_idLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(search_field1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(loading1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(error_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -207,10 +375,19 @@ public class Accueil extends javax.swing.JFrame {
         jLabel1.setText("Rechercher un DMR :");
         jLabel1.setToolTipText("");
 
-        search_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-search-32.png"))); // NOI18N
-        search_button.addActionListener(new java.awt.event.ActionListener() {
+        search_button_id.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-search-32.png"))); // NOI18N
+        search_button_id.setText("Par n° d'id");
+        search_button_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                search_buttonActionPerformed(evt);
+                search_button_idActionPerformed(evt);
+            }
+        });
+
+        search_button_name.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-search-32.png"))); // NOI18N
+        search_button_name.setText("Par nom / prénom");
+        search_button_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_button_nameActionPerformed(evt);
             }
         });
 
@@ -221,9 +398,12 @@ public class Accueil extends javax.swing.JFrame {
             .addGroup(search_panelLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(search_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(search_button)
+                    .addGroup(search_panelLayout.createSequentialGroup()
+                        .addComponent(search_button_id)
+                        .addGap(18, 18, 18)
+                        .addComponent(search_button_name))
                     .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         search_panelLayout.setVerticalGroup(
             search_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +411,9 @@ public class Accueil extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(search_button, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(search_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(search_button_id, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(search_button_name, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -305,7 +487,7 @@ public class Accueil extends javax.swing.JFrame {
             .addGroup(FondLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(FondLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(search_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(search_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
                     .addComponent(newdmr_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logout_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -339,33 +521,72 @@ public class Accueil extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void search_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_buttonActionPerformed
-        search_jdialog.setLocationRelativeTo(null);
+    private void search_button_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_button_idActionPerformed
+        // ouvre la jdialog de recherche
+        search_jdialog_nom.setLocationRelativeTo(null);
         jLabel10.setVisible(false);
-        jTextField1.setText("");
-        search_jdialog.setVisible(true);
-        jTextField1.requestFocusInWindow();
-    }//GEN-LAST:event_search_buttonActionPerformed
+        loading.setVisible(false);
+        jScrollPane1.setVisible(false);
+        search_field.setText("");
+        search_jdialog_nom.setVisible(true);
+        search_field.requestFocusInWindow();
+    }//GEN-LAST:event_search_button_idActionPerformed
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String id=jTextField1.getText();
+    private void search() {
+        String id=search_field.getText();
         
+        // si recherche avec n° id :
         try {
             DMR dmr=requetesbd.recupDMR(requetesbd.connexionBD(),id);
             open_dmr(dmr);
-            search_jdialog.setVisible(false);
+            search_jdialog_nom.setVisible(false);
         }
         catch(Exception e) {
-            jTextField1.setText("");
-            jTextField1.requestFocusInWindow();
-            jLabel10.setVisible(true);
+            try {
+                // si recherche avec prénom + nom
+                String prenom=id.split(" ")[0];
+                String nom=id.split(" ")[1];
+                
+                if (id.split(" ").length>1) { // au cas où il y ait des noms composés
+                    nom+=" "+id.split(" ")[2];
+                }
+                
+                ArrayList<DMR> dmrs= requetesbd.recupDMRBis(requetesbd.connexionBD(),nom,prenom);
+                
+                if (dmrs.size()==1) {
+                    // si qu'une seule personne correspond : ouvre son DMR
+                    open_dmr(requetesbd.recupDMR(requetesbd.connexionBD(), String.valueOf(dmrs.get(0).getId())));
+                    search_jdialog_nom.setVisible(false);
+                }
+                else {
+                    // si plusieurs personnes ont le même nom / prénom : affiche une liste avec dates de naissance
+                    loading.setVisible(false);
+                    jScrollPane1.setVisible(true);
+                    //search_jdialog.setSize(508, 350);
+                    
+                    DefaultListModel model= new DefaultListModel();
+                    for(DMR dmr : dmrs) {
+                            model.addElement(dmr);
+                    }
+                    liste_patients.setModel(model);
+                    
+                }
+            }
+            catch (Exception e2) {
+                search_field.setText("");
+                search_field.requestFocusInWindow();
+                jLabel10.setVisible(true);
+                loading.setVisible(false);
+            }
         }
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void newdmr_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newdmr_buttonActionPerformed
         // Ouvre un nouvel onglet permettant de créer un DMR
-        // A faire : vérifier format date de naissance
-        // Vérifier que tous les champs ont été remplis avant de valider sinon message d'erreur
         
         javax.swing.JPanel dmrpanel=new NewDMR(Onglets);
         
@@ -381,38 +602,95 @@ public class Accueil extends javax.swing.JFrame {
     }//GEN-LAST:event_newdmr_buttonActionPerformed
 
     private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
+        // Ouvre une jDialog qui demande une confirmation de déconnexion
+        logout_jdialog.setLocationRelativeTo(null);
+        logout_jdialog.setVisible(true);
+    }//GEN-LAST:event_logout_buttonActionPerformed
+
+    private void search_fieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_fieldKeyPressed
+        // quand on appuie sur la touche entrée : logo chargement
+        if(evt.getKeyCode()==10) {
+            loading.setVisible(true);
+            jLabel10.setVisible(false);
+        }
+    }//GEN-LAST:event_search_fieldKeyPressed
+
+    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+        // quand on appuie sur le bouton rechercher : logo chargement
+        loading.setVisible(true);
+        jLabel10.setVisible(false);
+    }//GEN-LAST:event_jButton1MousePressed
+
+    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+        // quand on appuie sur le bouton rechercher : lance la recherche
+        search();
+    }//GEN-LAST:event_jButton1MouseReleased
+
+    private void search_fieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_fieldKeyReleased
+        // quand on appuie sur la touche entrée : lance la recherche
+        if(evt.getKeyCode()==10) {
+            search();
+        }
+    }//GEN-LAST:event_search_fieldKeyReleased
+
+    private void yes_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yes_logoutActionPerformed
+        // si confirmation de déconnexion : ferme la session et retourne sur page de connexion
         AccueilConnexion ac = new AccueilConnexion();
         ac.setVisible(true);
         dispose();
-    }//GEN-LAST:event_logout_buttonActionPerformed
+    }//GEN-LAST:event_yes_logoutActionPerformed
 
-    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
-        if(evt.getKeyCode()==10) {
-            String id=jTextField1.getText();
-        
-            try {
-                DMR dmr=requetesbd.recupDMR(requetesbd.connexionBD(),id);
-                open_dmr(dmr);
-                search_jdialog.setVisible(false);
-            }
-            catch(Exception e) {
-                jTextField1.setText("");
-                jTextField1.requestFocusInWindow();
-                jLabel10.setVisible(true);
-            }
-        }
-    }//GEN-LAST:event_jTextField1KeyPressed
+    private void cancel_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_logoutActionPerformed
+        // si annule la déconnexion : ferme la jdialog
+        logout_jdialog.setVisible(false);
+    }//GEN-LAST:event_cancel_logoutActionPerformed
+
+    private void liste_patientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liste_patientsMouseClicked
+        // cas où plusieurs noms identiques : ouvre le DMR sur lequel on a cliqué dans la liste
+        DMR dmr=(DMR) liste_patients.getSelectedValues()[0];
+        search_jdialog_nom.setVisible(false);
+        open_dmr(dmr);
+    }//GEN-LAST:event_liste_patientsMouseClicked
+
+    private void search_button_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_button_nameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_search_button_nameActionPerformed
+
+    private void search_field1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_search_field1KeyPressed
+
+    private void search_field1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_search_field1KeyReleased
+
+    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2MousePressed
+
+    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2MouseReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void search_field2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_search_field2KeyPressed
+
+    private void search_field2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field2KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_search_field2KeyReleased
   
     private void open_dmr(DMR dmr) {
         // Ouvre un nouvel onglet avec le DMR correspondant au n° d'id rentré dans le champ de recherche
-        // A faire une fois lien nf établi :
-        // vérifier si n° id est correct
-        // si oui, initialiser les composants pour qu'ils correspondent au patient
         
         javax.swing.JPanel dmrpanel=new DMRPatient(Onglets,dmr);
         
         // ajoute un nouvel onglet
-        Onglets.addTab("             DMR         ",dmrpanel);
+        Onglets.addTab("         "+dmr.getPrenomPatient()+" "+dmr.getNomPatient()+"       ",dmrpanel);
         Onglets.setSelectedComponent(dmrpanel);
         
         // création d'un bouton pour fermer l'onglet
@@ -462,10 +740,15 @@ public class Accueil extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Fond;
     private javax.swing.JTabbedPane Onglets;
-    private javax.swing.JPanel error_panel;
+    private javax.swing.JButton cancel_logout;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -473,16 +756,25 @@ public class Accueil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> liste_patients;
+    private javax.swing.JLabel loading;
+    private javax.swing.JLabel loading1;
     private javax.swing.JButton logout_button;
+    private javax.swing.JDialog logout_jdialog;
     private javax.swing.JPanel logout_panel;
     private javax.swing.JButton newdmr_button;
     private javax.swing.JPanel newdmr_panel;
-    private javax.swing.JButton search_button;
-    private javax.swing.JDialog search_jdialog;
+    private javax.swing.JButton search_button_id;
+    private javax.swing.JButton search_button_name;
+    private javax.swing.JTextField search_field;
+    private javax.swing.JTextField search_field1;
+    private javax.swing.JTextField search_field2;
+    private javax.swing.JDialog search_jdialog_id;
+    private javax.swing.JDialog search_jdialog_nom;
     private javax.swing.JPanel search_panel;
     private javax.swing.JPanel top_Pane;
     private javax.swing.JLabel welcome_label;
+    private javax.swing.JButton yes_logout;
     // End of variables declaration//GEN-END:variables
 }
