@@ -6,6 +6,15 @@
 package ui;
 
 import BD.requetesbd;
+import gestion_images.ImageFileView;
+import gestion_images.ImageFilter;
+import gestion_images.ImagePreview;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import javax.swing.JFileChooser;
 import nf.DMR;
 import nf.Examen;
 import nf.Personnel;
@@ -100,6 +109,7 @@ public class VoirExam extends javax.swing.JPanel {
         pacs_label = new javax.swing.JLabel();
         save_button = new javax.swing.JButton();
         print_button = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         fen_confirmer_imp.setSize(new java.awt.Dimension(800, 750));
 
@@ -218,6 +228,13 @@ public class VoirExam extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Ajouter images numérisées");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -230,7 +247,9 @@ public class VoirExam extends javax.swing.JPanel {
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(pacs_label_1)
                             .addGap(18, 18, 18)
-                            .addComponent(pacs_label))
+                            .addComponent(pacs_label)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton1))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(Label3)
                             .addGap(18, 18, 18)
@@ -272,11 +291,12 @@ public class VoirExam extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Label4)
                     .addComponent(ph_label))
-                .addGap(37, 37, 37)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pacs_label_1)
-                    .addComponent(pacs_label))
-                .addGap(37, 37, 37)
+                    .addComponent(pacs_label)
+                    .addComponent(jButton1))
+                .addGap(32, 32, 32)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -379,6 +399,57 @@ public class VoirExam extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_button_imp_okActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        String chemin = System.getProperty("user.home") + "/Dropbox/projet_SIS/PACS/" + ex.getDate().getTime();
+        new File(chemin).mkdirs();
+
+        //Set up the file chooser.
+        JFileChooser fc = new JFileChooser(System.getProperty("user.home") + "/Documents/IMAGES_SCANNEES");
+        fc.setMultiSelectionEnabled(true);
+        //Add a custom file filter and disable the default
+        //(Accept All) file filter.
+        fc.addChoosableFileFilter(new ImageFilter());
+        fc.setAcceptAllFileFilterUsed(false);
+
+        //Add custom icons for file types.
+        fc.setFileView(new ImageFileView());
+
+        //Add the preview pane.
+        fc.setAccessory(new ImagePreview(fc));
+
+        //Show it.
+        int returnVal = fc.showDialog(this,
+                "Attach");
+
+        //Process the results.
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File[] liste_files = fc.getSelectedFiles();
+//            int i = 19;
+            for (File file : liste_files) {
+//            
+                try {
+                    Path source = file.toPath();
+                    Path dest = Paths.get(chemin + "/" + file.getName());
+
+                    Files.move(source, dest);
+//                    i++;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+                System.out.println("Attaching file: " + file.getPath()
+                        + ".");
+                
+            }
+        } else {
+            System.out.println("Attachment cancelled by user.");
+        }
+
+        //Reset the file chooser for the next time it's shown.
+        fc.setSelectedFile(null);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Label1;
@@ -391,6 +462,7 @@ public class VoirExam extends javax.swing.JPanel {
     private javax.swing.JLabel date_label;
     private javax.swing.JDialog fen_confirmer_imp;
     private javax.swing.JLabel id_label;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
