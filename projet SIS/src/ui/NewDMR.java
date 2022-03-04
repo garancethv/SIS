@@ -42,6 +42,9 @@ public class NewDMR extends javax.swing.JPanel {
         erreur_codepostal.setVisible(false);
         erreur_adresse.setVisible(false);
         erreur_ville.setVisible(false);
+        warning_jdialog.setLocationRelativeTo(null);
+        confirmation_jdialog.setLocationRelativeTo(null);
+        dmrcree_jdialog.setLocationRelativeTo(null);
     }
 
     /**
@@ -127,6 +130,11 @@ public class NewDMR extends javax.swing.JPanel {
         });
 
         annuler_button.setText("Annuler");
+        annuler_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                annuler_buttonActionPerformed(evt);
+            }
+        });
 
         tel_label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-téléphone-portable-48.png"))); // NOI18N
         tel_label.setText("n° tel");
@@ -769,8 +777,45 @@ public class NewDMR extends javax.swing.JPanel {
     }//GEN-LAST:event_genre_fieldActionPerformed
 
     private void continue_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continue_buttonActionPerformed
-        // force la création de DMR
-        // A ECRIRE
+        // force la création du DMR
+        String nom = nom_field.getText();
+        String prenom = prenom_field.getText();
+        String date = date_naissance_field.getText();
+        String genre = genre_field.getSelectedItem().toString();
+        String tel = tel_field.getText();
+        String adresse = adresse_field.getText();
+        String codePostal = codePostal_field.getText();
+        String ville = ville_field.getText();
+        
+        try {
+            DMR nv_dmr = requetesbd.creationDMR(requetesbd.connexionBD(), nom, prenom, date, tel, genre, adresse, codePostal, ville);
+
+            // ferme l'onglet
+            int i = pane.getSelectedIndex();
+            if (i != -1) {
+                pane.remove(i);
+            }
+
+            // ouvre le DMR crée
+            javax.swing.JPanel dmrpanel = new DMRPatient(pane, nv_dmr);
+
+            // ajoute un nouvel onglet
+            pane.addTab("             DMR         ", dmrpanel);
+            pane.setSelectedComponent(dmrpanel);
+
+            // création d'un bouton pour fermer l'onglet
+            CloseButton close_button = new CloseButton(pane);
+
+            // ajout du bouton
+            pane.setTabComponentAt(pane.getSelectedIndex(), close_button);
+        } 
+        catch (Exception e) {
+            System.out.println("Exception 2");
+        }
+        
+        warning_jdialog.setVisible(false);
+        dmrcree_jdialog.setVisible(true);
+        
     }//GEN-LAST:event_continue_buttonActionPerformed
 
     private void tel_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tel_fieldActionPerformed
@@ -828,14 +873,16 @@ public class NewDMR extends javax.swing.JPanel {
                 } catch (Exception e) {
                     System.out.println("Exception 2");
                 }
+                
+
+                this.setVisible(false);
+                dmrcree_jdialog.setVisible(true);
             }
         } catch (Exception e) {
             System.out.println("Exception 1");
         }
         
         confirmation_jdialog.setVisible(false);
-        this.setVisible(false);
-        dmrcree_jdialog.setVisible(true);
     }//GEN-LAST:event_yes_newdmrActionPerformed
 
     private void cancel_newdmrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_newdmrActionPerformed
@@ -845,6 +892,10 @@ public class NewDMR extends javax.swing.JPanel {
     private void yes_dmrcreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yes_dmrcreeActionPerformed
         dmrcree_jdialog.setVisible(false);
     }//GEN-LAST:event_yes_dmrcreeActionPerformed
+
+    private void annuler_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annuler_buttonActionPerformed
+        warning_jdialog.setVisible(false);
+    }//GEN-LAST:event_annuler_buttonActionPerformed
 
     private boolean bonFormatDate(String date) {
         String[] liste_date = date.split("/");
