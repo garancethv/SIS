@@ -81,7 +81,7 @@ this.j=j;
 //        JButton sendButton = new JButton("Attach...");
         JButton sendButton = b;
         sendButton.addActionListener(this);
-
+        
 //        add(sendButton, BorderLayout.PAGE_START);
 //        add(logScrollPane, BorderLayout.CENTER);
     }
@@ -91,7 +91,8 @@ this.j=j;
         if (fc == null) {
             
             fc = new JFileChooser(System.getProperty("user.home") + "/Documents/IMAGES_SCANNEES");
-
+            fc.setMultiSelectionEnabled(true);
+            
             //Add a custom file filter and disable the default
             //(Accept All) file filter.
             fc.addChoosableFileFilter(new ImageFilter());
@@ -105,15 +106,17 @@ this.j=j;
         }
  int returnVal = fc.showDialog(j,
                 "Attach");
-        
+        String chemin = System.getProperty("user.home")+"/Dropbox/projet_SIS/PACS/" ;
         //Process the results.
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-//            
+            File[] liste_files = fc.getSelectedFiles();
+            int i = 25;
+            for (File file : liste_files){
             try {
-                Path source = file.toPath();;
-                Path dest = Paths.get(System.getProperty("user.home") + "/Dropbox/projet_SIS/PACS/" + "test12.jpg");
-                String chemin = "/Dropbox/projet_SIS/PACS/" + "test.jpg";
+                Path source = file.toPath();
+                
+                Path dest = Paths.get(chemin + i+".jpg");
+                
                 Files.move(source, dest);
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -121,7 +124,7 @@ this.j=j;
 
             log.append("Attaching file: " + file.getPath()
                     + "." + newline);
-        } else {
+        }} else {
             log.append("Attachment cancelled by user." + newline);
         }
         log.setCaretPosition(log.getDocument().getLength());
