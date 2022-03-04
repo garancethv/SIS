@@ -79,7 +79,7 @@ class Connexionsgbd {
             } 
             conn = requetesbd.connexionBD();
 
-            requetesbd.creationExamen(conn, dmr1, 1234567890, TypeExamen.IRM, 1);
+            requetesbd.creationExamen(conn, dmr1, 1234567890, TypeExamen.IRM, 1,"");
             
             conn = requetesbd.connexionBD();
             requetesbd.creationCR(conn, dmr1.getExamens().get(1), dmr1.getExamens().get(1).getDate().toLocaleString(), "test2");
