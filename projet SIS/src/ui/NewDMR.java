@@ -110,7 +110,9 @@ public class NewDMR extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
+        warning_jdialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         warning_jdialog.setTitle("Attention");
+        warning_jdialog.setModal(true);
         warning_jdialog.setResizable(false);
         warning_jdialog.setSize(new java.awt.Dimension(655, 300));
 
@@ -184,6 +186,8 @@ public class NewDMR extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        confirmation_jdialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        confirmation_jdialog.setModal(true);
         confirmation_jdialog.setSize(new java.awt.Dimension(520, 300));
 
         yes_newdmr.setText("OUI");
@@ -239,6 +243,8 @@ public class NewDMR extends javax.swing.JPanel {
                 .addGap(48, 48, 48))
         );
 
+        dmrcree_jdialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        dmrcree_jdialog.setModal(true);
         dmrcree_jdialog.setSize(new java.awt.Dimension(520, 300));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
