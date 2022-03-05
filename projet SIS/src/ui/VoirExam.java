@@ -6,6 +6,7 @@
 package ui;
 
 import BD.requetesbd;
+import gestion_images.IconDemoApp;
 import gestion_images.ImageFileView;
 import gestion_images.ImageFilter;
 import gestion_images.ImagePreview;
@@ -29,50 +30,47 @@ public class VoirExam extends javax.swing.JPanel {
      * Creates new form VoirExam
      */
     Examen ex;
-    
+
     public VoirExam() {
         initComponents();
     }
-    
-    public VoirExam(DMR dmr,Examen ex) {
+
+    public VoirExam(DMR dmr, Examen ex) {
         initComponents();
-        
+
         fen_confirmer_imp.setLocationRelativeTo(null);
-        
-        this.ex=ex;
-        
+
+        this.ex = ex;
+
         print_button.setVisible(false);
         save_button.setVisible(false);
-        
-        String date=DMR.format_date(ex.getDate());
-        
-        title_label.setText(ex.getTypeExamen().toString()+" du "+date);
-        id_label.setText(String.valueOf(ex.getIdDMR())+" ("+dmr.getPrenomPatient()+" "+dmr.getNomPatient()+")"); //rajter nom/prénom correspondant
+
+        String date = DMR.format_date(ex.getDate());
+
+        title_label.setText(ex.getTypeExamen().toString() + " du " + date);
+        id_label.setText(String.valueOf(ex.getIdDMR()) + " (" + dmr.getPrenomPatient() + " " + dmr.getNomPatient() + ")"); //rajter nom/prénom correspondant
         type_label.setText(ex.getTypeExamen().toString());
         date_label.setText(date);
         try {
             Personnel p = requetesbd.utilisateur(requetesbd.connexionBD(), ex.getIdPhRespo());
-            ph_label.setText("Dr "+p.getPrenom()+" "+p.getNom());
+            ph_label.setText("Dr " + p.getPrenom() + " " + p.getNom());
+        } catch (Exception e) {
         }
-        catch(Exception e) {}
-        
-        if(ex.getNumPACS()==0) {
+
+        if (ex.getNumPACS() == 0) {
             pacs_label_1.setText("DMR Papier");
             pacs_label.setText("");
-        }
-        
-        else {
+        } else {
             pacs_label_1.setText("N° PACS :");
             pacs_label.setText(String.valueOf(ex.getNumPACS()));
         }
-        
+
         //compte-rendu éditable seulement si vide
-        if(ex.getTexteCR()!=null && !ex.getTexteCR().equals("")) {
+        if (ex.getTexteCR() != null && !ex.getTexteCR().equals("")) {
             compte_rendu.setText(ex.getTexteCR());
             compte_rendu.setRequestFocusEnabled(false);
             print_button.setVisible(true);
-        }
-        else {
+        } else {
             compte_rendu.setEditable(true);
         }
     }
@@ -110,6 +108,7 @@ public class VoirExam extends javax.swing.JPanel {
         save_button = new javax.swing.JButton();
         print_button = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         fen_confirmer_imp.setSize(new java.awt.Dimension(800, 750));
 
@@ -235,6 +234,13 @@ public class VoirExam extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setText("visualiser images numérisées");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -249,7 +255,9 @@ public class VoirExam extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addComponent(pacs_label)
                             .addGap(18, 18, 18)
-                            .addComponent(jButton1))
+                            .addComponent(jButton1)
+                            .addGap(66, 66, 66)
+                            .addComponent(jButton2))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(Label3)
                             .addGap(18, 18, 18)
@@ -295,7 +303,8 @@ public class VoirExam extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pacs_label_1)
                     .addComponent(pacs_label)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addGap(32, 32, 32)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
@@ -348,35 +357,34 @@ public class VoirExam extends javax.swing.JPanel {
 
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         //if (!compte_rendu.getText().equals("")){
-            ex.setTexteCR(compte_rendu.getText());
-            try {
-                requetesbd.creationCR(requetesbd.connexionBD(), ex, ex.getDate().toLocaleString(),compte_rendu.getText());
-            }
-            catch (Exception e) {
-                System.out.println("Echec du compte-rendu");
-            }
-            compte_rendu.setEditable(false);
-            save_button.setVisible(false);
-            print_button.setVisible(true);
+        ex.setTexteCR(compte_rendu.getText());
+        try {
+            requetesbd.creationCR(requetesbd.connexionBD(), ex, ex.getDate().toLocaleString(), compte_rendu.getText());
+        } catch (Exception e) {
+            System.out.println("Echec du compte-rendu");
+        }
+        compte_rendu.setEditable(false);
+        save_button.setVisible(false);
+        print_button.setVisible(true);
         //}
     }//GEN-LAST:event_save_buttonActionPerformed
 
     private void compte_renduKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_compte_renduKeyTyped
-        if (ex.getTexteCR()==null) {
+        if (ex.getTexteCR() == null) {
             save_button.setVisible(true);
         }
     }//GEN-LAST:event_compte_renduKeyTyped
 
     private void print_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_buttonActionPerformed
-        if (!compte_rendu.isEditable()){
+        if (!compte_rendu.isEditable()) {
             //ouvre la fenêtre de confirmation
             area_apercu.setText("                                                                                                                                                                                              Compte-rendu d'examen\n"
-            + "DMR : " + id_label.getText() + "\n"
-            + "Type d'examen : " + type_label.getText() + "\n"
-            + "Date : " + date_label.getText() + "\n"
-            + "PH responsable : " + ph_label.getText() + "\n"
-            + "      ------------------------------------------------------------------------------------------------\n"
-            + compte_rendu.getText());
+                    + "DMR : " + id_label.getText() + "\n"
+                    + "Type d'examen : " + type_label.getText() + "\n"
+                    + "Date : " + date_label.getText() + "\n"
+                    + "PH responsable : " + ph_label.getText() + "\n"
+                    + "      ------------------------------------------------------------------------------------------------\n"
+                    + compte_rendu.getText());
 
             fen_confirmer_imp.setVisible(true);
         }
@@ -385,22 +393,20 @@ public class VoirExam extends javax.swing.JPanel {
     private void button_imp_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_imp_okActionPerformed
         //imprimer
         boolean reussi = false;
-        
-        try{
+
+        try {
             area_apercu.print();
             reussi = true;
+        } catch (Exception e) {
         }
-        
-        catch (Exception e){ 
-        }
-        
-        if (reussi){
+
+        if (reussi) {
             fen_confirmer_imp.setVisible(false);
         }
     }//GEN-LAST:event_button_imp_okActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         String chemin = System.getProperty("user.home") + "/Dropbox/projet_SIS/PACS/" + ex.getDate().getTime();
         new File(chemin).mkdirs();
 
@@ -440,7 +446,7 @@ public class VoirExam extends javax.swing.JPanel {
 
                 System.out.println("Attaching file: " + file.getPath()
                         + ".");
-                
+
             }
         } else {
             System.out.println("Attachment cancelled by user.");
@@ -449,6 +455,45 @@ public class VoirExam extends javax.swing.JPanel {
         //Reset the file chooser for the next time it's shown.
         fc.setSelectedFile(null);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        String chemin = System.getProperty("user.home") + "/Dropbox/projet_SIS/PACS/" + "dateExamen_nom_prenom";
+
+        //Set up the file chooser.
+        JFileChooser fc = new JFileChooser(System.getProperty("user.home") + "/Dropbox/projet_SIS/PACS/" + "dateExamen_nom_prenom");
+        fc.setMultiSelectionEnabled(true);
+
+        //Add a custom file filter and disable the default
+        //(Accept All) file filter.
+        fc.addChoosableFileFilter(new ImageFilter());
+        fc.setAcceptAllFileFilterUsed(false);
+
+        //Add custom icons for file types.
+        fc.setFileView(new ImageFileView());
+
+        //Add the preview pane.
+        fc.setAccessory(new ImagePreview(fc));
+
+        //Show it.
+        int returnVal = fc.showDialog(this,
+                "Attach");
+
+        //Process the results.
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File[] liste_files = fc.getSelectedFiles();
+            int i = 19;
+            IconDemoApp vision = new IconDemoApp(liste_files);
+            vision.setVisible(true);
+
+        } else {
+            System.out.println("Attachment cancelled by user.");
+        }
+
+        //Reset the file chooser for the next time it's shown.
+        fc.setSelectedFile(null);
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -463,6 +508,7 @@ public class VoirExam extends javax.swing.JPanel {
     private javax.swing.JDialog fen_confirmer_imp;
     private javax.swing.JLabel id_label;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

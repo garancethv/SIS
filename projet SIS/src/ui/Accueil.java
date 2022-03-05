@@ -67,7 +67,7 @@ public class Accueil extends javax.swing.JFrame {
         erreur_nom = new javax.swing.JLabel();
         loading_nom = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        liste_patients = new javax.swing.JList<>();
+        liste_patients = new javax.swing.JList<String>();
         search_field_nom = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -104,7 +104,6 @@ public class Accueil extends javax.swing.JFrame {
         search_jdialog_nom.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         search_jdialog_nom.setTitle("Rechercher un DMR");
         search_jdialog_nom.setAlwaysOnTop(true);
-        search_jdialog_nom.setPreferredSize(new java.awt.Dimension(508, 240));
         search_jdialog_nom.setResizable(false);
         search_jdialog_nom.setSize(new java.awt.Dimension(530, 265));
 
@@ -158,10 +157,10 @@ public class Accueil extends javax.swing.JFrame {
         loading_nom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-chargement-en-cours-48.png"))); // NOI18N
         loading_nom.setText("Chargement en cours");
 
-        liste_patients.setModel(new javax.swing.AbstractListModel<String>() {
+        liste_patients.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         liste_patients.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -316,6 +315,8 @@ public class Accueil extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        logout_jdialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        logout_jdialog.setModal(true);
         logout_jdialog.setResizable(false);
         logout_jdialog.setSize(new java.awt.Dimension(485, 250));
 
@@ -430,7 +431,7 @@ public class Accueil extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(search_button_name))
                     .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         search_panelLayout.setVerticalGroup(
             search_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,7 +442,7 @@ public class Accueil extends javax.swing.JFrame {
                 .addGroup(search_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(search_button_id, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(search_button_name, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         logout_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-log-out-32.png"))); // NOI18N

@@ -94,10 +94,10 @@ public class IconDemoApp extends JFrame {
      */
 //    private String[] imageCaptions = { "Original SUNW Logo", "The Clocktower",
 //    "Clocktower from the West", "The Mansion", "Sun Auditorium"};
-    
-    /**
-     * List of all the image files to load.
-     */
+//    
+//    /**
+//     * List of all the image files to load.
+//     */
 //    private String[] imageFileNames = { "sunw01.jpg", "sunw02.jpg",
 //    "sunw03.jpg", "sunw04.jpg", "sunw05.jpg"};
     
@@ -121,8 +121,9 @@ public class IconDemoApp extends JFrame {
      */
     public IconDemoApp(File[] files) {
         this.files = files;
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Examen du dateExamen");
+        
         
         // A label for displaying the pictures
         photographLabel.setVerticalTextPosition(JLabel.BOTTOM);
@@ -209,13 +210,13 @@ public class IconDemoApp extends JFrame {
      */
     protected ImageIcon createImageIcon(String path,
             String description) {
-        java.net.URL imgURL = getClass().getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL, description);
-        } else {
-            System.err.println("Couldn't find file: " + path);
-            return null;
-        }
+//        java.net.URL imgURL = getClass().getResource(path);
+//        if (imgURL != null) {
+            return new ImageIcon(path, description);
+//        } else {
+//            System.err.println("Couldn't find file: " + path);
+//            return null;
+//        }
     }
     
     /**

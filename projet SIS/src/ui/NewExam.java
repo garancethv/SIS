@@ -63,10 +63,12 @@ public class NewExam extends javax.swing.JPanel {
         erreur_ph = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        type_field = new javax.swing.JComboBox<>();
+        type_field = new javax.swing.JComboBox<String>();
         valider_button = new javax.swing.JButton();
         add_cr_button = new javax.swing.JButton();
 
+        cr_jdialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        cr_jdialog.setModal(true);
         cr_jdialog.setResizable(false);
         cr_jdialog.setSize(new java.awt.Dimension(747, 540));
 
@@ -179,7 +181,7 @@ public class NewExam extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(170, 0, 0));
         jLabel7.setText("Type d'examen :");
 
-        type_field.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IRM", "RADIOGRAPHIE", "SCANNER" }));
+        type_field.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "IRM", "RADIOGRAPHIE", "SCANNER" }));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
