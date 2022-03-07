@@ -191,7 +191,7 @@ public class requetesbd {
             Statement stmt = conn.createStatement();
 // Execute the query
             System.out.println("b");
-            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR =" + dmr.getId());
+            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR =" + dmr.getId()+" order by dateExamen");
             ArrayList<Examen> liste = new ArrayList<>();
             while (rs.next()) {
                 String s = rs.getString("typeExamen");
@@ -220,8 +220,6 @@ public class requetesbd {
     }
     
     public static DMR creationExamen(Connection conn, DMR dmr, int idPH, TypeExamen typeExam, int archivagePapier, String texteCR) throws SQLException {
-        /*renvoie le DMR recherché
-        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();

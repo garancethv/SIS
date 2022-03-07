@@ -14,6 +14,7 @@ import nf.DMR;
 import nf.Examen;
 import nf.Genre;
 import nf.Personnel;
+import nf.Secretaire;
 
 /**
  *
@@ -25,6 +26,7 @@ public class DMRPatient extends javax.swing.JPanel {
      * Creates new form DMRPatient
      */
     JTabbedPane Onglets;
+    Personnel user;
     private ArrayList<Examen> examens;
     int ligne=-1;
     DMR dmr;
@@ -33,11 +35,12 @@ public class DMRPatient extends javax.swing.JPanel {
         initComponents();
     }
     
-    public DMRPatient(JTabbedPane pane, DMR dmr) {
+    public DMRPatient(JTabbedPane pane, Personnel user, DMR dmr) {
         initComponents();
         this.dmr=dmr;
         Onglets=pane;
         examens=dmr.getExamens();
+        this.user=user;
         
         nom_patient.setText(dmr.getNomPatient());
         prenom_patient.setText(dmr.getPrenomPatient());
@@ -75,6 +78,11 @@ public class DMRPatient extends javax.swing.JPanel {
             }
             catch(Exception e) {
             }
+        }
+        
+        // Restrictions : secrétaire ne peut pas ajouter un examen
+        if (user.getClass().equals(Secretaire.class)) {
+            new_exam.setVisible(false);
         }
     }
 
@@ -359,10 +367,11 @@ public class DMRPatient extends javax.swing.JPanel {
 
     private void ouvreExam() {
             // Besoin d'une fction recherche d'un exam avec id patient & date exam
+            
             Examen ex = examens.get(examens.size()-1-ligne);
+            
             // Ouvre un nouvel onglet avec l'examen sélectionné
-
-            javax.swing.JPanel exam_panel=new VoirExam(dmr,ex);
+            javax.swing.JPanel exam_panel=new VoirExam(dmr,user,ex);
 
             // ajoute un nouvel onglet
             Onglets.addTab("           "+ex.getTypeExamen().toString()+"        ",exam_panel);
@@ -389,7 +398,7 @@ public class DMRPatient extends javax.swing.JPanel {
             erreur_exam.setVisible(false);
             
             // Ouvre un nouvel onglet ajout d'exam
-            javax.swing.JPanel exam_panel=new NewExam(this);
+            javax.swing.JPanel exam_panel=new NewExam(this,user);
 
             // ajoute un nouvel onglet
             Onglets.addTab("        Ajouter un Examen      ",exam_panel);
@@ -414,7 +423,14 @@ public class DMRPatient extends javax.swing.JPanel {
             model.removeRow(i); 
         }
         for (int i=examens.size()-1; i>=0; i--) {
-            model.insertRow(model.getRowCount(), new Object[]{DMR.format_date(examens.get(i).getDate()),examens.get(i).getTypeExamen(),String.valueOf(examens.get(i).getIdPhRespo())});
+            try {
+                Personnel p = requetesbd.utilisateur(requetesbd.connexionBD(), examens.get(i).getIdPhRespo());
+                String ph="Dr "+p.getPrenom()+" "+p.getNom();
+                model.insertRow(model.getRowCount(), new Object[]{DMR.format_date(examens.get(i).getDate()),examens.get(i).getTypeExamen(),ph});
+            }
+            catch (Exception e) {
+                  System.out.println("Erreur bd");
+            }
         }
     }
 
