@@ -758,7 +758,7 @@ public class Accueil extends javax.swing.JFrame {
         javax.swing.JPanel dmrpanel=new DMRPatient(Onglets,dmr);
         
         // ajoute un nouvel onglet
-        Onglets.addTab("         "+dmr.getPrenomPatient()+" "+dmr.getNomPatient()+"       ",dmrpanel);
+        Onglets.addTab("       "+dmr.getPrenomPatient()+" "+dmr.getNomPatient()+" ("+dmr.getId()+")"+"     ",dmrpanel);
         Onglets.setSelectedComponent(dmrpanel);
         
         // création d'un bouton pour fermer l'onglet
