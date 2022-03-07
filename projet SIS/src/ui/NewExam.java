@@ -13,6 +13,7 @@ import nf.DMR;
 import nf.Examen;
 import nf.Genre;
 import nf.PH;
+import nf.Personnel;
 import nf.TypeExamen;
 
 /**
@@ -28,9 +29,12 @@ public class NewExam extends javax.swing.JPanel {
     DMR dmr;
     DMRPatient dmr_pane;
     JTabbedPane Onglets;
+    Personnel user;
     
-    public NewExam(DMRPatient dmr_pane) {
+    public NewExam(DMRPatient dmr_pane, Personnel user) {
         initComponents();
+        
+        this.user=user;
         
         this.dmr_pane=dmr_pane;
         this.Onglets=dmr_pane.Onglets;
@@ -38,6 +42,18 @@ public class NewExam extends javax.swing.JPanel {
         
         erreur_ph.setVisible(false);
         save_button.setVisible(false);
+        
+        // Restrictions :
+        // si PH : idPH déjà renseigné
+        // si manip radio : ne peut pas rajouter CR
+        
+        if (user.getClass().equals(nf.PH.class) || user.getClass().equals(nf.Interne.class)) {
+            ph_field.setText(String.valueOf(user.getId()));
+            ph_field.setEditable(false);
+        }
+        else {
+            add_cr_button.setVisible(false);
+        }
     }
 
     /**
@@ -272,8 +288,7 @@ public class NewExam extends javax.swing.JPanel {
     private void valider_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valider_buttonActionPerformed
         // Conditions avant de valider :
         // Tous les champs sont remplis
-        // idPH est bien un entier et correspond bien à un PH (à faire)
-        // numPacs est bien un entier et correspond bien à un num pacs (à faire)
+        // idPH est bien un entier et correspond bien à un PH
         
         String idPH= ph_field.getText();
         String type_ex= type_field.getSelectedItem().toString();
@@ -296,12 +311,25 @@ public class NewExam extends javax.swing.JPanel {
                 int id=Integer.valueOf(idPH);
                 DMR ajout_exam=requetesbd.creationExamen(requetesbd.connexionBD(), dmr, Integer.valueOf(idPH), type, 0, cr);
                 
-                
                 //met à jour DMR Patient
                 dmr_pane.maj_exam(ajout_exam);
 
                 // ferme l'onglet
                 Onglets.remove(this);
+                
+                //ouvre l'examen crée - 1er dans la liste (si triée par date croissante)
+                Examen ex=ajout_exam.getExamens().get(ajout_exam.getExamens().size()-1);
+                javax.swing.JPanel exam_panel=new VoirExam(ajout_exam,user,ex);
+
+                // ajoute un nouvel onglet
+                Onglets.addTab("           "+ex.getTypeExamen().toString()+"        ",exam_panel);
+                Onglets.setSelectedComponent(exam_panel);
+
+                // création d'un bouton pour fermer l'onglet
+                CloseButton close_button = new CloseButton(Onglets);
+
+                // ajout du bouton
+                Onglets.setTabComponentAt(Onglets.getSelectedIndex(), close_button);
             }
             catch (Exception e) {
                 erreur_ph.setVisible(true);
