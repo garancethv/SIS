@@ -49,7 +49,6 @@ public class NewExam extends javax.swing.JPanel {
         
         if (user.getClass().equals(nf.PH.class) || user.getClass().equals(nf.Interne.class)) {
             ph_field.setText(String.valueOf(user.getId()));
-            ph_field.setEditable(false);
         }
         else {
             add_cr_button.setVisible(false);
@@ -79,7 +78,7 @@ public class NewExam extends javax.swing.JPanel {
         erreur_ph = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        type_field = new javax.swing.JComboBox<String>();
+        type_field = new javax.swing.JComboBox<>();
         valider_button = new javax.swing.JButton();
         add_cr_button = new javax.swing.JButton();
 
@@ -161,6 +160,12 @@ public class NewExam extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(170, 0, 0));
         jLabel6.setText("Id du PH responsable :");
 
+        ph_field.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ph_fieldMouseExited(evt);
+            }
+        });
+
         erreur_ph.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         erreur_ph.setForeground(new java.awt.Color(149, 46, 46));
         erreur_ph.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
@@ -197,7 +202,7 @@ public class NewExam extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(170, 0, 0));
         jLabel7.setText("Type d'examen :");
 
-        type_field.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "IRM", "RADIOGRAPHIE", "SCANNER" }));
+        type_field.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IRM", "RADIOGRAPHIE", "SCANNER" }));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -360,6 +365,10 @@ public class NewExam extends javax.swing.JPanel {
     private void cr_fieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cr_fieldKeyTyped
         save_button.setVisible(true);
     }//GEN-LAST:event_cr_fieldKeyTyped
+
+    private void ph_fieldMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ph_fieldMouseExited
+        System.out.println("MouseExited");
+    }//GEN-LAST:event_ph_fieldMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

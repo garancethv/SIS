@@ -42,12 +42,12 @@ public class Accueil extends javax.swing.JFrame {
     public Accueil() {
         //initialiser les composants
         try {
-            // PH
-            // p = requetesbd.utilisateur(requetesbd.connexionBD(),1234567890);
-            // Secrétaire
+            // test PH
+            p = requetesbd.utilisateur(requetesbd.connexionBD(),1234567890);
+            // test Secrétaire
             // p = requetesbd.utilisateur(requetesbd.connexionBD(),1234567894);
-            // Manip
-            p = requetesbd.utilisateur(requetesbd.connexionBD(),1234567893);
+            // test Manip
+            // p = requetesbd.utilisateur(requetesbd.connexionBD(),1234567893);
         }
         catch (Exception e) {}
         initComponents();
@@ -623,7 +623,8 @@ public class Accueil extends javax.swing.JFrame {
                 search_field_nom.setText("");
                 search_field_prénom.requestFocusInWindow();
                 erreur_nom.setVisible(true);
-                loading_nom.setVisible(false); 
+                loading_nom.setVisible(false);
+                jScrollPane1.setVisible(false);
             }
         }
         else {
@@ -656,7 +657,8 @@ public class Accueil extends javax.swing.JFrame {
                 search_field_nom.setText("");
                 search_field_prénom.requestFocusInWindow();
                 erreur_nom.setVisible(true);
-                loading_nom.setVisible(false); 
+                loading_nom.setVisible(false);
+                jScrollPane1.setVisible(false);
             }
         }
     }

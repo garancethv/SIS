@@ -248,6 +248,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="ph_field">
+              <Events>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ph_fieldMouseExited"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="erreur_ph">
               <Properties>
