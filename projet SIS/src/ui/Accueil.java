@@ -8,8 +8,10 @@ package ui;
 
 import BD.requetesbd;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -62,7 +64,10 @@ public class Accueil extends javax.swing.JFrame {
         this.p=p;
         
         welcome_label.setText("Bienvenue "+p.getPrenom());
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        //this.setSize(size.getSize());
+        //this.pack();
     }
 
     /**
@@ -557,7 +562,7 @@ public class Accueil extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Onglets, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(Onglets, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
