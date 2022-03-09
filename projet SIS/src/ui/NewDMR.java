@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import nf.DMR;
 import nf.Genre;
+import nf.Personnel;
 
 /**
  *
@@ -28,10 +29,13 @@ public class NewDMR extends javax.swing.JPanel {
      * Creates new form NewDMR
      */
     JTabbedPane pane;
+    Personnel user;
 
-    public NewDMR(JTabbedPane pane) {
+    public NewDMR(JTabbedPane pane, Personnel user) {
         this.pane = pane;
         initComponents();
+        
+        this.user=user;
 
         nom_field.requestFocusInWindow();
 
@@ -803,7 +807,7 @@ public class NewDMR extends javax.swing.JPanel {
             }
 
             // ouvre le DMR crée
-            javax.swing.JPanel dmrpanel = new DMRPatient(pane, nv_dmr);
+            javax.swing.JPanel dmrpanel = new DMRPatient(pane, user, nv_dmr);
 
             // ajoute un nouvel onglet
             pane.addTab("             DMR         ", dmrpanel);
@@ -865,7 +869,7 @@ public class NewDMR extends javax.swing.JPanel {
                     }
 
                     // ouvre le DMR crée
-                    javax.swing.JPanel dmrpanel = new DMRPatient(pane, nv_dmr);
+                    javax.swing.JPanel dmrpanel = new DMRPatient(pane, user, nv_dmr);
 
                     // ajoute un nouvel onglet
                     pane.addTab("             DMR         ", dmrpanel);

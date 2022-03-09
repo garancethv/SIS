@@ -30,13 +30,16 @@ public class VoirExam extends javax.swing.JPanel {
      * Creates new form VoirExam
      */
     Examen ex;
+    Personnel user;
 
     public VoirExam() {
         initComponents();
     }
 
-    public VoirExam(DMR dmr, Examen ex) {
+    public VoirExam(DMR dmr, Personnel user, Examen ex) {
         initComponents();
+        
+        this.user=user;
 
         fen_confirmer_imp.setLocationRelativeTo(null);
 
@@ -47,7 +50,7 @@ public class VoirExam extends javax.swing.JPanel {
 
         String date = DMR.format_date(ex.getDate());
 
-        title_label.setText(ex.getTypeExamen().toString() + " du " + date);
+        title_label.setText("Examen du " + date);
         id_label.setText(String.valueOf(ex.getIdDMR()) + " (" + dmr.getPrenomPatient() + " " + dmr.getNomPatient() + ")"); //rajter nom/prénom correspondant
         type_label.setText(ex.getTypeExamen().toString());
         date_label.setText(date);
@@ -72,6 +75,15 @@ public class VoirExam extends javax.swing.JPanel {
             print_button.setVisible(true);
         } else {
             compte_rendu.setEditable(true);
+        }
+        
+        // Restrictions :
+        // Seul PH peut ajouter / voir le cr
+        
+        if (!user.getClass().equals(nf.PH.class)) {
+            jLabel10.setVisible(false);
+            jScrollPane1.setVisible(false);
+            print_button.setVisible(false);
         }
     }
 
