@@ -40,7 +40,7 @@ public class AccueilConnexion extends javax.swing.JFrame {
         initComponents();
 
         this.setLocationRelativeTo(null);
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         erreur_connexion.setVisible(false);
     }
@@ -67,7 +67,7 @@ public class AccueilConnexion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Connexion");
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(1098, 675));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
