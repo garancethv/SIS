@@ -4,6 +4,8 @@
   <NonVisualComponents>
     <Container class="javax.swing.JDialog" name="fen_confirmer_imp">
       <Properties>
+        <Property name="defaultCloseOperation" type="int" value="2"/>
+        <Property name="modal" type="boolean" value="true"/>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[800, 750]"/>
         </Property>
@@ -175,7 +177,9 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="boutonComparerImage" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                                  <Component id="visualisation3D" min="-2" pref="169" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="Label3" min="-2" max="-2" attributes="0"/>
@@ -236,7 +240,8 @@
                           <Component id="pacs_label_1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="pacs_label" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="boutonComparerImage" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="visualisation3D" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
@@ -387,12 +392,20 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="boutonComparerImage">
               <Properties>
                 <Property name="text" type="java.lang.String" value="visualiser images num&#xe9;ris&#xe9;es"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonComparerImageActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="visualisation3D">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="recherche 3D"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="visualisation3DActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

@@ -104,6 +104,7 @@ public class Accueil extends javax.swing.JFrame {
         search_jdialog_nom.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         search_jdialog_nom.setTitle("Rechercher un DMR");
         search_jdialog_nom.setAlwaysOnTop(true);
+        search_jdialog_nom.setModal(true);
         search_jdialog_nom.setResizable(false);
         search_jdialog_nom.setSize(new java.awt.Dimension(530, 265));
 
@@ -240,6 +241,7 @@ public class Accueil extends javax.swing.JFrame {
         search_jdialog_id.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         search_jdialog_id.setTitle("Rechercher un DMR");
         search_jdialog_id.setAlwaysOnTop(true);
+        search_jdialog_id.setModal(true);
         search_jdialog_id.setResizable(false);
         search_jdialog_id.setSize(new java.awt.Dimension(508, 255));
 
@@ -315,7 +317,7 @@ public class Accueil extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        logout_jdialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        logout_jdialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         logout_jdialog.setModal(true);
         logout_jdialog.setResizable(false);
         logout_jdialog.setSize(new java.awt.Dimension(485, 250));
@@ -431,7 +433,7 @@ public class Accueil extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(search_button_name))
                     .addComponent(jLabel1))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         search_panelLayout.setVerticalGroup(
             search_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -514,22 +516,22 @@ public class Accueil extends javax.swing.JFrame {
             .addComponent(top_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(FondLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(FondLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(FondLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(search_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
                     .addComponent(newdmr_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logout_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(1851, 1851, 1851))
         );
         FondLayout.setVerticalGroup(
             FondLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FondLayout.createSequentialGroup()
-                .addComponent(top_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 33, Short.MAX_VALUE)
-                .addComponent(search_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(top_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
+                .addComponent(search_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(newdmr_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(newdmr_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(logout_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(logout_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(315, 315, 315))
         );
 

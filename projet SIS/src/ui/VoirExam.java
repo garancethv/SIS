@@ -10,6 +10,8 @@ import gestion_images.IconDemoApp;
 import gestion_images.ImageFileView;
 import gestion_images.ImageFilter;
 import gestion_images.ImagePreview;
+import gestion_images.SliderDemo;
+import gestion_images.Visionneuse;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -108,8 +110,11 @@ public class VoirExam extends javax.swing.JPanel {
         save_button = new javax.swing.JButton();
         print_button = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        boutonComparerImage = new javax.swing.JButton();
+        visualisation3D = new javax.swing.JButton();
 
+        fen_confirmer_imp.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        fen_confirmer_imp.setModal(true);
         fen_confirmer_imp.setSize(new java.awt.Dimension(800, 750));
 
         area_apercu.setEditable(false);
@@ -234,10 +239,17 @@ public class VoirExam extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("visualiser images numérisées");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        boutonComparerImage.setText("visualiser images numérisées");
+        boutonComparerImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                boutonComparerImageActionPerformed(evt);
+            }
+        });
+
+        visualisation3D.setText("recherche 3D");
+        visualisation3D.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visualisation3DActionPerformed(evt);
             }
         });
 
@@ -257,7 +269,9 @@ public class VoirExam extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addComponent(jButton1)
                             .addGap(66, 66, 66)
-                            .addComponent(jButton2))
+                            .addComponent(boutonComparerImage)
+                            .addGap(66, 66, 66)
+                            .addComponent(visualisation3D, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(Label3)
                             .addGap(18, 18, 18)
@@ -304,7 +318,8 @@ public class VoirExam extends javax.swing.JPanel {
                     .addComponent(pacs_label_1)
                     .addComponent(pacs_label)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(boutonComparerImage)
+                    .addComponent(visualisation3D))
                 .addGap(32, 32, 32)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
@@ -456,7 +471,7 @@ public class VoirExam extends javax.swing.JPanel {
         fc.setSelectedFile(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void boutonComparerImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonComparerImageActionPerformed
 
         String chemin = System.getProperty("user.home") + "/Dropbox/projet_SIS/PACS/" + "dateExamen_nom_prenom";
 
@@ -483,7 +498,7 @@ public class VoirExam extends javax.swing.JPanel {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File[] liste_files = fc.getSelectedFiles();
             int i = 19;
-            IconDemoApp vision = new IconDemoApp(liste_files);
+            Visionneuse vision = new Visionneuse(liste_files);
             vision.setVisible(true);
 
         } else {
@@ -493,7 +508,12 @@ public class VoirExam extends javax.swing.JPanel {
         //Reset the file chooser for the next time it's shown.
         fc.setSelectedFile(null);
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_boutonComparerImageActionPerformed
+
+    private void visualisation3DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualisation3DActionPerformed
+       String chemin = System.getProperty("user.home") + "/Dropbox/projet_SIS/PACS/" + "dateExamen_nom_prenom";
+        SliderDemo.createAndShowGUI(chemin);
+    }//GEN-LAST:event_visualisation3DActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -502,13 +522,13 @@ public class VoirExam extends javax.swing.JPanel {
     private javax.swing.JLabel Label3;
     private javax.swing.JLabel Label4;
     private javax.swing.JTextArea area_apercu;
+    private javax.swing.JButton boutonComparerImage;
     private javax.swing.JButton button_imp_ok;
     private javax.swing.JTextPane compte_rendu;
     private javax.swing.JLabel date_label;
     private javax.swing.JDialog fen_confirmer_imp;
     private javax.swing.JLabel id_label;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -522,5 +542,6 @@ public class VoirExam extends javax.swing.JPanel {
     private javax.swing.JButton save_button;
     private javax.swing.JLabel title_label;
     private javax.swing.JLabel type_label;
+    private javax.swing.JButton visualisation3D;
     // End of variables declaration//GEN-END:variables
 }

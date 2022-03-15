@@ -136,7 +136,7 @@ public class Test_2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Test().setVisible(true);
+                new Test_2().setVisible(true);
             }
         });
     }

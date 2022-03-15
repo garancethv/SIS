@@ -114,5 +114,5 @@ public class ImagePreview extends JComponent
             }
             thumbnail.paintIcon(this, g, x, y);
         }
-    }
+    }  
 }
