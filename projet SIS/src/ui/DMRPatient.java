@@ -30,59 +30,55 @@ public class DMRPatient extends javax.swing.JPanel {
     JTabbedPane Onglets;
     Personnel user;
     private ArrayList<Examen> examens;
-    int ligne=-1;
+    int ligne = -1;
     DMR dmr;
-    
+
     public DMRPatient() {
         initComponents();
     }
-    
 
     public DMRPatient(JTabbedPane pane, Personnel user, DMR dmr) {
         initComponents();
-        this.dmr=dmr;
-        Onglets=pane;
-        examens=dmr.getExamens();
-        this.user=user;
-        
+        this.dmr = dmr;
+        Onglets = pane;
+        examens = dmr.getExamens();
+        this.user = user;
+
         nom_patient.setText(dmr.getNomPatient());
         prenom_patient.setText(dmr.getPrenomPatient());
-        
+
         Date date = dmr.getDateNaissance();
         date_naissance.setText(DMR.format_date(date));
-        
+
         id.setText(String.valueOf(dmr.getId()));
-        
-        String genre="";
-        if (dmr.getGenre()==Genre.H) {
-            genre="Homme";
-        }
-        else if (dmr.getGenre()==Genre.F) {
-            genre="Femme";
-        }
-        else {
-            genre="Autre";
+
+        String genre = "";
+        if (dmr.getGenre() == Genre.H) {
+            genre = "Homme";
+        } else if (dmr.getGenre() == Genre.F) {
+            genre = "Femme";
+        } else {
+            genre = "Autre";
         }
         genre_patient.setText(genre);
-        
-        tel_label.setText("0"+String.valueOf(dmr.getTel()));
+
+        tel_label.setText("0" + String.valueOf(dmr.getTel()));
         adresse.setText(dmr.getAdresse());
-        ville.setText(dmr.getCodePostal()+" "+dmr.getVille());
-        
+        ville.setText(dmr.getCodePostal() + " " + dmr.getVille());
+
         erreur_exam.setVisible(false);
-           
+
         DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
         // examens triés du plus ancien ou plus récent dans la BD donc il suffit de parcourir la liste en sens inverse
-        for (int i=examens.size()-1; i>=0; i--) {
+        for (int i = examens.size() - 1; i >= 0; i--) {
             try {
                 Personnel p = requetesbd.utilisateur(requetesbd.connexionBD(), examens.get(i).getIdPhRespo());
-                String ph="Dr "+p.getPrenom()+" "+p.getNom();
-                model.insertRow(model.getRowCount(), new Object[]{DMR.format_date(examens.get(i).getDate()),examens.get(i).getTypeExamen(),ph});
-            }
-            catch(Exception e) {
+                String ph = "Dr " + p.getPrenom() + " " + p.getNom();
+                model.insertRow(model.getRowCount(), new Object[]{DMR.format_date(examens.get(i).getDate()), examens.get(i).getTypeExamen(), ph});
+            } catch (Exception e) {
             }
         }
-        
+
         // Restrictions : secrétaire ne peut pas ajouter un examen
         if (user.getClass().equals(Secretaire.class)) {
             new_exam.setVisible(false);
@@ -372,27 +368,31 @@ public class DMRPatient extends javax.swing.JPanel {
             .addComponent(dmr_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void selection_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selection_buttonActionPerformed
-        
-       if (ligne>-1) {
+
+        if (ligne > -1) {
             ouvreExam();
-       }
-       else {
-           erreur_exam.setVisible(true);
-       }
+        } else {
+            erreur_exam.setVisible(true);
+        }
     }//GEN-LAST:event_selection_buttonActionPerformed
 
     private void ouvreExam() {
-            // Besoin d'une fction recherche d'un exam avec id patient & date exam
-            
-            Examen ex = examens.get(examens.size()-1-ligne);
-            
+        // Besoin d'une fonction recherche d'un exam avec id patient & date exam
+
+        Examen ex = examens.get(examens.size() - 1 - ligne);
+        
+        //si l'examen n'est pas déjà ouvert, on ouvre un nouvel onglet
+        int index = Onglets.indexOfTab("           " + ex.getTypeExamen().toString() + " (" + ex.getDate() + ")        ");
+        
+        if (index == -1) {
+
             // Ouvre un nouvel onglet avec l'examen sélectionné
-            javax.swing.JPanel exam_panel=new VoirExam(dmr,user,ex);
+            javax.swing.JPanel exam_panel = new VoirExam(dmr, user, ex);
 
             // ajoute un nouvel onglet
-            Onglets.addTab("           "+ex.getTypeExamen().toString()+"        ",exam_panel);
+            Onglets.insertTab("           " + ex.getTypeExamen().toString() + " (" + ex.getDate() + ")        ",null, exam_panel,null,Onglets.getSelectedIndex()+1);
             Onglets.setSelectedComponent(exam_panel);
 
             // création d'un bouton pour fermer l'onglet
@@ -400,33 +400,38 @@ public class DMRPatient extends javax.swing.JPanel {
 
             // ajout du bouton
             Onglets.setTabComponentAt(Onglets.getSelectedIndex(), close_button);
+        } 
+        // sinon on va sur l'onglet de l'examen en question
+        else {
+            Onglets.setSelectedIndex(index);
+        }
     }
-    
+
     private void table_examsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_examsMouseClicked
         erreur_exam.setVisible(false);
         ligne = table_exams.getSelectedRow();
         //System.out.println(ligne);
-                
-        if(evt.getClickCount()==2 && ligne>-1){
+
+        if (evt.getClickCount() == 2 && ligne > -1) {
             ouvreExam();
         }
     }//GEN-LAST:event_table_examsMouseClicked
 
     private void new_examActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_examActionPerformed
-            erreur_exam.setVisible(false);
-            
-            // Ouvre un nouvel onglet ajout d'exam
-            javax.swing.JPanel exam_panel=new NewExam(this,user);
+        erreur_exam.setVisible(false);
 
-            // ajoute un nouvel onglet
-            Onglets.addTab("        Ajouter un Examen      ",exam_panel);
-            Onglets.setSelectedComponent(exam_panel);
+        // Ouvre un nouvel onglet ajout d'exam
+        javax.swing.JPanel exam_panel = new NewExam(this, user);
 
-            // création d'un bouton pour fermer l'onglet
-            CloseButton close_button = new CloseButton(Onglets);
+        // on insert un nouvel onglet après le DMR auquel il faut ajouter l'examen
+        Onglets.insertTab("        Ajouter un Examen      ",null, exam_panel, null, Onglets.getSelectedIndex()+1);
+        Onglets.setSelectedComponent(exam_panel);
 
-            // ajout du bouton
-            Onglets.setTabComponentAt(Onglets.getSelectedIndex(), close_button);
+        // création d'un bouton pour fermer l'onglet
+        CloseButton close_button = new CloseButton(Onglets);
+
+        // ajout du bouton
+        Onglets.setTabComponentAt(Onglets.getSelectedIndex(), close_button);
     }//GEN-LAST:event_new_examActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -434,20 +439,19 @@ public class DMRPatient extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseClicked
 
     public void maj_exam(DMR maj) {
-        examens=maj.getExamens();
-        DefaultTableModel model = (DefaultTableModel)table_exams.getModel(); 
-        int rows = model.getRowCount(); 
-        for(int i = rows - 1; i >=0; i--){
-            model.removeRow(i); 
+        examens = maj.getExamens();
+        DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
+        int rows = model.getRowCount();
+        for (int i = rows - 1; i >= 0; i--) {
+            model.removeRow(i);
         }
-        for (int i=examens.size()-1; i>=0; i--) {
+        for (int i = examens.size() - 1; i >= 0; i--) {
             try {
                 Personnel p = requetesbd.utilisateur(requetesbd.connexionBD(), examens.get(i).getIdPhRespo());
-                String ph="Dr "+p.getPrenom()+" "+p.getNom();
-                model.insertRow(model.getRowCount(), new Object[]{DMR.format_date(examens.get(i).getDate()),examens.get(i).getTypeExamen(),ph});
-            }
-            catch (Exception e) {
-                  System.out.println("Erreur bd");
+                String ph = "Dr " + p.getPrenom() + " " + p.getNom();
+                model.insertRow(model.getRowCount(), new Object[]{DMR.format_date(examens.get(i).getDate()), examens.get(i).getTypeExamen(), ph});
+            } catch (Exception e) {
+                System.out.println("Erreur bd");
             }
         }
     }

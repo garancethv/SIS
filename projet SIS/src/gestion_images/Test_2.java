@@ -93,7 +93,7 @@ public class Test_2 extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File[] liste_files = fc.getSelectedFiles();
             int i = 19;
-            IconDemoApp vision = new IconDemoApp(liste_files);
+            IconDemoApp vision = new IconDemoApp(liste_files,"");
             vision.setVisible(true);
             
         } else {
