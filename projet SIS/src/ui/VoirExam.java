@@ -10,6 +10,7 @@ import gestion_images.IconDemoApp;
 import gestion_images.ImageFileView;
 import gestion_images.ImageFilter;
 import gestion_images.ImagePreview;
+import gestion_images.SliderDemo;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -31,6 +32,7 @@ public class VoirExam extends javax.swing.JPanel {
      */
     Examen ex;
     Personnel user;
+    String chemin;
 
     public VoirExam() {
         initComponents();
@@ -38,8 +40,14 @@ public class VoirExam extends javax.swing.JPanel {
 
     public VoirExam(DMR dmr, Personnel user, Examen ex) {
         initComponents();
-        
-        this.user=user;
+
+        //le chemin du PACS
+        this.chemin = System.getProperty("user.home") + "/Dropbox/projet_SIS/PACS/" + ex.getDate().getDay() + ex.getDate().getMonth() + ex.getDate().getYear() + ex.getDate().getTime();
+
+        //création du dossier examen dans le PACS s'il n'existe pas déjà
+        new File(chemin).mkdirs();
+
+        this.user = user;
 
         fen_confirmer_imp.setLocationRelativeTo(null);
 
@@ -76,14 +84,23 @@ public class VoirExam extends javax.swing.JPanel {
         } else {
             compte_rendu.setEditable(true);
         }
-        
+
         // Restrictions :
         // Seul PH peut ajouter / voir le cr
-        
         if (!user.getClass().equals(nf.PH.class)) {
             jLabel10.setVisible(false);
             jScrollPane1.setVisible(false);
             print_button.setVisible(false);
+        }
+
+        //Les boutons de visualisation sont seulement accessibles s'il y a des images dans le dossier d'examen du PACS
+        boutonAjouterImages.setVisible(true);
+        if (new File(chemin).listFiles().length != 0) {
+            visualiserImagesSélectionnees.setVisible(true);
+            visualisation3D.setVisible(true);
+        } else {
+            visualiserImagesSélectionnees.setVisible(false);
+            visualisation3D.setVisible(false);
         }
     }
 
@@ -119,8 +136,9 @@ public class VoirExam extends javax.swing.JPanel {
         pacs_label = new javax.swing.JLabel();
         save_button = new javax.swing.JButton();
         print_button = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        boutonAjouterImages = new javax.swing.JButton();
+        visualiserImagesSélectionnees = new javax.swing.JButton();
+        visualisation3D = new javax.swing.JButton();
 
         fen_confirmer_imp.setSize(new java.awt.Dimension(800, 750));
 
@@ -239,17 +257,24 @@ public class VoirExam extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Ajouter images numérisées");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        boutonAjouterImages.setText("Ajouter images numérisées");
+        boutonAjouterImages.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                boutonAjouterImagesActionPerformed(evt);
             }
         });
 
-        jButton2.setText("visualiser images numérisées");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        visualiserImagesSélectionnees.setText("visualiser images numérisées");
+        visualiserImagesSélectionnees.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                visualiserImagesSélectionneesActionPerformed(evt);
+            }
+        });
+
+        visualisation3D.setText("visualisation 3D");
+        visualisation3D.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visualisation3DActionPerformed(evt);
             }
         });
 
@@ -267,9 +292,11 @@ public class VoirExam extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addComponent(pacs_label)
                             .addGap(18, 18, 18)
-                            .addComponent(jButton1)
+                            .addComponent(boutonAjouterImages)
                             .addGap(66, 66, 66)
-                            .addComponent(jButton2))
+                            .addComponent(visualiserImagesSélectionnees)
+                            .addGap(77, 77, 77)
+                            .addComponent(visualisation3D))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(Label3)
                             .addGap(18, 18, 18)
@@ -315,8 +342,9 @@ public class VoirExam extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pacs_label_1)
                     .addComponent(pacs_label)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(boutonAjouterImages)
+                    .addComponent(visualiserImagesSélectionnees)
+                    .addComponent(visualisation3D))
                 .addGap(32, 32, 32)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
@@ -417,10 +445,7 @@ public class VoirExam extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_button_imp_okActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        String chemin = System.getProperty("user.home") + "/Dropbox/projet_SIS/PACS/" + ex.getDate().getTime();
-        new File(chemin).mkdirs();
+    private void boutonAjouterImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonAjouterImagesActionPerformed
 
         //Set up the file chooser.
         JFileChooser fc = new JFileChooser(System.getProperty("user.home") + "/Documents/IMAGES_SCANNEES");
@@ -443,15 +468,15 @@ public class VoirExam extends javax.swing.JPanel {
         //Process the results.
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File[] liste_files = fc.getSelectedFiles();
-//            int i = 19;
+            //Pour toutes les images sélectionnées on les déplace dans le dossier du PACS
             for (File file : liste_files) {
-//            
+
                 try {
                     Path source = file.toPath();
-                    Path dest = Paths.get(chemin + "/" + file.getName());
+                    Path dest = Paths.get(chemin + "/" + file.getName()); // nouveau path de l'image
 
-                    Files.move(source, dest);
-//                    i++;
+                    Files.move(source, dest); // déplacement de l'image
+
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -460,20 +485,24 @@ public class VoirExam extends javax.swing.JPanel {
                         + ".");
 
             }
+            //si on a bien ajouter des images dans le dossier du PACS alors on peut les visualiser
+            if (new File(chemin).listFiles().length != 0) {
+                visualiserImagesSélectionnees.setVisible(true);
+                visualisation3D.setVisible(true);
+            }
         } else {
             System.out.println("Attachment cancelled by user.");
         }
 
         //Reset the file chooser for the next time it's shown.
         fc.setSelectedFile(null);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_boutonAjouterImagesActionPerformed
 
-        String chemin = System.getProperty("user.home") + "/Dropbox/projet_SIS/PACS/" + "dateExamen_nom_prenom";
+    private void visualiserImagesSélectionneesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualiserImagesSélectionneesActionPerformed
 
         //Set up the file chooser.
-        JFileChooser fc = new JFileChooser(System.getProperty("user.home") + "/Dropbox/projet_SIS/PACS/" + "dateExamen_nom_prenom");
+        JFileChooser fc = new JFileChooser(chemin);
         fc.setMultiSelectionEnabled(true);
 
         //Add a custom file filter and disable the default
@@ -494,8 +523,8 @@ public class VoirExam extends javax.swing.JPanel {
         //Process the results.
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File[] liste_files = fc.getSelectedFiles();
-            int i = 19;
-            IconDemoApp vision = new IconDemoApp(liste_files);
+            //On visualise les images sélectionnées pour les comparer
+            IconDemoApp vision = new IconDemoApp(liste_files, title_label.getText());
             vision.setVisible(true);
 
         } else {
@@ -505,7 +534,12 @@ public class VoirExam extends javax.swing.JPanel {
         //Reset the file chooser for the next time it's shown.
         fc.setSelectedFile(null);
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_visualiserImagesSélectionneesActionPerformed
+
+    private void visualisation3DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualisation3DActionPerformed
+        //on visualise les images en profondeur ==visualisation de toutes les images du dossier examen du PACS
+        SliderDemo.createAndShowGUI(chemin);
+    }//GEN-LAST:event_visualisation3DActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -514,13 +548,12 @@ public class VoirExam extends javax.swing.JPanel {
     private javax.swing.JLabel Label3;
     private javax.swing.JLabel Label4;
     private javax.swing.JTextArea area_apercu;
+    private javax.swing.JButton boutonAjouterImages;
     private javax.swing.JButton button_imp_ok;
     private javax.swing.JTextPane compte_rendu;
     private javax.swing.JLabel date_label;
     private javax.swing.JDialog fen_confirmer_imp;
     private javax.swing.JLabel id_label;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -534,5 +567,7 @@ public class VoirExam extends javax.swing.JPanel {
     private javax.swing.JButton save_button;
     private javax.swing.JLabel title_label;
     private javax.swing.JLabel type_label;
+    private javax.swing.JButton visualisation3D;
+    private javax.swing.JButton visualiserImagesSélectionnees;
     // End of variables declaration//GEN-END:variables
 }

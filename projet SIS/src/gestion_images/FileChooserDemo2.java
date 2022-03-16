@@ -36,12 +36,8 @@ import java.awt.event.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
-import javax.swing.filechooser.*;
 
 /*
  * FileChooserDemo2.java requires these files:

@@ -326,8 +326,8 @@ public class NewExam extends javax.swing.JPanel {
                 Examen ex=ajout_exam.getExamens().get(ajout_exam.getExamens().size()-1);
                 javax.swing.JPanel exam_panel=new VoirExam(ajout_exam,user,ex);
 
-                // ajoute un nouvel onglet
-                Onglets.addTab("           "+ex.getTypeExamen().toString()+"        ",exam_panel);
+                // insertion d'un nouvel onglet après la page de l'examen 
+                Onglets.insertTab("           " + ex.getTypeExamen().toString() + " (" + ex.getDate() + ")        ",null,exam_panel,null,Onglets.getSelectedIndex()+1);
                 Onglets.setSelectedComponent(exam_panel);
 
                 // création d'un bouton pour fermer l'onglet
