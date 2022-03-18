@@ -13,6 +13,7 @@ import nf.DMR;
 import nf.Examen;
 import nf.Genre;
 import nf.PH;
+import nf.Personnel;
 import nf.TypeExamen;
 
 /**
@@ -28,9 +29,12 @@ public class NewExam extends javax.swing.JPanel {
     DMR dmr;
     DMRPatient dmr_pane;
     JTabbedPane Onglets;
+    Personnel user;
     
-    public NewExam(DMRPatient dmr_pane) {
+    public NewExam(DMRPatient dmr_pane, Personnel user) {
         initComponents();
+        
+        this.user=user;
         
         this.dmr_pane=dmr_pane;
         this.Onglets=dmr_pane.Onglets;
@@ -38,6 +42,17 @@ public class NewExam extends javax.swing.JPanel {
         
         erreur_ph.setVisible(false);
         save_button.setVisible(false);
+        
+        // Restrictions :
+        // si PH : idPH déjà renseigné
+        // si manip radio : ne peut pas rajouter CR
+        
+        if (user.getClass().equals(nf.PH.class) || user.getClass().equals(nf.Interne.class)) {
+            ph_field.setText(String.valueOf(user.getId()));
+        }
+        else {
+            add_cr_button.setVisible(false);
+        }
     }
 
     /**
@@ -63,7 +78,7 @@ public class NewExam extends javax.swing.JPanel {
         erreur_ph = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        type_field = new javax.swing.JComboBox<String>();
+        type_field = new javax.swing.JComboBox<>();
         valider_button = new javax.swing.JButton();
         add_cr_button = new javax.swing.JButton();
 
@@ -145,6 +160,12 @@ public class NewExam extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(170, 0, 0));
         jLabel6.setText("Id du PH responsable :");
 
+        ph_field.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ph_fieldMouseExited(evt);
+            }
+        });
+
         erreur_ph.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         erreur_ph.setForeground(new java.awt.Color(149, 46, 46));
         erreur_ph.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
@@ -181,7 +202,7 @@ public class NewExam extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(170, 0, 0));
         jLabel7.setText("Type d'examen :");
 
-        type_field.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "IRM", "RADIOGRAPHIE", "SCANNER" }));
+        type_field.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IRM", "RADIOGRAPHIE", "SCANNER" }));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -272,8 +293,7 @@ public class NewExam extends javax.swing.JPanel {
     private void valider_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valider_buttonActionPerformed
         // Conditions avant de valider :
         // Tous les champs sont remplis
-        // idPH est bien un entier et correspond bien à un PH (à faire)
-        // numPacs est bien un entier et correspond bien à un num pacs (à faire)
+        // idPH est bien un entier et correspond bien à un PH
         
         String idPH= ph_field.getText();
         String type_ex= type_field.getSelectedItem().toString();
@@ -296,12 +316,25 @@ public class NewExam extends javax.swing.JPanel {
                 int id=Integer.valueOf(idPH);
                 DMR ajout_exam=requetesbd.creationExamen(requetesbd.connexionBD(), dmr, Integer.valueOf(idPH), type, 0, cr);
                 
-                
                 //met à jour DMR Patient
                 dmr_pane.maj_exam(ajout_exam);
 
                 // ferme l'onglet
                 Onglets.remove(this);
+                
+                //ouvre l'examen crée - 1er dans la liste (si triée par date croissante)
+                Examen ex=ajout_exam.getExamens().get(ajout_exam.getExamens().size()-1);
+                javax.swing.JPanel exam_panel=new VoirExam(ajout_exam,user,ex);
+
+                // insertion d'un nouvel onglet après la page de l'examen 
+                Onglets.insertTab("           " + ex.getTypeExamen().toString() + " (" + ex.getDate() + ")        ",null,exam_panel,null,Onglets.getSelectedIndex()+1);
+                Onglets.setSelectedComponent(exam_panel);
+
+                // création d'un bouton pour fermer l'onglet
+                CloseButton close_button = new CloseButton(Onglets);
+
+                // ajout du bouton
+                Onglets.setTabComponentAt(Onglets.getSelectedIndex(), close_button);
             }
             catch (Exception e) {
                 erreur_ph.setVisible(true);
@@ -332,6 +365,10 @@ public class NewExam extends javax.swing.JPanel {
     private void cr_fieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cr_fieldKeyTyped
         save_button.setVisible(true);
     }//GEN-LAST:event_cr_fieldKeyTyped
+
+    private void ph_fieldMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ph_fieldMouseExited
+        System.out.println("MouseExited");
+    }//GEN-LAST:event_ph_fieldMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,6 +6,8 @@
 package ui;
 
 import BD.requetesbd;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JTabbedPane;
@@ -14,6 +16,7 @@ import nf.DMR;
 import nf.Examen;
 import nf.Genre;
 import nf.Personnel;
+import nf.Secretaire;
 
 /**
  *
@@ -25,56 +28,60 @@ public class DMRPatient extends javax.swing.JPanel {
      * Creates new form DMRPatient
      */
     JTabbedPane Onglets;
+    Personnel user;
     private ArrayList<Examen> examens;
-    int ligne=-1;
+    int ligne = -1;
     DMR dmr;
-    
+
     public DMRPatient() {
         initComponents();
     }
-    
-    public DMRPatient(JTabbedPane pane, DMR dmr) {
+
+    public DMRPatient(JTabbedPane pane, Personnel user, DMR dmr) {
         initComponents();
-        this.dmr=dmr;
-        Onglets=pane;
-        examens=dmr.getExamens();
-        
+        this.dmr = dmr;
+        Onglets = pane;
+        examens = dmr.getExamens();
+        this.user = user;
+
         nom_patient.setText(dmr.getNomPatient());
         prenom_patient.setText(dmr.getPrenomPatient());
-        
+
         Date date = dmr.getDateNaissance();
         date_naissance.setText(DMR.format_date(date));
-        
+
         id.setText(String.valueOf(dmr.getId()));
-        
-        String genre="";
-        if (dmr.getGenre()==Genre.H) {
-            genre="Homme";
-        }
-        else if (dmr.getGenre()==Genre.F) {
-            genre="Femme";
-        }
-        else {
-            genre="Autre";
+
+        String genre = "";
+        if (dmr.getGenre() == Genre.H) {
+            genre = "Homme";
+        } else if (dmr.getGenre() == Genre.F) {
+            genre = "Femme";
+        } else {
+            genre = "Autre";
         }
         genre_patient.setText(genre);
-        
-        tel_label.setText("0"+String.valueOf(dmr.getTel()));
+
+        tel_label.setText("0" + String.valueOf(dmr.getTel()));
         adresse.setText(dmr.getAdresse());
-        ville.setText(dmr.getCodePostal()+" "+dmr.getVille());
-        
+        ville.setText(dmr.getCodePostal() + " " + dmr.getVille());
+
         erreur_exam.setVisible(false);
-           
+
         DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
         // examens triés du plus ancien ou plus récent dans la BD donc il suffit de parcourir la liste en sens inverse
-        for (int i=examens.size()-1; i>=0; i--) {
+        for (int i = examens.size() - 1; i >= 0; i--) {
             try {
                 Personnel p = requetesbd.utilisateur(requetesbd.connexionBD(), examens.get(i).getIdPhRespo());
-                String ph="Dr "+p.getPrenom()+" "+p.getNom();
-                model.insertRow(model.getRowCount(), new Object[]{DMR.format_date(examens.get(i).getDate()),examens.get(i).getTypeExamen(),ph});
+                String ph = "Dr " + p.getPrenom() + " " + p.getNom();
+                model.insertRow(model.getRowCount(), new Object[]{DMR.format_date(examens.get(i).getDate()), examens.get(i).getTypeExamen(), ph});
+            } catch (Exception e) {
             }
-            catch(Exception e) {
-            }
+        }
+
+        // Restrictions : secrétaire ne peut pas ajouter un examen
+        if (user.getClass().equals(Secretaire.class)) {
+            new_exam.setVisible(false);
         }
     }
 
@@ -107,6 +114,7 @@ public class DMRPatient extends javax.swing.JPanel {
         exams = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_exams = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         new_exam = new javax.swing.JButton();
         selection_button = new javax.swing.JButton();
         erreur_exam = new javax.swing.JLabel();
@@ -120,13 +128,13 @@ public class DMRPatient extends javax.swing.JPanel {
         id_patient_panel.setBackground(new java.awt.Color(255, 255, 255));
         id_patient_panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Patient"));
 
-        jLabel8.setText("Nom :");
+        jLabel8.setText("Nom -----------------------");
 
-        jLabel9.setText("Prénom :");
+        jLabel9.setText("Prénom --------------------");
 
-        jLabel10.setText("Date de naissance :");
+        jLabel10.setText("Date de naissance --------");
 
-        jLabel14.setText("N° Identifiant :");
+        jLabel14.setText("N° id -----------------------");
 
         nom_patient.setText("John");
 
@@ -136,15 +144,15 @@ public class DMRPatient extends javax.swing.JPanel {
 
         id.setText("JLabel");
 
-        jLabel1.setText("Genre :");
+        jLabel1.setText("Genre ----------------------");
 
         genre_patient.setText("Inconnu");
 
-        jLabel2.setText("Téléphone :");
+        jLabel2.setText("Téléphone -----------------");
 
         tel_label.setText("0781808779");
 
-        jLabel4.setText("Adresse :");
+        jLabel4.setText("Adresse --------------------");
 
         adresse.setText("14, place du Conseil National de la Résistance");
 
@@ -157,72 +165,73 @@ public class DMRPatient extends javax.swing.JPanel {
             .addGroup(id_patient_panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(id_patient_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(date_naissance))
-                    .addGroup(id_patient_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(prenom_patient))
-                    .addGroup(id_patient_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(nom_patient))
-                    .addGroup(id_patient_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(id))
-                    .addGroup(id_patient_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(genre_patient))
-                    .addGroup(id_patient_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(tel_label))
-                    .addGroup(id_patient_panelLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
                         .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ville)
-                            .addComponent(adresse))))
-                .addContainerGap(73, Short.MAX_VALUE))
+                            .addGroup(id_patient_panelLayout.createSequentialGroup()
+                                .addComponent(prenom_patient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(56, 56, 56))
+                            .addGroup(id_patient_panelLayout.createSequentialGroup()
+                                .addComponent(nom_patient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(50, 50, 50))
+                            .addGroup(id_patient_panelLayout.createSequentialGroup()
+                                .addComponent(id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(10, 10, 10))
+                            .addComponent(date_naissance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(269, 269, 269))
+                    .addGroup(id_patient_panelLayout.createSequentialGroup()
+                        .addComponent(genre_patient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(295, 295, 295))
+                    .addGroup(id_patient_panelLayout.createSequentialGroup()
+                        .addComponent(tel_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(263, 263, 263))
+                    .addGroup(id_patient_panelLayout.createSequentialGroup()
+                        .addComponent(adresse, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(ville, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         id_patient_panelLayout.setVerticalGroup(
             id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(id_patient_panelLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(id))
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(nom_patient))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nom_patient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(prenom_patient))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(prenom_patient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(date_naissance))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(date_naissance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(genre_patient))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(genre_patient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tel_label))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tel_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(id_patient_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(adresse))
-                .addGap(6, 6, 6)
-                .addComponent(ville)
-                .addGap(31, 31, 31))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(adresse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ville, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
 
         exams.setBackground(new java.awt.Color(255, 255, 255));
@@ -258,7 +267,7 @@ public class DMRPatient extends javax.swing.JPanel {
             examsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(examsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
                 .addContainerGap())
         );
         examsLayout.setVerticalGroup(
@@ -293,79 +302,97 @@ public class DMRPatient extends javax.swing.JPanel {
         erreur_exam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
         erreur_exam.setText("Aucun examen n'est sélectionné.");
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(new_exam, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selection_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(erreur_exam, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(new_exam)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selection_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(erreur_exam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout dmr_panelLayout = new javax.swing.GroupLayout(dmr_panel);
         dmr_panel.setLayout(dmr_panelLayout);
         dmr_panelLayout.setHorizontalGroup(
             dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dmr_panelLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(140, 140, 140)
-                .addComponent(exams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
                 .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(new_exam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(selection_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(dmr_panelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(erreur_exam)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                        .addGap(141, 141, 141)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(exams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         dmr_panelLayout.setVerticalGroup(
             dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dmr_panelLayout.createSequentialGroup()
-                .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dmr_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(exams, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(dmr_panelLayout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(exams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(dmr_panelLayout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(new_exam)
-                        .addGap(26, 26, 26)
-                        .addComponent(selection_button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(id_patient_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(erreur_exam)))
-                .addGap(68, 68, 68))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(dmr_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(dmr_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(dmr_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(dmr_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void selection_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selection_buttonActionPerformed
-        
-       if (ligne>-1) {
+
+        if (ligne > -1) {
             ouvreExam();
-       }
-       else {
-           erreur_exam.setVisible(true);
-       }
+        } else {
+            erreur_exam.setVisible(true);
+        }
     }//GEN-LAST:event_selection_buttonActionPerformed
 
     private void ouvreExam() {
-            // Besoin d'une fction recherche d'un exam avec id patient & date exam
-            Examen ex = examens.get(examens.size()-1-ligne);
-            // Ouvre un nouvel onglet avec l'examen sélectionné
+        // Besoin d'une fonction recherche d'un exam avec id patient & date exam
 
-            javax.swing.JPanel exam_panel=new VoirExam(dmr,ex);
+        Examen ex = examens.get(examens.size() - 1 - ligne);
+        
+        //si l'examen n'est pas déjà ouvert, on ouvre un nouvel onglet
+        int index = Onglets.indexOfTab("           " + ex.getTypeExamen().toString() + " (" + ex.getDate() + ")        ");
+        
+        if (index == -1) {
+
+            // Ouvre un nouvel onglet avec l'examen sélectionné
+            javax.swing.JPanel exam_panel = new VoirExam(dmr, user, ex);
 
             // ajoute un nouvel onglet
-            Onglets.addTab("           "+ex.getTypeExamen().toString()+"        ",exam_panel);
+            Onglets.insertTab("           " + ex.getTypeExamen().toString() + " (" + ex.getDate() + ")        ",null, exam_panel,null,Onglets.getSelectedIndex()+1);
             Onglets.setSelectedComponent(exam_panel);
 
             // création d'un bouton pour fermer l'onglet
@@ -373,33 +400,38 @@ public class DMRPatient extends javax.swing.JPanel {
 
             // ajout du bouton
             Onglets.setTabComponentAt(Onglets.getSelectedIndex(), close_button);
+        } 
+        // sinon on va sur l'onglet de l'examen en question
+        else {
+            Onglets.setSelectedIndex(index);
+        }
     }
-    
+
     private void table_examsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_examsMouseClicked
         erreur_exam.setVisible(false);
         ligne = table_exams.getSelectedRow();
         //System.out.println(ligne);
-                
-        if(evt.getClickCount()==2 && ligne>-1){
+
+        if (evt.getClickCount() == 2 && ligne > -1) {
             ouvreExam();
         }
     }//GEN-LAST:event_table_examsMouseClicked
 
     private void new_examActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_examActionPerformed
-            erreur_exam.setVisible(false);
-            
-            // Ouvre un nouvel onglet ajout d'exam
-            javax.swing.JPanel exam_panel=new NewExam(this);
+        erreur_exam.setVisible(false);
 
-            // ajoute un nouvel onglet
-            Onglets.addTab("        Ajouter un Examen      ",exam_panel);
-            Onglets.setSelectedComponent(exam_panel);
+        // Ouvre un nouvel onglet ajout d'exam
+        javax.swing.JPanel exam_panel = new NewExam(this, user);
 
-            // création d'un bouton pour fermer l'onglet
-            CloseButton close_button = new CloseButton(Onglets);
+        // on insert un nouvel onglet après le DMR auquel il faut ajouter l'examen
+        Onglets.insertTab("        Ajouter un Examen      ",null, exam_panel, null, Onglets.getSelectedIndex()+1);
+        Onglets.setSelectedComponent(exam_panel);
 
-            // ajout du bouton
-            Onglets.setTabComponentAt(Onglets.getSelectedIndex(), close_button);
+        // création d'un bouton pour fermer l'onglet
+        CloseButton close_button = new CloseButton(Onglets);
+
+        // ajout du bouton
+        Onglets.setTabComponentAt(Onglets.getSelectedIndex(), close_button);
     }//GEN-LAST:event_new_examActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -407,14 +439,20 @@ public class DMRPatient extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseClicked
 
     public void maj_exam(DMR maj) {
-        examens=maj.getExamens();
-        DefaultTableModel model = (DefaultTableModel)table_exams.getModel(); 
-        int rows = model.getRowCount(); 
-        for(int i = rows - 1; i >=0; i--){
-            model.removeRow(i); 
+        examens = maj.getExamens();
+        DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
+        int rows = model.getRowCount();
+        for (int i = rows - 1; i >= 0; i--) {
+            model.removeRow(i);
         }
-        for (int i=examens.size()-1; i>=0; i--) {
-            model.insertRow(model.getRowCount(), new Object[]{DMR.format_date(examens.get(i).getDate()),examens.get(i).getTypeExamen(),String.valueOf(examens.get(i).getIdPhRespo())});
+        for (int i = examens.size() - 1; i >= 0; i--) {
+            try {
+                Personnel p = requetesbd.utilisateur(requetesbd.connexionBD(), examens.get(i).getIdPhRespo());
+                String ph = "Dr " + p.getPrenom() + " " + p.getNom();
+                model.insertRow(model.getRowCount(), new Object[]{DMR.format_date(examens.get(i).getDate()), examens.get(i).getTypeExamen(), ph});
+            } catch (Exception e) {
+                System.out.println("Erreur bd");
+            }
         }
     }
 
@@ -434,6 +472,7 @@ public class DMRPatient extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton new_exam;
     private javax.swing.JLabel nom_patient;
