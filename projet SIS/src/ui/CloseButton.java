@@ -27,8 +27,7 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */ 
-
+ */
 package ui;
 
 import javax.swing.*;
@@ -38,11 +37,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Component to be used as tabComponent;
- * Contains a JLabel to show the text and 
- * a JButton to close the tab it belongs to 
- */ 
+ * Component to be used as tabComponent; Contains a JLabel to show the text and
+ * a JButton to close the tab it belongs to
+ */
 public class CloseButton extends JPanel {
+
     private final JTabbedPane pane;
 
     public CloseButton(final JTabbedPane pane) {
@@ -53,7 +52,7 @@ public class CloseButton extends JPanel {
         }
         this.pane = pane;
         setOpaque(false);
-        
+
         //make JLabel read titles from JTabbedPane
         JLabel label = new JLabel() {
             public String getText() {
@@ -64,7 +63,7 @@ public class CloseButton extends JPanel {
                 return null;
             }
         };
-        
+
         add(label);
         //add more space between the label and the button
         label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
@@ -76,6 +75,7 @@ public class CloseButton extends JPanel {
     }
 
     private class TabButton extends JButton implements ActionListener {
+
         public TabButton() {
             int size = 17;
             setPreferredSize(new Dimension(size, size));
@@ -99,7 +99,20 @@ public class CloseButton extends JPanel {
         public void actionPerformed(ActionEvent e) {
             int i = pane.indexOfTabComponent(CloseButton.this);
             if (i != -1) {
-                pane.remove(i);
+                
+                //si l'onglet est un DMR et qu'il y a des onglets d'examen ouverts, on les ferme
+
+                if (!pane.getTitleAt(i).contains("SCANNER") && !pane.getTitleAt(i).contains("RADIOGRAPHIE") && !pane.getTitleAt(i).contains("IRM") && !pane.getTitleAt(i).contains("Ajouter un Examen") && !pane.getTitleAt(i).contains("Création")) {
+                    pane.remove(i);
+//                  
+                    while (i < pane.getTabCount() && (pane.getTitleAt(i).contains("SCANNER") || pane.getTitleAt(i).contains("RADIOGRAPHIE") || pane.getTitleAt(i).contains("IRM") || pane.getTitleAt(i).contains("Ajouter un Examen"))) {
+                        pane.remove(i);
+//                     
+                    }
+                } else {
+                    pane.remove(i);
+                }
+
             }
         }
 

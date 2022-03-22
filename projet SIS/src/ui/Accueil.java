@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ui;
 
 import BD.requetesbd;
@@ -40,33 +39,47 @@ public class Accueil extends javax.swing.JFrame {
      * Creates new form Accueil
      */
     Personnel p;
-    
+
     public Accueil() {
         //initialiser les composants
         try {
             // test PH
-            p = requetesbd.utilisateur(requetesbd.connexionBD(),1234567890);
+            p = requetesbd.utilisateur(requetesbd.connexionBD(), 1234567890);
             // test Secrétaire
             //p = requetesbd.utilisateur(requetesbd.connexionBD(),1234567894);
             // test Manip
+<<<<<<< HEAD
             //p = requetesbd.utilisateur(requetesbd.connexionBD(),1234567893);
+=======
+            // p = requetesbd.utilisateur(requetesbd.connexionBD(),1234567893);
+        } catch (Exception e) {
+>>>>>>> d54b49a39a17b47410065b011126638cce07bb7a
         }
-        catch (Exception e) {}
         initComponents();
-        
+
         //mettre la fenêtre en plein écran
-        welcome_label.setText("Bienvenue "+p.getPrenom());
+        welcome_label.setText("Bienvenue " + p.getPrenom());
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         //this.setSize(size.getSize());
     }
-    
+
     public Accueil(Personnel p) {
         initComponents();
+<<<<<<< HEAD
         this.p=p;
         
         welcome_label.setText("Bienvenue "+p.getPrenom());
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+=======
+        this.p = p;
+
+        welcome_label.setText("Bienvenue " + p.getPrenom());
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        //this.setSize(size.getSize());
+        //this.pack();
+>>>>>>> d54b49a39a17b47410065b011126638cce07bb7a
     }
 
     /**
@@ -85,7 +98,7 @@ public class Accueil extends javax.swing.JFrame {
         erreur_nom = new javax.swing.JLabel();
         loading_nom = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        liste_patients = new javax.swing.JList<>();
+        liste_patients = new javax.swing.JList<String>();
         search_field_nom = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -176,10 +189,10 @@ public class Accueil extends javax.swing.JFrame {
         loading_nom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-chargement-en-cours-48.png"))); // NOI18N
         loading_nom.setText("Chargement en cours");
 
-        liste_patients.setModel(new javax.swing.AbstractListModel<String>() {
+        liste_patients.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         liste_patients.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -340,7 +353,7 @@ public class Accueil extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        logout_jdialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        logout_jdialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         logout_jdialog.setModal(true);
         logout_jdialog.setResizable(false);
         logout_jdialog.setSize(new java.awt.Dimension(485, 250));
@@ -449,25 +462,23 @@ public class Accueil extends javax.swing.JFrame {
         search_panelLayout.setHorizontalGroup(
             search_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(search_panelLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addContainerGap()
                 .addGroup(search_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(search_panelLayout.createSequentialGroup()
-                        .addComponent(search_button_id)
-                        .addGap(18, 18, 18)
-                        .addComponent(search_button_name))
-                    .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(search_button_id)
+                    .addComponent(search_button_name))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         search_panelLayout.setVerticalGroup(
             search_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(search_panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(search_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(search_button_id, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(search_button_name, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(search_button_id, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(search_button_name, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         logout_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-log-out-32.png"))); // NOI18N
@@ -489,7 +500,7 @@ public class Accueil extends javax.swing.JFrame {
                 .addGroup(logout_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(logout_button)
                     .addComponent(jLabel3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
         logout_panelLayout.setVerticalGroup(
             logout_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -516,18 +527,18 @@ public class Accueil extends javax.swing.JFrame {
         newdmr_panelLayout.setHorizontalGroup(
             newdmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(newdmr_panelLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addContainerGap()
                 .addGroup(newdmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(newdmr_button)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(newdmr_button))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         newdmr_panelLayout.setVerticalGroup(
             newdmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newdmr_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(newdmr_button, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -538,24 +549,24 @@ public class Accueil extends javax.swing.JFrame {
             FondLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(top_Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(FondLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(FondLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(search_panel, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
-                    .addComponent(newdmr_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logout_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addComponent(search_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(107, 107, 107)
+                .addComponent(newdmr_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
+                .addComponent(logout_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         FondLayout.setVerticalGroup(
             FondLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FondLayout.createSequentialGroup()
                 .addComponent(top_Pane, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 33, Short.MAX_VALUE)
-                .addComponent(search_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(newdmr_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(logout_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(315, 315, 315))
+                .addGap(128, 128, 128)
+                .addGroup(FondLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(search_panel, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newdmr_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logout_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(471, Short.MAX_VALUE))
         );
 
         Onglets.addTab("             Accueil             ", Fond);
@@ -583,36 +594,43 @@ public class Accueil extends javax.swing.JFrame {
         search_jdialog_id.setVisible(true);
         search_field_id.requestFocusInWindow();
     }//GEN-LAST:event_search_button_idActionPerformed
-    
+
     private void search_id() {
-        String id=search_field_id.getText();
-        
+        String id = search_field_id.getText();
+
         try {
-            DMR dmr=requetesbd.recupDMR(requetesbd.connexionBD(),id);
+            DMR dmr = requetesbd.recupDMR(requetesbd.connexionBD(), id);
             open_dmr(dmr);
             search_jdialog_id.setVisible(false);
-        }
-        catch (Exception e2) {
+        } catch (Exception e2) {
             search_field_id.setText("");
             search_field_id.requestFocusInWindow();
             erreur_id.setVisible(true);
             loading_id.setVisible(false);
         }
     }
-    
+
     private void search_nom() {
+<<<<<<< HEAD
         String prenom=search_field_prénom.getText();
         String nom=search_field_nom.getText();
         jScrollPane1.setVisible(false);
         
         if (!prenom.equals("")) { //recherche nom + prénom
-            try {
-                ArrayList<DMR> dmrs= requetesbd.recupDMRBis(requetesbd.connexionBD(),nom,prenom);
+=======
+        String prenom = search_field_prénom.getText();
+        String nom = search_field_nom.getText();
 
-                if (dmrs.size()==1) {
+        if (!prenom.equals("")) {
+>>>>>>> d54b49a39a17b47410065b011126638cce07bb7a
+            try {
+                ArrayList<DMR> dmrs = requetesbd.recupDMRBis(requetesbd.connexionBD(), nom, prenom);
+
+                if (dmrs.size() == 1) {
                     // si qu'une seule personne correspond : ouvre son DMR
                     open_dmr(requetesbd.recupDMR(requetesbd.connexionBD(), String.valueOf(dmrs.get(0).getId())));
                     search_jdialog_nom.setVisible(false);
+<<<<<<< HEAD
                 }
                 
                 else if (dmrs.size()==0) {
@@ -625,32 +643,38 @@ public class Accueil extends javax.swing.JFrame {
                 }
 
                 else {
+=======
+                } else {
+>>>>>>> d54b49a39a17b47410065b011126638cce07bb7a
                     // si plusieurs personnes ont le même nom / prénom : affiche une liste avec dates de naissance
                     loading_nom.setVisible(false);
                     jScrollPane1.setVisible(true);
                     //search_jdialog.setSize(508, 350);
 
-                    DefaultListModel model= new DefaultListModel();
-                    for(DMR dmr : dmrs) {
-                            model.addElement(dmr);
+                    DefaultListModel model = new DefaultListModel();
+                    for (DMR dmr : dmrs) {
+                        model.addElement(dmr);
                     }
                     liste_patients.setModel(model);
                 }
 
-            }
-
-            catch(Exception e) {
+            } catch (Exception e) {
                 search_field_prénom.setText("");
                 search_field_nom.setText("");
                 search_field_prénom.requestFocusInWindow();
                 erreur_nom.setVisible(true);
                 loading_nom.setVisible(false);
             }
+<<<<<<< HEAD
         }
         else { //recherche avec juste nom
+=======
+        } else {
+>>>>>>> d54b49a39a17b47410065b011126638cce07bb7a
             try {
-                ArrayList<DMR> dmrs= requetesbd.recupDMRTer(requetesbd.connexionBD(),nom);
+                ArrayList<DMR> dmrs = requetesbd.recupDMRTer(requetesbd.connexionBD(), nom);
 
+<<<<<<< HEAD
                 if (dmrs.size()==0) {
                     search_field_prénom.setText("");
                     search_field_nom.setText("");
@@ -660,20 +684,25 @@ public class Accueil extends javax.swing.JFrame {
                 }
 
                 else {
+=======
+                if (dmrs.size() == 1) {
+                    // si qu'une seule personne correspond : ouvre son DMR
+                    open_dmr(requetesbd.recupDMR(requetesbd.connexionBD(), String.valueOf(dmrs.get(0).getId())));
+                    search_jdialog_nom.setVisible(false);
+                } else {
+>>>>>>> d54b49a39a17b47410065b011126638cce07bb7a
                     // si plusieurs personnes ont le même nom : affiche une liste avec dates de naissance
                     loading_nom.setVisible(false);
                     jScrollPane1.setVisible(true);
 
-                    DefaultListModel model= new DefaultListModel();
-                    for(DMR dmr : dmrs) {
-                            model.addElement(dmr);
+                    DefaultListModel model = new DefaultListModel();
+                    for (DMR dmr : dmrs) {
+                        model.addElement(dmr);
                     }
                     liste_patients.setModel(model);
                 }
 
-            }
-
-            catch(Exception e) {
+            } catch (Exception e) {
                 search_field_prénom.setText("");
                 search_field_nom.setText("");
                 search_field_prénom.requestFocusInWindow();
@@ -682,23 +711,23 @@ public class Accueil extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void jButton_nomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_nomActionPerformed
         // inutile
     }//GEN-LAST:event_jButton_nomActionPerformed
 
     private void newdmr_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newdmr_buttonActionPerformed
         // Ouvre un nouvel onglet permettant de créer un DMR
-        
-        javax.swing.JPanel dmrpanel=new NewDMR(Onglets,p);
-        
-        // ajoute un nouvel onglet
-        Onglets.addTab("    Création DMR    ",dmrpanel);
+
+        javax.swing.JPanel dmrpanel = new NewDMR(Onglets, p);
+
+        // on insert un nouvel onglet en 1er onglet
+        Onglets.insertTab("    Création DMR    ", null, dmrpanel, null, 1);
         Onglets.setSelectedComponent(dmrpanel);
-        
+
         // création d'un bouton pour fermer l'onglet
         CloseButton close_button = new CloseButton(Onglets);
-        
+
         // ajout du bouton
         Onglets.setTabComponentAt(Onglets.getSelectedIndex(), close_button);
     }//GEN-LAST:event_newdmr_buttonActionPerformed
@@ -711,7 +740,7 @@ public class Accueil extends javax.swing.JFrame {
 
     private void search_field_prénomKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field_prénomKeyPressed
         // quand on appuie sur la touche entrée : logo chargement
-        if(evt.getKeyCode()==10) {
+        if (evt.getKeyCode() == 10) {
             loading_nom.setVisible(true);
             erreur_nom.setVisible(false);
         }
@@ -730,7 +759,7 @@ public class Accueil extends javax.swing.JFrame {
 
     private void search_field_prénomKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field_prénomKeyReleased
         // quand on appuie sur la touche entrée : lance la recherche
-        if(evt.getKeyCode()==10) {
+        if (evt.getKeyCode() == 10) {
             search_nom();
         }
     }//GEN-LAST:event_search_field_prénomKeyReleased
@@ -748,7 +777,14 @@ public class Accueil extends javax.swing.JFrame {
     }//GEN-LAST:event_cancel_logoutActionPerformed
 
     private void liste_patientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liste_patientsMouseClicked
+<<<<<<< HEAD
         // inutile
+=======
+        // cas où plusieurs noms identiques : ouvre le DMR sur lequel on a cliqué dans la liste
+        DMR dmr = (DMR) liste_patients.getSelectedValues()[0];
+        search_jdialog_nom.setVisible(false);
+        open_dmr(dmr);
+>>>>>>> d54b49a39a17b47410065b011126638cce07bb7a
     }//GEN-LAST:event_liste_patientsMouseClicked
 
     private void search_button_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_button_nameActionPerformed
@@ -765,7 +801,7 @@ public class Accueil extends javax.swing.JFrame {
 
     private void search_field_idKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field_idKeyPressed
         // quand on appuie sur la touche entrée : logo chargement
-        if(evt.getKeyCode()==10) {
+        if (evt.getKeyCode() == 10) {
             loading_id.setVisible(true);
             erreur_id.setVisible(false);
         }
@@ -773,7 +809,7 @@ public class Accueil extends javax.swing.JFrame {
 
     private void search_field_idKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field_idKeyReleased
         // quand on appuie sur la touche entrée : lance la recherche
-        if(evt.getKeyCode()==10) {
+        if (evt.getKeyCode() == 10) {
             search_id();
         }
     }//GEN-LAST:event_search_field_idKeyReleased
@@ -795,7 +831,7 @@ public class Accueil extends javax.swing.JFrame {
 
     private void search_field_nomKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field_nomKeyPressed
         // quand on appuie sur la touche entrée : logo chargement
-        if(evt.getKeyCode()==10) {
+        if (evt.getKeyCode() == 10) {
             loading_nom.setVisible(true);
             erreur_nom.setVisible(false);
         }
@@ -803,7 +839,7 @@ public class Accueil extends javax.swing.JFrame {
 
     private void search_field_nomKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field_nomKeyReleased
         // quand on appuie sur la touche entrée : lance la recherche
-        if(evt.getKeyCode()==10) {
+        if (evt.getKeyCode() == 10) {
             search_nom();
         }
     }//GEN-LAST:event_search_field_nomKeyReleased
@@ -820,6 +856,7 @@ public class Accueil extends javax.swing.JFrame {
         // inutile
     }//GEN-LAST:event_search_field_nomMouseClicked
 
+<<<<<<< HEAD
     private void liste_patientsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liste_patientsMousePressed
         // quand on appuie sur le bouton rechercher : logo chargement
         search_jdialog_nom.setSize(530, 320);
@@ -839,25 +876,33 @@ public class Accueil extends javax.swing.JFrame {
         search_jdialog_nom.setVisible(false);
     }//GEN-LAST:event_liste_patientsMouseReleased
   
+=======
+>>>>>>> d54b49a39a17b47410065b011126638cce07bb7a
     private void open_dmr(DMR dmr) {
-        // Vérifie que le DMR n'est pas déjà ouvert dans un onglet : réfléchir à une méthode
+        // Vérifie que le DMR n'est pas déjà ouvert dans un onglet :
+        int index = Onglets.indexOfTab("       " + dmr.getPrenomPatient() + " " + dmr.getNomPatient() + " (" + dmr.getId() + ")" + "     ");
         
-        // Ouvre un nouvel onglet avec le DMR correspondant au n° d'id rentré dans le champ de recherche
-        
-        javax.swing.JPanel dmrpanel=new DMRPatient(Onglets,p,dmr);
-        
-        // ajoute un nouvel onglet
-        Onglets.addTab("       "+dmr.getPrenomPatient()+" "+dmr.getNomPatient()+" ("+dmr.getId()+")"+"     ",dmrpanel);
-        Onglets.setSelectedComponent(dmrpanel);
-        
-        // création d'un bouton pour fermer l'onglet
-        CloseButton close_button = new CloseButton(Onglets);
-        
-        // ajout du bouton
-        Onglets.setTabComponentAt(Onglets.getSelectedIndex(), close_button);        
+        //s'il n'est pas déjà ouvert : on peut en ouvrir un autre
+        if (index == -1) {
+
+            // Ouvre un nouvel onglet avec le DMR correspondant au n° d'id rentré dans le champ de recherche
+            javax.swing.JPanel dmrpanel = new DMRPatient(Onglets, p, dmr);
+
+            // ajoute un nouvel onglet à la fin
+            Onglets.addTab("       " + dmr.getPrenomPatient() + " " + dmr.getNomPatient() + " (" + dmr.getId() + ")" + "     ", dmrpanel);
+            Onglets.setSelectedComponent(dmrpanel);
+
+            // création d'un bouton pour fermer l'onglet
+            CloseButton close_button = new CloseButton(Onglets);
+
+            // ajout du bouton
+            Onglets.setTabComponentAt(Onglets.getSelectedIndex(), close_button);
+        } else {
+            //sinon on va sur l'onglet du DMR recherché dejà ouvert
+            Onglets.setSelectedIndex(index);
+        }
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -889,7 +934,7 @@ public class Accueil extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Accueil().setVisible(true);
-                
+
             }
         });
     }
