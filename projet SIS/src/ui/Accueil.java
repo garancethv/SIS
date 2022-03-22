@@ -47,9 +47,9 @@ public class Accueil extends javax.swing.JFrame {
             // test PH
             p = requetesbd.utilisateur(requetesbd.connexionBD(),1234567890);
             // test Secrétaire
-            // p = requetesbd.utilisateur(requetesbd.connexionBD(),1234567894);
+            //p = requetesbd.utilisateur(requetesbd.connexionBD(),1234567894);
             // test Manip
-            // p = requetesbd.utilisateur(requetesbd.connexionBD(),1234567893);
+            //p = requetesbd.utilisateur(requetesbd.connexionBD(),1234567893);
         }
         catch (Exception e) {}
         initComponents();
@@ -57,6 +57,8 @@ public class Accueil extends javax.swing.JFrame {
         //mettre la fenêtre en plein écran
         welcome_label.setText("Bienvenue "+p.getPrenom());
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        //this.setSize(size.getSize());
     }
     
     public Accueil(Personnel p) {
@@ -64,10 +66,7 @@ public class Accueil extends javax.swing.JFrame {
         this.p=p;
         
         welcome_label.setText("Bienvenue "+p.getPrenom());
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-        //this.setSize(size.getSize());
-        //this.pack();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -123,6 +122,7 @@ public class Accueil extends javax.swing.JFrame {
         search_jdialog_nom.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         search_jdialog_nom.setTitle("Rechercher un DMR");
         search_jdialog_nom.setAlwaysOnTop(true);
+        search_jdialog_nom.setPreferredSize(new java.awt.Dimension(519, 365));
         search_jdialog_nom.setResizable(false);
         search_jdialog_nom.setSize(new java.awt.Dimension(530, 265));
 
@@ -184,6 +184,12 @@ public class Accueil extends javax.swing.JFrame {
         liste_patients.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 liste_patientsMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                liste_patientsMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                liste_patientsMouseReleased(evt);
             }
         });
         jScrollPane1.setViewportView(liste_patients);
@@ -597,8 +603,9 @@ public class Accueil extends javax.swing.JFrame {
     private void search_nom() {
         String prenom=search_field_prénom.getText();
         String nom=search_field_nom.getText();
+        jScrollPane1.setVisible(false);
         
-        if (!prenom.equals("")) {
+        if (!prenom.equals("")) { //recherche nom + prénom
             try {
                 ArrayList<DMR> dmrs= requetesbd.recupDMRBis(requetesbd.connexionBD(),nom,prenom);
 
@@ -606,6 +613,15 @@ public class Accueil extends javax.swing.JFrame {
                     // si qu'une seule personne correspond : ouvre son DMR
                     open_dmr(requetesbd.recupDMR(requetesbd.connexionBD(), String.valueOf(dmrs.get(0).getId())));
                     search_jdialog_nom.setVisible(false);
+                }
+                
+                else if (dmrs.size()==0) {
+                    // si personne : erreur
+                    search_field_prénom.setText("");
+                    search_field_nom.setText("");
+                    search_field_prénom.requestFocusInWindow();
+                    erreur_nom.setVisible(true);
+                    loading_nom.setVisible(false);
                 }
 
                 else {
@@ -629,24 +645,24 @@ public class Accueil extends javax.swing.JFrame {
                 search_field_prénom.requestFocusInWindow();
                 erreur_nom.setVisible(true);
                 loading_nom.setVisible(false);
-                jScrollPane1.setVisible(false);
             }
         }
-        else {
+        else { //recherche avec juste nom
             try {
                 ArrayList<DMR> dmrs= requetesbd.recupDMRTer(requetesbd.connexionBD(),nom);
 
-                if (dmrs.size()==1) {
-                    // si qu'une seule personne correspond : ouvre son DMR
-                    open_dmr(requetesbd.recupDMR(requetesbd.connexionBD(), String.valueOf(dmrs.get(0).getId())));
-                    search_jdialog_nom.setVisible(false);
+                if (dmrs.size()==0) {
+                    search_field_prénom.setText("");
+                    search_field_nom.setText("");
+                    search_field_prénom.requestFocusInWindow();
+                    erreur_nom.setVisible(true);
+                    loading_nom.setVisible(false);
                 }
 
                 else {
                     // si plusieurs personnes ont le même nom : affiche une liste avec dates de naissance
                     loading_nom.setVisible(false);
                     jScrollPane1.setVisible(true);
-                    //search_jdialog.setSize(508, 350);
 
                     DefaultListModel model= new DefaultListModel();
                     for(DMR dmr : dmrs) {
@@ -663,7 +679,6 @@ public class Accueil extends javax.swing.JFrame {
                 search_field_prénom.requestFocusInWindow();
                 erreur_nom.setVisible(true);
                 loading_nom.setVisible(false);
-                jScrollPane1.setVisible(false);
             }
         }
     }
@@ -733,14 +748,12 @@ public class Accueil extends javax.swing.JFrame {
     }//GEN-LAST:event_cancel_logoutActionPerformed
 
     private void liste_patientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liste_patientsMouseClicked
-        // cas où plusieurs noms identiques : ouvre le DMR sur lequel on a cliqué dans la liste
-        DMR dmr=(DMR) liste_patients.getSelectedValues()[0];
-        search_jdialog_nom.setVisible(false);
-        open_dmr(dmr);
+        // inutile
     }//GEN-LAST:event_liste_patientsMouseClicked
 
     private void search_button_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_button_nameActionPerformed
         search_jdialog_nom.setLocationRelativeTo(null);
+        search_jdialog_nom.setSize(530, 265);
         erreur_nom.setVisible(false);
         loading_nom.setVisible(false);
         search_field_prénom.setText("");
@@ -806,6 +819,25 @@ public class Accueil extends javax.swing.JFrame {
     private void search_field_nomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_field_nomMouseClicked
         // inutile
     }//GEN-LAST:event_search_field_nomMouseClicked
+
+    private void liste_patientsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liste_patientsMousePressed
+        // quand on appuie sur le bouton rechercher : logo chargement
+        search_jdialog_nom.setSize(530, 320);
+        loading_nom.setVisible(true);
+    }//GEN-LAST:event_liste_patientsMousePressed
+
+    private void liste_patientsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liste_patientsMouseReleased
+        // cas où plusieurs noms identiques : ouvre le DMR sur lequel on a cliqué dans la liste
+        DMR dmr=(DMR) liste_patients.getSelectedValues()[0];
+        try {
+            dmr=requetesbd.recupDMR(requetesbd.connexionBD(), String.valueOf(dmr.getId()));
+        }
+        catch (Exception e) {
+            System.out.println("Erreur");
+        }
+        open_dmr(dmr);
+        search_jdialog_nom.setVisible(false);
+    }//GEN-LAST:event_liste_patientsMouseReleased
   
     private void open_dmr(DMR dmr) {
         // Vérifie que le DMR n'est pas déjà ouvert dans un onglet : réfléchir à une méthode
