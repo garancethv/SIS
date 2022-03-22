@@ -392,14 +392,20 @@ public class Accueil extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(1650, 1080));
 
+        Onglets.setBackground(new java.awt.Color(255, 255, 255));
+        Onglets.setOpaque(true);
+
+        Fond.setBackground(new java.awt.Color(255, 255, 255));
+
         top_Pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        welcome_label.setFont(new java.awt.Font("Source Serif Pro Black", 0, 58)); // NOI18N
+        welcome_label.setFont(new java.awt.Font("Leelawadee UI", 0, 58)); // NOI18N
         welcome_label.setText("Bienvenue Agathe");
-        top_Pane.add(welcome_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 900, 66));
+        top_Pane.add(welcome_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 480, 80));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logo (encore).png"))); // NOI18N
         top_Pane.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1740, 0, 580, 170));
@@ -413,6 +419,7 @@ public class Accueil extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logo (encore).png"))); // NOI18N
         top_Pane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, 580, 170));
 
+        search_panel.setBackground(new java.awt.Color(255, 255, 255));
         search_panel.setPreferredSize(new java.awt.Dimension(321, 143));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -461,6 +468,9 @@ public class Accueil extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        logout_panel.setBackground(new java.awt.Color(255, 255, 255));
+
+        logout_button.setBackground(new java.awt.Color(0, 204, 255));
         logout_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-log-out-32.png"))); // NOI18N
         logout_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -491,6 +501,8 @@ public class Accueil extends javax.swing.JFrame {
                 .addComponent(logout_button, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        newdmr_panel.setBackground(new java.awt.Color(255, 255, 255));
 
         newdmr_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-pencil-32.png"))); // NOI18N
         newdmr_button.addActionListener(new java.awt.event.ActionListener() {
