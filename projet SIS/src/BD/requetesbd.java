@@ -40,7 +40,7 @@ public class requetesbd {
      * @throws java.lang.ClassNotFoundException
      */
     public static Connection connexionBD() throws SQLException, ClassNotFoundException {
-        
+
         try {
             String jdbcDriver, dbUrl, username, password;
             DatabaseAccessProperties dap = new DatabaseAccessProperties(configurationFile);
@@ -60,29 +60,27 @@ public class requetesbd {
         }
     }
 
-
-
-    
     /**
-     *Ferme la connexion
+     * Ferme la connexion
+     *
      * @param conn
      * @throws SQLException
      */
-
     public static void deconnexionBD(Connection conn) throws SQLException {
         /*déconnexion de la BD*/
         conn.close();
     }
 
     /**
-     * Vérifie si l'identifiant et le mot de passe entrés sont valides pour ouvrir une session
+     * Vérifie si l'identifiant et le mot de passe entrés sont valides pour
+     * ouvrir une session
+     *
      * @param conn
      * @param idPerso identifiant du personnel
      * @param mdp mot de passe du personnel
      * @return boolean
      * @throws SQLException
      */
-
     public static boolean connexion(Connection conn, String idPerso, String mdp) throws SQLException {
         /*vérifie que le personnel existe dans la base de données*/
         try {
@@ -108,13 +106,14 @@ public class requetesbd {
 
     /**
      * Vérifie que le personnel existe dans la base de données
+     *
      * @param conn
      * @param idPerso
      * @return boolean
      * @throws SQLException
      */
     public static boolean PhExiste(Connection conn, String idPerso) throws SQLException {
-  
+
         try {
 
 // Get a statement from the connection
@@ -136,18 +135,16 @@ public class requetesbd {
         }
     }
 
-
-
     /**
      * Renvoie le personnel qui est censé être connecté
+     *
      * @param conn
      * @param idPerso
      * @return Personnel
      * @throws SQLException
      */
-
     public static Personnel utilisateur(Connection conn, int idPerso) throws SQLException {
-       
+
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
@@ -180,17 +177,16 @@ public class requetesbd {
         }
     }
 
- 
     /**
      * Renvoie le DMR recherché par son identifiant
+     *
      * @param conn
      * @param idDMR
      * @return DMR
      * @throws SQLException
      */
-
     public static DMR recupDMR(Connection conn, String idDMR) throws SQLException {
-       
+
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
@@ -227,17 +223,16 @@ public class requetesbd {
         }
     }
 
-    
     /**
-     * Charge les examens d'un DMR
-     * NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD)
+     * Charge les examens d'un DMR NE PAS UTILISER EN DEHORS DE REQUETESBD (car
+     * ne ferme pas la connexion à la BD)
+     *
      * @param conn
      * @param dmr
      * @return
      * @throws SQLException
      */
     private static DMR recupExamen(Connection conn, DMR dmr) throws SQLException {
-        
 
         try {
 // Get a statement from the connection
@@ -273,7 +268,7 @@ public class requetesbd {
         }
     }
 
-    public static DMR triExamenSelonDate(Connection conn, DMR dmr) throws SQLException {
+    public static DMR triExamenSelonDateAsc(Connection conn, DMR dmr) throws SQLException {
         /*renvoie l'examen recherché
         NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
         try {
@@ -309,10 +304,124 @@ public class requetesbd {
             }
         }
     }
-
     
+    public static DMR triExamenSelonDateDesc(Connection conn, DMR dmr) throws SQLException {
+        /*renvoie l'examen recherché
+        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
+        try {
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+// Execute the query
+            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR = '" + dmr.getId() + "' ORDER BY dateExamen desc");
+            ArrayList<Examen> liste = new ArrayList<>();
+            while (rs.next()) {
+                String s = rs.getString("typeExamen");
+                TypeExamen typeExam;
+                if (s.equals("irm")) {
+                    typeExam = TypeExamen.IRM;
+                } else if (s.equals("scanner")) {
+                    typeExam = TypeExamen.SCANNER;
+                } else {
+                    typeExam = TypeExamen.RADIOGRAPHIE;
+                }
+                liste.add(new Examen(dmr.getId(), (Date) rs.getTimestamp("dateExamen"), rs.getInt("idPH"), typeExam, rs.getInt("idPACS"), rs.getString("texteCR")));
+
+            }
+            dmr.setExamens(liste);
+// Close the result set, statement and the connection 
+            rs.close();
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+
+            return dmr;
+        } finally {
+//close connection
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    
+
+    public static DMR triExamenSelonPH(Connection conn, DMR dmr) throws SQLException {
+        /*renvoie l'examen recherché
+        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
+        try {
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+            
+// Execute the query
+            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen JOIN Personnel ON (idPH=idPerso) where idDMR = '" + dmr.getId() + "' ORDER BY nom");
+            ArrayList<Examen> liste = new ArrayList<>();
+            while (rs.next()) {
+                String s = rs.getString("typeExamen");
+                TypeExamen typeExam;
+                if (s.equals("irm")) {
+                    typeExam = TypeExamen.IRM;
+                } else if (s.equals("scanner")) {
+                    typeExam = TypeExamen.SCANNER;
+                } else {
+                    typeExam = TypeExamen.RADIOGRAPHIE;
+                }
+                liste.add(new Examen(dmr.getId(), (Date) rs.getTimestamp("dateExamen"), rs.getInt("idPH"), typeExam, rs.getInt("idPACS"), rs.getString("texteCR")));
+
+            }
+            dmr.setExamens(liste);
+// Close the result set, statement and the connection 
+            rs.close();
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+
+            return dmr;
+        } finally {
+//close connection
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    
+    public static DMR triExamenSelonTypeExam(Connection conn, DMR dmr, String typeExamen) throws SQLException {
+        /*renvoie l'examen recherché
+        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
+        try {
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+            
+// Execute the query
+            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR = '" + dmr.getId() + "' AND lower(typeExamen) = '" + typeExamen.toLowerCase() + "' ORDER BY dateExamen desc");
+            ArrayList<Examen> liste = new ArrayList<>();
+            while (rs.next()) {
+                String s = rs.getString("typeExamen");
+                TypeExamen typeExam;
+                if (s.equals("irm")) {
+                    typeExam = TypeExamen.IRM;
+                } else if (s.equals("scanner")) {
+                    typeExam = TypeExamen.SCANNER;
+                } else {
+                    typeExam = TypeExamen.RADIOGRAPHIE;
+                }
+                liste.add(new Examen(dmr.getId(), (Date) rs.getTimestamp("dateExamen"), rs.getInt("idPH"), typeExam, rs.getInt("idPACS"), rs.getString("texteCR")));
+
+            }
+            dmr.setExamens(liste);
+// Close the result set, statement and the connection 
+            rs.close();
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+
+            return dmr;
+        } finally {
+//close connection
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
     /**
      * Création d'un examen et chargement des examens du DMR
+     *
      * @param conn
      * @param dmr
      * @param idPH
@@ -322,7 +431,6 @@ public class requetesbd {
      * @return DMR
      * @throws SQLException
      */
-
     public static DMR creationExamen(Connection conn, DMR dmr, int idPH, TypeExamen typeExam, int archivagePapier, String texteCR) throws SQLException {
         try {
 // Get a statement from the connection
@@ -353,6 +461,7 @@ public class requetesbd {
 
     /**
      * Création d'un compte-rendu dans la base de données
+     *
      * @param conn
      * @param examen
      * @param date
@@ -385,9 +494,6 @@ public class requetesbd {
         }
     }
 
-
-
-    
 //    /**
 //     * 
 //     * @param conn
@@ -415,9 +521,10 @@ public class requetesbd {
 //            }
 //        }
 //    }
-
     /**
-     * Récupération de tous les DMR ayant le même nom, prénom et la même date de naissance
+     * Récupération de tous les DMR ayant le même nom, prénom et la même date de
+     * naissance
+     *
      * @param conn
      * @param nom
      * @param prenom
@@ -425,7 +532,6 @@ public class requetesbd {
      * @return liste de DMR
      * @throws SQLException
      */
-
     public static ArrayList<DMR> recupDMRBis(Connection conn, String nom, String prenom, String dateNaissance) throws SQLException {
 
         ArrayList<DMR> listeDMR = new ArrayList<>();
@@ -464,16 +570,16 @@ public class requetesbd {
         }
     }
 
-    
     /**
-     * Récupération de tous les DMR ayant le même nom et prénom lors de la recherche par nom et prénom
+     * Récupération de tous les DMR ayant le même nom et prénom lors de la
+     * recherche par nom et prénom
+     *
      * @param conn
      * @param nom
      * @param prenom
      * @return liste de DMR
      * @throws SQLException
      */
-
     public static ArrayList<DMR> recupDMRBis(Connection conn, String nom, String prenom) throws SQLException {
 
         /*renvoie le DMR recherché*/
@@ -514,15 +620,15 @@ public class requetesbd {
         }
     }
 
-
     /**
-     * Récupération de tous les DMR ayant le même nom lors de la recherche par nom
+     * Récupération de tous les DMR ayant le même nom lors de la recherche par
+     * nom
+     *
      * @param conn
      * @param nom
      * @return liste de DMR
      * @throws SQLException
      */
-
     public static ArrayList<DMR> recupDMRTer(Connection conn, String nom) throws SQLException {
 
         ArrayList<DMR> listeDMR = new ArrayList<>();
@@ -561,17 +667,16 @@ public class requetesbd {
         }
     }
 
-    
     /**
      * Vérifie si le DMR existe
+     *
      * @param conn
      * @param idDMR
      * @return boolean
      * @throws SQLException
      */
-
     public static boolean dmrExiste(Connection conn, int idDMR) throws SQLException {
-       
+
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
@@ -592,9 +697,9 @@ public class requetesbd {
         }
     }
 
-    
     /**
      * Vérifie que le DMR ayant ce nom, prenom et cette date de naissance existe
+     *
      * @param conn
      * @param nom
      * @param prenom
@@ -602,9 +707,8 @@ public class requetesbd {
      * @return boolean
      * @throws SQLException
      */
-
     public static boolean dmrExisteBis(Connection conn, String nom, String prenom, String dateNaissance) throws SQLException {
-       
+
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
@@ -625,16 +729,15 @@ public class requetesbd {
         }
     }
 
-    
     /**
-     * Renvoie un nouvel idDMR
-     * NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD)
+     * Renvoie un nouvel idDMR NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne
+     * ferme pas la connexion à la BD)
+     *
      * @param conn
-     * @return nouveau  idDMR = max(idDMR)+1
+     * @return nouveau idDMR = max(idDMR)+1
      * @throws SQLException
      */
     private static int nouveauIdDMR(Connection conn) throws SQLException {
-        
 
         try {
 // Get a statement from the connection
@@ -654,9 +757,9 @@ public class requetesbd {
         }
     }
 
-    
     /**
      * création dans la base de données d’un nouveau DMR
+     *
      * @param conn
      * @param nom
      * @param prenom
@@ -669,9 +772,8 @@ public class requetesbd {
      * @return DMR
      * @throws SQLException
      */
-
     public static DMR creationDMR(Connection conn, String nom, String prenom, String dateNaissance, String tel, String genre, String adresse, String codePostal, String ville) throws SQLException {
-    
+
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
