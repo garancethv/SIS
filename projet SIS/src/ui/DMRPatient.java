@@ -501,7 +501,12 @@ public class DMRPatient extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseClicked
 
     private void actualiseTableau(ArrayList<Examen> ex) {
+        // vider le tableau
         DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
+        int rows = model.getRowCount();
+        for (int i = rows - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
         // examens triés du plus ancien ou plus récent dans la BD donc il suffit de parcourir la liste en sens inverse
         for (int i = ex.size() - 1; i >= 0; i--) {
             try {
@@ -533,6 +538,12 @@ public class DMRPatient extends javax.swing.JPanel {
             radiobutton2.setSelected(true);
             
             //effectue tri par date décroissante (par défaut)
+            try {
+                actualiseTableau(requetesbd.triExamenSelonDateAsc(requetesbd.connexionBD(), dmr).getExamens());
+            }
+            catch (Exception e) {
+                System.out.println("Erreur tri décroissant");
+            }
         }
         
         else if (i==1) { // tri par type
@@ -555,6 +566,12 @@ public class DMRPatient extends javax.swing.JPanel {
             radiobutton3.setVisible(false);
             
             // effectue tri par nom PH
+            try {
+                actualiseTableau(requetesbd.triExamenSelonPH(requetesbd.connexionBD(), dmr).getExamens());
+            }
+            catch (Exception e) {
+                System.out.println("Erreur tri ph");
+            }
         }
         
     }//GEN-LAST:event_triActionPerformed
@@ -566,10 +583,20 @@ public class DMRPatient extends javax.swing.JPanel {
         radiobutton3.setSelected(false);
         
         if (i==0) { // tri par date croissante
-            
+            try {
+                actualiseTableau(requetesbd.triExamenSelonDateDesc(requetesbd.connexionBD(), dmr).getExamens());
+            }
+            catch (Exception e) {
+                System.out.println("Erreur tri croissant");
+            }
         }
         else if (i==1) { // tri par type IRM
-            
+            try {
+                actualiseTableau(requetesbd.triExamenSelonTypeExam(requetesbd.connexionBD(), dmr, "irm").getExamens());
+            }
+            catch (Exception e) {
+                System.out.println("Erreur tri irm");
+            }
         }
     }//GEN-LAST:event_radiobutton1ActionPerformed
 
@@ -580,10 +607,20 @@ public class DMRPatient extends javax.swing.JPanel {
         radiobutton3.setSelected(false);
         
         if (i==0) { // tri par date décroissante
-            
+            try {
+                actualiseTableau(requetesbd.triExamenSelonDateAsc(requetesbd.connexionBD(), dmr).getExamens());
+            }
+            catch (Exception e) {
+                System.out.println("Erreur tri décroissant");
+            }
         }
         else if (i==1) { // tri par type Scanner
-            
+            try {
+                actualiseTableau(requetesbd.triExamenSelonTypeExam(requetesbd.connexionBD(), dmr, "scanner").getExamens());
+            }
+            catch (Exception e) {
+                System.out.println("Erreur tri scanner");
+            }
         }
     }//GEN-LAST:event_radiobutton2ActionPerformed
 
@@ -592,6 +629,12 @@ public class DMRPatient extends javax.swing.JPanel {
         radiobutton2.setSelected(false);
         
         // tri par type Radiographie
+        try {
+                actualiseTableau(requetesbd.triExamenSelonTypeExam(requetesbd.connexionBD(), dmr, "radiographie").getExamens());
+            }
+            catch (Exception e) {
+                System.out.println("Erreur tri radio");
+            }
     }//GEN-LAST:event_radiobutton3ActionPerformed
 
     public void maj_exam(DMR maj) {
