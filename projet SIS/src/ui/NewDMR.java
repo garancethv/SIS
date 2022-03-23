@@ -274,6 +274,8 @@ public class NewDMR extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel7.setText("Date de naissance");
 
+        date_naissance_field.setToolTipText("DD/MM/AAAA");
+
         erreur_date.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         erreur_date.setForeground(new java.awt.Color(149, 46, 46));
         erreur_date.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N

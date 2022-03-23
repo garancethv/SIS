@@ -51,6 +51,8 @@ public class DMRPatient extends javax.swing.JPanel {
         date_naissance.setText(DMR.format_date(date));
 
         id.setText(String.valueOf(dmr.getId()));
+        
+        radiobutton3.setVisible(false);
 
         String genre = "";
         if (dmr.getGenre() == Genre.H) {
@@ -118,6 +120,10 @@ public class DMRPatient extends javax.swing.JPanel {
         new_exam = new javax.swing.JButton();
         selection_button = new javax.swing.JButton();
         erreur_exam = new javax.swing.JLabel();
+        tri = new javax.swing.JComboBox<>();
+        radiobutton1 = new javax.swing.JRadioButton();
+        radiobutton2 = new javax.swing.JRadioButton();
+        radiobutton3 = new javax.swing.JRadioButton();
 
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -348,17 +354,56 @@ public class DMRPatient extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        tri.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Date", "Type", "PH" }));
+        tri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                triActionPerformed(evt);
+            }
+        });
+
+        radiobutton1.setText("croissante");
+        radiobutton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radiobutton1ActionPerformed(evt);
+            }
+        });
+
+        radiobutton2.setSelected(true);
+        radiobutton2.setText("décroissante");
+        radiobutton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radiobutton2ActionPerformed(evt);
+            }
+        });
+
+        radiobutton3.setText("jRadioButton3");
+        radiobutton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radiobutton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout dmr_panelLayout = new javax.swing.GroupLayout(dmr_panel);
         dmr_panel.setLayout(dmr_panelLayout);
         dmr_panelLayout.setHorizontalGroup(
             dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dmr_panelLayout.createSequentialGroup()
                 .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(dmr_panelLayout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(dmr_panelLayout.createSequentialGroup()
+                                .addGap(135, 135, 135)
+                                .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tri, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dmr_panelLayout.createSequentialGroup()
+                        .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(radiobutton2)
+                            .addComponent(radiobutton1)
+                            .addComponent(radiobutton3))
+                        .addGap(102, 102, 102)))
                 .addComponent(exams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -369,9 +414,18 @@ public class DMRPatient extends javax.swing.JPanel {
                 .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(exams, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(dmr_panelLayout.createSequentialGroup()
-                        .addComponent(id_patient_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(radiobutton1)
+                        .addGap(6, 6, 6)
+                        .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(radiobutton2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(radiobutton3)
+                        .addGap(0, 64, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -383,7 +437,7 @@ public class DMRPatient extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dmr_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(dmr_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -456,6 +510,142 @@ public class DMRPatient extends javax.swing.JPanel {
         erreur_exam.setVisible(false);
     }//GEN-LAST:event_formMouseClicked
 
+    private void actualiseTableau(ArrayList<Examen> ex) {
+        // vider le tableau
+        DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
+        int rows = model.getRowCount();
+        for (int i = rows - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        // examens triés du plus ancien ou plus récent dans la BD donc il suffit de parcourir la liste en sens inverse
+        for (int i = ex.size() - 1; i >= 0; i--) {
+            try {
+                Personnel p = requetesbd.utilisateur(requetesbd.connexionBD(), ex.get(i).getIdPhRespo());
+                String ph = "Dr " + p.getPrenom() + " " + p.getNom();
+                model.insertRow(model.getRowCount(), new Object[]{DMR.format_date(ex.get(i).getDate()), ex.get(i).getTypeExamen(), ph});
+            } catch (Exception e) {
+            }
+        }
+    }
+    
+    private void triActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triActionPerformed
+        radiobutton1.setVisible(false);
+        radiobutton2.setVisible(false);
+        radiobutton3.setVisible(false);
+        
+        // i = 0 -> date
+        // i = 1 -> type
+        // i = 2 -> ph
+        int i = tri.getSelectedIndex();
+        
+        if (i==0) { // tri par date
+            // réinititalisation des items
+            radiobutton1.setVisible(true);
+            radiobutton2.setVisible(true);
+            radiobutton1.setText("croissante");
+            radiobutton2.setText("décroissante");
+            radiobutton1.setSelected(false);
+            radiobutton2.setSelected(true);
+            
+            //effectue tri par date décroissante (par défaut)
+            try {
+                actualiseTableau(requetesbd.triExamenSelonDateAsc(requetesbd.connexionBD(), dmr).getExamens());
+            }
+            catch (Exception e) {
+                System.out.println("Erreur tri décroissant");
+            }
+        }
+        
+        else if (i==1) { // tri par type
+            // réinitialisation des items
+            radiobutton1.setVisible(true);
+            radiobutton2.setVisible(true);
+            radiobutton3.setVisible(true);
+            radiobutton1.setText("IRM");
+            radiobutton2.setText("Scanner");
+            radiobutton3.setText("Radio");
+            radiobutton1.setSelected(false);
+            radiobutton2.setSelected(false);
+            radiobutton3.setSelected(false);
+        }
+        
+        else { // tri par PH (ordre alphabétique)
+            // réinitialisation des items
+            radiobutton1.setVisible(false);
+            radiobutton2.setVisible(false);
+            radiobutton3.setVisible(false);
+            
+            // effectue tri par nom PH
+            try {
+                actualiseTableau(requetesbd.triExamenSelonPH(requetesbd.connexionBD(), dmr).getExamens());
+            }
+            catch (Exception e) {
+                System.out.println("Erreur tri ph");
+            }
+        }
+    }//GEN-LAST:event_triActionPerformed
+
+    private void radiobutton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobutton1ActionPerformed
+        int i = tri.getSelectedIndex();
+        
+        radiobutton2.setSelected(false);
+        radiobutton3.setSelected(false);
+        
+        if (i==0) { // tri par date croissante
+            try {
+                actualiseTableau(requetesbd.triExamenSelonDateDesc(requetesbd.connexionBD(), dmr).getExamens());
+            }
+            catch (Exception e) {
+                System.out.println("Erreur tri croissant");
+            }
+        }
+        else if (i==1) { // tri par type IRM
+            try {
+                actualiseTableau(requetesbd.triExamenSelonTypeExam(requetesbd.connexionBD(), dmr, "irm").getExamens());
+            }
+            catch (Exception e) {
+                System.out.println("Erreur tri irm");
+            }
+        }
+    }//GEN-LAST:event_radiobutton1ActionPerformed
+
+    private void radiobutton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobutton2ActionPerformed
+        int i = tri.getSelectedIndex();
+        
+        radiobutton1.setSelected(false);
+        radiobutton3.setSelected(false);
+        
+        if (i==0) { // tri par date décroissante
+            try {
+                actualiseTableau(requetesbd.triExamenSelonDateAsc(requetesbd.connexionBD(), dmr).getExamens());
+            }
+            catch (Exception e) {
+                System.out.println("Erreur tri décroissant");
+            }
+        }
+        else if (i==1) { // tri par type Scanner
+            try {
+                actualiseTableau(requetesbd.triExamenSelonTypeExam(requetesbd.connexionBD(), dmr, "scanner").getExamens());
+            }
+            catch (Exception e) {
+                System.out.println("Erreur tri scanner");
+            }
+        }
+    }//GEN-LAST:event_radiobutton2ActionPerformed
+
+    private void radiobutton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobutton3ActionPerformed
+        radiobutton1.setSelected(false);
+        radiobutton2.setSelected(false);
+        
+        // tri par type Radiographie
+        try {
+                actualiseTableau(requetesbd.triExamenSelonTypeExam(requetesbd.connexionBD(), dmr, "radiographie").getExamens());
+            }
+            catch (Exception e) {
+                System.out.println("Erreur tri radio");
+            }
+    }//GEN-LAST:event_radiobutton3ActionPerformed
+
     public void maj_exam(DMR maj) {
         examens = maj.getExamens();
         DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
@@ -495,9 +685,13 @@ public class DMRPatient extends javax.swing.JPanel {
     private javax.swing.JButton new_exam;
     private javax.swing.JLabel nom_patient;
     private javax.swing.JLabel prenom_patient;
+    private javax.swing.JRadioButton radiobutton1;
+    private javax.swing.JRadioButton radiobutton2;
+    private javax.swing.JRadioButton radiobutton3;
     private javax.swing.JButton selection_button;
     private javax.swing.JTable table_exams;
     private javax.swing.JLabel tel_label;
+    private javax.swing.JComboBox<String> tri;
     private javax.swing.JLabel ville;
     // End of variables declaration//GEN-END:variables
 }
