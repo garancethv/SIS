@@ -117,6 +117,7 @@ public class VoirExam extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         area_apercu = new javax.swing.JTextArea();
         button_imp_ok = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -147,37 +148,56 @@ public class VoirExam extends javax.swing.JPanel {
         fen_confirmer_imp.setSize(new java.awt.Dimension(800, 750));
 
         area_apercu.setEditable(false);
+        area_apercu.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
         area_apercu.setLineWrap(true);
         area_apercu.setAutoscrolls(false);
+        area_apercu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 173, 161)));
         area_apercu.setMaximumSize(new java.awt.Dimension(2, 2));
         area_apercu.setMinimumSize(new java.awt.Dimension(2, 2));
         jScrollPane3.setViewportView(area_apercu);
 
+        button_imp_ok.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        button_imp_ok.setForeground(new java.awt.Color(3, 173, 161));
         button_imp_ok.setText("Confimer l'impression");
+        button_imp_ok.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 173, 161)));
         button_imp_ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_imp_okActionPerformed(evt);
             }
         });
 
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(3, 173, 161));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/feuilleBV1.png"))); // NOI18N
+        jLabel3.setText("Aperçu de l'impression");
+
         javax.swing.GroupLayout fen_confirmer_impLayout = new javax.swing.GroupLayout(fen_confirmer_imp.getContentPane());
         fen_confirmer_imp.getContentPane().setLayout(fen_confirmer_impLayout);
         fen_confirmer_impLayout.setHorizontalGroup(
             fen_confirmer_impLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fen_confirmer_impLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(button_imp_ok)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addGroup(fen_confirmer_impLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fen_confirmer_impLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3))
+                    .addGroup(fen_confirmer_impLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(button_imp_ok, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         fen_confirmer_impLayout.setVerticalGroup(
             fen_confirmer_impLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fen_confirmer_impLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(fen_confirmer_impLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(button_imp_ok, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button_imp_ok, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -376,6 +396,7 @@ public class VoirExam extends javax.swing.JPanel {
         jLabel10.setText("Compte Rendu :");
 
         compte_rendu.setEditable(false);
+        compte_rendu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 173, 161)));
         compte_rendu.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         compte_rendu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -658,6 +679,7 @@ public class VoirExam extends javax.swing.JPanel {
     private javax.swing.JDialog fen_confirmer_imp;
     private javax.swing.JLabel id_label;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
