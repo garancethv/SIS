@@ -42,6 +42,7 @@ public class NewExam extends javax.swing.JPanel {
         
         erreur_ph.setVisible(false);
         save_button.setVisible(false);
+        loading.setVisible(false);
         
         // Restrictions :
         // si PH : idPH déjà renseigné
@@ -76,8 +77,9 @@ public class NewExam extends javax.swing.JPanel {
         ph_field = new javax.swing.JTextField();
         erreur_ph = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        type_field = new javax.swing.JComboBox<String>();
+        type_field = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        loading = new javax.swing.JLabel();
 
         cr_jdialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         cr_jdialog.setModal(true);
@@ -142,6 +144,11 @@ public class NewExam extends javax.swing.JPanel {
         valider_button.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         valider_button.setText("Valider");
         valider_button.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 191, 252), 2));
+        valider_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                valider_buttonMousePressed(evt);
+            }
+        });
         valider_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valider_buttonActionPerformed(evt);
@@ -176,7 +183,7 @@ public class NewExam extends javax.swing.JPanel {
         jLabel7.setText("Type d'examen :");
 
         type_field.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        type_field.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "IRM", "RADIOGRAPHIE", "SCANNER" }));
+        type_field.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IRM", "RADIOGRAPHIE", "SCANNER" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -238,6 +245,12 @@ public class NewExam extends javax.swing.JPanel {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/feuilleBC1.png"))); // NOI18N
         jLabel2.setText("Création d'un examen");
 
+        loading.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
+        loading.setForeground(new java.awt.Color(153, 204, 0));
+        loading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loading.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-chargement-en-cours-48.png"))); // NOI18N
+        loading.setText("Chargement en cours");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -245,21 +258,25 @@ public class NewExam extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(33, 33, 33)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(158, 158, 158)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(loading, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(703, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(43, 43, 43)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(98, 98, 98)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(loading, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(384, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -275,7 +292,13 @@ public class NewExam extends javax.swing.JPanel {
         // vérifier que id correspond à un PH
         try {
             int id=Integer.valueOf(idPH);
-            erreur_ph.setVisible(false);
+            if (requetesbd.PhExiste(requetesbd.connexionBD(), idPH)) {
+                erreur_ph.setVisible(false);
+            }
+            else {
+                erreur_ph.setVisible(false);
+                System.out.println("N'existe pas");
+            }
         }
         catch(Exception e) {
             erreur_ph.setVisible(true);
@@ -286,7 +309,6 @@ public class NewExam extends javax.swing.JPanel {
             // fonction recherche ph à partir de son id
             
             try {
-                int id=Integer.valueOf(idPH);
                 DMR ajout_exam=requetesbd.creationExamen(requetesbd.connexionBD(), dmr, Integer.valueOf(idPH), type, 0, cr);
                 
                 //met à jour DMR Patient
@@ -300,7 +322,7 @@ public class NewExam extends javax.swing.JPanel {
                 javax.swing.JPanel exam_panel=new VoirExam(ajout_exam,user,ex);
 
                 // insertion d'un nouvel onglet après la page de l'examen 
-                Onglets.insertTab("           " + ex.getTypeExamen().toString() + " (" + ex.getDate() + ")        ",null,exam_panel,null,Onglets.getSelectedIndex()+1);
+                Onglets.insertTab("           " + ex.getTypeExamen().toString() + " (" + ex.getDate() + ")        ",null,exam_panel,null,Onglets.getSelectedIndex());
                 Onglets.setSelectedComponent(exam_panel);
 
                 // création d'un bouton pour fermer l'onglet
@@ -313,6 +335,7 @@ public class NewExam extends javax.swing.JPanel {
                 erreur_ph.setVisible(true);
             }
         }
+        loading.setVisible(false);
     }//GEN-LAST:event_valider_buttonActionPerformed
 
     
@@ -340,8 +363,12 @@ public class NewExam extends javax.swing.JPanel {
     }//GEN-LAST:event_cr_fieldKeyTyped
 
     private void ph_fieldMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ph_fieldMouseExited
-        System.out.println("MouseExited");
+        // inutile
     }//GEN-LAST:event_ph_fieldMouseExited
+
+    private void valider_buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_valider_buttonMousePressed
+        loading.setVisible(true);
+    }//GEN-LAST:event_valider_buttonMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -355,6 +382,7 @@ public class NewExam extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel loading;
     private javax.swing.JTextField ph_field;
     private javax.swing.JButton save_button;
     private javax.swing.JComboBox<String> type_field;
