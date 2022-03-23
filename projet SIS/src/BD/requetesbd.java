@@ -145,6 +145,157 @@ public class requetesbd {
      * @return Personnel
      * @throws SQLException
      */
+    
+      public static DMR triExamenSelonDateAsc(Connection conn, DMR dmr) throws SQLException {
+        /*renvoie l'examen recherché
+        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
+        try {
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+// Execute the query
+            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR = '" + dmr.getId() + "' ORDER BY dateExamen");
+            ArrayList<Examen> liste = new ArrayList<>();
+            while (rs.next()) {
+                String s = rs.getString("typeExamen");
+                TypeExamen typeExam;
+                if (s.equals("irm")) {
+                    typeExam = TypeExamen.IRM;
+                } else if (s.equals("scanner")) {
+                    typeExam = TypeExamen.SCANNER;
+                } else {
+                    typeExam = TypeExamen.RADIOGRAPHIE;
+                }
+                liste.add(new Examen(dmr.getId(), (Date) rs.getTimestamp("dateExamen"), rs.getInt("idPH"), typeExam, rs.getInt("idPACS"), rs.getString("texteCR")));
+
+            }
+            dmr.setExamens(liste);
+// Close the result set, statement and the connection 
+            rs.close();
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+
+            return dmr;
+        } finally {
+//close connection
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    
+    public static DMR triExamenSelonDateDesc(Connection conn, DMR dmr) throws SQLException {
+        /*renvoie l'examen recherché
+        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
+        try {
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+// Execute the query
+            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR = '" + dmr.getId() + "' ORDER BY dateExamen desc");
+            ArrayList<Examen> liste = new ArrayList<>();
+            while (rs.next()) {
+                String s = rs.getString("typeExamen");
+                TypeExamen typeExam;
+                if (s.equals("irm")) {
+                    typeExam = TypeExamen.IRM;
+                } else if (s.equals("scanner")) {
+                    typeExam = TypeExamen.SCANNER;
+                } else {
+                    typeExam = TypeExamen.RADIOGRAPHIE;
+                }
+                liste.add(new Examen(dmr.getId(), (Date) rs.getTimestamp("dateExamen"), rs.getInt("idPH"), typeExam, rs.getInt("idPACS"), rs.getString("texteCR")));
+
+            }
+            dmr.setExamens(liste);
+// Close the result set, statement and the connection 
+            rs.close();
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+
+            return dmr;
+        } finally {
+//close connection
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    
+
+    public static DMR triExamenSelonPH(Connection conn, DMR dmr) throws SQLException {
+        /*renvoie l'examen recherché
+        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
+        try {
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+            
+// Execute the query
+            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen JOIN Personnel ON (idPH=idPerso) where idDMR = '" + dmr.getId() + "' ORDER BY nom");
+            ArrayList<Examen> liste = new ArrayList<>();
+            while (rs.next()) {
+                String s = rs.getString("typeExamen");
+                TypeExamen typeExam;
+                if (s.equals("irm")) {
+                    typeExam = TypeExamen.IRM;
+                } else if (s.equals("scanner")) {
+                    typeExam = TypeExamen.SCANNER;
+                } else {
+                    typeExam = TypeExamen.RADIOGRAPHIE;
+                }
+                liste.add(new Examen(dmr.getId(), (Date) rs.getTimestamp("dateExamen"), rs.getInt("idPH"), typeExam, rs.getInt("idPACS"), rs.getString("texteCR")));
+
+            }
+            dmr.setExamens(liste);
+// Close the result set, statement and the connection 
+            rs.close();
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+
+            return dmr;
+        } finally {
+//close connection
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    
+    public static DMR triExamenSelonTypeExam(Connection conn, DMR dmr, String typeExamen) throws SQLException {
+        /*renvoie l'examen recherché
+        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
+        try {
+// Get a statement from the connection
+            Statement stmt = conn.createStatement();
+            
+// Execute the query
+            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR = '" + dmr.getId() + "' AND lower(typeExamen) = '" + typeExamen.toLowerCase() + "' ORDER BY dateExamen desc");
+            ArrayList<Examen> liste = new ArrayList<>();
+            while (rs.next()) {
+                String s = rs.getString("typeExamen");
+                TypeExamen typeExam;
+                if (s.equals("irm")) {
+                    typeExam = TypeExamen.IRM;
+                } else if (s.equals("scanner")) {
+                    typeExam = TypeExamen.SCANNER;
+                } else {
+                    typeExam = TypeExamen.RADIOGRAPHIE;
+                }
+                liste.add(new Examen(dmr.getId(), (Date) rs.getTimestamp("dateExamen"), rs.getInt("idPH"), typeExam, rs.getInt("idPACS"), rs.getString("texteCR")));
+
+            }
+            dmr.setExamens(liste);
+// Close the result set, statement and the connection 
+            rs.close();
+            stmt.close();
+            SQLWarningsExceptions.printWarnings(conn);
+
+            return dmr;
+        } finally {
+//close connection
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
 
     public static Personnel utilisateur(Connection conn, int idPerso) throws SQLException {
        
