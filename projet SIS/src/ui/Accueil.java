@@ -405,12 +405,12 @@ public class Accueil extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        search_panel.setBackground(new java.awt.Color(173, 253, 226));
-        search_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(5, 246, 168), 2));
+        search_panel.setBackground(new java.awt.Color(173, 247, 229));
+        search_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 173, 161), 2));
         search_panel.setPreferredSize(new java.awt.Dimension(330, 150));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 153, 102));
+        jLabel1.setForeground(new java.awt.Color(3, 173, 161));
         jLabel1.setText("Rechercher un DMR :");
         jLabel1.setToolTipText("");
 
@@ -594,7 +594,7 @@ public class Accueil extends javax.swing.JFrame {
         welcome_label.setFont(new java.awt.Font("Century Gothic", 1, 58)); // NOI18N
         welcome_label.setForeground(new java.awt.Color(0, 129, 173));
         welcome_label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-maple-leaf-64.png"))); // NOI18N
-        welcome_label.setText("Bienvenue Agathe");
+        welcome_label.setText("Bienvenue Prénom");
 
         jLabel4.setBackground(new java.awt.Color(56, 194, 197));
         jLabel4.setForeground(new java.awt.Color(56, 194, 197));
@@ -810,7 +810,6 @@ public class Accueil extends javax.swing.JFrame {
         // si confirmation de déconnexion : ferme la session et retourne sur page de connexion
         AccueilConnexion ac = new AccueilConnexion();
         ac.setVisible(true);
-        logout_jdialog.setVisible(false);
         dispose();
     }//GEN-LAST:event_yes_logoutActionPerformed
 
