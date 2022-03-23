@@ -58,7 +58,7 @@ public class VoirExam extends javax.swing.JPanel {
 
         String date = DMR.format_date(ex.getDate());
 
-        title_label.setText("Examen du " + date);
+        jLabel5.setText("Examen du " + date);
         id_label.setText(String.valueOf(ex.getIdDMR()) + " (" + dmr.getPrenomPatient() + " " + dmr.getNomPatient() + ")"); //rajter nom/prénom correspondant
         type_label.setText(ex.getTypeExamen().toString());
         date_label.setText(date);
@@ -119,26 +119,30 @@ public class VoirExam extends javax.swing.JPanel {
         button_imp_ok = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        title_label = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        Label1 = new javax.swing.JLabel();
-        Label2 = new javax.swing.JLabel();
-        Label4 = new javax.swing.JLabel();
-        Label3 = new javax.swing.JLabel();
+        visualisation3D1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        visualiserImagesSélectionnees = new javax.swing.JButton();
+        boutonAjouterImages = new javax.swing.JButton();
+        visualisation3D = new javax.swing.JButton();
         pacs_label_1 = new javax.swing.JLabel();
+        pacs_label = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        Label1 = new javax.swing.JLabel();
+        id_label = new javax.swing.JLabel();
+        Label2 = new javax.swing.JLabel();
+        type_label = new javax.swing.JLabel();
+        Label3 = new javax.swing.JLabel();
+        date_label = new javax.swing.JLabel();
+        Label4 = new javax.swing.JLabel();
+        ph_label = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         compte_rendu = new javax.swing.JTextPane();
-        id_label = new javax.swing.JLabel();
-        type_label = new javax.swing.JLabel();
-        date_label = new javax.swing.JLabel();
-        ph_label = new javax.swing.JLabel();
-        pacs_label = new javax.swing.JLabel();
-        save_button = new javax.swing.JButton();
         print_button = new javax.swing.JButton();
-        boutonAjouterImages = new javax.swing.JButton();
-        visualiserImagesSélectionnees = new javax.swing.JButton();
-        visualisation3D = new javax.swing.JButton();
+        save_button = new javax.swing.JButton();
 
         fen_confirmer_imp.setSize(new java.awt.Dimension(800, 750));
 
@@ -177,50 +181,202 @@ public class VoirExam extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        title_label.setFont(new java.awt.Font("Source Serif Pro Black", 0, 58)); // NOI18N
-        title_label.setText("Examen du JJ/MM/AAAA");
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 58)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(3, 173, 161));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/feuilleBV1.png"))); // NOI18N
+        jLabel5.setText("Examen du date");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(344, 344, 344)
-                .addComponent(title_label)
+                .addContainerGap()
+                .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(title_label, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Label1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        Label1.setForeground(new java.awt.Color(170, 0, 0));
-        Label1.setText("DMR :");
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        Label2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        Label2.setForeground(new java.awt.Color(170, 0, 0));
-        Label2.setText("Type d'Examen :");
+        visualisation3D1.setText("visualisation 3D");
+        visualisation3D1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visualisation3DActionPerformed(evt);
+            }
+        });
 
-        Label4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        Label4.setForeground(new java.awt.Color(170, 0, 0));
-        Label4.setText("PH responsable :");
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        Label3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        Label3.setForeground(new java.awt.Color(170, 0, 0));
-        Label3.setText("Date :");
+        visualiserImagesSélectionnees.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        visualiserImagesSélectionnees.setForeground(new java.awt.Color(3, 173, 161));
+        visualiserImagesSélectionnees.setText("Visualiser images numérisées");
+        visualiserImagesSélectionnees.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visualiserImagesSélectionneesActionPerformed(evt);
+            }
+        });
 
+        boutonAjouterImages.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        boutonAjouterImages.setForeground(new java.awt.Color(3, 173, 161));
+        boutonAjouterImages.setText("Ajouter images numérisées");
+        boutonAjouterImages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonAjouterImagesActionPerformed(evt);
+            }
+        });
+
+        visualisation3D.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        visualisation3D.setForeground(new java.awt.Color(3, 173, 161));
+        visualisation3D.setText("Visualisation 3D");
+        visualisation3D.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visualisation3DActionPerformed(evt);
+            }
+        });
+
+        pacs_label_1.setBackground(new java.awt.Color(255, 255, 255));
         pacs_label_1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        pacs_label_1.setForeground(new java.awt.Color(3, 173, 161));
         pacs_label_1.setText("N° PACS : / DMR Papier");
 
+        pacs_label.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        pacs_label.setText("numPACS");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(visualiserImagesSélectionnees, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(visualisation3D, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(boutonAjouterImages, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(pacs_label_1)
+                        .addGap(18, 18, 18)
+                        .addComponent(pacs_label)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pacs_label_1)
+                    .addComponent(pacs_label))
+                .addGap(18, 18, 18)
+                .addComponent(visualiserImagesSélectionnees)
+                .addGap(18, 18, 18)
+                .addComponent(boutonAjouterImages)
+                .addGap(18, 18, 18)
+                .addComponent(visualisation3D))
+        );
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        Label1.setBackground(new java.awt.Color(255, 255, 255));
+        Label1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        Label1.setForeground(new java.awt.Color(3, 173, 161));
+        Label1.setText("DMR :");
+
+        id_label.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        id_label.setText("id (Nom Prénom)");
+
+        Label2.setBackground(new java.awt.Color(255, 255, 255));
+        Label2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        Label2.setForeground(new java.awt.Color(3, 173, 161));
+        Label2.setText("Type d'Examen :");
+
+        type_label.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        type_label.setText("type");
+
+        Label3.setBackground(new java.awt.Color(255, 255, 255));
+        Label3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        Label3.setForeground(new java.awt.Color(3, 173, 161));
+        Label3.setText("Date :");
+
+        date_label.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        date_label.setText("date");
+
+        Label4.setBackground(new java.awt.Color(255, 255, 255));
+        Label4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        Label4.setForeground(new java.awt.Color(3, 173, 161));
+        Label4.setText("PH responsable :");
+
+        ph_label.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        ph_label.setText("Nom Prénom");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(Label1)
+                        .addGap(18, 18, 18)
+                        .addComponent(id_label))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(Label2)
+                        .addGap(18, 18, 18)
+                        .addComponent(type_label))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(Label3)
+                        .addGap(18, 18, 18)
+                        .addComponent(date_label))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(Label4)
+                        .addGap(18, 18, 18)
+                        .addComponent(ph_label)))
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Label1)
+                    .addComponent(id_label))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Label2)
+                    .addComponent(type_label))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Label3)
+                    .addComponent(date_label))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Label4)
+                    .addComponent(ph_label))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(170, 0, 0));
+        jLabel10.setForeground(new java.awt.Color(3, 173, 161));
         jLabel10.setText("Compte Rendu :");
 
         compte_rendu.setEditable(false);
+        compte_rendu.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         compte_rendu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 compte_renduMouseEntered(evt);
@@ -233,15 +389,12 @@ public class VoirExam extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(compte_rendu);
 
-        id_label.setText("id (Nom Prénom)");
-
-        type_label.setText("type");
-
-        date_label.setText("date");
-
-        ph_label.setText("Nom Prénom");
-
-        pacs_label.setText("jLabel1");
+        print_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-printer-32.png"))); // NOI18N
+        print_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                print_buttonActionPerformed(evt);
+            }
+        });
 
         save_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-save-32.png"))); // NOI18N
         save_button.addActionListener(new java.awt.event.ActionListener() {
@@ -250,134 +403,84 @@ public class VoirExam extends javax.swing.JPanel {
             }
         });
 
-        print_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-printer-32.png"))); // NOI18N
-        print_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                print_buttonActionPerformed(evt);
-            }
-        });
-
-        boutonAjouterImages.setText("Ajouter images numérisées");
-        boutonAjouterImages.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boutonAjouterImagesActionPerformed(evt);
-            }
-        });
-
-        visualiserImagesSélectionnees.setText("visualiser images numérisées");
-        visualiserImagesSélectionnees.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                visualiserImagesSélectionneesActionPerformed(evt);
-            }
-        });
-
-        visualisation3D.setText("visualisation 3D");
-        visualisation3D.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                visualisation3DActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(print_button)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(save_button))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1037, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 15, Short.MAX_VALUE))))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(print_button, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(save_button, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(205, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel10)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(pacs_label_1)
-                            .addGap(18, 18, 18)
-                            .addComponent(pacs_label)
-                            .addGap(18, 18, 18)
-                            .addComponent(boutonAjouterImages)
-                            .addGap(66, 66, 66)
-                            .addComponent(visualiserImagesSélectionnees)
-                            .addGap(77, 77, 77)
-                            .addComponent(visualisation3D))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(Label3)
-                            .addGap(18, 18, 18)
-                            .addComponent(date_label))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(Label4)
-                            .addGap(18, 18, 18)
-                            .addComponent(ph_label))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(Label2)
-                            .addGap(18, 18, 18)
-                            .addComponent(type_label))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(Label1)
-                            .addGap(18, 18, 18)
-                            .addComponent(id_label))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(print_button)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(save_button))))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(88, 88, 88))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Label1)
-                    .addComponent(id_label))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Label2)
-                    .addComponent(type_label))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Label3)
-                    .addComponent(date_label))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Label4)
-                    .addComponent(ph_label))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pacs_label_1)
-                    .addComponent(pacs_label)
-                    .addComponent(boutonAjouterImages)
-                    .addComponent(visualiserImagesSélectionnees)
-                    .addComponent(visualisation3D))
-                .addGap(32, 32, 32)
-                .addComponent(jLabel10)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(save_button, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(print_button, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(169, 169, 169))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1098, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1531, Short.MAX_VALUE)
+            .addGap(0, 1098, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -385,7 +488,7 @@ public class VoirExam extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 819, Short.MAX_VALUE)
+            .addGap(0, 686, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -524,7 +627,7 @@ public class VoirExam extends javax.swing.JPanel {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File[] liste_files = fc.getSelectedFiles();
             //On visualise les images sélectionnées pour les comparer
-            IconDemoApp vision = new IconDemoApp(liste_files, title_label.getText());
+            IconDemoApp vision = new IconDemoApp(liste_files, jLabel5.getText());
             vision.setVisible(true);
 
         } else {
@@ -555,9 +658,13 @@ public class VoirExam extends javax.swing.JPanel {
     private javax.swing.JDialog fen_confirmer_imp;
     private javax.swing.JLabel id_label;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel pacs_label;
@@ -565,9 +672,9 @@ public class VoirExam extends javax.swing.JPanel {
     private javax.swing.JLabel ph_label;
     private javax.swing.JButton print_button;
     private javax.swing.JButton save_button;
-    private javax.swing.JLabel title_label;
     private javax.swing.JLabel type_label;
     private javax.swing.JButton visualisation3D;
+    private javax.swing.JButton visualisation3D1;
     private javax.swing.JButton visualiserImagesSélectionnees;
     // End of variables declaration//GEN-END:variables
 }
