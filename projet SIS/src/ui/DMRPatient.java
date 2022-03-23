@@ -125,8 +125,11 @@ public class DMRPatient extends javax.swing.JPanel {
             }
         });
 
-        id_patient_panel.setBackground(new java.awt.Color(255, 255, 255));
-        id_patient_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Patient", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 20))); // NOI18N
+        dmr_panel.setBackground(new java.awt.Color(255, 255, 255));
+
+        id_patient_panel.setBackground(new java.awt.Color(173, 247, 229));
+        id_patient_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 173, 161), 2), "Patient", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 20), new java.awt.Color(3, 173, 161))); // NOI18N
+        id_patient_panel.setForeground(new java.awt.Color(3, 173, 161));
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel8.setText("Nom -----------------------------");
@@ -249,10 +252,11 @@ public class DMRPatient extends javax.swing.JPanel {
                 .addGap(58, 58, 58))
         );
 
-        exams.setBackground(new java.awt.Color(255, 255, 255));
-        exams.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Examens", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 20))); // NOI18N
+        exams.setBackground(new java.awt.Color(173, 247, 229));
+        exams.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(3, 173, 161), 2, true), "Examens\n", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 20), new java.awt.Color(3, 173, 161))); // NOI18N
+        exams.setForeground(new java.awt.Color(3, 173, 161));
 
-        table_exams.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        table_exams.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         table_exams.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -293,6 +297,8 @@ public class DMRPatient extends javax.swing.JPanel {
                 .addComponent(jScrollPane1)
                 .addContainerGap())
         );
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         new_exam.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         new_exam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add (2).png"))); // NOI18N
@@ -354,9 +360,11 @@ public class DMRPatient extends javax.swing.JPanel {
             dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dmr_panelLayout.createSequentialGroup()
                 .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(dmr_panelLayout.createSequentialGroup()
-                        .addGap(141, 141, 141)
+                        .addContainerGap()
+                        .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dmr_panelLayout.createSequentialGroup()
+                        .addGap(151, 151, 151)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(exams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -379,7 +387,7 @@ public class DMRPatient extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dmr_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(dmr_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

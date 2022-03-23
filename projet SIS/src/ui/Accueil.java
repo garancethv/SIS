@@ -405,12 +405,12 @@ public class Accueil extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        search_panel.setBackground(new java.awt.Color(173, 253, 226));
-        search_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(5, 246, 168), 2));
+        search_panel.setBackground(new java.awt.Color(173, 247, 229));
+        search_panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 173, 161), 2));
         search_panel.setPreferredSize(new java.awt.Dimension(330, 150));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 153, 102));
+        jLabel1.setForeground(new java.awt.Color(3, 173, 161));
         jLabel1.setText("Rechercher un DMR :");
         jLabel1.setToolTipText("");
 
