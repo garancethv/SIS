@@ -1,5 +1,7 @@
 package nf;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Date;
 /**
@@ -22,17 +24,17 @@ public class SIS {
         //String nom = null;
         //System.out.println(nom);
         
-        Date d1 = new Date(01, 01, 1001);
-        Date d2 = new Date(01, 01, 1002);
-        Date d3 = new Date(01, 01, 1003);
-        Date d4 = new Date(01, 01, 1004);
-        Date d5 = new Date(01, 01, 1005);
-        ArrayList<Date> dates = new ArrayList<>();
-        dates.add(d1);
-        dates.add(d2);
-        dates.add(d3);
-        dates.add(d4);
-        dates.add(d5);
+//        Date d1 = new Date(01, 01, 1001);
+//        Date d2 = new Date(01, 01, 1002);
+//        Date d3 = new Date(01, 01, 1003);
+//        Date d4 = new Date(01, 01, 1004);
+//        Date d5 = new Date(01, 01, 1005);
+//        ArrayList<Date> dates = new ArrayList<>();
+//        dates.add(d1);
+//        dates.add(d2);
+//        dates.add(d3);
+//        dates.add(d4);
+//        dates.add(d5);
         
         
         /*int nb_examens = dates.size();
@@ -48,6 +50,9 @@ public class SIS {
             }
         }
         System.out.println(dates_tri.get(3).toString());*/
+        
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        System.out.println(size);
 
 }
 
