@@ -67,20 +67,20 @@ public class AccueilConnexion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Connexion");
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(1098, 675));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoHopital3.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoHopital.png"))); // NOI18N
 
-        jPanel2.setBackground(new java.awt.Color(213, 241, 241));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(56, 194, 197), 2));
+        jPanel2.setBackground(new java.awt.Color(236, 236, 236));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(149, 46, 46), 2));
 
-        bouton_valider.setBackground(new java.awt.Color(255, 255, 255));
+        bouton_valider.setBackground(new java.awt.Color(204, 204, 204));
         bouton_valider.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
-        bouton_valider.setForeground(new java.awt.Color(56, 194, 197));
+        bouton_valider.setForeground(new java.awt.Color(149, 46, 46));
         bouton_valider.setText("Valider");
-        bouton_valider.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(56, 194, 197), null));
+        bouton_valider.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(149, 46, 46), null));
         bouton_valider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bouton_validerActionPerformed(evt);
@@ -88,8 +88,8 @@ public class AccueilConnexion extends javax.swing.JFrame {
         });
 
         field_mdp.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        field_mdp.setForeground(new java.awt.Color(56, 194, 197));
-        field_mdp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(56, 194, 197), 2));
+        field_mdp.setForeground(new java.awt.Color(100, 0, 0));
+        field_mdp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(149, 46, 46)));
         field_mdp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 field_mdpActionPerformed(evt);
@@ -97,15 +97,15 @@ public class AccueilConnexion extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(56, 194, 197));
+        jLabel5.setForeground(new java.awt.Color(170, 0, 0));
         jLabel5.setText("Identifiant");
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(56, 194, 197));
+        jLabel6.setForeground(new java.awt.Color(170, 0, 0));
         jLabel6.setText("Mot de passe");
 
-        field_identifiant.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(56, 194, 197), 2));
-        field_identifiant.setForeground(new java.awt.Color(56, 194, 197));
+        field_identifiant.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(149, 46, 46)));
+        field_identifiant.setForeground(new java.awt.Color(100, 0, 0));
         field_identifiant.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -143,8 +143,8 @@ public class AccueilConnexion extends javax.swing.JFrame {
                 .addGap(44, 44, 44))
         );
 
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 30)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(56, 194, 197));
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 30)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(170, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Page de connexion");
 
