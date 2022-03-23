@@ -126,36 +126,51 @@ public class DMRPatient extends javax.swing.JPanel {
         });
 
         id_patient_panel.setBackground(new java.awt.Color(255, 255, 255));
-        id_patient_panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Patient"));
+        id_patient_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Patient", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 20))); // NOI18N
 
-        jLabel8.setText("Nom -----------------------");
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jLabel8.setText("Nom -----------------------------");
 
-        jLabel9.setText("Prénom --------------------");
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jLabel9.setText("Prénom -------------------------");
 
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel10.setText("Date de naissance --------");
 
-        jLabel14.setText("N° id -----------------------");
+        jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jLabel14.setText("N° id -----------------------------");
 
+        nom_patient.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         nom_patient.setText("John");
 
+        prenom_patient.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         prenom_patient.setText("Doe");
 
+        date_naissance.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         date_naissance.setText("01/01/1900");
 
+        id.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         id.setText("JLabel");
 
-        jLabel1.setText("Genre ----------------------");
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jLabel1.setText("Genre ---------------------------");
 
+        genre_patient.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         genre_patient.setText("Inconnu");
 
-        jLabel2.setText("Téléphone -----------------");
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jLabel2.setText("Téléphone --------------------");
 
+        tel_label.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         tel_label.setText("0781808779");
 
-        jLabel4.setText("Adresse --------------------");
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jLabel4.setText("Adresse ------------------------");
 
+        adresse.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         adresse.setText("14, place du Conseil National de la Résistance");
 
+        ville.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         ville.setText("38400 Saint-Martin-d'Hères");
 
         javax.swing.GroupLayout id_patient_panelLayout = new javax.swing.GroupLayout(id_patient_panel);
@@ -235,8 +250,9 @@ public class DMRPatient extends javax.swing.JPanel {
         );
 
         exams.setBackground(new java.awt.Color(255, 255, 255));
-        exams.setBorder(javax.swing.BorderFactory.createTitledBorder("Examens"));
+        exams.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Examens", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 20))); // NOI18N
 
+        table_exams.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         table_exams.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -278,6 +294,7 @@ public class DMRPatient extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        new_exam.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         new_exam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add (2).png"))); // NOI18N
         new_exam.setText("  Créer un nouvel examen");
         new_exam.addActionListener(new java.awt.event.ActionListener() {
@@ -286,6 +303,7 @@ public class DMRPatient extends javax.swing.JPanel {
             }
         });
 
+        selection_button.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         selection_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-view-32.png"))); // NOI18N
         selection_button.setText("  Voir l'examen sélectionné");
         selection_button.setMaximumSize(new java.awt.Dimension(251, 41));
@@ -311,11 +329,11 @@ public class DMRPatient extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(new_exam, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(new_exam, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
                             .addComponent(selection_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(erreur_exam, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)))
+                        .addComponent(erreur_exam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -336,10 +354,10 @@ public class DMRPatient extends javax.swing.JPanel {
             dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dmr_panelLayout.createSequentialGroup()
                 .addGroup(dmr_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(dmr_panelLayout.createSequentialGroup()
                         .addGap(141, 141, 141)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(id_patient_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(exams, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

@@ -36,11 +36,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Component id="id_patient_panel" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
                           <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="id_patient_panel" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="exams" min="-2" max="-2" attributes="0"/>
@@ -73,7 +73,9 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Patient"/>
+                <TitledBorder title="Patient">
+                  <Font PropertyName="font" name="Century Gothic" size="20" style="1"/>
+                </TitledBorder>
               </Border>
             </Property>
           </Properties>
@@ -177,76 +179,121 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nom -----------------------"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Nom -----------------------------"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pr&#xe9;nom --------------------"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Pr&#xe9;nom -------------------------"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Date de naissance --------"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
               <Properties>
-                <Property name="text" type="java.lang.String" value="N&#xb0; id -----------------------"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="N&#xb0; id -----------------------------"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="nom_patient">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="John"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="prenom_patient">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Doe"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="date_naissance">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="01/01/1900"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="id">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="JLabel"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Genre ----------------------"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Genre ---------------------------"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="genre_patient">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Inconnu"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="T&#xe9;l&#xe9;phone -----------------"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="T&#xe9;l&#xe9;phone --------------------"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="tel_label">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="0781808779"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Adresse --------------------"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Adresse ------------------------"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="adresse">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="14, place du Conseil National de la R&#xe9;sistance"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="ville">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="38400 Saint-Martin-d&apos;H&#xe8;res"/>
               </Properties>
             </Component>
@@ -259,7 +306,9 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Examens"/>
+                <TitledBorder title="Examens">
+                  <Font PropertyName="font" name="Century Gothic" size="20" style="1"/>
+                </TitledBorder>
               </Border>
             </Property>
           </Properties>
@@ -294,6 +343,9 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="table_exams">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Century Gothic" size="16" style="0"/>
+                    </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="3" rowCount="0">
                         <Column editable="false" title="Date" type="java.lang.Object"/>
@@ -324,13 +376,13 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="new_exam" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="new_exam" alignment="0" pref="285" max="32767" attributes="0"/>
                                   <Component id="selection_button" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="erreur_exam" pref="258" max="32767" attributes="0"/>
+                              <Component id="erreur_exam" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -354,6 +406,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="new_exam">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Images/add (2).png"/>
                 </Property>
@@ -365,6 +420,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="selection_button">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="16" style="0"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Images/icons8-view-32.png"/>
                 </Property>

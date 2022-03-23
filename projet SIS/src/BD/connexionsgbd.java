@@ -71,21 +71,24 @@ class connexionsgbd {
             DMR dmr1 = requetesbd.recupDMR(conn, "7");
             System.out.println(dmr1.toString());
 
-            conn = requetesbd.connexionBD();
-            if (requetesbd.dmrExisteBis(conn, "Doe", "John", d)) {
-                conn = requetesbd.connexionBD();
-                ArrayList<DMR> listedmr = requetesbd.recupDMRBis(conn, "Doe", "John", d);
-                System.out.println(listedmr.toString()); 
-            } 
+//            conn = requetesbd.connexionBD();
+//            if (requetesbd.dmrExisteBis(conn, "Doe", "John", d)) {
+//                conn = requetesbd.connexionBD();
+//                ArrayList<DMR> listedmr = requetesbd.recupDMRBis(conn, "Doe", "John", d);
+//                System.out.println(listedmr.toString()); 
+//            } 
+//            conn = requetesbd.connexionBD();
+//
+//            requetesbd.creationExamen(conn, dmr1, 1234567890, TypeExamen.IRM, 1,"");
+//            
+//            conn = requetesbd.connexionBD();
+//            requetesbd.creationCR(conn, dmr1.getExamens().get(1), dmr1.getExamens().get(1).getDate().toString(), "test2");
+//            conn = requetesbd.connexionBD();
+//            System.out.println(requetesbd.recupExamen(conn, dmr1).getExamens());
             conn = requetesbd.connexionBD();
 
-            requetesbd.creationExamen(conn, dmr1, 1234567890, TypeExamen.IRM, 1,"");
-            
-            conn = requetesbd.connexionBD();
-            requetesbd.creationCR(conn, dmr1.getExamens().get(1), dmr1.getExamens().get(1).getDate().toLocaleString(), "test2");
-            conn = requetesbd.connexionBD();
-//            System.out.println(requetesbd.recupExamen(conn, dmr1).getExamens());
- 
+            System.out.println("exam selon date : "+ requetesbd.triExamenSelonDate(conn, dmr1).getExamens().toString());
+
             // requetesbd.employes(conn); 
 // Print information about connection warnings
             //SQLWarningsExceptions.printWarnings(conn);
