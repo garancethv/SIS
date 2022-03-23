@@ -436,6 +436,12 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="date_naissance_field">
+<<<<<<< HEAD
+=======
+                  <Properties>
+                    <Property name="toolTipText" type="java.lang.String" value="DD/MM/AAAA"/>
+                  </Properties>
+>>>>>>> ae92c1273e3a5b8fdc934e58816e8eda0c71e6f8
                 </Component>
                 <Component class="javax.swing.JLabel" name="erreur_date">
                   <Properties>

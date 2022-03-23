@@ -85,7 +85,7 @@ public class Accueil extends javax.swing.JFrame {
         erreur_nom = new javax.swing.JLabel();
         loading_nom = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        liste_patients = new javax.swing.JList<String>();
+        liste_patients = new javax.swing.JList<>();
         search_field_nom = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -176,10 +176,10 @@ public class Accueil extends javax.swing.JFrame {
         loading_nom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-chargement-en-cours-48.png"))); // NOI18N
         loading_nom.setText("Chargement en cours");
 
-        liste_patients.setModel(new javax.swing.AbstractListModel() {
+        liste_patients.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            public String getElementAt(int i) { return strings[i]; }
         });
         liste_patients.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -334,7 +334,7 @@ public class Accueil extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        logout_jdialog.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        logout_jdialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         logout_jdialog.setModal(true);
         logout_jdialog.setResizable(false);
         logout_jdialog.setSize(new java.awt.Dimension(485, 250));
@@ -399,6 +399,7 @@ public class Accueil extends javax.swing.JFrame {
 
         Onglets.setBackground(new java.awt.Color(255, 255, 255));
         Onglets.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Onglets.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         Onglets.setOpaque(true);
 
         Fond.setBackground(new java.awt.Color(255, 255, 255));
@@ -660,6 +661,9 @@ public class Accueil extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Onglets, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+
+        Onglets.getAccessibleContext().setAccessibleName("Accueil");
+        Onglets.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
