@@ -810,6 +810,7 @@ public class Accueil extends javax.swing.JFrame {
         // si confirmation de déconnexion : ferme la session et retourne sur page de connexion
         AccueilConnexion ac = new AccueilConnexion();
         ac.setVisible(true);
+        logout_jdialog.setVisible(false);
         dispose();
     }//GEN-LAST:event_yes_logoutActionPerformed
 
