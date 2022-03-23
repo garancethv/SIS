@@ -511,6 +511,9 @@ public class DMRPatient extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseClicked
 
     private void actualiseTableau(ArrayList<Examen> ex) {
+        // actualise examens
+        examens=ex;
+        
         // vider le tableau
         DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
         int rows = model.getRowCount();

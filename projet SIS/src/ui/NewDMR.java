@@ -718,7 +718,7 @@ public class NewDMR extends javax.swing.JPanel {
                         javax.swing.JPanel dmrpanel = new DMRPatient(pane, user, nv_dmr);
 
                         // ajoute un nouvel onglet
-                        pane.addTab("             DMR         ", dmrpanel);
+                        pane.addTab("       " + nv_dmr.getPrenomPatient() + " " + nv_dmr.getNomPatient() + " (" + nv_dmr.getId() + ")" + "     ", dmrpanel);
                         pane.setSelectedComponent(dmrpanel);
 
                         // création d'un bouton pour fermer l'onglet
@@ -766,7 +766,7 @@ public class NewDMR extends javax.swing.JPanel {
             javax.swing.JPanel dmrpanel = new DMRPatient(pane, user, nv_dmr);
 
             // ajoute un nouvel onglet
-            pane.addTab("             DMR         ", dmrpanel);
+            pane.addTab("       " + nv_dmr.getPrenomPatient() + " " + nv_dmr.getNomPatient() + " (" + nv_dmr.getId() + ")" + "     ", dmrpanel);
             pane.setSelectedComponent(dmrpanel);
 
             // création d'un bouton pour fermer l'onglet
