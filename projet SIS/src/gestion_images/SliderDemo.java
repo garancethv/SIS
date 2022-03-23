@@ -241,7 +241,7 @@ public class SliderDemo extends JPanel {
         });
         add(boutonMiroir);
 
-        JButton rotation = new JButton("rotation");
+        JButton rotation = new JButton("Rotation");
         rotation.addMouseListener(new MouseListener() {
 
             @Override
@@ -371,7 +371,7 @@ public class SliderDemo extends JPanel {
      */
     public static void createAndShowGUI(String chemin) {
         //Create and set up the window.
-        JFrame frame = new JFrame("SliderDemo");
+        JFrame frame = new JFrame("Visionneuse d'images");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         SliderDemo animator = new SliderDemo(chemin);
 
