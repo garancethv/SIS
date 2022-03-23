@@ -292,7 +292,7 @@
     </Container>
     <Container class="javax.swing.JDialog" name="logout_jdialog">
       <Properties>
-        <Property name="defaultCloseOperation" type="int" value="0"/>
+        <Property name="defaultCloseOperation" type="int" value="2"/>
         <Property name="modal" type="boolean" value="true"/>
         <Property name="resizable" type="boolean" value="false"/>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -425,14 +425,8 @@
             <BevelBorder/>
           </Border>
         </Property>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Serif" size="18" style="1"/>
-        </Property>
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Accueil"/>
-      </AccessibilityProperties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -499,6 +493,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
+
                           <Component id="search_panel" min="-2" pref="296" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
@@ -509,6 +504,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
+
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -518,6 +514,7 @@
                       <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
                       <Component id="jPanel5" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
+
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jPanel3" min="-2" pref="141" max="-2" attributes="0"/>
                               <Component id="jPanel2" min="-2" pref="139" max="-2" attributes="0"/>

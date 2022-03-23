@@ -173,9 +173,11 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="pacs_label" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="boutonAjouterImages" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="visualiserImagesSélectionnees" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                                  <Component id="visualisation3D" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="Label3" min="-2" max="-2" attributes="0"/>
@@ -235,8 +237,9 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="pacs_label_1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="pacs_label" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="boutonAjouterImages" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="visualiserImagesSélectionnees" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="visualisation3D" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
@@ -379,20 +382,28 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="print_buttonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="boutonAjouterImages">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ajouter images num&#xe9;ris&#xe9;es"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boutonAjouterImagesActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="visualiserImagesS&#xe9;lectionnees">
               <Properties>
                 <Property name="text" type="java.lang.String" value="visualiser images num&#xe9;ris&#xe9;es"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="visualiserImagesS&#xe9;lectionneesActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="visualisation3D">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="visualisation 3D"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="visualisation3DActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="visualisation3D">
