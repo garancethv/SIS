@@ -38,10 +38,7 @@ public class AccueilConnexion extends javax.swing.JFrame {
     
     public AccueilConnexion() {
         initComponents();
-
         this.setLocationRelativeTo(null);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
         erreur_connexion.setVisible(false);
     }
 
@@ -95,6 +92,11 @@ public class AccueilConnexion extends javax.swing.JFrame {
                 field_mdpActionPerformed(evt);
             }
         });
+        field_mdp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                field_mdpKeyPressed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(56, 194, 197));
@@ -107,6 +109,11 @@ public class AccueilConnexion extends javax.swing.JFrame {
         field_identifiant.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(56, 194, 197), 2));
         field_identifiant.setForeground(new java.awt.Color(56, 194, 197));
         field_identifiant.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        field_identifiant.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                field_identifiantKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -198,8 +205,7 @@ public class AccueilConnexion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bouton_validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_validerActionPerformed
-        
+    private void connexion() {
         String mdp = field_mdp.getText();
         String id = field_identifiant.getText();
         System.out.println(id);
@@ -223,6 +229,10 @@ public class AccueilConnexion extends javax.swing.JFrame {
         else{
             erreur_connexion();
         }
+    }
+    
+    private void bouton_validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_validerActionPerformed
+        connexion();
     }//GEN-LAST:event_bouton_validerActionPerformed
 
     private void erreur_connexion() {
@@ -234,6 +244,18 @@ public class AccueilConnexion extends javax.swing.JFrame {
     private void field_mdpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_mdpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_field_mdpActionPerformed
+
+    private void field_mdpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_mdpKeyPressed
+        if (evt.getKeyCode() == 10) {
+            connexion();
+        }
+    }//GEN-LAST:event_field_mdpKeyPressed
+
+    private void field_identifiantKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_identifiantKeyPressed
+        if (evt.getKeyCode() == 10) {
+            connexion();
+        }
+    }//GEN-LAST:event_field_identifiantKeyPressed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
