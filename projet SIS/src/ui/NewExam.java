@@ -300,7 +300,7 @@ public class NewExam extends javax.swing.JPanel {
                 javax.swing.JPanel exam_panel=new VoirExam(ajout_exam,user,ex);
 
                 // insertion d'un nouvel onglet après la page de l'examen 
-                Onglets.insertTab("           " + ex.getTypeExamen().toString() + " (" + ex.getDate() + ")        ",null,exam_panel,null,Onglets.getSelectedIndex()+1);
+                Onglets.insertTab("           " + ex.getTypeExamen().toString() + " (" + ex.getDate() + ")        ",null,exam_panel,null,Onglets.getSelectedIndex());
                 Onglets.setSelectedComponent(exam_panel);
 
                 // création d'un bouton pour fermer l'onglet
