@@ -257,6 +257,11 @@ public class VoirExam extends javax.swing.JPanel {
         });
 
         visualisation3D.setText("visualisation 3D");
+        visualisation3D.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visualisation3DActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

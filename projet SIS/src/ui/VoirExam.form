@@ -383,6 +383,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="visualisation 3D"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="visualisation3DActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
