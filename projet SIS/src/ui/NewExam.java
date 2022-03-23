@@ -65,9 +65,10 @@ public class NewExam extends javax.swing.JPanel {
     private void initComponents() {
 
         cr_jdialog = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         cr_field = new javax.swing.JTextArea();
-        jLabel10 = new javax.swing.JLabel();
         save_button = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         valider_button = new javax.swing.JButton();
@@ -80,22 +81,32 @@ public class NewExam extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
 
         cr_jdialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        cr_jdialog.setBackground(new java.awt.Color(255, 255, 255));
         cr_jdialog.setModal(true);
         cr_jdialog.setResizable(false);
         cr_jdialog.setSize(new java.awt.Dimension(747, 540));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(37, 191, 252));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/feuilleBC1.png"))); // NOI18N
+        jLabel3.setText("Saisie du compte-rendu");
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+
         cr_field.setColumns(20);
+        cr_field.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
         cr_field.setRows(5);
+        cr_field.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(37, 191, 252)));
         cr_field.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 cr_fieldKeyTyped(evt);
             }
         });
         jScrollPane1.setViewportView(cr_field);
-
-        jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(170, 0, 0));
-        jLabel10.setText("Compte Rendu :");
 
         save_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-save-32.png"))); // NOI18N
         save_button.addActionListener(new java.awt.event.ActionListener() {
@@ -104,33 +115,43 @@ public class NewExam extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout cr_jdialogLayout = new javax.swing.GroupLayout(cr_jdialog.getContentPane());
-        cr_jdialog.getContentPane().setLayout(cr_jdialogLayout);
-        cr_jdialogLayout.setHorizontalGroup(
-            cr_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cr_jdialogLayout.createSequentialGroup()
-                .addGap(290, 290, 290)
-                .addComponent(jLabel10)
-                .addContainerGap(291, Short.MAX_VALUE))
-            .addGroup(cr_jdialogLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(cr_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cr_jdialogLayout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(save_button)))
                 .addContainerGap())
         );
-        cr_jdialogLayout.setVerticalGroup(
-            cr_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cr_jdialogLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel10)
-                .addGap(31, 31, 31)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(save_button, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout cr_jdialogLayout = new javax.swing.GroupLayout(cr_jdialog.getContentPane());
+        cr_jdialog.getContentPane().setLayout(cr_jdialogLayout);
+        cr_jdialogLayout.setHorizontalGroup(
+            cr_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        cr_jdialogLayout.setVerticalGroup(
+            cr_jdialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -349,10 +370,11 @@ public class NewExam extends javax.swing.JPanel {
     private javax.swing.JTextArea cr_field;
     private javax.swing.JDialog cr_jdialog;
     private javax.swing.JLabel erreur_ph;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField ph_field;
