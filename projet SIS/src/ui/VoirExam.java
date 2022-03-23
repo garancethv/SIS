@@ -68,6 +68,14 @@ public class VoirExam extends javax.swing.JPanel {
         } catch (Exception e) {
         }
 
+        if (ex.getNumPACS() == 0) {
+            pacs_label_1.setText("DMR Papier");
+            pacs_label.setText("");
+        } else {
+            pacs_label_1.setText("N° PACS :");
+            pacs_label.setText(String.valueOf(ex.getNumPACS()));
+        }
+
         //compte-rendu éditable seulement si vide
         if (ex.getTexteCR() != null && !ex.getTexteCR().equals("")) {
             compte_rendu.setText(ex.getTexteCR());
@@ -117,6 +125,7 @@ public class VoirExam extends javax.swing.JPanel {
         Label2 = new javax.swing.JLabel();
         Label4 = new javax.swing.JLabel();
         Label3 = new javax.swing.JLabel();
+        pacs_label_1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         compte_rendu = new javax.swing.JTextPane();
@@ -124,6 +133,7 @@ public class VoirExam extends javax.swing.JPanel {
         type_label = new javax.swing.JLabel();
         date_label = new javax.swing.JLabel();
         ph_label = new javax.swing.JLabel();
+        pacs_label = new javax.swing.JLabel();
         save_button = new javax.swing.JButton();
         print_button = new javax.swing.JButton();
         boutonAjouterImages = new javax.swing.JButton();
@@ -203,6 +213,9 @@ public class VoirExam extends javax.swing.JPanel {
         Label3.setForeground(new java.awt.Color(170, 0, 0));
         Label3.setText("Date :");
 
+        pacs_label_1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        pacs_label_1.setText("N° PACS : / DMR Papier");
+
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(170, 0, 0));
         jLabel10.setText("Compte Rendu :");
@@ -227,6 +240,8 @@ public class VoirExam extends javax.swing.JPanel {
         date_label.setText("date");
 
         ph_label.setText("Nom Prénom");
+
+        pacs_label.setText("jLabel1");
 
         save_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-save-32.png"))); // NOI18N
         save_button.addActionListener(new java.awt.event.ActionListener() {
@@ -273,10 +288,14 @@ public class VoirExam extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel10)
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(boutonAjouterImages)
-                            .addGap(38, 38, 38)
-                            .addComponent(visualiserImagesSélectionnees)
+                            .addComponent(pacs_label_1)
                             .addGap(18, 18, 18)
+                            .addComponent(pacs_label)
+                            .addGap(18, 18, 18)
+                            .addComponent(boutonAjouterImages)
+                            .addGap(66, 66, 66)
+                            .addComponent(visualiserImagesSélectionnees)
+                            .addGap(77, 77, 77)
                             .addComponent(visualisation3D))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(Label3)
@@ -321,6 +340,8 @@ public class VoirExam extends javax.swing.JPanel {
                     .addComponent(ph_label))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pacs_label_1)
+                    .addComponent(pacs_label)
                     .addComponent(boutonAjouterImages)
                     .addComponent(visualiserImagesSélectionnees)
                     .addComponent(visualisation3D))
@@ -539,6 +560,8 @@ public class VoirExam extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel pacs_label;
+    private javax.swing.JLabel pacs_label_1;
     private javax.swing.JLabel ph_label;
     private javax.swing.JButton print_button;
     private javax.swing.JButton save_button;
