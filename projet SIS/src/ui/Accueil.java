@@ -15,6 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -85,7 +86,7 @@ public class Accueil extends javax.swing.JFrame {
         erreur_nom = new javax.swing.JLabel();
         loading_nom = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        liste_patients = new javax.swing.JList<String>();
+        liste_patients = new javax.swing.JList<>();
         search_field_nom = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -176,10 +177,10 @@ public class Accueil extends javax.swing.JFrame {
         loading_nom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-chargement-en-cours-48.png"))); // NOI18N
         loading_nom.setText("Chargement en cours");
 
-        liste_patients.setModel(new javax.swing.AbstractListModel() {
+        liste_patients.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            public String getElementAt(int i) { return strings[i]; }
         });
         liste_patients.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -399,6 +400,7 @@ public class Accueil extends javax.swing.JFrame {
 
         Onglets.setBackground(new java.awt.Color(255, 255, 255));
         Onglets.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Onglets.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         Onglets.setOpaque(true);
 
         Fond.setBackground(new java.awt.Color(255, 255, 255));
@@ -661,6 +663,8 @@ public class Accueil extends javax.swing.JFrame {
             .addComponent(Onglets, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        Onglets.getAccessibleContext().setAccessibleName("Accueil");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -810,6 +814,7 @@ public class Accueil extends javax.swing.JFrame {
         // si confirmation de déconnexion : ferme la session et retourne sur page de connexion
         AccueilConnexion ac = new AccueilConnexion();
         ac.setVisible(true);
+        logout_jdialog.setVisible(false);
         dispose();
     }//GEN-LAST:event_yes_logoutActionPerformed
 
