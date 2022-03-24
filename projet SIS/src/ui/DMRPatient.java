@@ -6,8 +6,6 @@
 package ui;
 
 import BD.requetesbd;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JTabbedPane;
@@ -41,9 +39,8 @@ public class DMRPatient extends javax.swing.JPanel {
     }
 
     /**
-     * Constructeur de DMRPatient (panel affichant les informations d'un patient et la liste de
-     * ses examens)
-     * @param pane : le JTabbedPane Onglets présent dans la JFrame
+     * Constructeur de DMRPatient (panel affichant les informations d'un patient et la liste de ses examens)
+     * @param pane : le JTabbedPane Onglets
      * @param user : l'utilisateur connecté
      * @param dmr : le dmr affiché
      */
@@ -81,8 +78,7 @@ public class DMRPatient extends javax.swing.JPanel {
         erreur_exam.setVisible(false);
 
         DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
-        // examens triés du plus ancien ou plus récent dans la BD, donc il suffit de parcourir la liste en sens inverse
-        for (int i = examens.size() - 1; i >= 0; i--) {
+        for (int i = 0; i < examens.size() ; i++) {
             try {
                 Personnel p = requetesbd.utilisateur(requetesbd.connexionBD(), examens.get(i).getIdPhRespo());
                 String ph = "Dr " + p.getPrenom() + " " + p.getNom();
@@ -502,12 +498,11 @@ public class DMRPatient extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Action Listener du bouton sélectionner un examen.
-     * Si un examen du tableau est sélectionné, l'ouvre (via la fonction ouvreExam())
+     * Action Listener du bouton "Voir l'examen sélectionné".
+     * Si un examen du tableau est sélectionné, l'ouvre (via la fonction ouvreExam).
      * Sinon affiche un message d'erreur.
      */
     private void selection_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selection_buttonActionPerformed
-
         if (ligne > -1) {
             ouvreExam();
         } else {
@@ -515,10 +510,12 @@ public class DMRPatient extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_selection_buttonActionPerformed
 
+    /**
+     * Ouvre l'examen sélectionné dans un nouvel onglet (juste après le DMR auquel il correspond) s'il n'est pas déjà ouvert.
+     * Sinon, ouvre l'onglet correspondant.
+     */
     private void ouvreExam() {
-        // Besoin d'une fonction recherche d'un exam avec id patient & date exam
-
-        Examen ex = examens.get(examens.size() - 1 - ligne);
+        Examen ex = examens.get(ligne);
         
         //si l'examen n'est pas déjà ouvert, on ouvre un nouvel onglet
         int index = Onglets.indexOfTab("           " + ex.getTypeExamen().toString() + " (" + ex.getDate() + ")        ");
@@ -544,6 +541,10 @@ public class DMRPatient extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * ActionListener du tableau d'Examens.
+     * Si double clic sur une même ligne, ouvre l'examen correspondant via la fonction ouvreExam.
+     */
     private void table_examsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_examsMouseClicked
         erreur_exam.setVisible(false);
         ligne = table_exams.getSelectedRow();
@@ -554,6 +555,10 @@ public class DMRPatient extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_table_examsMouseClicked
 
+    /**
+     * Action Listener du bouton "Créer un nouvel Examen".
+     * Ouvre un nouvel onglet de création d'Examen (juste après celui du DMR auquel on veut ajouter l'examen).
+     */
     private void new_examActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_examActionPerformed
         erreur_exam.setVisible(false);
 
@@ -575,15 +580,20 @@ public class DMRPatient extends javax.swing.JPanel {
         erreur_exam.setVisible(false);
     }//GEN-LAST:event_formMouseClicked
 
+    /**
+     * Actualise le tableau d'examens après une action de tri (le vide et le remplit).
+     * @param ex : la liste d'examens triée
+     */
     private void actualiseTableau(ArrayList<Examen> ex) {
+        examens=ex;
         // vider le tableau
         DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
         int rows = model.getRowCount();
         for (int i = rows - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-        // examens triés du plus ancien ou plus récent dans la BD donc il suffit de parcourir la liste en sens inverse
-        for (int i = ex.size() - 1; i >= 0; i--) {
+        // remplir le tableau en parcourant la liste des examens
+        for (int i = 0; i < ex.size(); i++) {
             try {
                 Personnel p = requetesbd.utilisateur(requetesbd.connexionBD(), ex.get(i).getIdPhRespo());
                 String ph = "Dr " + p.getPrenom() + " " + p.getNom();
@@ -593,6 +603,13 @@ public class DMRPatient extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Action Listener de la ComboBox de tri.
+     * Par défaut (quand on ouvre la fenêtre) le mode de tri est par date décroissante.
+     * Si Date est sélectionné : affiche les radiobutton 1 et 2 (croissante et décroissante) et effectue un tri par date décroissante (par défaut).
+     * Si Type est sélectionné : affiche les radiobutton 1, 2 et 3 (scanner, irm et radio)
+     * Si PH est sélectionné : effectue un tri par ordre alphabétique des noms de famille des PH.
+     */
     private void triActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triActionPerformed
         radiobutton1.setVisible(false);
         radiobutton2.setVisible(false);
@@ -614,7 +631,7 @@ public class DMRPatient extends javax.swing.JPanel {
             
             //effectue tri par date décroissante (par défaut)
             try {
-                actualiseTableau(requetesbd.triExamenSelonDateAsc(requetesbd.connexionBD(), dmr).getExamens());
+                actualiseTableau(requetesbd.triExamenSelonDateDesc(requetesbd.connexionBD(), dmr).getExamens());
             }
             catch (Exception e) {
                 System.out.println("Erreur tri décroissant");
@@ -650,6 +667,11 @@ public class DMRPatient extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_triActionPerformed
 
+    /**
+     * Action Listener de radiobutton1.
+     * Si Date est sélectionné : déselectionne le radiobutton2 et effectue le tri par date croissante.
+     * Si Type est sélectionné : déselectionne les radiobutton 2 et 3 et effectue le tri par type IRM.
+     */
     private void radiobutton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobutton1ActionPerformed
         int i = tri.getSelectedIndex();
         
@@ -658,7 +680,7 @@ public class DMRPatient extends javax.swing.JPanel {
         
         if (i==0) { // tri par date croissante
             try {
-                actualiseTableau(requetesbd.triExamenSelonDateDesc(requetesbd.connexionBD(), dmr).getExamens());
+                actualiseTableau(requetesbd.triExamenSelonDateAsc(requetesbd.connexionBD(), dmr).getExamens());
             }
             catch (Exception e) {
                 System.out.println("Erreur tri croissant");
@@ -674,6 +696,11 @@ public class DMRPatient extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_radiobutton1ActionPerformed
 
+    /**
+     * Action Listener de radiobutton2.
+     * Si Date est sélectionné : déselectionne le radiobutton1 et effectue le tri par date décroissante.
+     * Si Type est sélectionné : déselectionne les radiobutton 1 et 3 et effectue le tri par type Scanner.
+     */
     private void radiobutton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobutton2ActionPerformed
         int i = tri.getSelectedIndex();
         
@@ -682,7 +709,7 @@ public class DMRPatient extends javax.swing.JPanel {
         
         if (i==0) { // tri par date décroissante
             try {
-                actualiseTableau(requetesbd.triExamenSelonDateAsc(requetesbd.connexionBD(), dmr).getExamens());
+                actualiseTableau(requetesbd.triExamenSelonDateDesc(requetesbd.connexionBD(), dmr).getExamens());
             }
             catch (Exception e) {
                 System.out.println("Erreur tri décroissant");
@@ -698,6 +725,10 @@ public class DMRPatient extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_radiobutton2ActionPerformed
 
+    /**
+     * Action Listener de radiobutton3.
+     * Effectue le tri par type Radiographie.
+     */
     private void radiobutton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobutton3ActionPerformed
         
         radiobutton1.setSelected(false);
@@ -713,8 +744,9 @@ public class DMRPatient extends javax.swing.JPanel {
     }//GEN-LAST:event_radiobutton3ActionPerformed
 
     /**
-     *
-     * @param maj
+     * Fonction appelée en cas d'ajout d'un examen.
+     * Met à jour la liste des examens et réactualise le tableau des examens.
+     * @param maj : le DMR mis à jour
      */
     public void maj_exam(DMR maj) {
         examens = maj.getExamens();
@@ -723,17 +755,17 @@ public class DMRPatient extends javax.swing.JPanel {
         for (int i = rows - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-        for (int i = examens.size() - 1; i >= 0; i--) {
+        for (int i = 0; i < examens.size(); i++) {
             try {
                 Personnel p = requetesbd.utilisateur(requetesbd.connexionBD(), examens.get(i).getIdPhRespo());
                 String ph = "Dr " + p.getPrenom() + " " + p.getNom();
                 model.insertRow(model.getRowCount(), new Object[]{DMR.format_date(examens.get(i).getDate()), examens.get(i).getTypeExamen(), ph});
             } catch (Exception e) {
-                System.out.println("Erreur bd");
+                System.out.println("Erreur BD");
             }
         }
         tri.setSelectedIndex(0);
-        radiobutton1.setSelected(false);
+        radiobutton1.setSelected(true);
         radiobutton2.setSelected(false);
     }
 
