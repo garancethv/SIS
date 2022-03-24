@@ -50,8 +50,10 @@ import javax.swing.JLabel;
 import javax.swing.JToolBar;
 import javax.swing.SwingWorker;
 
-
-
+/**
+ * Classe de démonstration oracle modifiée 
+ *
+ */
 public class IconDemoApp extends JFrame {
 
     private JLabel photographLabel = new JLabel();
@@ -60,12 +62,12 @@ public class IconDemoApp extends JFrame {
     private File[] files;
     private MissingIcon placeholderIcon = new MissingIcon();
 
-    /**
-     * Main entry point to the demo. Loads the Swing elements on the "Event
-     * Dispatch Thread".
-     *
-     * @param args
-     */
+//    /**
+//     * Main entry point to the demo. Loads the Swing elements on the "Event
+//     * Dispatch Thread".
+//     *
+//     * @param args
+//     */
 //    public static void main(String args[]) {
 //        SwingUtilities.invokeLater(new Runnable() {
 //            public void run() {
@@ -74,6 +76,7 @@ public class IconDemoApp extends JFrame {
 //            }
 //        });
 //    }
+    
     /**
      * Default constructor for the demo.
      * @param files
@@ -170,6 +173,7 @@ public class IconDemoApp extends JFrame {
      *
      * @param String - resource path
      * @param String - description of the file
+     * @return 
      */
     protected ImageIcon createImageIcon(String path,
             String description) {

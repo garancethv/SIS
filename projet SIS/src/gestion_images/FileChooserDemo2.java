@@ -50,6 +50,11 @@ import javax.swing.SwingUtilities;
  *   images/tiffIcon.gif (required by ImageFileView.java)
  *   images/pngIcon.png (required by ImageFileView.java)
  */
+
+/**
+ * Classe de démonstration oracle modifiée 
+ */
+
 public class FileChooserDemo2 extends JPanel
         implements ActionListener {
 
@@ -57,7 +62,9 @@ public class FileChooserDemo2 extends JPanel
     private JTextArea log;
     private JFileChooser fc;
 
-
+    /**
+     * Constructeur par défaut du FileChooserDemo2 : création du panneau de recherche
+     */
     public FileChooserDemo2() {
         super(new BorderLayout());
        
@@ -139,7 +146,12 @@ public class FileChooserDemo2 extends JPanel
         frame.pack();
         frame.setVisible(true);
     }
-   public static void main(String[] args) {
+
+    /**
+     * Main pour tester le fonctionnement de la fenêtre de choix
+     * @param args
+     */
+    public static void main(String[] args) {
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.
         SwingUtilities.invokeLater(new Runnable() {

@@ -1,7 +1,7 @@
 package nf;
 
 /**
- *
+ * Créer une instance de Personnel
  * @author Mathilde
  */
 public class Personnel {
@@ -11,6 +11,13 @@ public class Personnel {
     private int id;
     private String mdp;
 
+    /**
+     * Constructeur de la classe Personnel
+     * @param nom
+     * @param prenom
+     * @param id
+     * @param mdp
+     */
     public Personnel(String nom, String prenom, int id, String mdp) {
         this.nom = nom;
         this.prenom = prenom;
@@ -23,28 +30,38 @@ public class Personnel {
         return "Personnel {" + "nom = " + nom + ", prénom = " + prenom + ", id = " + id + '}';
     }
 
-    /*public String getMetier() {
-        if (this instanceof Medecin) {
-            return "MEDECIN";
-        } else if (this instanceof SecretaireAdministration) {
-            return "SECRETAIRE ADMINISTRATIVE";
-        } else {
-            return "SECRETAIRE MEDICALE";
-        }
-    }*/
+    
+
+    /**
+     * renvoie le nom du PH
+     * @return
+     */
+    
 
     public String getNom() {
         return nom;
     }
 
+    /**
+     * Renvoie le prénom du PH
+     * @return
+     */
     public String getPrenom() {
         return prenom;
     }
 
+    /**
+     * Renvoie le mot de passe du PH
+     * @return
+     */
     public String getMdp() {
         return mdp;
     }
 
+    /**
+     * Renvoie l'identifiant du PH
+     * @return
+     */
     public int getId() {
         return id;
     }
