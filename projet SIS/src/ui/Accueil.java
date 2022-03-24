@@ -6,28 +6,11 @@
 package ui;
 
 import BD.requetesbd;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
-import javax.swing.ListModel;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
 import nf.DMR;
-import nf.Examen;
-import nf.Genre;
-import nf.PH;
 import nf.Personnel;
-import nf.TypeExamen;
 
 /**
  *
@@ -40,6 +23,9 @@ public class Accueil extends javax.swing.JFrame {
      */
     Personnel p;
 
+    /**
+     * Constructeur par défaut de la classe Accueil (pour tester les différentes sessions sans passer par le portail de connexion).
+     */
     public Accueil() {
         //initialiser les composants
         try {
@@ -53,20 +39,22 @@ public class Accueil extends javax.swing.JFrame {
         }
         initComponents();
 
-        //mettre la fenêtre en plein écran
         welcome_label.setText("Bienvenue " + p.getPrenom());
+        //mettre la fenêtre en plein écran
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
+    /**
+     * Constructeur de la classe Accueil.
+     * @param p : l'utilisateur connecté sur la session.
+     */
     public Accueil(Personnel p) {
         initComponents();
         this.p = p;
 
         welcome_label.setText("Bienvenue " + p.getPrenom());
+        //mettre la fenêtre en plein écran
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-        //this.setSize(size.getSize());
-        //this.pack();
     }
 
     /**
@@ -722,6 +710,10 @@ public class Accueil extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action Listener du bouton "Recherche par n° d'id".
+     * Ouvre la fenêtre jDialog de recherche id.
+     */
     private void search_button_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_button_idActionPerformed
         // ouvre la jdialog de recherche
         search_jdialog_id.setLocationRelativeTo(null);
@@ -732,6 +724,11 @@ public class Accueil extends javax.swing.JFrame {
         search_field_id.requestFocusInWindow();
     }//GEN-LAST:event_search_button_idActionPerformed
 
+    /**
+     * Effectue une recherche avec le numéro d'id rentré dans le TextField search_field_id.
+     * S'il correspond à un DMR : l'ouvre via la fonction open_dmr.
+     * Sinon : affiche un message d'erreur.
+     */
     private void search_id() {
         String id = search_field_id.getText();
 
@@ -747,6 +744,13 @@ public class Accueil extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Effectue une recherche avec le nom et prénom rentrés dans les TextField search_field_prénom et search_field_nom.
+     * Si le champ prénom est vide : effectue une recherche avec seulement le nom.
+     * Si la recherche correspond à un seul DMR : l'ouvre via la fonction open_dmr.
+     * Si la recherche correspond à plusieurs DMR : remplit une JList avec les n° d'id, noms, prénoms et dates de naissance
+     * Sinon : affiche un message d'erreur.
+     */
     private void search_nom() {
         String prenom = search_field_prénom.getText();
         String nom = search_field_nom.getText();
@@ -772,7 +776,7 @@ public class Accueil extends javax.swing.JFrame {
                     search_jdialog_nom.setSize(604, 370);
                 }
                 else {
-                    // si plusieurs personnes ont le même nom / prénom : affiche une liste avec dates de naissance
+                    // si plusieurs personnes ont le même nom / prénom : affiche une liste avec dates de naissance et n° id
                     loading_nom.setVisible(false);
                     jScrollPane1.setVisible(true);
                     search_jdialog_nom.setSize(604, 475);
@@ -842,12 +846,14 @@ public class Accueil extends javax.swing.JFrame {
         // inutile
     }//GEN-LAST:event_jButton_nomActionPerformed
 
+    /**
+     * Action Listener du bouton "Créer un nouveau DMR".
+     * Ouvre un nouvel onglet de création de DMR.
+     */
     private void newdmr_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newdmr_buttonActionPerformed
-        // Ouvre un nouvel onglet permettant de créer un DMR
-
         javax.swing.JPanel dmrpanel = new NewDMR(Onglets, p);
 
-        // on insert un nouvel onglet en 1er onglet
+        // on insere un nouvel onglet en 1er onglet
         Onglets.insertTab("    Création DMR    ", null, dmrpanel, null, 1);
         Onglets.setSelectedComponent(dmrpanel);
 
@@ -858,31 +864,47 @@ public class Accueil extends javax.swing.JFrame {
         Onglets.setTabComponentAt(Onglets.getSelectedIndex(), close_button);
     }//GEN-LAST:event_newdmr_buttonActionPerformed
 
+    /**
+     * Action Listener du bouton "Se déconnecter".
+     * Ouvre une jDialog demandant une confirmation de déconnexion.
+     */
     private void logout_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_buttonActionPerformed
-        // Ouvre une jDialog qui demande une confirmation de déconnexion
         logout_jdialog.setLocationRelativeTo(null);
         logout_jdialog.setVisible(true);
     }//GEN-LAST:event_logout_buttonActionPerformed
 
+    /**
+     * Action Listener du TextField search_field_prénom.
+     * Si on appuie sur la touche entrée, un logo de chargement s'affiche.
+     */
     private void search_field_prénomKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field_prénomKeyPressed
-        // quand on appuie sur la touche entrée : logo chargement
         if (evt.getKeyCode() == 10) {
             loading_nom.setVisible(true);
             erreur_nom.setVisible(false);
         }
     }//GEN-LAST:event_search_field_prénomKeyPressed
 
+    /**
+     * Action Listener du bouton Rechercher un DMR par nom.
+     * Si on appuie sur le bouton, un logo de chargement s'affiche.
+     */
     private void jButton_nomMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_nomMousePressed
-        // quand on appuie sur le bouton rechercher : logo chargement
         loading_nom.setVisible(true);
         erreur_nom.setVisible(false);
     }//GEN-LAST:event_jButton_nomMousePressed
 
+    /**
+     * Action Listener du bouton Rechercher un DMR par nom.
+     * Si on relâche la souris, lance la recherche par nom (via fonction search_nom).
+     */
     private void jButton_nomMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_nomMouseReleased
-        // quand on appuie sur le bouton rechercher : lance la recherche
         search_nom();
     }//GEN-LAST:event_jButton_nomMouseReleased
 
+    /**
+     * Action Listener du TextField search_field_prénom.
+     * Si on relâche la touche entrée, lance la recherche par nom (via fonction search_nom).
+     */
     private void search_field_prénomKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field_prénomKeyReleased
         // quand on appuie sur la touche entrée : lance la recherche
         if (evt.getKeyCode() == 10) {
@@ -890,19 +912,29 @@ public class Accueil extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_search_field_prénomKeyReleased
 
+    /**
+     * Action Listener du bouton de confirmation de déconnexion.
+     * Ferme la JFrame Accueil ainsi que la JDialog de déconnexion et ouvre le portail de connexion.
+     */
     private void yes_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yes_logoutActionPerformed
-        // si confirmation de déconnexion : ferme la session et retourne sur page de connexion
         AccueilConnexion ac = new AccueilConnexion();
         ac.setVisible(true);
         logout_jdialog.setVisible(false);
         dispose();
     }//GEN-LAST:event_yes_logoutActionPerformed
 
+    /**
+     * Action Listener du bouton d'annulation de déconnexion.
+     * Ferme la JDialog de déconnexion.
+     */
     private void cancel_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_logoutActionPerformed
-        // si annule la déconnexion : ferme la jdialog
         logout_jdialog.setVisible(false);
     }//GEN-LAST:event_cancel_logoutActionPerformed
 
+    /**
+     * Action Listener de la JList liste_patients (affiche la liste des id, noms, prénoms et dates de naissance des DMR lors d'une recherche par nom / prénom).
+     * Si on clique sur une ligne, ouvre le DMR correspondant via la fonction open_dmr.
+     */
     private void liste_patientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liste_patientsMouseClicked
         // cas où plusieurs noms identiques : ouvre le DMR sur lequel on a cliqué dans la liste
         DMR dmr = (DMR) liste_patients.getSelectedValues()[0];
@@ -910,6 +942,10 @@ public class Accueil extends javax.swing.JFrame {
         open_dmr(dmr);
     }//GEN-LAST:event_liste_patientsMouseClicked
 
+    /**
+     * Action Listener du bouton "Recherche par nom/prénom".
+     * Ouvre la fenêtre jDialog de recherche nom & prénom.
+     */
     private void search_button_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_button_nameActionPerformed
         search_jdialog_nom.setLocationRelativeTo(null);
         erreur_nom.setVisible(false);
@@ -921,16 +957,22 @@ public class Accueil extends javax.swing.JFrame {
         search_field_prénom.requestFocusInWindow();
     }//GEN-LAST:event_search_button_nameActionPerformed
 
+    /**
+     * Action Listener du TextField search_field_nom.
+     * Si on appuie sur la touche entrée, affiche un logo de chargement.
+     */
     private void search_field_nomKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field_nomKeyPressed
-        // quand on appuie sur la touche entrée : logo chargement
         if (evt.getKeyCode() == 10) {
             loading_nom.setVisible(true);
             erreur_nom.setVisible(false);
         }
     }//GEN-LAST:event_search_field_nomKeyPressed
 
+    /**
+     * Action Listener du TextField search_field_nom.
+     * Si on relâche la touche entrée, lance la recherche par nom (via fonction search_nom).
+     */
     private void search_field_nomKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field_nomKeyReleased
-        // quand on appuie sur la touche entrée : lance la recherche
         if (evt.getKeyCode() == 10) {
             search_nom();
         }
@@ -952,14 +994,21 @@ public class Accueil extends javax.swing.JFrame {
         // inutile
     }//GEN-LAST:event_search_field_idMouseClicked
 
+    /**
+     * Action Listener du TextField search_field_id.
+     * Si on appuie sur la touche entrée, affiche un logo de chargement.
+     */
     private void search_field_idKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field_idKeyPressed
-        // quand on appuie sur la touche entrÃ©e : logo chargement
         if (evt.getKeyCode() == 10) {
             loading_id.setVisible(true);
             erreur_id.setVisible(false);
         }
     }//GEN-LAST:event_search_field_idKeyPressed
 
+    /**
+     * Action Listener du TextField search_field_id.
+     * Si on relâche la touche entrée, lance la recherche par id (via fonction search_id).
+     */
     private void search_field_idKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_field_idKeyReleased
         // quand on appuie sur la touche entrÃ©e : lance la recherche
         if (evt.getKeyCode() == 10) {
@@ -967,13 +1016,20 @@ public class Accueil extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_search_field_idKeyReleased
 
+    /**
+     * Action Listener du bouton Rechercher un DMR par n° d'id.
+     * Si on appuie sur le bouton, un logo de chargement s'affiche.
+     */
     private void jButton_idMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_idMousePressed
         loading_id.setVisible(true);
         erreur_id.setVisible(false);
     }//GEN-LAST:event_jButton_idMousePressed
 
+    /**
+     * Action Listener du bouton Rechercher un DMR par n° d'id.
+     * Si on relâche la souris, lance la recherche par nom (via fonction search_id).
+     */
     private void jButton_idMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_idMouseReleased
-        // quand on appuie sur le bouton rechercher : lance la recherche
         search_id();
     }//GEN-LAST:event_jButton_idMouseReleased
 
@@ -985,6 +1041,10 @@ public class Accueil extends javax.swing.JFrame {
         // inutile
     }//GEN-LAST:event_search_field_idActionPerformed
 
+    /**
+     * Ouvre le DMR passé en paramètre dans un nouvel onglet s'il n'est pas déjà ouvert, sinon ouvre l'onglet correspondant.
+     * @param dmr : le DMR à ouvrir
+     */
     private void open_dmr(DMR dmr) {
         // Vérifie que le DMR n'est pas déjà ouvert dans un onglet :
         int index = Onglets.indexOfTab("       " + dmr.getPrenomPatient() + " " + dmr.getNomPatient() + " (" + dmr.getId() + ")" + "     ");

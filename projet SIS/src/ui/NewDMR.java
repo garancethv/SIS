@@ -32,6 +32,11 @@ public class NewDMR extends javax.swing.JPanel {
     JTabbedPane pane;
     Personnel user;
 
+    /**
+     * Constructeur de NewDMR (panel permettant de créer un nouveau DMR)
+     * @param pane : le JTabbedPane Onglets
+     * @param user : l'utilisateur connecté
+     */
     public NewDMR(JTabbedPane pane, Personnel user) {
         this.pane = pane;
         initComponents();
@@ -200,6 +205,8 @@ public class NewDMR extends javax.swing.JPanel {
         jLabel16.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel16.setText("Nom");
 
+        nom_field3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         erreur_nom3.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         erreur_nom3.setForeground(new java.awt.Color(149, 46, 46));
         erreur_nom3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
@@ -237,6 +244,8 @@ public class NewDMR extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel6.setText("Prénom");
 
+        prenom_field.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         erreur_prenom.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         erreur_prenom.setForeground(new java.awt.Color(149, 46, 46));
         erreur_prenom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
@@ -273,6 +282,7 @@ public class NewDMR extends javax.swing.JPanel {
         date_panel.setForeground(new java.awt.Color(170, 0, 0));
         date_panel.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
+        date_naissance_field.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         date_naissance_field.setToolTipText("DD/MM/AAAA");
 
         erreur_date.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
@@ -369,6 +379,7 @@ public class NewDMR extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel9.setText("Téléphone ");
 
+        tel_field.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tel_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tel_fieldActionPerformed(evt);
@@ -385,12 +396,14 @@ public class NewDMR extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(erreur_tel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tel_field, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(erreur_tel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tel_field, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -409,6 +422,8 @@ public class NewDMR extends javax.swing.JPanel {
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel12.setText("Adresse");
+
+        adresse_field.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         erreur_adresse.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         erreur_adresse.setForeground(new java.awt.Color(149, 46, 46));
@@ -447,6 +462,8 @@ public class NewDMR extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel13.setText("Code Postal");
 
+        codePostal_field.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         erreur_codepostal.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         erreur_codepostal.setForeground(new java.awt.Color(149, 46, 46));
         erreur_codepostal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoInformation.png"))); // NOI18N
@@ -483,6 +500,8 @@ public class NewDMR extends javax.swing.JPanel {
 
         jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel14.setText("Ville");
+
+        ville_field.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         erreur_ville.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         erreur_ville.setForeground(new java.awt.Color(149, 46, 46));
@@ -594,7 +613,7 @@ public class NewDMR extends javax.swing.JPanel {
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loading, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         jPanel13.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1770, 1050));
@@ -613,6 +632,18 @@ public class NewDMR extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Vérifie que toutes les informations ont bien été rentrées et sont sous le bon format (date sous format JJ/MM/AAAA, téléphone a 10 chiffres et commençant par 0, code postal compris entre 1000 et 10000).
+     * Renvoie true si c'est le cas.
+     * Sinon renvoie false et affiche un message d'erreur sous les champs manquants / erronés.
+     * @param nom : String rentré dans le champ nom
+     * @param prénom : String rentré dans le champ prénom
+     * @param date : String rentré dans le champ date
+     * @param tel : String rentré dans le champ tel
+     * @param adresse : String rentré dans le champ adresse
+     * @param codePostal : String rentré dans le champ code postal
+     * @param ville : String rentré dans le champ ville
+     */
     private boolean check_valider(String nom, String prenom, String date, String tel, String adresse, String codePostal, String ville ) {
         erreur_nom3.setVisible(false);
         erreur_prenom.setVisible(false);
@@ -672,11 +703,16 @@ public class NewDMR extends javax.swing.JPanel {
         return true;
     }
 
+    /**
+     * Récupère toutes les informations rentrées dans les champs et fait appel à la fonction check_valider pour vérifier que tout est valide.
+     * Si c'est le cas, vérifie qu'il n'y a pas déjà un ou plusieurs DMRs avec le même nom, prénom et date de naissance.
+     * Si non, crée le DMR et l'ouvre dans un nouvel onglet.
+     * Si oui, ouvre une JDialog qui avertit l'utilisateur qu'un ou plusieurs DMR ont le même nom/prénom/date de naissance et affiche leurs numéros de téléphones. Demande à l'utilisateur s'il souhaite poursuivre la création de DMR ou annuler.
+     */
     private void creation_dmr() {
         // Conditions avant de valider :
         // Tous les champs obligatoires sont remplis
         // Date sous le bon format
-        // Rajouter nveaux champs
         
         String nom = nom_field3.getText();
         String prenom = prenom_field.getText();
@@ -753,6 +789,9 @@ public class NewDMR extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Action Listener du bouton forçant la création du DMR s'il en existe déjà d'autres avec le même nom/prénom/date de naissance.
+     */
     private void continue_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continue_buttonActionPerformed
         // force la création du DMR
         String nom = nom_field3.getText();
@@ -794,6 +833,9 @@ public class NewDMR extends javax.swing.JPanel {
         
     }//GEN-LAST:event_continue_buttonActionPerformed
 
+    /**
+     * Action Listener du bouton annulant la création du DMR s'il en existe déjà d'autres avec le même nom/prénom/date de naissance.
+     */
     private void annuler_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annuler_buttonActionPerformed
         warning_jdialog.setVisible(false);
         int i = pane.getSelectedIndex();
@@ -802,6 +844,9 @@ public class NewDMR extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_annuler_buttonActionPerformed
 
+    /**
+     * Méthode permettant de vérifier si la date est bien sous le format JJ/MM/AAAA.
+     */
     private boolean bonFormatDate(String date) {
         String[] liste_date = date.split("/");
         if (liste_date.length == 3 && liste_date[0].matches("-?\\d+") && liste_date[1].matches("-?\\d+")
@@ -811,10 +856,18 @@ public class NewDMR extends javax.swing.JPanel {
         return false;
     }
     
+    /**
+     * Action Listener du bouton "Valider la création du DMR".
+     * Si on appuie sur le bouton, un logo de chargement s'affiche.
+     */
     private void valider_buttonMousePressed(java.awt.event.MouseEvent evt) {
         loading.setVisible(true);
     }
     
+    /**
+     * Action Listener du bouton "Valider la création du DMR".
+     * Si on relâche la souris, lance la création de dmr (via la fonction creation_dmr).
+     */
     private void valider_buttonMouseReleased(java.awt.event.MouseEvent evt) {
         creation_dmr();
     }

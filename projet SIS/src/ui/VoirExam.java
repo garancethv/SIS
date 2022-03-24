@@ -34,10 +34,19 @@ public class VoirExam extends javax.swing.JPanel {
     Personnel user;
     String chemin;
 
+    /**
+     *
+     */
     public VoirExam() {
         initComponents();
     }
 
+    /**
+     * Constructeur de VoirExam (panel permettant de voir un examen)
+     * @param dmr : le DMR auquel appartient l'exam
+     * @param user : l'utilisateur connecté
+     * @param ex : l'examen affiché
+     */
     public VoirExam(DMR dmr, Personnel user, Examen ex) {
         initComponents();
 
@@ -479,9 +488,13 @@ public class VoirExam extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void compte_renduMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_compte_renduMouseEntered
-
+        //inutile
     }//GEN-LAST:event_compte_renduMouseEntered
 
+    /**
+     * Action listener du bouton "Sauvegarder le Compte Rendu".
+     * Ajoute le Compte Rendu à l'examen dans la base de données.
+     */
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         //if (!compte_rendu.getText().equals("")){
         ex.setTexteCR(compte_rendu.getText());
@@ -496,12 +509,20 @@ public class VoirExam extends javax.swing.JPanel {
         //}
     }//GEN-LAST:event_save_buttonActionPerformed
 
+    /**
+     * Action listener du JTextArea compte_rendu.
+     * Fait apparaître le bouton permettant de sauvegarder le compte-rendu quand du texte est tapé.
+     */
     private void compte_renduKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_compte_renduKeyTyped
         if (ex.getTexteCR() == null) {
             save_button.setVisible(true);
         }
     }//GEN-LAST:event_compte_renduKeyTyped
 
+    /**
+     * Action listener du bouton imprimer.
+     * Fait apparaître une JDialog de confirmation d'impression.
+     */
     private void print_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_buttonActionPerformed
         if (!compte_rendu.isEditable()) {
             //ouvre la fenêtre de confirmation
@@ -517,6 +538,10 @@ public class VoirExam extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_print_buttonActionPerformed
 
+    /**
+     * Action listener du bouton confirmation d'impression.
+     * Lance l'impression.
+     */
     private void button_imp_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_imp_okActionPerformed
         //imprimer
         boolean reussi = false;
@@ -532,6 +557,10 @@ public class VoirExam extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_button_imp_okActionPerformed
 
+    /**
+     * Action listener du bouton Ajouter Images.
+     * Permet d'ajouter des images à l'Examen.
+     */
     private void boutonAjouterImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonAjouterImagesActionPerformed
 
         //Set up the file chooser.
@@ -586,6 +615,10 @@ public class VoirExam extends javax.swing.JPanel {
 
     }//GEN-LAST:event_boutonAjouterImagesActionPerformed
 
+    /**
+     * Action listener du bouton Visualiser Images.
+     * Permet de visualiser les images sélectionnées parmi celles liées à l'examen.
+     */
     private void visualiserImagesSélectionneesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualiserImagesSélectionneesActionPerformed
 
         //Set up the file chooser.
@@ -623,6 +656,10 @@ public class VoirExam extends javax.swing.JPanel {
 
     }//GEN-LAST:event_visualiserImagesSélectionneesActionPerformed
 
+    /**
+     * Action listener du bouton Visualisation 3D.
+     * Ouvre une fenêtre SliderDemo (voir package gestion_images).
+     */
     private void visualisation3DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualisation3DActionPerformed
         //on visualise les images en profondeur ==visualisation de toutes les images du dossier examen du PACS
         SliderDemo.createAndShowGUI(chemin);

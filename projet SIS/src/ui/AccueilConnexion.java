@@ -36,6 +36,9 @@ import nf.Personnel;
  */
 public class AccueilConnexion extends javax.swing.JFrame {
     
+    /**
+     * Constructeur d'AccueilConnexion : initialise les composants
+     */
     public AccueilConnexion() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -205,6 +208,11 @@ public class AccueilConnexion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Récupère l'identifiant et le mot de passe rentrés dans les champs field_identifiant et field_mdp.
+     * S'ils correspondent à un couple (id,mdp) existant dans la base de donnée, ouvre une nouvelle page Accueil.
+     * Sinon, affiche un message d'erreur.
+     */
     private void connexion() {
         String mdp = field_mdp.getText();
         String id = field_identifiant.getText();
@@ -231,10 +239,16 @@ public class AccueilConnexion extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Action Listener du bouton "Valider". Lance la connexion via la fonction connexion().
+     */
     private void bouton_validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_validerActionPerformed
         connexion();
     }//GEN-LAST:event_bouton_validerActionPerformed
 
+    /**
+     * Affiche un message d'erreur. Appelée dans la fonction connexion().
+     */
     private void erreur_connexion() {
         erreur_connexion.setVisible(true);
         field_identifiant.setText("");
@@ -242,21 +256,33 @@ public class AccueilConnexion extends javax.swing.JFrame {
     }
     
     private void field_mdpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_mdpActionPerformed
-        // TODO add your handling code here:
+        // inutile
     }//GEN-LAST:event_field_mdpActionPerformed
 
+    /**
+     * Action Listener du TextField mot de passe.
+     * Si la touche entrée est la touche mot de passe, appelle la fonction connexion().
+     */
     private void field_mdpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_mdpKeyPressed
         if (evt.getKeyCode() == 10) {
             connexion();
         }
     }//GEN-LAST:event_field_mdpKeyPressed
 
+    /**
+     * Action Listener du TextField identifiant.
+     * Si la touche entrée est la touche mot de passe, appelle la fonction connexion().
+     */
     private void field_identifiantKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_identifiantKeyPressed
         if (evt.getKeyCode() == 10) {
             connexion();
         }
     }//GEN-LAST:event_field_identifiantKeyPressed
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

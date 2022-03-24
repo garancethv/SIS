@@ -418,7 +418,7 @@ public class requetesbd {
             Statement stmt = conn.createStatement();
 // Execute the query
 
-            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR =" + dmr.getId()+" order by dateExamen asc");
+            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR =" + dmr.getId()+" order by dateExamen desc");
 
             ArrayList<Examen> liste = new ArrayList<>();
             while (rs.next()) {
@@ -446,8 +446,6 @@ public class requetesbd {
 
         }
     }
-
-
     
     /**
      * Création d'un examen et chargement des examens du DMR
