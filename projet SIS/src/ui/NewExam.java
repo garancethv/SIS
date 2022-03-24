@@ -31,6 +31,12 @@ public class NewExam extends javax.swing.JPanel {
     JTabbedPane Onglets;
     Personnel user;
     
+    /**
+     * Constructeur de la classe NewExam (panel permettant la création d'un nouvel examen).
+     * S'ouvre à partir de DMRPatient.
+     * @param dmr_pane : le JTabbedPane Onglets
+     * @param user : l'utilisateur connecté (si c'est un PH, le champ id prend pour valeur son identifiant mais peut être modifié)
+     */
     public NewExam(DMRPatient dmr_pane, Personnel user) {
         initComponents();
         
@@ -168,6 +174,7 @@ public class NewExam extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel6.setText("ID du PH responsable :");
 
+        ph_field.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ph_field.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 ph_fieldMouseExited(evt);
@@ -276,10 +283,15 @@ public class NewExam extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loading, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(384, Short.MAX_VALUE))
+                .addContainerGap(382, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action listener du bouton "Création d'Examen".
+     * Vérifie que l'identifiant rentré dans le champ ph_field correspond bien à un PH, sinon affiche un message d'erreur.
+     * Si pas d'erreur crée l'examen, met à jour l'onglet DMRPatient avec la fonction maj_exam et ouvre l'examen crée dans un nouvel onglet (placé après le DMR auquel il correspond).
+     */
     private void valider_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valider_buttonActionPerformed
         // Conditions avant de valider :
         // Tous les champs sont remplis
@@ -305,17 +317,14 @@ public class NewExam extends javax.swing.JPanel {
         }
 
         if (!erreur_ph.isVisible()) {
-            // à faire : récupérer Date et Heure avec la base de données
-            // fonction recherche ph à partir de son id
-            
             try {
                 DMR ajout_exam=requetesbd.creationExamen(requetesbd.connexionBD(), dmr, Integer.valueOf(idPH), type, 0, cr);
                 
                 //met à jour DMR Patient
                 dmr_pane.maj_exam(ajout_exam);
                 
-                //ouvre l'examen crée - 1er dans la liste (si triée par date décroissante)
-                Examen ex=ajout_exam.getExamens().get(ajout_exam.getExamens().size()-1);
+                //ouvre l'examen crée - premier dans la liste car plus récent
+                Examen ex=ajout_exam.getExamens().get(0);
                 javax.swing.JPanel exam_panel=new VoirExam(ajout_exam,user,ex);
 
                 // insertion d'un nouvel onglet après la page de l'examen 
@@ -338,7 +347,11 @@ public class NewExam extends javax.swing.JPanel {
         loading.setVisible(false);
     }//GEN-LAST:event_valider_buttonActionPerformed
 
-    
+    /**
+     * Action listener du bouton "Sauvegarder le Compte Rendu".
+     * Le bouton devient "Modifier le compte-rendu" si du texte a été rentré.
+     * Le compte-rendu peut être modifié tant que l'examen n'est pas créé.
+     */
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         if(!cr_field.getText().equals("")) {
             add_cr_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-pencil-32.png")));
@@ -352,12 +365,20 @@ public class NewExam extends javax.swing.JPanel {
         cr_jdialog.dispose();
     }//GEN-LAST:event_save_buttonActionPerformed
 
+    /**
+     * Action listener du bouton "Ajouter un Compte Rendu".
+     * Ouvre une JDialog dans laquelle le PH peut taper le Compte Rendu de l'examen.
+     */
     private void add_cr_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_cr_buttonActionPerformed
         cr_field.setText(cr);
         cr_jdialog.setLocationRelativeTo(null);
         cr_jdialog.setVisible(true);
     }//GEN-LAST:event_add_cr_buttonActionPerformed
 
+    /**
+     * Action listener du JTextArea cr_field.
+     * Fait apparaître le bouton permettant de sauvegarder le compte-rendu quand du texte est tapé.
+     */
     private void cr_fieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cr_fieldKeyTyped
         save_button.setVisible(true);
     }//GEN-LAST:event_cr_fieldKeyTyped
@@ -366,6 +387,10 @@ public class NewExam extends javax.swing.JPanel {
         // inutile
     }//GEN-LAST:event_ph_fieldMouseExited
 
+    /**
+     * Action listener du bouton "Créer l'Examen".
+     * Si on appuie sur le bouton, un logo de chargement s'affiche.
+     */
     private void valider_buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_valider_buttonMousePressed
         loading.setVisible(true);
     }//GEN-LAST:event_valider_buttonMousePressed

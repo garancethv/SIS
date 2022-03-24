@@ -128,7 +128,7 @@ public class DMR {
   
     @Override
     public String toString() {
-        return prenomPatient+" "+ nomPatient +" ("+DMR.format_date(dateNaissance)+")";
+        return id+" - "+prenomPatient+" "+ nomPatient +" ("+DMR.format_date(dateNaissance)+")";
     }
     
 }
