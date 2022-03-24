@@ -126,7 +126,6 @@ public class Accueil extends javax.swing.JFrame {
         search_jdialog_nom.setTitle("Rechercher un DMR");
         search_jdialog_nom.setAlwaysOnTop(true);
         search_jdialog_nom.setBackground(new java.awt.Color(173, 247, 229));
-        search_jdialog_nom.setPreferredSize(new java.awt.Dimension(535, 445));
         search_jdialog_nom.setResizable(false);
         search_jdialog_nom.setSize(new java.awt.Dimension(604, 370));
 
@@ -172,6 +171,9 @@ public class Accueil extends javax.swing.JFrame {
         liste_patients.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 liste_patientsMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                liste_patientsMousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(liste_patients);
@@ -906,8 +908,8 @@ public class Accueil extends javax.swing.JFrame {
     private void liste_patientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liste_patientsMouseClicked
         // cas où plusieurs noms identiques : ouvre le DMR sur lequel on a cliqué dans la liste
         DMR dmr = (DMR) liste_patients.getSelectedValues()[0];
-        search_jdialog_nom.setVisible(false);
         open_dmr(dmr);
+        search_jdialog_nom.setVisible(false);
     }//GEN-LAST:event_liste_patientsMouseClicked
 
     private void search_button_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_button_nameActionPerformed
@@ -984,6 +986,10 @@ public class Accueil extends javax.swing.JFrame {
     private void search_field_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_field_idActionPerformed
         // inutile
     }//GEN-LAST:event_search_field_idActionPerformed
+
+    private void liste_patientsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_liste_patientsMousePressed
+        loading_nom.setVisible(true);
+    }//GEN-LAST:event_liste_patientsMousePressed
 
     private void open_dmr(DMR dmr) {
         // Vérifie que le DMR n'est pas déjà ouvert dans un onglet :
