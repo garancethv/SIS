@@ -418,7 +418,7 @@ public class requetesbd {
             Statement stmt = conn.createStatement();
 // Execute the query
 
-            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR =" + dmr.getId()+" order by dateExamen asc");
+            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR =" + dmr.getId()+" order by dateExamen desc");
 
             ArrayList<Examen> liste = new ArrayList<>();
             while (rs.next()) {
@@ -525,34 +525,6 @@ public class requetesbd {
 
 
 
-    
-//    /**
-//     * 
-//     * @param conn
-//     * @param examen
-//     * @throws SQLException
-//     */
-//    public static void numerisationImage(Connection conn, Examen examen) throws SQLException {
-//        /*renvoie le DMR recherché
-//        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
-//        try {
-//// Get a statement from the connection
-//            Statement stmt = conn.createStatement();
-//// Execute the query
-//            int rowCount = stmt.executeUpdate("INSERT INTO Examen SET texteCR ='"
-//                    + "' where idDMR ='" + examen.getIdDMR() + "' and idExamen ='" + examen.getDate().toString() + "'");
-//
-//// Close the result set, statement and the connection 
-//            stmt.close();
-//            SQLWarningsExceptions.printWarnings(conn);
-//            
-//        } finally {
-//            //close connection
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//    }
 
     /**
      * Récupération de tous les DMR ayant le même nom, prénom et la même date de naissance

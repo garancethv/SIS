@@ -29,6 +29,7 @@ public class DMR {
      * @param genre
      * @param id
      */
+    @SuppressWarnings("unchecked")
     public DMR(String nomPatient, String prenomPatient, Date dateNaissance, Genre genre, int id) {
         this.nomPatient = nomPatient;
         this.prenomPatient = prenomPatient;
@@ -50,6 +51,7 @@ public class DMR {
      * @param codePostal
      * @param ville
      */
+    @SuppressWarnings("unchecked")
     public DMR(String nomPatient, String prenomPatient, Date dateNaissance, int tel, Genre genre, int id, String adresse, String codePostal, String ville) {
         this.nomPatient = nomPatient;
         this.prenomPatient = prenomPatient;
@@ -68,6 +70,7 @@ public class DMR {
      * @param date
      * @return
      */
+    @SuppressWarnings("unchecked")
     public static String format_date(Date date) {
         String année="1800";
         if (Integer.valueOf(date.getYear())-100 > 9) {
@@ -170,6 +173,7 @@ public class DMR {
      * @param numPACS
      * @param texteCR
      */
+    @SuppressWarnings("unchecked")
     public void ajouterExamen( Date date, int idPhRespo, TypeExamen typeExamen, int numPACS, String texteCR){//ajoute un nouvel examen dans le DMR courant
         Examen examen = new Examen(id,date, idPhRespo,typeExamen,numPACS, texteCR);   
         examens.add(examen);
@@ -191,27 +195,9 @@ public class DMR {
         this.examens=examens;
     }
 
-    /**
-     * tri des examens par Date
-     */
-    public void trierExamensParDate(){
-        int nb_examens = this.examens.size();
-        if (nb_examens > 0){
-            ArrayList<Examen> examens_tri = new ArrayList<>();
-            for (int i = 0; i < nb_examens; i++){
-                int j = 0;
-                Examen exam_courant = examens.get(i);
-                while (exam_courant.getDate().after(examens_tri.get(j).getDate()) && j < i){//car i = examens_tri.size()
-                    j++;
-                }
-                examens_tri.add(j + 1, exam_courant);
-            }
-        }
-    }
-  
     @Override
     public String toString() {
-        return prenomPatient+" "+ nomPatient +" ("+DMR.format_date(dateNaissance)+")";
+        return id+" - "+prenomPatient+" "+ nomPatient +" ("+DMR.format_date(dateNaissance)+")";
     }
     
 }
