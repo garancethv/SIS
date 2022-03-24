@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- *
+ * Créer une instance de DMR
  * @author Mathilde
  */
 public class DMR {
@@ -21,6 +21,14 @@ public class DMR {
 
     private ArrayList<Examen> examens;
 
+    /**
+     * Constructeur de la classe DMR
+     * @param nomPatient
+     * @param prenomPatient
+     * @param dateNaissance
+     * @param genre
+     * @param id
+     */
     public DMR(String nomPatient, String prenomPatient, Date dateNaissance, Genre genre, int id) {
         this.nomPatient = nomPatient;
         this.prenomPatient = prenomPatient;
@@ -30,6 +38,18 @@ public class DMR {
         examens = new ArrayList<Examen>();
     }
 
+    /**
+     * Constructeur de la classe DMR
+     * @param nomPatient
+     * @param prenomPatient
+     * @param dateNaissance
+     * @param tel
+     * @param genre
+     * @param id
+     * @param adresse
+     * @param codePostal
+     * @param ville
+     */
     public DMR(String nomPatient, String prenomPatient, Date dateNaissance, int tel, Genre genre, int id, String adresse, String codePostal, String ville) {
         this.nomPatient = nomPatient;
         this.prenomPatient = prenomPatient;
@@ -43,6 +63,11 @@ public class DMR {
         examens = new ArrayList<Examen>();
     }
     
+    /**
+     * renvoie une date selon le format jj/mm/aaaa
+     * @param date
+     * @return
+     */
     public static String format_date(Date date) {
         String année="1800";
         if (Integer.valueOf(date.getYear())-100 > 9) {
@@ -57,60 +82,118 @@ public class DMR {
         return String.valueOf(date.getDate())+"/"+String.valueOf(date.getMonth()+1)+"/"+année;
     }
 
+    /**
+     * Renvoue le nom du patient
+     * @return
+     */
     public String getNomPatient() {
         return nomPatient;
     }
 
+    /**
+     * renvoie le prénom du patient
+     * @return
+     */
     public String getPrenomPatient() {
         return prenomPatient;
     }
 
+    /**
+     *renvoie la date de naissance du patient
+     * @return
+     */
     public Date getDateNaissance() {
         return dateNaissance;
     }
 
+    /**
+     *renvoie le genre du patient
+     * @return
+     */
     public Genre getGenre() {
         return genre;
     }
 
+    /**
+     * renvoie l'identifiant DMR du patient
+     * @return
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * renvoie le numéro de téléphone du patient
+     * @return
+     */
     public int getTel() {
         return tel;
     }
 
+    /**
+     * renvoie l'adresse du patient
+     * @return
+     */
     public String getAdresse() {
         return adresse;
     }
 
+    /**
+     * renvoie le code postal du patient
+     * @return
+     */
     public String getCodePostal() {
         return codePostal;
     }
 
+    /**
+     * renvoie la ville du patient
+     * @return
+     */
     public String getVille() {
         return ville;
     }
 
+    /**
+     * renvoie la liste d'examens du patient
+     * @return
+     */
     public ArrayList<Examen> getExamens() {
         return examens;
     }
 
+    /**
+     * ajoute un examen à la liste d'examens en le créant
+     * @param date
+     * @param idPhRespo
+     * @param typeExamen
+     * @param numPACS
+     * @param texteCR
+     */
     public void ajouterExamen( Date date, int idPhRespo, TypeExamen typeExamen, int numPACS, String texteCR){//ajoute un nouvel examen dans le DMR courant
         Examen examen = new Examen(id,date, idPhRespo,typeExamen,numPACS, texteCR);   
         examens.add(examen);
     }
     
+    /**
+     * ajoute un examen passé en paramètre à la liste d'examens 
+     * @param examen
+     */
     public void ajouterExamen(Examen examen) {
         examens.add(examen);
     }
     
+    /**
+     * remplace la liste d'examens existante par une nouvelle
+     * @param examens
+     */
     public void setExamens(ArrayList<Examen> examens) {
         this.examens=examens;
     }
 
-    
+    /**
+     * tri des examens par Date
+     */
     public void trierExamensParDate(){
         int nb_examens = this.examens.size();
         if (nb_examens > 0){

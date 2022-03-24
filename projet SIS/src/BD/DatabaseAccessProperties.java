@@ -26,6 +26,10 @@ public class DatabaseAccessProperties {
     private String dbUrl;
     private String username, password;
 
+    /**
+     * Récupération des inofrmations de connexion à la base de données en trouvant le dossier de connexion
+     * @param propertiesFile
+     */
     public DatabaseAccessProperties(String propertiesFile) {
         try {
             prop = new Properties();
@@ -47,18 +51,34 @@ public class DatabaseAccessProperties {
         password = prop.getProperty("database.password");
     }
 
+    /**
+     * Renvoie le Driver
+     * @return string
+     */
     public String getJdbcDriver() {
         return jdbcDriver;
     }
 
+    /**
+     * Renvoie la DAtabaseUrl
+     * @return String
+     */
     public String getDatabaseUrl() {
         return dbUrl;
     }
 
+    /**
+     * Renvoie le nom d'utilisateur
+     * @return String
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Renvoie le mot de passe Password
+     * @return String
+     */
     public String getPassword() {
         return password;
     }

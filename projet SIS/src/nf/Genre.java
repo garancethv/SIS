@@ -7,12 +7,24 @@
 package nf;
 
 /**
- *
+ * Genre d'un patient
  * @author Mathilde
  */
 public enum Genre {
+
+    /**
+     * Genre Masculin
+     */
     H("masculin"),
+
+    /**
+     * genre féminin
+     */
     F("feminin"),
+
+    /**
+     * autre genre
+     */
     Autre("autre");
 
     Genre(String s) {

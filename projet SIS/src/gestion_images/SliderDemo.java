@@ -81,11 +81,11 @@ public class SliderDemo extends JPanel {
     JLabel picture;
 
     int faireRotation = 0;
-    
-    boolean imageMiroir=false;
+
+    boolean imageMiroir = false;
 
     /**
-     *
+     * Constructeur de la classe SliderDemo
      * @param chemin
      */
     public SliderDemo(String chemin) {
@@ -101,12 +101,7 @@ public class SliderDemo extends JPanel {
         //initialisation de la liste d'ImageIcon
         images = new ImageIcon[NUM_FRAMES];
 
-//        //initialisation de la liste des valeurs de contraste par image
-//        valeurs_contraste = new int[NUM_FRAMES];
-//        for (int f =0;f< valeurs_contraste.length;f++) {
-//            valeurs_contraste[f] = 100;
-//            
-//        }
+//        
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         //Create the label.
@@ -166,22 +161,7 @@ public class SliderDemo extends JPanel {
             public void stateChanged(ChangeEvent evt) {
                 valeurContraste = framesPerSecondbis.getValue();
                 contraste();
-//                float brightenFactor = (float) framesPerSecondbis.getValue() / 100;
-//                RescaleOp op = new RescaleOp(brightenFactor, 0, null);
-//                BufferedImage image;
-//                try {
-//
-//                    image = ImageIO.read(liste_files[frameNumber]);
-//                    images[frameNumber] = new ImageIcon(op.filter(image, image));
-//                    
-//                    updatePicture(frameNumber);
-//                    valeurs_contraste[frameNumber] = framesPerSecondbis.getValue();
-//                    System.out.println(valeurs_contraste[frameNumber]);
-//
-//                } catch (IOException ex) {
-//                    Logger.getLogger(SliderDemo.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-
+//               
             }
         }
         );
@@ -218,8 +198,8 @@ public class SliderDemo extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                imageMiroir=!imageMiroir;
-                
+                imageMiroir = !imageMiroir;
+
                 contraste();
             }
 
@@ -270,9 +250,14 @@ public class SliderDemo extends JPanel {
             }
         });
         add(rotation);
-        
+
     }
 
+    /**
+     * Tourne l'image de 90° puis utilise la fonction miroir
+     *
+     * @param source
+     */
     protected void rotation(BufferedImage source) {
 
         int i = 0;
@@ -323,6 +308,10 @@ public class SliderDemo extends JPanel {
 
     }
 
+    /**
+     * Met du contraste sur l'image selon la valeur du slider de contraste puis
+     * fait la rotation de l'image
+     */
     protected void contraste() {
         float brightenFactor = (float) valeurContraste / 100;
         RescaleOp op = new RescaleOp(brightenFactor, 0, null);
@@ -330,12 +319,9 @@ public class SliderDemo extends JPanel {
         try {
 
             image = ImageIO.read(liste_files[frameNumber]);
-//            images[frameNumber] = new ImageIcon(op.filter(image, image));
+
             op.filter(image, image);
             rotation(image);
-//            updatePicture(frameNumber);
-//                    valeurs_contraste[frameNumber] = valeurContraste;
-//                    System.out.println(valeurs_contraste[frameNumber]);
 
         } catch (IOException ex) {
             Logger.getLogger(SliderDemo.class
@@ -343,8 +329,14 @@ public class SliderDemo extends JPanel {
         }
     }
 
+    /**
+     * Prend l'image miroir de l'image en paramètre et utilise la fonction
+     * updatePicture pour l'afficher
+     *
+     * @param image
+     */
     protected void miroir(BufferedImage image) {
-        
+
         if (imageMiroir) {
             int w = image.getWidth();
             int h = image.getHeight();

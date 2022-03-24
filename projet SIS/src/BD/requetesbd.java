@@ -136,19 +136,15 @@ public class requetesbd {
         }
     }
 
-
-
     /**
-     * Renvoie le personnel qui est censé être connecté
+     * Tri les examens selon la date croissante
      * @param conn
-     * @param idPerso
-     * @return Personnel
+     * @param dmr
+     * @return DMR avec les examens triés
      * @throws SQLException
      */
-    
-      public static DMR triExamenSelonDateAsc(Connection conn, DMR dmr) throws SQLException {
-        /*renvoie l'examen recherché
-        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
+    public static DMR triExamenSelonDateAsc(Connection conn, DMR dmr) throws SQLException {
+        
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
@@ -183,9 +179,15 @@ public class requetesbd {
         }
     }
     
+    /**
+     * Tri les examens selon la date décroissante
+     * @param conn
+     * @param dmr
+     * @return DMR avec les examens triés
+     * @throws SQLException
+     */
     public static DMR triExamenSelonDateDesc(Connection conn, DMR dmr) throws SQLException {
-        /*renvoie l'examen recherché
-        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
+        
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
@@ -220,10 +222,15 @@ public class requetesbd {
         }
     }
     
-
+    /**
+     * Tri les examens selon le nom des PH responsables dans l'ordre alphabétique
+     * @param conn
+     * @param dmr
+     * @return DMR avec les examens triés
+     * @throws SQLException
+     */
     public static DMR triExamenSelonPH(Connection conn, DMR dmr) throws SQLException {
-        /*renvoie l'examen recherché
-        NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
+        
         try {
 // Get a statement from the connection
             Statement stmt = conn.createStatement();
@@ -259,6 +266,14 @@ public class requetesbd {
         }
     }
     
+    /**
+     * Tri les examens selon le type de l'examen
+     * @param conn
+     * @param dmr
+     * @param typeExamen : type de l'examen recherché
+     * @return DMR avec les examen de typeExamen triés par date décroissante
+     * @throws SQLException
+     */
     public static DMR triExamenSelonTypeExam(Connection conn, DMR dmr, String typeExamen) throws SQLException {
         /*renvoie l'examen recherché
         NE PAS UTILISER EN DEHORS DE REQUETESBD (car ne ferme pas la connexion à la BD*/
@@ -296,7 +311,15 @@ public class requetesbd {
             }
         }
     }
-
+    
+    /**
+     * Renvoie le personnel qui est censé être connecté
+     * @param conn
+     * @param idPerso
+     * @return Personnel
+     * @throws SQLException
+     */
+    
     public static Personnel utilisateur(Connection conn, int idPerso) throws SQLException {
        
         try {
@@ -423,7 +446,6 @@ public class requetesbd {
 
         }
     }
-
     
     /**
      * Création d'un examen et chargement des examens du DMR
