@@ -313,17 +313,17 @@ public class NewExam extends javax.swing.JPanel {
                 
                 //met à jour DMR Patient
                 dmr_pane.maj_exam(ajout_exam);
-
-                // ferme l'onglet
-                Onglets.remove(this);
                 
-                //ouvre l'examen crée - 1er dans la liste (si triée par date croissante)
+                //ouvre l'examen crée - 1er dans la liste (si triée par date décroissante)
                 Examen ex=ajout_exam.getExamens().get(ajout_exam.getExamens().size()-1);
                 javax.swing.JPanel exam_panel=new VoirExam(ajout_exam,user,ex);
 
                 // insertion d'un nouvel onglet après la page de l'examen 
-                Onglets.insertTab("           " + ex.getTypeExamen().toString() + " (" + ex.getDate() + ")        ",null,exam_panel,null,Onglets.getSelectedIndex());
+                Onglets.insertTab("           " + ex.getTypeExamen().toString() + " (" + ex.getDate() + ")        ",null,exam_panel,null,Onglets.getSelectedIndex()+1);
                 Onglets.setSelectedComponent(exam_panel);
+                
+                // ferme l'onglet
+                Onglets.remove(this);
 
                 // création d'un bouton pour fermer l'onglet
                 CloseButton close_button = new CloseButton(Onglets);

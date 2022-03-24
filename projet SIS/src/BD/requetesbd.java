@@ -395,7 +395,7 @@ public class requetesbd {
             Statement stmt = conn.createStatement();
 // Execute the query
 
-            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR =" + dmr.getId());
+            ResultSet rs = stmt.executeQuery("select dateExamen, texteCR, idPH, idPACS, lower(typeExamen) typeExamen, archivagePapier from Examen where idDMR =" + dmr.getId()+" order by dateExamen asc");
 
             ArrayList<Examen> liste = new ArrayList<>();
             while (rs.next()) {

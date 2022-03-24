@@ -33,10 +33,20 @@ public class DMRPatient extends javax.swing.JPanel {
     int ligne = -1;
     DMR dmr;
 
+    /**
+     *
+     */
     public DMRPatient() {
         initComponents();
     }
 
+    /**
+     * Constructeur de DMRPatient (panel affichant les informations d'un patient et la liste de
+     * ses examens)
+     * @param pane : le JTabbedPane Onglets présent dans la JFrame
+     * @param user : l'utilisateur connecté
+     * @param dmr : le dmr affiché
+     */
     public DMRPatient(JTabbedPane pane, Personnel user, DMR dmr) {
         initComponents();
         this.dmr = dmr;
@@ -71,7 +81,7 @@ public class DMRPatient extends javax.swing.JPanel {
         erreur_exam.setVisible(false);
 
         DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
-        // examens triés du plus ancien ou plus récent dans la BD donc il suffit de parcourir la liste en sens inverse
+        // examens triés du plus ancien ou plus récent dans la BD, donc il suffit de parcourir la liste en sens inverse
         for (int i = examens.size() - 1; i >= 0; i--) {
             try {
                 Personnel p = requetesbd.utilisateur(requetesbd.connexionBD(), examens.get(i).getIdPhRespo());
@@ -491,6 +501,11 @@ public class DMRPatient extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action Listener du bouton sélectionner un examen.
+     * Si un examen du tableau est sélectionné, l'ouvre (via la fonction ouvreExam())
+     * Sinon affiche un message d'erreur.
+     */
     private void selection_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selection_buttonActionPerformed
 
         if (ligne > -1) {
@@ -684,6 +699,7 @@ public class DMRPatient extends javax.swing.JPanel {
     }//GEN-LAST:event_radiobutton2ActionPerformed
 
     private void radiobutton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobutton3ActionPerformed
+        
         radiobutton1.setSelected(false);
         radiobutton2.setSelected(false);
         
@@ -696,6 +712,10 @@ public class DMRPatient extends javax.swing.JPanel {
             }
     }//GEN-LAST:event_radiobutton3ActionPerformed
 
+    /**
+     *
+     * @param maj
+     */
     public void maj_exam(DMR maj) {
         examens = maj.getExamens();
         DefaultTableModel model = (DefaultTableModel) table_exams.getModel();
@@ -712,6 +732,9 @@ public class DMRPatient extends javax.swing.JPanel {
                 System.out.println("Erreur bd");
             }
         }
+        tri.setSelectedIndex(0);
+        radiobutton1.setSelected(false);
+        radiobutton2.setSelected(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
