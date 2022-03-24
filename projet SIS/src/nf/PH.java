@@ -3,18 +3,30 @@
 package nf;
 
 /**
- *
+ * Créer une instance de Ph
  * @author Mathilde
  */
 public class PH extends Personnel{
     
     private int isChef;
     
+    /**
+     * Contructeur de la classe PH et initialisation avec la classe Personnel
+     * @param nom
+     * @param prenom
+     * @param id
+     * @param mdp
+     * @param isChef
+     */
     public PH(String nom, String prenom,int id, String mdp, int isChef) {
         super(nom,prenom,id,mdp);
         this.isChef = isChef;
     }
     
+    /**
+     * renvoie le fait s'il est chef ou non
+     * @return
+     */
     public int getIsChef(){
         return isChef;
     }

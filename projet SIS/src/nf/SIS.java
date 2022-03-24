@@ -8,6 +8,10 @@ import java.util.Date;
  */
 public class SIS {
 
+    /**
+     * Test du noyau fonctionnel
+     * @param args
+     */
     public static void main(String[] args) {
         /*String nomPatient1 = "Laurant";
         String prenomPatient1 = "Mathilde";
